@@ -1,0 +1,56 @@
+project_name: pmsg
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - binary: pmsg
+
+    env:
+      - CGO_ENABLED=0
+      - CODENAME=pmsg
+    ldflags:
+      - -s -w -X github.com/lenye/pmsg/pkg/version.Version={{.Version}} -X github.com/lenye/pmsg/pkg/version.AppName={{.ProjectName}} -X github.com/lenye/pmsg/pkg/version.BuildTime={{.CommitDate}} -X github.com/lenye/pmsg/pkg/version.BuildGit={{.ShortCommit}}
+    flags:
+      - -trimpath
+    goos:
+      - linux
+      - windows
+      - darwin
+      - freebsd
+      - openbsd
+    goarch:
+      - amd64
+      - 386
+      - arm
+      - arm64
+      - ppc64le
+      - s390x
+    goarm:
+      - 7
+      - 6
+      - 5
+    ignore:
+      - goos: darwin
+        goarch: 386
+      - goos: darwin
+        goarch: arm
+      - goos: openbsd
+        goarm: 5
+      - goos: openbsd
+        goarm: 6
+
+archives:
+  - id: pmsg
+    name_template: '{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+
+checksum:
+  name_template: "{{ .ProjectName }}_v{{ .Version }}_checksums.txt"
+
+changelog:
+  skip: true
