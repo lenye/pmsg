@@ -43,9 +43,7 @@ type templateSendResponse struct {
 	MsgID int64 `json:"msgid"` // 消息id
 }
 
-const (
-	templateSendURL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s"
-)
+const templateSendURL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s"
 
 // SendTemplate 发送模板消息
 func SendTemplate(accessToken string, msg *Template) (msgID int64, err error) {

@@ -5,6 +5,8 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+
+	"github.com/lenye/pmsg/pkg/version"
 )
 
 const (
@@ -37,5 +39,6 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.Version = "1.0.0"
+	rootCmd.SetVersionTemplate(`{{printf "%s" .Version}}`)
+	rootCmd.Version = version.Print()
 }

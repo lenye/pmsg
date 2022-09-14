@@ -7,8 +7,6 @@ import (
 	"github.com/lenye/pmsg/pkg/weixin"
 )
 
-const accessTokenURL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s"
-
 type AccessToken struct {
 	Token    string `json:"access_token"` // 接口调用凭证
 	ExpireIn int64  `json:"expires_in"`   // 接口调用凭证有效时间，单位：秒
@@ -19,6 +17,8 @@ type AccessTokenResponse struct {
 	weixin.ResponseCode
 	AccessToken
 }
+
+const accessTokenURL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s"
 
 // GetAccessToken 获取接口调用凭证
 // 正常情况下，微信会返回下述 JSON
