@@ -4,7 +4,7 @@
 
 命令参数说明
 
-```
+```text
 $ pmsg weixin template -h
 
 -a, --user_agent string     http user agent
@@ -25,8 +25,16 @@ $ pmsg weixin template -h
 
 样例
 
+windows
+
 ```shell
-$ pmsg weixin template -i app_id -s app_secret -p template_id -o open_id '{\"first\":{\"value\":\"测试\"}}'
+pmsg.exe weixin template -i app_id -s app_secret -p template_id -o open_id "{\"first\":{\"value\":\"测试\"}}"
+```
+
+linux
+
+```shell
+$ pmsg weixin template -i app_id -s app_secret -p template_id -o open_id '{"first":{"value":"测试"}}'
 ```
 
 [微信发送模板消息开发文档](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html#%E5%8F%91%E9%80%81%E6%A8%A1%E6%9D%BF%E6%B6%88%E6%81%AF)
