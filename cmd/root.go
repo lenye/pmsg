@@ -39,6 +39,7 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.SetVersionTemplate(`{{printf "%s" .Version}}`)
+	rootCmd.SetVersionTemplate(`{{printf "%s" .Version}}
+`)
 	rootCmd.Version = version.Print()
 }
