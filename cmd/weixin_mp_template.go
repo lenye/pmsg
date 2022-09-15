@@ -37,37 +37,37 @@ var (
 	miniPagePath string
 )
 
-// weiXinTplCmd represents the weiXinTplCmd command
-var weiXinTplCmd = &cobra.Command{
+// weiXinMpTplCmd 微信公众号模板消息
+var weiXinMpTplCmd = &cobra.Command{
 	Use:     "template",
 	Aliases: []string{"tpl"},
-	Short:   "weixin template message",
-	Long:    `publish weixin template message`,
+	Short:   "weixin mp template message",
+	Long:    `publish weixin mp template message`,
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := WeiXinSendTemplate(args); err != nil {
+		if err := WeiXinMpSendTemplate(args); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
 }
 
 func init() {
-	weiXinCmd.AddCommand(weiXinTplCmd)
+	weiXinMpCmd.AddCommand(weiXinMpTplCmd)
 
-	weiXinTplCmd.Flags().StringVarP(&openID, nameOpenID, "o", "", "weixin user open id (required)")
-	weiXinTplCmd.MarkFlagRequired(nameOpenID)
+	weiXinMpTplCmd.Flags().StringVarP(&openID, nameOpenID, "o", "", "weixin user open id (required)")
+	weiXinMpTplCmd.MarkFlagRequired(nameOpenID)
 
-	weiXinTplCmd.Flags().StringVarP(&templateID, nameTemplateID, "p", "", "weixin template id (required)")
-	weiXinTplCmd.MarkFlagRequired(nameTemplateID)
+	weiXinMpTplCmd.Flags().StringVarP(&templateID, nameTemplateID, "p", "", "weixin template id (required)")
+	weiXinMpTplCmd.MarkFlagRequired(nameTemplateID)
 
-	weiXinTplCmd.Flags().StringVarP(&url, nameUrl, "u", "", "url")
-	weiXinTplCmd.Flags().StringVar(&clientMsgID, nameClientMsgID, "", "weixin template client msg id")
-	weiXinTplCmd.Flags().StringVarP(&color, nameColor, "c", "", "weixin template color")
+	weiXinMpTplCmd.Flags().StringVarP(&url, nameUrl, "u", "", "url")
+	weiXinMpTplCmd.Flags().StringVar(&clientMsgID, nameClientMsgID, "", "weixin template client msg id")
+	weiXinMpTplCmd.Flags().StringVarP(&color, nameColor, "c", "", "weixin template color")
 
-	weiXinTplCmd.Flags().StringToStringVarP(&mini, nameMini, "m", nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
+	weiXinMpTplCmd.Flags().StringToStringVarP(&mini, nameMini, "m", nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
 }
 
-// WeiXinSendTemplate 发送微信模板消息
-func WeiXinSendTemplate(args []string) error {
+// WeiXinMpSendTemplate 发送微信公众号模板消息
+func WeiXinMpSendTemplate(args []string) error {
 
 	if userAgent != "" {
 		client.UserAgent = userAgent
@@ -100,7 +100,7 @@ func WeiXinSendTemplate(args []string) error {
 		accessToken = accessTokenResp.AccessToken.Token
 	}
 
-	msg := message.Template{
+	msg := message.TemplateMessage{
 		ToUser:      openID,
 		TemplateID:  templateID,
 		Data:        dataItem,

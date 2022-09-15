@@ -20,13 +20,13 @@ var (
 
 var ErrMultiRequiredOne = errors.New("flags in the group [access_token app_id] required set one")
 
-// weiXinCmd represents the weixin command
+// weiXinCmd 微信
 var weiXinCmd = &cobra.Command{
-	Use:   "weixin",
-	Short: "weixin message",
-	Long: `weixin template message,
-weixin kefu message,
-weixin miniprogram message,`,
+	Use:     "weixin",
+	Aliases: []string{"wx"},
+	Short:   "weixin message",
+	Long: `weixin mp template message,
+weixin miniprogram subscribe message`,
 }
 
 func init() {
