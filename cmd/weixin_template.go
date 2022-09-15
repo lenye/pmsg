@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/pkg/http/client"
-	"github.com/lenye/pmsg/pkg/weixin/message"
+	"github.com/lenye/pmsg/pkg/weixin/mp/message"
 	"github.com/lenye/pmsg/pkg/weixin/token"
 )
 
