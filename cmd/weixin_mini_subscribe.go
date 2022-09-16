@@ -29,7 +29,7 @@ var (
 var weiXinMiniSubCmd = &cobra.Command{
 	Use:     "subscribe",
 	Aliases: []string{"sub"},
-	Short:   "weixin miniprogram subscribe message",
+	Short:   "publish weixin miniprogram subscribe message",
 	Long:    `publish weixin miniprogram subscribe message`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := WeiXinMpSendSubscribe(args); err != nil {

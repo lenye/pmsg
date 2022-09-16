@@ -7,8 +7,9 @@ import (
 // weiXinMiniCmd 微信小程序
 var weiXinMiniCmd = &cobra.Command{
 	Use:   "mini",
-	Short: "weixin miniprogram message",
-	Long:  `weixin miniprogram subscribe message`,
+	Short: "publish weixin miniprogram message",
+	Long: `publish weixin miniprogram message:
+weixin miniprogram subscribe message`,
 }
 
 func init() {

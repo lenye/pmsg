@@ -23,6 +23,7 @@ var rootCmd = &cobra.Command{
 	Short: "publish message",
 	Long: `publish message:
 weixin mp template message,
+weixin mp template subscribe message,
 weixin miniprogram subscribe message,
 dingtalk message,
 rabbitmq message`,

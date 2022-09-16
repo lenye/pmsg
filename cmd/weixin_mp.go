@@ -7,8 +7,10 @@ import (
 // weiXinMpCmd 微信公众号
 var weiXinMpCmd = &cobra.Command{
 	Use:   "mp",
-	Short: "weixin mp message",
-	Long:  `weixin mp template message`,
+	Short: "publish weixin mp message",
+	Long: `publish weixin mp message:
+weixin mp template message,
+weixin mp template subscribe message`,
 }
 
 func init() {
