@@ -120,7 +120,13 @@ func WeiXinMpSendTemplate(args []string) error {
 			return fmt.Errorf("mini flag %q not set", nameMiniAppID)
 		}
 
-		miniPagePath, _ = mini[nameMiniPagePath]
+		miniPagePath, ok = mini[nameMiniPagePath]
+		if !ok {
+			return fmt.Errorf("mini flag %q not set", nameMiniPagePath)
+		}
+		if miniPagePath == "" {
+			return fmt.Errorf("mini flag %q not set", nameMiniPagePath)
+		}
 
 		msg.MiniProgram = &message.MiniProgram{
 			AppID:    miniAppID,
