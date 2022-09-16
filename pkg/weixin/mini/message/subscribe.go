@@ -7,6 +7,37 @@ import (
 	"github.com/lenye/pmsg/pkg/weixin"
 )
 
+/*
+数据示例
+
+{
+  "touser": "OPENID",
+  "template_id": "TEMPLATE_ID",
+  "page": "index",
+  "miniprogram_state": "developer",
+  "lang": "zh_CN",
+  "data": {
+    "number01": {
+      "value": "339208499"
+    },
+    "date01": {
+      "value": "2015年01月05日"
+    },
+    "site01": {
+      "value": "TIT创意园"
+    },
+    "site02": {
+      "value": "广州市新港中路397号"
+    }
+  }
+}
+
+{
+  "errcode": 0,
+  "errmsg": "ok"
+}
+*/
+
 // SubscribeMessage 微信小程序订阅消息
 type SubscribeMessage struct {
 	ToUser           string                       `json:"touser"`
