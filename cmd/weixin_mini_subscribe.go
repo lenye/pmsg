@@ -113,7 +113,7 @@ func WeiXinMpSendSubscribe(args []string) error {
 		if err != nil {
 			return err
 		}
-		accessToken = accessTokenResp.AccessToken.Token
+		accessToken = accessTokenResp.Token
 	}
 
 	if err := message.SendSubscribe(accessToken, &msg); err != nil {

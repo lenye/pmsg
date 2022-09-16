@@ -25,7 +25,7 @@ const accessTokenURL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=clien
 // {"access_token":"ACCESS_TOKEN","expires_in":7200}
 // 错误时微信会返回错误码等信息，JSON数据包示例如下:
 // {"errcode":40013,"errmsg":"invalid appid"}
-func GetAccessToken(appID, appSecret string) (*AccessTokenResponse, error) {
+func GetAccessToken(appID, appSecret string) (*AccessToken, error) {
 	url := fmt.Sprintf(accessTokenURL, appID, appSecret)
 	var resp AccessTokenResponse
 	_, err := client.GetJSON(url, &resp)
@@ -36,5 +36,5 @@ func GetAccessToken(appID, appSecret string) (*AccessTokenResponse, error) {
 		return nil, fmt.Errorf("weixin request failed, uri=%q, response=%+v", url, resp.ResponseCode)
 	}
 
-	return &resp, nil
+	return &resp.AccessToken, nil
 }

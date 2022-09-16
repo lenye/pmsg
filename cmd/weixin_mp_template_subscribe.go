@@ -127,7 +127,7 @@ func WeiXinMpSendTemplateSubscribe(args []string) error {
 		if err != nil {
 			return err
 		}
-		accessToken = accessTokenResp.AccessToken.Token
+		accessToken = accessTokenResp.Token
 	}
 
 	if err := message.SendTemplateSubscribe(accessToken, &msg); err != nil {
