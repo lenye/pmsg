@@ -92,14 +92,6 @@ func WeiXinMpSendTemplate(args []string) error {
 		}
 	}
 
-	if accessToken == "" {
-		accessTokenResp, err := token.GetAccessToken(appID, appSecret)
-		if err != nil {
-			return err
-		}
-		accessToken = accessTokenResp.AccessToken.Token
-	}
-
 	msg := message.TemplateMessage{
 		ToUser:      openID,
 		TemplateID:  templateID,
@@ -132,6 +124,14 @@ func WeiXinMpSendTemplate(args []string) error {
 			AppID:    miniAppID,
 			PagePath: miniPagePath,
 		}
+	}
+
+	if accessToken == "" {
+		accessTokenResp, err := token.GetAccessToken(appID, appSecret)
+		if err != nil {
+			return err
+		}
+		accessToken = accessTokenResp.AccessToken.Token
 	}
 
 	if gotMsgID, err := message.SendTemplate(accessToken, &msg); err != nil {

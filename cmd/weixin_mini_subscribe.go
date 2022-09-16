@@ -78,14 +78,6 @@ func WeiXinMpSendSubscribe(args []string) error {
 		}
 	}
 
-	if accessToken == "" {
-		accessTokenResp, err := token.GetAccessToken(appID, appSecret)
-		if err != nil {
-			return err
-		}
-		accessToken = accessTokenResp.AccessToken.Token
-	}
-
 	msg := message.SubscribeMessage{
 		ToUser:           openID,
 		TemplateID:       templateID,
@@ -114,6 +106,14 @@ func WeiXinMpSendSubscribe(args []string) error {
 			return fmt.Errorf("%s not set to [%q %q %q]", nameMiniProgramState, message.MiniProgramStateDeveloper, message.MiniProgramStateTrial, message.MiniProgramStateFormal)
 		}
 		msg.MiniProgramState = miniProgramState
+	}
+
+	if accessToken == "" {
+		accessTokenResp, err := token.GetAccessToken(appID, appSecret)
+		if err != nil {
+			return err
+		}
+		accessToken = accessTokenResp.AccessToken.Token
 	}
 
 	if err := message.SendSubscribe(accessToken, &msg); err != nil {
