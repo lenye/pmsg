@@ -9,7 +9,6 @@ builds:
 
     env:
       - CGO_ENABLED=0
-      - CODENAME=pmsg
     ldflags:
       - -s -w -X github.com/lenye/pmsg/pkg/version.Version={{.Version}} -X github.com/lenye/pmsg/pkg/version.AppName={{.ProjectName}} -X github.com/lenye/pmsg/pkg/version.BuildTime={{.CommitDate}} -X github.com/lenye/pmsg/pkg/version.BuildGit={{.ShortCommit}}
     flags:
@@ -40,6 +39,8 @@ builds:
         goarm: 5
       - goos: openbsd
         goarm: 6
+      - goos: windows
+        goarch: arm
 
 archives:
   - id: pmsg
