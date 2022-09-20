@@ -69,10 +69,6 @@ func init() {
 // WeiXinMpSendTemplate 发送微信公众号模板消息
 func WeiXinMpSendTemplate(args []string) error {
 
-	if userAgent != "" {
-		client.UserAgent = userAgent
-	}
-
 	if accessToken == "" {
 		if appID == "" {
 			return ErrMultiRequiredOne
@@ -126,12 +122,16 @@ func WeiXinMpSendTemplate(args []string) error {
 		}
 	}
 
+	if userAgent != "" {
+		client.UserAgent = userAgent
+	}
+
 	if accessToken == "" {
 		accessTokenResp, err := token.GetAccessToken(appID, appSecret)
 		if err != nil {
 			return err
 		}
-		accessToken = accessTokenResp.Token
+		accessToken = accessTokenResp.AccessToken
 	}
 
 	if gotMsgID, err := message.SendTemplate(accessToken, &msg); err != nil {

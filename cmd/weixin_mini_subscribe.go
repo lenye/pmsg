@@ -55,10 +55,6 @@ func init() {
 // WeiXinMpSendSubscribe 发送微信小程序订阅消息
 func WeiXinMpSendSubscribe(args []string) error {
 
-	if userAgent != "" {
-		client.UserAgent = userAgent
-	}
-
 	if accessToken == "" {
 		if appID == "" {
 			return ErrMultiRequiredOne
@@ -108,12 +104,16 @@ func WeiXinMpSendSubscribe(args []string) error {
 		msg.MiniProgramState = miniProgramState
 	}
 
+	if userAgent != "" {
+		client.UserAgent = userAgent
+	}
+
 	if accessToken == "" {
 		accessTokenResp, err := token.GetAccessToken(appID, appSecret)
 		if err != nil {
 			return err
 		}
-		accessToken = accessTokenResp.Token
+		accessToken = accessTokenResp.AccessToken
 	}
 
 	if err := message.SendSubscribe(accessToken, &msg); err != nil {

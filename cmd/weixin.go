@@ -25,10 +25,11 @@ var weiXinCmd = &cobra.Command{
 	Use:     "weixin",
 	Aliases: []string{"wx"},
 	Short:   "publish weixin message",
-	Long: `publish weixin message:
-weixin mp template message,
-weixin mp template subscribe message,
-weixin miniprogram subscribe message`,
+	Long: `get weixin access token,
+publish weixin message:
+ weixin mp template message,
+ weixin mp template subscribe message,
+ weixin miniprogram subscribe message`,
 }
 
 func init() {

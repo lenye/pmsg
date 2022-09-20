@@ -58,10 +58,6 @@ func init() {
 // WeiXinMpSendTemplateSubscribe 发送微信公众号一次性订阅消息
 func WeiXinMpSendTemplateSubscribe(args []string) error {
 
-	if userAgent != "" {
-		client.UserAgent = userAgent
-	}
-
 	if accessToken == "" {
 		if appID == "" {
 			return ErrMultiRequiredOne
@@ -122,12 +118,16 @@ func WeiXinMpSendTemplateSubscribe(args []string) error {
 		}
 	}
 
+	if userAgent != "" {
+		client.UserAgent = userAgent
+	}
+
 	if accessToken == "" {
 		accessTokenResp, err := token.GetAccessToken(appID, appSecret)
 		if err != nil {
 			return err
 		}
-		accessToken = accessTokenResp.Token
+		accessToken = accessTokenResp.AccessToken
 	}
 
 	if err := message.SendTemplateSubscribe(accessToken, &msg); err != nil {
