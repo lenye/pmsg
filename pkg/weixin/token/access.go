@@ -2,14 +2,16 @@ package token
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
 )
 
 type AccessToken struct {
-	Token    string `json:"access_token"` // 接口调用凭证
-	ExpireIn int64  `json:"expires_in"`   // 接口调用凭证有效时间，单位：秒
+	AccessToken string    `json:"access_token"`        // 接口调用凭证
+	ExpireIn    int64     `json:"expires_in"`          // 接口调用凭证有效时间，单位：秒
+	ExpireAt    time.Time `json:"expire_at,omitempty"` // 到期时间
 }
 
 // AccessTokenResponse 响应
@@ -35,6 +37,8 @@ func GetAccessToken(appID, appSecret string) (*AccessToken, error) {
 	if !resp.Succeed() {
 		return nil, fmt.Errorf("weixin request failed, uri=%q, response=%+v", url, resp.ResponseCode)
 	}
+
+	resp.AccessToken.ExpireAt = time.Now().Add(time.Second * time.Duration(resp.AccessToken.ExpireIn))
 
 	return &resp.AccessToken, nil
 }
