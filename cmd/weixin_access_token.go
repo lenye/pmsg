@@ -14,6 +14,7 @@ import (
 var weiXinAccessTokenCmd = &cobra.Command{
 	Use:   "token",
 	Short: "get weixin access token (mp, miniprogram)",
+	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := WeiXinGetAccessToken(); err != nil {
 			fmt.Fprintln(os.Stderr, err)

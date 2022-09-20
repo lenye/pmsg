@@ -1,10 +1,10 @@
 package cmd
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"os"
-	"strings"
 
 	"github.com/spf13/cobra"
 
@@ -19,6 +19,7 @@ var weiXinMpSubCmd = &cobra.Command{
 	Use:     "subscribe",
 	Aliases: []string{"sub"},
 	Short:   "publish weixin mp subscribe message",
+	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := WeiXinMpBizSendSubscribe(args); err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -49,9 +50,10 @@ func WeiXinMpBizSendSubscribe(args []string) error {
 	}
 
 	var dataItem map[string]message.SubscribeDataItem
-	data = strings.Join(args, "")
-	if data != "" {
-		if err := json.Unmarshal([]byte(data), &dataItem); err != nil {
+	buf := bytes.NewBufferString("")
+	buf.WriteString(args[0])
+	if buf.String() != "" {
+		if err := json.Unmarshal(buf.Bytes(), &dataItem); err != nil {
 			return fmt.Errorf("invalid json format, %v", err)
 		}
 		for k, v := range dataItem {
