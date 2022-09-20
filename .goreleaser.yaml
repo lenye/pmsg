@@ -31,16 +31,19 @@ builds:
       - 6
       - 5
     ignore:
+      - goos: windows
+        goarch: arm
       - goos: darwin
         goarch: 386
       - goos: darwin
         goarch: arm
+      - goos: freebsd
+        goarm: 5
       - goos: openbsd
         goarm: 5
       - goos: openbsd
         goarm: 6
-      - goos: windows
-        goarch: arm
+    mod_timestamp: '{{ .CommitTimestamp }}'
 
 archives:
   - id: pmsg
