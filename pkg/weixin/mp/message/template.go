@@ -86,6 +86,10 @@ type templateSendResponse struct {
 	MsgID int64 `json:"msgid"` // 消息id
 }
 
+func (t templateSendResponse) String() string {
+	return fmt.Sprintf("{errcode: %v, errmsg: %q, msgid: %v}", t.ErrorCode, t.ErrorMessage, t.MsgID)
+}
+
 const templateSendURL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s"
 
 // SendTemplate 发送微信公众号模板消息
@@ -97,7 +101,7 @@ func SendTemplate(accessToken string, msg *TemplateMessage) (msgID int64, err er
 		return
 	}
 	if !resp.Succeed() {
-		err = fmt.Errorf("weixin request failed, uri=%q, resp=%+v", url, resp.ResponseCode)
+		err = fmt.Errorf("weixin request failed, uri=%q, response=%v", url, resp.ResponseCode)
 	}
 	msgID = resp.MsgID
 	return

@@ -9,6 +9,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/weixin"
 	"github.com/lenye/pmsg/pkg/weixin/mp/message"
 	"github.com/lenye/pmsg/pkg/weixin/token"
 )
@@ -133,6 +134,7 @@ func WeiXinMpSendTemplateSubscribe(args []string) error {
 	if err := message.SendTemplateSubscribe(accessToken, &msg); err != nil {
 		return err
 	}
+	fmt.Println(weixin.MessageOK)
 
 	return nil
 }

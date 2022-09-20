@@ -44,7 +44,7 @@ func WeiXinGetAccessToken() error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(fmt.Sprintf("access_token: %+v", accessTokenResp))
+	fmt.Println(fmt.Sprintf("%v", accessTokenResp))
 
 	return nil
 }

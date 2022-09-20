@@ -1,6 +1,13 @@
 package weixin
 
-const CodeOK = 0
+import (
+	"fmt"
+)
+
+const (
+	CodeOK    = 0
+	MessageOK = "ok"
+)
 
 // ResponseCode 微信响应操作错误信息
 type ResponseCode struct {
@@ -8,7 +15,11 @@ type ResponseCode struct {
 	ErrorMessage string `json:"errmsg,omitempty"` // 返回码提示语
 }
 
+func (t ResponseCode) String() string {
+	return fmt.Sprintf("{errcode: %v, errmsg: %q}", t.ErrorCode, t.ErrorMessage)
+}
+
 // Succeed 操作是否成功
-func (p ResponseCode) Succeed() bool {
-	return p.ErrorCode == CodeOK
+func (t ResponseCode) Succeed() bool {
+	return t.ErrorCode == CodeOK
 }

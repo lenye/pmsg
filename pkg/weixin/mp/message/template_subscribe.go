@@ -56,7 +56,7 @@ func SendTemplateSubscribe(accessToken string, msg *TemplateSubscribeMessage) (e
 		return
 	}
 	if !resp.Succeed() {
-		err = fmt.Errorf("weixin request failed, uri=%q, resp=%+v", url, resp)
+		err = fmt.Errorf("weixin request failed, uri=%q, reponse=%v", url, resp)
 	}
 	return
 }

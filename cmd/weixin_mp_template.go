@@ -9,6 +9,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/weixin"
 	"github.com/lenye/pmsg/pkg/weixin/mp/message"
 	"github.com/lenye/pmsg/pkg/weixin/token"
 )
@@ -137,7 +138,7 @@ func WeiXinMpSendTemplate(args []string) error {
 	if gotMsgID, err := message.SendTemplate(accessToken, &msg); err != nil {
 		return err
 	} else {
-		fmt.Println(fmt.Sprintf("msgid: %v", gotMsgID))
+		fmt.Println(fmt.Sprintf("%v, msgid: %v", weixin.MessageOK, gotMsgID))
 	}
 
 	return nil

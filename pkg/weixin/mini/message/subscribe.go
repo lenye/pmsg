@@ -77,7 +77,7 @@ func SendSubscribe(accessToken string, msg *SubscribeMessage) (err error) {
 		return
 	}
 	if !resp.Succeed() {
-		err = fmt.Errorf("weixin request failed, uri=%q, resp=%+v", url, resp)
+		err = fmt.Errorf("weixin request failed, uri=%q, response=%v", url, resp)
 	}
 	return
 }
