@@ -9,7 +9,7 @@ var weiXinMiniCmd = &cobra.Command{
 	Use:   "mini",
 	Short: "publish weixin miniprogram message",
 	Long: `publish weixin miniprogram message:
-weixin miniprogram subscribe message`,
+ subscribe message`,
 }
 
 func init() {

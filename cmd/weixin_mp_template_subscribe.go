@@ -28,8 +28,7 @@ var (
 var weiXinMpTplSubCmd = &cobra.Command{
 	Use:     "subscribe",
 	Aliases: []string{"sub"},
-	Short:   "publish weixin mp template subscribe message",
-	Long:    `publish weixin mp template subscribe message`,
+	Short:   "publish weixin mp template subscribe message (onetime)",
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := WeiXinMpSendTemplateSubscribe(args); err != nil {
 			fmt.Fprintln(os.Stderr, err)

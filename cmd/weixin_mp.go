@@ -9,8 +9,9 @@ var weiXinMpCmd = &cobra.Command{
 	Use:   "mp",
 	Short: "publish weixin mp message",
 	Long: `publish weixin mp message:
-weixin mp template message,
-weixin mp template subscribe message`,
+ template message,
+ template subscribe message (onetime),
+ subscribe message`,
 }
 
 func init() {

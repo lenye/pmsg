@@ -43,7 +43,6 @@ var weiXinMpTplCmd = &cobra.Command{
 	Use:     "template",
 	Aliases: []string{"tpl"},
 	Short:   "publish weixin mp template message",
-	Long:    `publish weixin mp template message`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := WeiXinMpSendTemplate(args); err != nil {
 			fmt.Fprintln(os.Stderr, err)

@@ -27,9 +27,10 @@ var weiXinCmd = &cobra.Command{
 	Short:   "publish weixin message",
 	Long: `get weixin access token,
 publish weixin message:
- weixin mp template message,
- weixin mp template subscribe message,
- weixin miniprogram subscribe message`,
+ mp template message,
+ mp template subscribe message (onetime),
+ mp subscribe message,
+ miniprogram subscribe message`,
 }
 
 func init() {
