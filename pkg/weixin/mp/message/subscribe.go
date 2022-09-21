@@ -63,7 +63,7 @@ func BizSendSubscribe(accessToken string, msg *SubscribeMessage) error {
 		return err
 	}
 	if !resp.Succeed() {
-		return fmt.Errorf("%w; uri: %q, %v", weixin.ErrWeiXinRequest, url, resp)
+		return fmt.Errorf("%w; %v", weixin.ErrWeiXinRequest, resp)
 	}
 	return nil
 }

@@ -42,7 +42,7 @@ func GetAccessToken(appID, appSecret string) (*AccessToken, error) {
 		return nil, err
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w; uri: %q, %v", weixin.ErrWeiXinRequest, url, resp.ResponseCode)
+		return nil, fmt.Errorf("%w; %v", weixin.ErrWeiXinRequest, resp.ResponseCode)
 	}
 
 	resp.AccessToken.ExpireAt = time.Now().Add(time.Second * time.Duration(resp.AccessToken.ExpireIn))

@@ -59,12 +59,32 @@ const (
 	MiniProgramStateFormal    = "formal"    // formal为正式版；默认
 )
 
+// ValidateMiniProgramState 验证
+func ValidateMiniProgramState(v string) error {
+	switch v {
+	case MiniProgramStateDeveloper, MiniProgramStateTrial, MiniProgramStateFormal:
+	default:
+		return fmt.Errorf("%s not in [%q %q %q]", v, MiniProgramStateDeveloper, MiniProgramStateTrial, MiniProgramStateFormal)
+	}
+	return nil
+}
+
 const (
 	LanguageZhCN = "zh_CN" // 简体中文, 默认
 	LanguageEnUS = "en_US" // 英文
 	LanguageZhHK = "zh_HK" // 繁体中文
 	LanguageZhTW = "zh_TW" // 繁体中文
 )
+
+// ValidateLanguage 验证
+func ValidateLanguage(v string) error {
+	switch v {
+	case LanguageZhCN, LanguageEnUS, LanguageZhHK, LanguageZhTW:
+	default:
+		return fmt.Errorf("%s not in [%q %q %q %q]", v, LanguageZhCN, LanguageEnUS, LanguageZhHK, LanguageZhTW)
+	}
+	return nil
+}
 
 const subscribeSendURL = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=%s"
 
@@ -77,7 +97,7 @@ func SendSubscribe(accessToken string, msg *SubscribeMessage) error {
 		return err
 	}
 	if !resp.Succeed() {
-		return fmt.Errorf("%w; uri: %q, %v", weixin.ErrWeiXinRequest, url, resp)
+		return fmt.Errorf("%w; %v", weixin.ErrWeiXinRequest, resp)
 	}
 	return nil
 }

@@ -101,7 +101,7 @@ func SendTemplate(accessToken string, msg *TemplateMessage) (int64, error) {
 		return 0, err
 	}
 	if !resp.Succeed() {
-		return 0, fmt.Errorf("%w; uri: %q, %v", weixin.ErrWeiXinRequest, url, resp.ResponseCode)
+		return 0, fmt.Errorf("%w; %v", weixin.ErrWeiXinRequest, resp.ResponseCode)
 	}
 	return resp.MsgID, nil
 }

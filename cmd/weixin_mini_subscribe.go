@@ -91,19 +91,15 @@ func WeiXinMpSendSubscribe(args []string) error {
 	}
 
 	if language != "" {
-		switch language {
-		case message.LanguageZhCN, message.LanguageEnUS, message.LanguageZhHK, message.LanguageZhTW:
-		default:
-			return fmt.Errorf("%s not set to [%q %q %q %q]", nameLanguage, message.LanguageZhCN, message.LanguageEnUS, message.LanguageZhHK, message.LanguageZhTW)
+		if err := message.ValidateLanguage(language); err != nil {
+			return fmt.Errorf("flag %s: %v", nameLanguage, err)
 		}
 		msg.Language = language
 	}
 
 	if miniProgramState != "" {
-		switch miniProgramState {
-		case message.MiniProgramStateDeveloper, message.MiniProgramStateTrial, message.MiniProgramStateFormal:
-		default:
-			return fmt.Errorf("%s not set to [%q %q %q]", nameMiniProgramState, message.MiniProgramStateDeveloper, message.MiniProgramStateTrial, message.MiniProgramStateFormal)
+		if err := message.ValidateMiniProgramState(miniProgramState); err != nil {
+			return fmt.Errorf("flag %s: %v", nameMiniProgramState, err)
 		}
 		msg.MiniProgramState = miniProgramState
 	}
