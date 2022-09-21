@@ -28,7 +28,7 @@ windows
 ```shell
 pmsg.exe weixin mp template -i app_id -s app_secret -p template_id -o open_id "{\"first\":{\"value\":\"测试\"}}"
 
-ok; {msgid: 1234567890}
+ok; msgid: 1234567890
 ```
 
 linux
@@ -36,7 +36,7 @@ linux
 ```shell
 $ pmsg weixin mp template -i app_id -s app_secret -p template_id -o open_id '{"first":{"value":"测试"}}'
 
-ok; {msgid: 1234567890}
+ok; msgid: 1234567890
 ```
 
 [微信公众号模板消息开发文档](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html#%E5%8F%91%E9%80%81%E6%A8%A1%E6%9D%BF%E6%B6%88%E6%81%AF)

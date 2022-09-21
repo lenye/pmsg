@@ -16,9 +16,9 @@ type AccessToken struct {
 
 func (t AccessToken) String() string {
 	if t.ExpireAt.IsZero() {
-		return fmt.Sprintf("{access_token: %q, expires_in: %v}", t.AccessToken, t.ExpireIn)
+		return fmt.Sprintf("access_token: %q, expires_in: %v", t.AccessToken, t.ExpireIn)
 	}
-	return fmt.Sprintf("{access_token: %q, expires_in: %v, expire_at: %q}", t.AccessToken, t.ExpireIn, t.ExpireAt.Format(time.RFC3339))
+	return fmt.Sprintf("access_token: %q, expires_in: %v, expire_at: %q", t.AccessToken, t.ExpireIn, t.ExpireAt.Format(time.RFC3339))
 }
 
 // AccessTokenResponse 响应
@@ -42,7 +42,7 @@ func GetAccessToken(appID, appSecret string) (*AccessToken, error) {
 		return nil, err
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w; uri: %q, response: %v", weixin.ErrWeiXinRequest, url, resp.ResponseCode)
+		return nil, fmt.Errorf("%w; uri: %q, %v", weixin.ErrWeiXinRequest, url, resp.ResponseCode)
 	}
 
 	resp.AccessToken.ExpireAt = time.Now().Add(time.Second * time.Duration(resp.AccessToken.ExpireIn))

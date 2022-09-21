@@ -19,7 +19,7 @@ type ResponseCode struct {
 }
 
 func (t ResponseCode) String() string {
-	return fmt.Sprintf("{errcode: %v, errmsg: %q}", t.ErrorCode, t.ErrorMessage)
+	return fmt.Sprintf("errcode: %v, errmsg: %q", t.ErrorCode, t.ErrorMessage)
 }
 
 // Succeed 操作是否成功

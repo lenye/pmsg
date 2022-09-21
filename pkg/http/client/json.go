@@ -10,7 +10,7 @@ import (
 // CheckHttpResponseStatusCode 检查HTTP响应状态码
 func CheckHttpResponseStatusCode(url string, statusCode int) error {
 	if statusCode/100 != 2 {
-		return fmt.Errorf("%w; url: %q, http.Response.StatusCode: %d", ErrHttpRequest, url, statusCode)
+		return fmt.Errorf("%w; url: %q, http response status code: %v", ErrHttpRequest, url, statusCode)
 	}
 	return nil
 }
