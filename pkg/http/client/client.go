@@ -16,7 +16,6 @@ var ErrHttpRequest = errors.New("http request error")
 
 const (
 	contentTypeJson = "application/json;charset=utf-8"
-	bufferSize      = 1024
 )
 
 func DefaultUserAgent() string {

@@ -35,15 +35,15 @@ func GetJSON(url string, respBody interface{}) (http.Header, error) {
 
 // PostJSON http post json
 func PostJSON(url string, reqBody, respBody interface{}) (http.Header, error) {
-	jsonBuf := bytes.NewBuffer(make([]byte, 0, bufferSize))
-	enc := json.NewEncoder(jsonBuf)
+	buf := bytes.NewBufferString("")
+	enc := json.NewEncoder(buf)
 	enc.SetEscapeHTML(false)
 	err := enc.Encode(reqBody)
 	if err != nil {
 		return nil, err
 	}
 
-	resp, err := POST(url, contentTypeJson, jsonBuf)
+	resp, err := POST(url, contentTypeJson, buf)
 	if err != nil {
 		return nil, fmt.Errorf("%w; post %q, %v", ErrHttpRequest, url, err)
 	}
