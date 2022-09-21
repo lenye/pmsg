@@ -55,15 +55,15 @@ type SubscribeDataItem struct {
 const subscribeBizSendURL = "https://api.weixin.qq.com/cgi-bin/message/subscribe/bizsend?access_token=%s"
 
 // BizSendSubscribe 发送微信公众号订阅通知消息
-func BizSendSubscribe(accessToken string, msg *SubscribeMessage) (err error) {
+func BizSendSubscribe(accessToken string, msg *SubscribeMessage) error {
 	url := fmt.Sprintf(subscribeBizSendURL, accessToken)
 	var resp weixin.ResponseCode
-	_, err = client.PostJSON(url, msg, &resp)
+	_, err := client.PostJSON(url, msg, &resp)
 	if err != nil {
-		return
+		return err
 	}
 	if !resp.Succeed() {
-		err = fmt.Errorf("weixin request failed, uri=%q, reponse=%v", url, resp)
+		return fmt.Errorf("%w; uri: %q, response: %v", weixin.ErrWeiXinRequest, url, resp)
 	}
-	return
+	return nil
 }

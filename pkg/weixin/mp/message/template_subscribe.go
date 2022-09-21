@@ -48,15 +48,15 @@ type TemplateSubscribeMessage struct {
 const subscribeTemplateSendURL = "https://api.weixin.qq.com/cgi-bin/message/template/subscribe?access_token=%s"
 
 // SendTemplateSubscribe 发送微信公众号一次性订阅消息
-func SendTemplateSubscribe(accessToken string, msg *TemplateSubscribeMessage) (err error) {
+func SendTemplateSubscribe(accessToken string, msg *TemplateSubscribeMessage) error {
 	url := fmt.Sprintf(subscribeTemplateSendURL, accessToken)
 	var resp weixin.ResponseCode
-	_, err = client.PostJSON(url, msg, &resp)
+	_, err := client.PostJSON(url, msg, &resp)
 	if err != nil {
-		return
+		return err
 	}
 	if !resp.Succeed() {
-		err = fmt.Errorf("weixin request failed, uri=%q, reponse=%v", url, resp)
+		return fmt.Errorf("%w; uri: %q, response: %v", weixin.ErrWeiXinRequest, url, resp)
 	}
-	return
+	return nil
 }

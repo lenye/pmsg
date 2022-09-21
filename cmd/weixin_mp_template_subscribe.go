@@ -40,6 +40,8 @@ var weiXinMpTplSubCmd = &cobra.Command{
 func init() {
 	weiXinMpTplCmd.AddCommand(weiXinMpTplSubCmd)
 
+	weiXinSetAccessTokenFlags(weiXinMpTplSubCmd)
+
 	weiXinMpTplSubCmd.Flags().StringVarP(&openID, nameOpenID, "o", "", "weixin user open id (required)")
 	weiXinMpTplSubCmd.MarkFlagRequired(nameOpenID)
 

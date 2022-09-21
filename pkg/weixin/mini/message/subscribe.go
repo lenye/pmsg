@@ -69,15 +69,15 @@ const (
 const subscribeSendURL = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=%s"
 
 // SendSubscribe 发送微信小程序订阅消息
-func SendSubscribe(accessToken string, msg *SubscribeMessage) (err error) {
+func SendSubscribe(accessToken string, msg *SubscribeMessage) error {
 	url := fmt.Sprintf(subscribeSendURL, accessToken)
 	var resp weixin.ResponseCode
-	_, err = client.PostJSON(url, msg, &resp)
+	_, err := client.PostJSON(url, msg, &resp)
 	if err != nil {
-		return
+		return err
 	}
 	if !resp.Succeed() {
-		err = fmt.Errorf("weixin request failed, uri=%q, response=%v", url, resp)
+		return fmt.Errorf("%w; uri: %q, response: %v", weixin.ErrWeiXinRequest, url, resp)
 	}
-	return
+	return nil
 }

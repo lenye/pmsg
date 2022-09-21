@@ -7,6 +7,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/weixin"
 	"github.com/lenye/pmsg/pkg/weixin/token"
 )
 
@@ -24,6 +25,12 @@ var weiXinAccessTokenCmd = &cobra.Command{
 
 func init() {
 	weiXinCmd.AddCommand(weiXinAccessTokenCmd)
+
+	weiXinAccessTokenCmd.Flags().StringVarP(&appID, nameAppID, "i", "", "weixin app id (required)")
+	weiXinAccessTokenCmd.MarkFlagRequired(nameAppID)
+
+	weiXinAccessTokenCmd.Flags().StringVarP(&appSecret, nameAppSecret, "s", "", "weixin app secret (required)")
+	weiXinAccessTokenCmd.MarkFlagRequired(nameAppSecret)
 }
 
 // WeiXinGetAccessToken 获取微信接口调用凭证
@@ -45,7 +52,7 @@ func WeiXinGetAccessToken() error {
 	if err != nil {
 		return err
 	}
-	fmt.Println(fmt.Sprintf("%v", accessTokenResp))
+	fmt.Println(fmt.Sprintf("%v; %v", weixin.MessageOK, accessTokenResp))
 
 	return nil
 }

@@ -37,12 +37,15 @@ func init() {
 	rootCmd.AddCommand(weiXinCmd)
 
 	weiXinCmd.PersistentFlags().StringVarP(&userAgent, nameUserAgent, "a", "", "http user agent")
+}
 
-	weiXinCmd.PersistentFlags().StringVarP(&accessToken, nameAccessToken, "t", "", "weixin access token")
+// weiXinSetAccessTokenFlags 设置微信access_token或者app_id/app_secret命令行参数
+func weiXinSetAccessTokenFlags(cmd *cobra.Command) {
+	cmd.Flags().StringVarP(&accessToken, nameAccessToken, "t", "", "weixin access token")
 
-	weiXinCmd.PersistentFlags().StringVarP(&appID, nameAppID, "i", "", "weixin app id (required if app secret is set)")
-	weiXinCmd.PersistentFlags().StringVarP(&appSecret, nameAppSecret, "s", "", "weixin app secret (required if app id is set)")
+	cmd.Flags().StringVarP(&appID, nameAppID, "i", "", "weixin app id (required if app secret is set)")
+	cmd.Flags().StringVarP(&appSecret, nameAppSecret, "s", "", "weixin app secret (required if app id is set)")
 
-	weiXinCmd.MarkFlagsMutuallyExclusive(nameAccessToken, nameAppID)
-	weiXinCmd.MarkFlagsRequiredTogether(nameAppID, nameAppSecret)
+	cmd.MarkFlagsMutuallyExclusive(nameAccessToken, nameAppID)
+	cmd.MarkFlagsRequiredTogether(nameAppID, nameAppSecret)
 }

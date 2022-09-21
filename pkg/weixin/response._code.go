@@ -1,6 +1,7 @@
 package weixin
 
 import (
+	"errors"
 	"fmt"
 )
 
@@ -8,6 +9,8 @@ const (
 	CodeOK    = 0
 	MessageOK = "ok"
 )
+
+var ErrWeiXinRequest = errors.New("weixin request error")
 
 // ResponseCode 微信响应操作错误信息
 type ResponseCode struct {

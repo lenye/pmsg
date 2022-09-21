@@ -7,10 +7,18 @@ import (
 	"net/http"
 )
 
+// CheckHttpResponseStatusCode 检查HTTP响应状态码
+func CheckHttpResponseStatusCode(url string, statusCode int) error {
+	if statusCode/100 != 2 {
+		return fmt.Errorf("%w; url: %q, http.Response.StatusCode: %d", ErrHttpRequest, url, statusCode)
+	}
+	return nil
+}
+
 func GetJSON(url string, respBody interface{}) (http.Header, error) {
 	resp, err := Get(url)
 	if err != nil {
-		return nil, fmt.Errorf("http failed to get %q: %w", url, err)
+		return nil, fmt.Errorf("%w; get %q, %v", ErrHttpRequest, url, err)
 	}
 	defer resp.Body.Close()
 
@@ -37,7 +45,7 @@ func PostJSON(url string, reqBody, respBody interface{}) (http.Header, error) {
 
 	resp, err := POST(url, contentTypeJson, jsonBuf)
 	if err != nil {
-		return nil, fmt.Errorf("http failed to post %q: %w", url, err)
+		return nil, fmt.Errorf("%w; post %q, %v", ErrHttpRequest, url, err)
 	}
 	defer resp.Body.Close()
 

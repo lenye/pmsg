@@ -1,6 +1,7 @@
 package client
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -10,6 +11,8 @@ import (
 )
 
 var UserAgent string
+
+var ErrHttpRequest = errors.New("http request error")
 
 const (
 	contentTypeJson = "application/json;charset=utf-8"
@@ -48,12 +51,4 @@ func POST(url string, bodyType string, body io.Reader) (*http.Response, error) {
 	req.Header.Set("User-Agent", userAgent())
 
 	return http.DefaultClient.Do(req)
-}
-
-// CheckHttpResponseStatusCode 检查HTTP响应状态码
-func CheckHttpResponseStatusCode(uri string, statusCode int) error {
-	if statusCode/100 != 2 {
-		return fmt.Errorf("http request failed, uri=%q, statusCode=%d", uri, statusCode)
-	}
-	return nil
 }

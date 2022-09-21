@@ -53,6 +53,8 @@ var weiXinMpTplCmd = &cobra.Command{
 func init() {
 	weiXinMpCmd.AddCommand(weiXinMpTplCmd)
 
+	weiXinSetAccessTokenFlags(weiXinMpTplCmd)
+
 	weiXinMpTplCmd.Flags().StringVarP(&openID, nameOpenID, "o", "", "weixin user open id (required)")
 	weiXinMpTplCmd.MarkFlagRequired(nameOpenID)
 
@@ -138,7 +140,7 @@ func WeiXinMpSendTemplate(args []string) error {
 	if gotMsgID, err := message.SendTemplate(accessToken, &msg); err != nil {
 		return err
 	} else {
-		fmt.Println(fmt.Sprintf("%v, msgid: %v", weixin.MessageOK, gotMsgID))
+		fmt.Println(fmt.Sprintf("%v; {msgid: %v}", weixin.MessageOK, gotMsgID))
 	}
 
 	return nil

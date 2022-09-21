@@ -93,16 +93,15 @@ func (t templateSendResponse) String() string {
 const templateSendURL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s"
 
 // SendTemplate 发送微信公众号模板消息
-func SendTemplate(accessToken string, msg *TemplateMessage) (msgID int64, err error) {
+func SendTemplate(accessToken string, msg *TemplateMessage) (int64, error) {
 	url := fmt.Sprintf(templateSendURL, accessToken)
 	var resp templateSendResponse
-	_, err = client.PostJSON(url, msg, &resp)
+	_, err := client.PostJSON(url, msg, &resp)
 	if err != nil {
-		return
+		return 0, err
 	}
 	if !resp.Succeed() {
-		err = fmt.Errorf("weixin request failed, uri=%q, response=%v", url, resp.ResponseCode)
+		return 0, fmt.Errorf("%w; uri: %q, response: %v", weixin.ErrWeiXinRequest, url, resp.ResponseCode)
 	}
-	msgID = resp.MsgID
-	return
+	return resp.MsgID, nil
 }
