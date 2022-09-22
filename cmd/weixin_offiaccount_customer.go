@@ -69,30 +69,15 @@ func WeiXinOfficialAccountSendCustomer(args []string) error {
 	switch msgType {
 	case message.MpMsgTypeText:
 		var msgMeta message.TextMeta
-		if err := json.Unmarshal(buf.Bytes(), &msgMeta); err != nil {
-			return fmt.Errorf("invalid json format, %v", err)
-		}
-		if msgMeta.Content == "" {
-			return errors.New("content is empty")
-		}
+		msgMeta.Content = buf.String()
 		msg.Text = &msgMeta
 	case message.MpMsgTypeImage:
 		var msgMeta message.ImageMeta
-		if err := json.Unmarshal(buf.Bytes(), &msgMeta); err != nil {
-			return fmt.Errorf("invalid json format, %v", err)
-		}
-		if msgMeta.MediaID == "" {
-			return errors.New("media_id is empty")
-		}
+		msgMeta.MediaID = buf.String()
 		msg.Image = &msgMeta
 	case message.MpMsgTypeVoice:
 		var msgMeta message.VoiceMeta
-		if err := json.Unmarshal(buf.Bytes(), &msgMeta); err != nil {
-			return fmt.Errorf("invalid json format, %v", err)
-		}
-		if msgMeta.MediaID == "" {
-			return errors.New("media_id is empty")
-		}
+		msgMeta.MediaID = buf.String()
 		msg.Voice = &msgMeta
 	case message.MpMsgTypeVideo:
 		var msgMeta message.VideoMeta
@@ -157,21 +142,11 @@ func WeiXinOfficialAccountSendCustomer(args []string) error {
 		msg.News = &msgMeta
 	case message.MpMsgTypeMpNews:
 		var msgMeta message.MpNewsMeta
-		if err := json.Unmarshal(buf.Bytes(), &msgMeta); err != nil {
-			return fmt.Errorf("invalid json format, %v", err)
-		}
-		if msgMeta.MediaID == "" {
-			return errors.New("media_id is empty")
-		}
+		msgMeta.MediaID = buf.String()
 		msg.MpNews = &msgMeta
 	case message.MpMsgTypeMpNewsArticle:
 		var msgMeta message.MpNewsArticleMeta
-		if err := json.Unmarshal(buf.Bytes(), &msgMeta); err != nil {
-			return fmt.Errorf("invalid json format, %v", err)
-		}
-		if msgMeta.ArticleID == "" {
-			return errors.New("article_id is empty")
-		}
+		msgMeta.ArticleID = buf.String()
 		msg.MpNewsArticle = &msgMeta
 	case message.MpMsgTypeMsgMenu:
 		var msgMeta message.MsgMenuMeta
@@ -199,12 +174,7 @@ func WeiXinOfficialAccountSendCustomer(args []string) error {
 		msg.MsgMenu = &msgMeta
 	case message.MpMsgTypeWxCard:
 		var msgMeta message.WxCardMeta
-		if err := json.Unmarshal(buf.Bytes(), &msgMeta); err != nil {
-			return fmt.Errorf("invalid json format, %v", err)
-		}
-		if msgMeta.CardID == "" {
-			return errors.New("card_id is empty")
-		}
+		msgMeta.CardID = buf.String()
 		msg.WxCard = &msgMeta
 	case message.MiniProgramMsgTypeMiniProgramPage:
 		var msgMeta message.MiniProgramPageMeta

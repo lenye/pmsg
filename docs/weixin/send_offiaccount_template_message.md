@@ -3,7 +3,10 @@
 命令参数说明
 
 ```text
-$ pmsg weixin mp template -h
+$ pmsg weixin offiaccount template -h
+
+Aliases:
+  template, tpl
 
 -a, --user_agent string     http user agent
 
@@ -26,7 +29,7 @@ $ pmsg weixin mp template -h
 windows
 
 ```shell
-pmsg.exe weixin mp template -i app_id -s app_secret -p template_id -o open_id "{\"first\":{\"value\":\"测试\"}}"
+pmsg.exe weixin offiaccount template -i app_id -s app_secret -p template_id -o open_id "{\"first\":{\"value\":\"测试\"}}"
 
 ok; msgid: 1234567890
 ```
@@ -34,7 +37,7 @@ ok; msgid: 1234567890
 linux
 
 ```shell
-$ pmsg weixin mp template -i app_id -s app_secret -p template_id -o open_id '{"first":{"value":"测试"}}'
+$ pmsg weixin offiaccount template -i app_id -s app_secret -p template_id -o open_id '{"first":{"value":"测试"}}'
 
 ok; msgid: 1234567890
 ```

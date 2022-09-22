@@ -5,6 +5,9 @@
 ```text
 $ pmsg weixin mini customer -h
 
+Aliases:
+  customer, kf
+
 -a, --user_agent string     http user agent
 
 -t, --access_token string   微信接口调用凭证
@@ -18,18 +21,15 @@ $ pmsg weixin mini customer -h
 ```
 
 消息内容
+
 1. 文本消息 --type text
-    ```json
-    {
-      "content": "HelloWorld"
-    }
+    ```text
+    "HelloWorld"
     ```
 
 1. 图片消息 --type image
-    ```json
-    {
-      "media_id": "MEDIA_ID"
-    }
+    ```text
+    "MEDIA_ID"
     ```
 
 1. 图文链接 --type link
@@ -55,16 +55,36 @@ $ pmsg weixin mini customer -h
 
 windows
 
+发送文本消息
+
 ```shell
-pmsg.exe weixin mini customer -i app_id -s app_secret -o open_id --type text "{\"content\":\"HelloWorld\"}"
+pmsg.exe weixin miniprogram customer -i app_id -s app_secret -o open_id --type text "HelloWorld"
+
+ok
+```
+
+发送小程序卡片
+
+```shell
+pmsg.exe weixin miniprogram customer -i app_id -s app_secret -o open_id --type miniprogrampage "{\"title\":\"title\",\"pagepath\":\"pagepath\",\"thumb_media_id\":\"thumb_media_id\"}"
 
 ok
 ```
 
 linux
 
+发送文本消息
+
 ```shell
-$ pmsg weixin mini customer -i app_id -s app_secret -o open_id --type text '{"content":"HelloWorld"}'
+$ pmsg weixin miniprogram customer -i app_id -s app_secret -o open_id --type text 'HelloWorld'
+
+ok
+```
+
+发送小程序卡片
+
+```shell
+pmsg weixin miniprogram customer -i app_id -s app_secret -o open_id --type miniprogrampage '{"title":"title","pagepath":"pagepath","thumb_media_id":"thumb_media_id"}'
 
 ok
 ```

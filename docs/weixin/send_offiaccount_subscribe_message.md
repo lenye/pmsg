@@ -3,7 +3,10 @@
 命令参数说明
 
 ```text
-$ pmsg weixin mp subscribe -h
+$ pmsg weixin offiaccount subscribe -h
+
+Aliases:
+  subscribe, sub
 
 -a, --user_agent string     http user agent
 
@@ -25,7 +28,7 @@ $ pmsg weixin mp subscribe -h
 windows
 
 ```shell
-pmsg.exe weixin mp subscribe -i app_id -s app_secret -p template_id -o open_id "{\"first\":{\"value\":\"测试\"}}"
+pmsg.exe weixin offiaccount subscribe -i app_id -s app_secret -p template_id -o open_id "{\"first\":{\"value\":\"测试\"}}"
 
 ok
 ```
@@ -33,7 +36,7 @@ ok
 linux
 
 ```shell
-$ pmsg weixin mp subscribe -i app_id -s app_secret -p template_id -o open_id '{"first":{"value":"测试"}}'
+$ pmsg weixin offiaccount subscribe -i app_id -s app_secret -p template_id -o open_id '{"first":{"value":"测试"}}'
 
 ok
 ```

@@ -63,21 +63,11 @@ func WeiXinMiniSendCustomer(args []string) error {
 	switch msgType {
 	case message.MiniProgramMsgTypeText:
 		var msgMeta message.TextMeta
-		if err := json.Unmarshal(buf.Bytes(), &msgMeta); err != nil {
-			return fmt.Errorf("invalid json format, %v", err)
-		}
-		if msgMeta.Content == "" {
-			return errors.New("content is empty")
-		}
+		msgMeta.Content = buf.String()
 		msg.Text = &msgMeta
 	case message.MiniProgramMsgTypeImage:
 		var msgMeta message.ImageMeta
-		if err := json.Unmarshal(buf.Bytes(), &msgMeta); err != nil {
-			return fmt.Errorf("invalid json format, %v", err)
-		}
-		if msgMeta.MediaID == "" {
-			return errors.New("media_id is empty")
-		}
+		msgMeta.MediaID = buf.String()
 		msg.Image = &msgMeta
 	case message.MiniProgramMsgTypeLink:
 		var msgMeta message.LinkMeta

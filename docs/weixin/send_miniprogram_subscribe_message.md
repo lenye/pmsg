@@ -5,6 +5,9 @@
 ```text
 $ pmsg weixin mini subscribe -h
 
+Aliases:
+  subscribe, sub
+
 -a, --user_agent string     http user agent
 
 -t, --access_token string   微信接口调用凭证
@@ -25,15 +28,29 @@ $ pmsg weixin mini subscribe -h
 windows
 
 ```shell
-pmsg.exe weixin mini subscribe -i app_id -s app_secret -p template_id -o open_id "{\"first\":{\"value\":\"测试\"}}"
+pmsg.exe weixin miniprogram subscribe -i app_id -s app_secret -p template_id -o open_id "{\"first\":{\"value\":\"测试\"}}"
 
 ok
+
+
+使用命令别名
+pmsg.exe wx mini sub -i app_id -s app_secret -p template_id -o open_id "{\"first\":{\"value\":\"测试\"}}"
+
+ok
+
 ```
+
 
 linux
 
 ```shell
-$ pmsg weixin mini subscribe -i app_id -s app_secret -p template_id -o open_id '{"first":{"value":"测试"}}'
+$ pmsg weixin miniprogram subscribe -i app_id -s app_secret -p template_id -o open_id '{"first":{"value":"测试"}}'
+
+ok
+
+
+使用命令别名
+$ pmsg wx mini sub -i app_id -s app_secret -p template_id -o open_id '{"first":{"value":"测试"}}'
 
 ok
 ```

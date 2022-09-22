@@ -3,7 +3,10 @@
 命令参数说明
 
 ```text
-$ pmsg weixin mp customer -h
+$ pmsg weixin offiaccount customer -h
+
+Aliases:
+  customer, kf
 
 -a, --user_agent string     http user agent
 
@@ -24,24 +27,18 @@ $ pmsg weixin mp customer -h
 消息内容
 
 1. 文本消息 --type text
-    ```json
-    {
-      "content": "HelloWorld"
-    }
+    ```text
+    "HelloWorld"
     ```
 
 1. 图片消息 --type image
-    ```json
-    {
-      "media_id": "MEDIA_ID"
-    }
+    ```text
+    "MEDIA_ID"
     ```
 
 1. 语音消息 --type voice
-    ```json
-    {
-      "media_id": "MEDIA_ID"
-    }
+    ```text
+    "MEDIA_ID"
     ```
 
 1. 视频消息 --type video
@@ -80,17 +77,13 @@ $ pmsg weixin mp customer -h
     ```
 
 1. 图文消息 --type mpnews
-    ```json
-    {
-      "media_id": "MEDIA_ID"
-    }
+    ```text
+    "MEDIA_ID"
     ```
 
 1. 图文消息 --type mpnewsarticle
-    ```json
-    {
-      "article_id": "ARTICLE_ID"
-    }
+    ```text
+    "ARTICLE_ID"
     ```
 
 1. 菜单消息 --type msgmenu
@@ -112,10 +105,8 @@ $ pmsg weixin mp customer -h
     ```
 
 1. 卡券 --type wxcard
-    ```json
-    {
-      "card_id": "CARD_ID"
-    }
+    ```text
+    "CARD_ID"
     ```
 
 1. 小程序卡片 --type miniprogrampage
@@ -132,16 +123,36 @@ $ pmsg weixin mp customer -h
 
 windows
 
+发送文本消息
+
 ```shell
-pmsg.exe weixin mp customer -i app_id -s app_secret -o open_id --type text "{\"content\":\"HelloWorld\"}"
+pmsg.exe weixin offiaccount customer -i app_id -s app_secret -o open_id --type text "HelloWorld"
+
+ok
+```
+
+发送小程序卡片
+
+```shell
+pmsg.exe weixin offiaccount customer -i app_id -s app_secret -o open_id --type miniprogrampage "{\"title\":\"title\",\"appid\":\"appid\",\"pagepath\":\"pagepath\",\"thumb_media_id\":\"thumb_media_id\"}"
 
 ok
 ```
 
 linux
 
+发送文本消息
+
 ```shell
-$ pmsg weixin mp customer -i app_id -s app_secret -o open_id --type text '{"content":"HelloWorld"}'
+$ pmsg weixin offiaccount customer -i app_id -s app_secret -o open_id --type text 'HelloWorld'
+
+ok
+```
+
+发送小程序卡片
+
+```shell
+pmsg weixin offiaccount customer -i app_id -s app_secret -o open_id --type miniprogrampage '{"title":"title","appid":"appid","pagepath":"pagepath","thumb_media_id":"thumb_media_id"}'
 
 ok
 ```
