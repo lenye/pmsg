@@ -39,6 +39,9 @@ linux
 ```shell
 $ pmsg weixin offiaccount template -i app_id -s app_secret -p template_id -o open_id '{"first":{"value":"测试"}}'
 
+使用命令别名
+$ pmsg wx mp tpl -i app_id -s app_secret -p template_id -o open_id '{"first":{"value":"测试"}}'
+
 ok; msgid: 1234567890
 ```
 

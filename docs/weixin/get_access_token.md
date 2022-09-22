@@ -17,6 +17,9 @@ $ pmsg weixin token -h
 ```shell
 $ pmsg weixin token -i app_id -s app_secret
 
+使用命令别名
+$ pmsg wx token -i app_id -s app_secret
+
 ok; access_token: "access_token", expires_in: 7200, expire_at: "2022-09-20T15:00:20+08:00"
 ```
 

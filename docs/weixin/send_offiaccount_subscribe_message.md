@@ -38,6 +38,9 @@ linux
 ```shell
 $ pmsg weixin offiaccount subscribe -i app_id -s app_secret -p template_id -o open_id '{"first":{"value":"测试"}}'
 
+使用命令别名
+$ pmsg wx mp sub -i app_id -s app_secret -p template_id -o open_id '{"first":{"value":"测试"}}'
+
 ok
 ```
 

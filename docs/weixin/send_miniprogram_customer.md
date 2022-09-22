@@ -3,7 +3,7 @@
 命令参数说明
 
 ```text
-$ pmsg weixin mini customer -h
+$ pmsg weixin miniprogram customer -h
 
 Aliases:
   customer, kf
@@ -60,6 +60,9 @@ windows
 ```shell
 pmsg.exe weixin miniprogram customer -i app_id -s app_secret -o open_id --type text "HelloWorld"
 
+使用命令别名
+pmsg.exe wx mini kf -i app_id -s app_secret -o open_id --type text "HelloWorld"
+
 ok
 ```
 
@@ -77,6 +80,9 @@ linux
 
 ```shell
 $ pmsg weixin miniprogram customer -i app_id -s app_secret -o open_id --type text 'HelloWorld'
+
+使用命令别名
+$ pmsg wx mini kf -i app_id -s app_secret -o open_id --type text 'HelloWorld'
 
 ok
 ```

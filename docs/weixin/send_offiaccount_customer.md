@@ -146,6 +146,9 @@ linux
 ```shell
 $ pmsg weixin offiaccount customer -i app_id -s app_secret -o open_id --type text 'HelloWorld'
 
+使用命令别名
+$ pmsg wx mp kf -i app_id -s app_secret -o open_id --type text 'HelloWorld'
+
 ok
 ```
 

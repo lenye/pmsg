@@ -3,7 +3,7 @@
 命令参数说明
 
 ```text
-$ pmsg weixin mini subscribe -h
+$ pmsg weixin miniprogram subscribe -h
 
 Aliases:
   subscribe, sub
