@@ -18,39 +18,38 @@ $ pmsg weixin mini customer -h
 ```
 
 消息内容
-
-* 文本消息 --type text
+1. 文本消息 --type text
     ```json
     {
       "content": "HelloWorld"
     }
     ```
 
-* 图片消息 --type image
-  ```json
-  {
-    "media_id": "MEDIA_ID"
-  }
-  ```
+1. 图片消息 --type image
+    ```json
+    {
+      "media_id": "MEDIA_ID"
+    }
+    ```
 
-* 图文链接 --type link
-  ```json
-  {
-    "title": "Happy Day",
-    "description": "Is Really A Happy Day",
-    "url": "URL",
-    "thumb_url": "THUMB_URL"
-  }
-  ```
-  
-* 小程序卡片 --type miniprogrampage
-  ```json
-  {
-    "title": "title",
-    "pagepath": "pagepath",
-    "thumb_media_id": "thumb_media_id"
-  }
-  ```
+1. 图文链接 --type link
+    ```json
+    {
+      "title": "Happy Day",
+      "description": "Is Really A Happy Day",
+      "url": "URL",
+      "thumb_url": "THUMB_URL"
+    }
+    ```
+
+1. 小程序卡片 --type miniprogrampage
+    ```json
+    {
+      "title": "title",
+      "pagepath": "pagepath",
+      "thumb_media_id": "thumb_media_id"
+    }
+    ```
 
 样例
 
