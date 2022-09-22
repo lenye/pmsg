@@ -10,40 +10,40 @@ import (
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
-	"github.com/lenye/pmsg/pkg/weixin/mp/message"
+	"github.com/lenye/pmsg/pkg/weixin/offiaccount/message"
 	"github.com/lenye/pmsg/pkg/weixin/token"
 )
 
-// weiXinMpSubCmd 微信公众号订阅通知消息
-var weiXinMpSubCmd = &cobra.Command{
+// weiXinOfficialAccountSubCmd 微信公众号订阅通知消息
+var weiXinOfficialAccountSubCmd = &cobra.Command{
 	Use:     "subscribe",
 	Aliases: []string{"sub"},
-	Short:   "publish weixin mp subscribe message",
+	Short:   "publish weixin offiaccount subscribe message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := WeiXinMpBizSendSubscribe(args); err != nil {
+		if err := WeiXinOfficialAccountBizSendSubscribe(args); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
 }
 
 func init() {
-	weiXinMpCmd.AddCommand(weiXinMpSubCmd)
+	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialAccountSubCmd)
 
-	weiXinSetAccessTokenFlags(weiXinMpSubCmd)
+	weiXinSetAccessTokenFlags(weiXinOfficialAccountSubCmd)
 
-	weiXinMpSubCmd.Flags().StringVarP(&openID, nameOpenID, "o", "", "weixin user open id (required)")
-	weiXinMpSubCmd.MarkFlagRequired(nameOpenID)
+	weiXinOfficialAccountSubCmd.Flags().StringVarP(&openID, nameOpenID, "o", "", "weixin user open id (required)")
+	weiXinOfficialAccountSubCmd.MarkFlagRequired(nameOpenID)
 
-	weiXinMpSubCmd.Flags().StringVarP(&templateID, nameTemplateID, "p", "", "weixin template id (required)")
-	weiXinMpSubCmd.MarkFlagRequired(nameTemplateID)
+	weiXinOfficialAccountSubCmd.Flags().StringVarP(&templateID, nameTemplateID, "p", "", "weixin template id (required)")
+	weiXinOfficialAccountSubCmd.MarkFlagRequired(nameTemplateID)
 
-	weiXinMpSubCmd.Flags().StringVar(&page, namePage, "", "page")
-	weiXinMpSubCmd.Flags().StringToStringVarP(&mini, nameMini, "m", nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
+	weiXinOfficialAccountSubCmd.Flags().StringVar(&page, namePage, "", "page")
+	weiXinOfficialAccountSubCmd.Flags().StringToStringVarP(&mini, nameMini, "m", nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
 }
 
-// WeiXinMpBizSendSubscribe 发送微信公众号订阅通知消息
-func WeiXinMpBizSendSubscribe(args []string) error {
+// WeiXinOfficialAccountBizSendSubscribe 发送微信公众号订阅通知消息
+func WeiXinOfficialAccountBizSendSubscribe(args []string) error {
 
 	if accessToken == "" {
 		if appID == "" {
@@ -91,7 +91,7 @@ func WeiXinMpBizSendSubscribe(args []string) error {
 			return fmt.Errorf("mini flag %q not set", nameMiniPagePath)
 		}
 
-		msg.MiniProgram = &message.MiniProgram{
+		msg.MiniProgram = &message.MiniProgramMeta{
 			AppID:    miniAppID,
 			PagePath: miniPagePath,
 		}

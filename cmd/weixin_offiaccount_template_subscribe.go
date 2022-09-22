@@ -10,7 +10,7 @@ import (
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
-	"github.com/lenye/pmsg/pkg/weixin/mp/message"
+	"github.com/lenye/pmsg/pkg/weixin/offiaccount/message"
 	"github.com/lenye/pmsg/pkg/weixin/token"
 )
 
@@ -24,42 +24,42 @@ var (
 	title string
 )
 
-// weiXinMpTplSubCmd 微信公众号一次性订阅消息
-var weiXinMpTplSubCmd = &cobra.Command{
+// weiXinOfficialAccountTplSubCmd 微信公众号一次性订阅消息
+var weiXinOfficialAccountTplSubCmd = &cobra.Command{
 	Use:     "subscribe",
 	Aliases: []string{"sub"},
-	Short:   "publish weixin mp template subscribe message (onetime)",
+	Short:   "publish weixin offiaccount template subscribe message (onetime)",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := WeiXinMpSendTemplateSubscribe(args); err != nil {
+		if err := WeiXinOfficialAccountSendTemplateSubscribe(args); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
 }
 
 func init() {
-	weiXinMpTplCmd.AddCommand(weiXinMpTplSubCmd)
+	weiXinOfficialAccountTplCmd.AddCommand(weiXinOfficialAccountTplSubCmd)
 
-	weiXinSetAccessTokenFlags(weiXinMpTplSubCmd)
+	weiXinSetAccessTokenFlags(weiXinOfficialAccountTplSubCmd)
 
-	weiXinMpTplSubCmd.Flags().StringVarP(&openID, nameOpenID, "o", "", "weixin user open id (required)")
-	weiXinMpTplSubCmd.MarkFlagRequired(nameOpenID)
+	weiXinOfficialAccountTplSubCmd.Flags().StringVarP(&openID, nameOpenID, "o", "", "weixin user open id (required)")
+	weiXinOfficialAccountTplSubCmd.MarkFlagRequired(nameOpenID)
 
-	weiXinMpTplSubCmd.Flags().StringVarP(&templateID, nameTemplateID, "p", "", "weixin template id (required)")
-	weiXinMpTplSubCmd.MarkFlagRequired(nameTemplateID)
+	weiXinOfficialAccountTplSubCmd.Flags().StringVarP(&templateID, nameTemplateID, "p", "", "weixin template id (required)")
+	weiXinOfficialAccountTplSubCmd.MarkFlagRequired(nameTemplateID)
 
-	weiXinMpTplSubCmd.Flags().StringVar(&scene, nameScene, "", "weixin subscribe scene (required)")
-	weiXinMpTplSubCmd.MarkFlagRequired(nameScene)
+	weiXinOfficialAccountTplSubCmd.Flags().StringVar(&scene, nameScene, "", "weixin subscribe scene (required)")
+	weiXinOfficialAccountTplSubCmd.MarkFlagRequired(nameScene)
 
-	weiXinMpTplSubCmd.Flags().StringVar(&title, nameTitle, "", "weixin message title (required)")
-	weiXinMpTplSubCmd.MarkFlagRequired(nameTitle)
+	weiXinOfficialAccountTplSubCmd.Flags().StringVar(&title, nameTitle, "", "weixin message title (required)")
+	weiXinOfficialAccountTplSubCmd.MarkFlagRequired(nameTitle)
 
-	weiXinMpTplSubCmd.Flags().StringVarP(&url, nameUrl, "u", "", "url")
-	weiXinMpTplSubCmd.Flags().StringToStringVarP(&mini, nameMini, "m", nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
+	weiXinOfficialAccountTplSubCmd.Flags().StringVarP(&url, nameUrl, "u", "", "url")
+	weiXinOfficialAccountTplSubCmd.Flags().StringToStringVarP(&mini, nameMini, "m", nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
 }
 
-// WeiXinMpSendTemplateSubscribe 发送微信公众号一次性订阅消息
-func WeiXinMpSendTemplateSubscribe(args []string) error {
+// WeiXinOfficialAccountSendTemplateSubscribe 发送微信公众号一次性订阅消息
+func WeiXinOfficialAccountSendTemplateSubscribe(args []string) error {
 
 	if accessToken == "" {
 		if appID == "" {
@@ -116,7 +116,7 @@ func WeiXinMpSendTemplateSubscribe(args []string) error {
 			return fmt.Errorf("mini flag %q not set", nameMiniPagePath)
 		}
 
-		msg.MiniProgram = &message.MiniProgram{
+		msg.MiniProgram = &message.MiniProgramMeta{
 			AppID:    miniAppID,
 			PagePath: miniPagePath,
 		}

@@ -43,7 +43,7 @@ type SubscribeMessage struct {
 	ToUser      string                       `json:"touser"`
 	TemplateID  string                       `json:"template_id"`
 	Page        string                       `json:"page,omitempty"`
-	MiniProgram *MiniProgram                 `json:"miniprogram,omitempty"` // 可选, 跳小程序所需数据，不需跳小程序可不用传该数据
+	MiniProgram *MiniProgramMeta             `json:"miniprogram,omitempty"` // 可选, 跳小程序所需数据，不需跳小程序可不用传该数据
 	Data        map[string]SubscribeDataItem `json:"data"`
 }
 
@@ -57,7 +57,7 @@ const subscribeBizSendURL = "https://api.weixin.qq.com/cgi-bin/message/subscribe
 // BizSendSubscribe 发送微信公众号订阅通知消息
 func BizSendSubscribe(accessToken string, msg *SubscribeMessage) error {
 	url := fmt.Sprintf(subscribeBizSendURL, accessToken)
-	var resp weixin.ResponseCode
+	var resp weixin.ResponseMeta
 	_, err := client.PostJSON(url, msg, &resp)
 	if err != nil {
 		return err

@@ -91,7 +91,7 @@ const subscribeSendURL = "https://api.weixin.qq.com/cgi-bin/message/subscribe/se
 // SendSubscribe 发送微信小程序订阅消息
 func SendSubscribe(accessToken string, msg *SubscribeMessage) error {
 	url := fmt.Sprintf(subscribeSendURL, accessToken)
-	var resp weixin.ResponseCode
+	var resp weixin.ResponseMeta
 	_, err := client.PostJSON(url, msg, &resp)
 	if err != nil {
 		return err

@@ -22,10 +22,12 @@ var rootCmd = &cobra.Command{
 	Use:   "pmsg",
 	Short: "publish message",
 	Long: `publish message:
- weixin mp template message,
- weixin mp template subscribe message (onetime),
- weixin mp subscribe message,
+ weixin offiaccount template message,
+ weixin offiaccount template subscribe message (onetime),
+ weixin offiaccount subscribe message,
+ weixin offiaccount customer message,
  weixin miniprogram subscribe message,
+ weixin miniprogram customer message,
  dingtalk message,
  rabbitmq message`,
 }

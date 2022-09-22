@@ -10,7 +10,7 @@ import (
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
-	"github.com/lenye/pmsg/pkg/weixin/mp/message"
+	"github.com/lenye/pmsg/pkg/weixin/offiaccount/message"
 	"github.com/lenye/pmsg/pkg/weixin/token"
 )
 
@@ -37,39 +37,39 @@ var (
 	miniPagePath string
 )
 
-// weiXinMpTplCmd 微信公众号模板消息
-var weiXinMpTplCmd = &cobra.Command{
+// weiXinOfficialAccountTplCmd 微信公众号模板消息
+var weiXinOfficialAccountTplCmd = &cobra.Command{
 	Use:     "template",
 	Aliases: []string{"tpl"},
-	Short:   "publish weixin mp template message",
+	Short:   "publish weixin offiaccount template message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := WeiXinMpSendTemplate(args); err != nil {
+		if err := WeiXinOfficialAccountSendTemplate(args); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
 }
 
 func init() {
-	weiXinMpCmd.AddCommand(weiXinMpTplCmd)
+	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialAccountTplCmd)
 
-	weiXinSetAccessTokenFlags(weiXinMpTplCmd)
+	weiXinSetAccessTokenFlags(weiXinOfficialAccountTplCmd)
 
-	weiXinMpTplCmd.Flags().StringVarP(&openID, nameOpenID, "o", "", "weixin user open id (required)")
-	weiXinMpTplCmd.MarkFlagRequired(nameOpenID)
+	weiXinOfficialAccountTplCmd.Flags().StringVarP(&openID, nameOpenID, "o", "", "weixin user open id (required)")
+	weiXinOfficialAccountTplCmd.MarkFlagRequired(nameOpenID)
 
-	weiXinMpTplCmd.Flags().StringVarP(&templateID, nameTemplateID, "p", "", "weixin template id (required)")
-	weiXinMpTplCmd.MarkFlagRequired(nameTemplateID)
+	weiXinOfficialAccountTplCmd.Flags().StringVarP(&templateID, nameTemplateID, "p", "", "weixin template id (required)")
+	weiXinOfficialAccountTplCmd.MarkFlagRequired(nameTemplateID)
 
-	weiXinMpTplCmd.Flags().StringVarP(&url, nameUrl, "u", "", "url")
-	weiXinMpTplCmd.Flags().StringVar(&clientMsgID, nameClientMsgID, "", "weixin template client msg id")
-	weiXinMpTplCmd.Flags().StringVarP(&color, nameColor, "c", "", "weixin template color")
+	weiXinOfficialAccountTplCmd.Flags().StringVarP(&url, nameUrl, "u", "", "url")
+	weiXinOfficialAccountTplCmd.Flags().StringVar(&clientMsgID, nameClientMsgID, "", "weixin template client msg id")
+	weiXinOfficialAccountTplCmd.Flags().StringVarP(&color, nameColor, "c", "", "weixin template color")
 
-	weiXinMpTplCmd.Flags().StringToStringVarP(&mini, nameMini, "m", nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
+	weiXinOfficialAccountTplCmd.Flags().StringToStringVarP(&mini, nameMini, "m", nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
 }
 
-// WeiXinMpSendTemplate 发送微信公众号模板消息
-func WeiXinMpSendTemplate(args []string) error {
+// WeiXinOfficialAccountSendTemplate 发送微信公众号模板消息
+func WeiXinOfficialAccountSendTemplate(args []string) error {
 
 	if accessToken == "" {
 		if appID == "" {
@@ -119,7 +119,7 @@ func WeiXinMpSendTemplate(args []string) error {
 			return fmt.Errorf("mini flag %q not set", nameMiniPagePath)
 		}
 
-		msg.MiniProgram = &message.MiniProgram{
+		msg.MiniProgram = &message.MiniProgramMeta{
 			AppID:    miniAppID,
 			PagePath: miniPagePath,
 		}

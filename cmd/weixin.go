@@ -24,13 +24,15 @@ var ErrMultiRequiredOne = errors.New("flags in the group [access_token app_id] r
 var weiXinCmd = &cobra.Command{
 	Use:     "weixin",
 	Aliases: []string{"wx"},
-	Short:   "publish weixin message",
+	Short:   "weixin message",
 	Long: `get weixin access token,
 publish weixin message:
- mp template message,
- mp template subscribe message (onetime),
- mp subscribe message,
- miniprogram subscribe message`,
+ offiaccount template message,
+ offiaccount template subscribe message (onetime),
+ offiaccount subscribe message,
+ offiaccount customer message,
+ miniprogram subscribe message,
+ miniprogram customer message`,
 }
 
 func init() {

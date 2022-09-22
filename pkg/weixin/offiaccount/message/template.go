@@ -56,7 +56,7 @@ type TemplateMessage struct {
 	ToUser      string                      `json:"touser"`                  // 必须, 接受者OpenID
 	TemplateID  string                      `json:"template_id"`             // 必须, 模版ID
 	URL         string                      `json:"url,omitempty"`           // 可选, 用户点击后跳转的URL, 该URL必须处于开发者在公众平台网站中设置的域中
-	MiniProgram *MiniProgram                `json:"miniprogram,omitempty"`   // 可选, 跳小程序所需数据，不需跳小程序可不用传该数据
+	MiniProgram *MiniProgramMeta            `json:"miniprogram,omitempty"`   // 可选, 跳小程序所需数据，不需跳小程序可不用传该数据
 	Data        map[string]TemplateDataItem `json:"data"`                    // 必须, 模板数据, JSON 格式的 []byte, 满足特定的模板需求
 	Color       string                      `json:"color,omitempty"`         // 可选, 模板内容字体颜色，不填默认为黑色
 }
@@ -68,8 +68,8 @@ url 和 miniprogram 都是非必填字段，若都不传则模板无跳转；
 当用户的微信客户端版本不支持跳小程序时，将会跳转至url。
 */
 
-// MiniProgram 跳小程序所需数据
-type MiniProgram struct {
+// MiniProgramMeta 跳小程序所需数据
+type MiniProgramMeta struct {
 	AppID    string `json:"appid"`    // 所需跳转到的小程序appid（该小程序 appid 必须与发模板消息的公众号是绑定关联关系，暂不支持小游戏）
 	PagePath string `json:"pagepath"` // 所需跳转到小程序的具体页面路径，支持带参数,（示例index?foo=bar），要求该小程序已发布，暂不支持小游戏
 }
@@ -82,7 +82,7 @@ type TemplateDataItem struct {
 
 // templateSendResponse 发送模板消息的响应
 type templateSendResponse struct {
-	weixin.ResponseCode
+	weixin.ResponseMeta
 	MsgID int64 `json:"msgid"` // 消息id
 }
 
@@ -101,7 +101,7 @@ func SendTemplate(accessToken string, msg *TemplateMessage) (int64, error) {
 		return 0, err
 	}
 	if !resp.Succeed() {
-		return 0, fmt.Errorf("%w; %v", weixin.ErrWeiXinRequest, resp.ResponseCode)
+		return 0, fmt.Errorf("%w; %v", weixin.ErrWeiXinRequest, resp.ResponseMeta)
 	}
 	return resp.MsgID, nil
 }

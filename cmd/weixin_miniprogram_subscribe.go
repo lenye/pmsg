@@ -10,7 +10,7 @@ import (
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
-	"github.com/lenye/pmsg/pkg/weixin/mini/message"
+	"github.com/lenye/pmsg/pkg/weixin/miniprogram/message"
 	"github.com/lenye/pmsg/pkg/weixin/token"
 )
 
@@ -26,37 +26,37 @@ var (
 	language         string
 )
 
-// weiXinMiniSubCmd 微信小程序订阅消息
-var weiXinMiniSubCmd = &cobra.Command{
+// weiXinMiniProgramSubCmd 微信小程序订阅消息
+var weiXinMiniProgramSubCmd = &cobra.Command{
 	Use:     "subscribe",
 	Aliases: []string{"sub"},
 	Short:   "publish weixin miniprogram subscribe message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		if err := WeiXinMpSendSubscribe(args); err != nil {
+		if err := WeiXinMiniProgramSendSubscribe(args); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
 }
 
 func init() {
-	weiXinMiniCmd.AddCommand(weiXinMiniSubCmd)
+	weiXinMiniProgramCmd.AddCommand(weiXinMiniProgramSubCmd)
 
-	weiXinSetAccessTokenFlags(weiXinMiniSubCmd)
+	weiXinSetAccessTokenFlags(weiXinMiniProgramSubCmd)
 
-	weiXinMiniSubCmd.Flags().StringVarP(&openID, nameOpenID, "o", "", "weixin user open id (required)")
-	weiXinMiniSubCmd.MarkFlagRequired(nameOpenID)
+	weiXinMiniProgramSubCmd.Flags().StringVarP(&openID, nameOpenID, "o", "", "weixin user open id (required)")
+	weiXinMiniProgramSubCmd.MarkFlagRequired(nameOpenID)
 
-	weiXinMiniSubCmd.Flags().StringVarP(&templateID, nameTemplateID, "p", "", "weixin template id (required)")
-	weiXinMiniSubCmd.MarkFlagRequired(nameTemplateID)
+	weiXinMiniProgramSubCmd.Flags().StringVarP(&templateID, nameTemplateID, "p", "", "weixin template id (required)")
+	weiXinMiniProgramSubCmd.MarkFlagRequired(nameTemplateID)
 
-	weiXinMiniSubCmd.Flags().StringVarP(&miniProgramState, nameMiniProgramState, "g", "", "miniprogram_state")
-	weiXinMiniSubCmd.Flags().StringVar(&page, namePage, "", "page")
-	weiXinMiniSubCmd.Flags().StringVar(&language, nameLanguage, "", "language")
+	weiXinMiniProgramSubCmd.Flags().StringVarP(&miniProgramState, nameMiniProgramState, "g", "", "miniprogram_state")
+	weiXinMiniProgramSubCmd.Flags().StringVar(&page, namePage, "", "page")
+	weiXinMiniProgramSubCmd.Flags().StringVar(&language, nameLanguage, "", "language")
 }
 
-// WeiXinMpSendSubscribe 发送微信小程序订阅消息
-func WeiXinMpSendSubscribe(args []string) error {
+// WeiXinMiniProgramSendSubscribe 发送微信小程序订阅消息
+func WeiXinMiniProgramSendSubscribe(args []string) error {
 
 	if accessToken == "" {
 		if appID == "" {
@@ -92,14 +92,14 @@ func WeiXinMpSendSubscribe(args []string) error {
 
 	if language != "" {
 		if err := message.ValidateLanguage(language); err != nil {
-			return fmt.Errorf("flag %s: %v", nameLanguage, err)
+			return fmt.Errorf("invalid flags %s: %v", nameLanguage, err)
 		}
 		msg.Language = language
 	}
 
 	if miniProgramState != "" {
 		if err := message.ValidateMiniProgramState(miniProgramState); err != nil {
-			return fmt.Errorf("flag %s: %v", nameMiniProgramState, err)
+			return fmt.Errorf("invalid flags %s: %v", nameMiniProgramState, err)
 		}
 		msg.MiniProgramState = miniProgramState
 	}

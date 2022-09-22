@@ -14,7 +14,7 @@ import (
 // weiXinAccessTokenCmd 获取微信接口调用凭证
 var weiXinAccessTokenCmd = &cobra.Command{
 	Use:   "token",
-	Short: "get weixin access token (mp, miniprogram)",
+	Short: "get weixin access token (offiaccount, miniprogram)",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		if err := WeiXinGetAccessToken(); err != nil {
