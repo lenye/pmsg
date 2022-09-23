@@ -19,3 +19,7 @@
 
 * [发送订阅消息](https://github.com/lenye/pmsg/blob/main/docs/weixin/send_miniprogram_subscribe_message.md)
 * [发送客服消息](https://github.com/lenye/pmsg/blob/main/docs/weixin/send_miniprogram_customer.md)
+
+### 企业微信
+
+* [获取接口调用凭证](https://github.com/lenye/pmsg/blob/main/docs/weixin/weixin_work_access_token.md)
