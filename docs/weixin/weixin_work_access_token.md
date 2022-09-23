@@ -14,10 +14,7 @@ $ pmsg weixin work token -h
 样例
 
 ```shell
-$ pmsg weixin work token -i app_id -s app_secret
-
-使用命令别名
-$ pmsg wx token -i corp_id -s corp_secret
+$ pmsg weixin work token -i corp_id -s corp_secret
 
 ok; access_token: "access_token", expires_in: 7200, expire_at: "2022-09-20T15:00:20+08:00"
 ```
