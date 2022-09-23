@@ -1,8 +1,8 @@
-# 发消息命令行程序
+`pmsg`是一个发送消息的小工具。
 
-pmsg是一个发送消息的小工具。
+`pmsg` 可运行于 Windows, Linux, macOS, FreeBSD 操作系统。
 
-#### 支持的消息类型
+### 支持的消息类型
 
 * 模板消息 - 微信公众号
 * 一次性订阅消息 - 微信公众号
@@ -16,8 +16,26 @@ pmsg是一个发送消息的小工具。
 
 ### 下载
 
-* 从[发布页面](https://github.com/lenye/pmsg/releases)获取最新的二进制文件
-* 获取源代码
+#### 使用二进制发行版
+
+1. 下载 `pmsg` [最新版本](https://github.com/lenye/pmsg/releases)
+
+1. 开始运行它:
+
+   windows
+
     ```shell
-    git clone https://github.com/lenye/pmsg.git
+    pmsg.exe --help
     ```
+
+   linux
+
+    ```shell
+    ./pmsg --help
+    ```
+
+#### 源代码
+
+```shell
+git clone https://github.com/lenye/pmsg.git
+```

@@ -1,4 +1,8 @@
-# 发消息命令行程序文档
+# 文档
+
+### 下载
+
+* `pmsg` [最新版本及源代码](https://github.com/lenye/pmsg/blob/main/docs/install.md)
 
 ### 微信接口调用凭证
 
