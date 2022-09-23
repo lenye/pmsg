@@ -7,7 +7,6 @@ $ pmsg weixin token -h
 
 -a, --user_agent string     http user agent
 
--t, --access_token string   微信接口调用凭证 (不可用)
 -i, --app_id string         微信app_id (必填)
 -s, --app_secret string     微信app_secret (必填)
 ```
