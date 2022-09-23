@@ -18,12 +18,12 @@ builds:
       - windows
       - darwin
       - freebsd
-      - openbsd
     goarch:
       - amd64
       - arm64
       - 386
       - arm
+      - mips64le
       - ppc64le
       - s390x
     goarm:
@@ -39,10 +39,6 @@ builds:
         goarch: arm
       - goos: freebsd
         goarm: 5
-      - goos: openbsd
-        goarm: 5
-      - goos: openbsd
-        goarm: 6
     mod_timestamp: '{{ .CommitTimestamp }}'
 
 archives:
