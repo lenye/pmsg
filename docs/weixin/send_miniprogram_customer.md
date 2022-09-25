@@ -17,22 +17,22 @@ Aliases:
 如果没有提供access_token，需要提供微信app_id和app_secret来获取access_token
 
 -o, --open_id string        接收人的open_id (必填)
-    --type string           消息类型 (必填)，text(文本消息)、image(图片消息)、link(图文链接)、miniprogrampage(小程序卡片)
+    --msgtype string        消息类型 (必填)，text(文本消息)、image(图片消息)、link(图文链接)、miniprogrampage(小程序卡片)
 ```
 
 消息内容
 
-1. 文本消息 --type text
+1. 文本消息 --msgtype text
     ```text
     "HelloWorld"
     ```
 
-1. 图片消息 --type image
+1. 图片消息 --msgtype image
     ```text
     "MEDIA_ID"
     ```
 
-1. 图文链接 --type link
+1. 图文链接 --msgtype link
     ```json
     {
       "title": "Happy Day",
@@ -42,7 +42,7 @@ Aliases:
     }
     ```
 
-1. 小程序卡片 --type miniprogrampage
+1. 小程序卡片 --msgtype miniprogrampage
     ```json
     {
       "title": "title",
@@ -58,10 +58,10 @@ windows
 发送文本消息
 
 ```shell
-pmsg.exe weixin miniprogram customer -i app_id -s app_secret -o open_id --type text "HelloWorld"
+pmsg.exe weixin miniprogram customer -i app_id -s app_secret -o open_id --msgtype text "HelloWorld"
 
 使用命令别名
-pmsg.exe wx mini kf -i app_id -s app_secret -o open_id --type text "HelloWorld"
+pmsg.exe wx mini kf -i app_id -s app_secret -o open_id --msgtype text "HelloWorld"
 
 ok
 ```
@@ -69,7 +69,7 @@ ok
 发送小程序卡片
 
 ```shell
-pmsg.exe weixin miniprogram customer -i app_id -s app_secret -o open_id --type miniprogrampage "{\"title\":\"title\",\"pagepath\":\"pagepath\",\"thumb_media_id\":\"thumb_media_id\"}"
+pmsg.exe weixin miniprogram customer -i app_id -s app_secret -o open_id --msgtype miniprogrampage "{\"title\":\"title\",\"pagepath\":\"pagepath\",\"thumb_media_id\":\"thumb_media_id\"}"
 
 ok
 ```
@@ -79,10 +79,10 @@ linux
 发送文本消息
 
 ```shell
-$ pmsg weixin miniprogram customer -i app_id -s app_secret -o open_id --type text 'HelloWorld'
+$ pmsg weixin miniprogram customer -i app_id -s app_secret -o open_id --msgtype text 'HelloWorld'
 
 使用命令别名
-$ pmsg wx mini kf -i app_id -s app_secret -o open_id --type text 'HelloWorld'
+$ pmsg wx mini kf -i app_id -s app_secret -o open_id --msgtype text 'HelloWorld'
 
 ok
 ```
@@ -90,7 +90,7 @@ ok
 发送小程序卡片
 
 ```shell
-pmsg weixin miniprogram customer -i app_id -s app_secret -o open_id --type miniprogrampage '{"title":"title","pagepath":"pagepath","thumb_media_id":"thumb_media_id"}'
+pmsg weixin miniprogram customer -i app_id -s app_secret -o open_id --msgtype miniprogrampage '{"title":"title","pagepath":"pagepath","thumb_media_id":"thumb_media_id"}'
 
 ok
 ```

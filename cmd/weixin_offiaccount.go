@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	nameMsgType   = "type"
+	nameMsgType   = "msgtype"
 	nameKfAccount = "kf_account"
 )
 
