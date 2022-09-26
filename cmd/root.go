@@ -9,14 +9,6 @@ import (
 	"github.com/lenye/pmsg/pkg/version"
 )
 
-const (
-	nameUserAgent = "user_agent"
-)
-
-var (
-	userAgent string
-)
-
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "pmsg",
