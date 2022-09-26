@@ -1,0 +1,113 @@
+package message
+
+import (
+	"bytes"
+	"encoding/json"
+	"errors"
+	"fmt"
+
+	"github.com/lenye/pmsg/pkg/flags"
+	"github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/token"
+)
+
+type CmdMiniSendCustomerParams struct {
+	UserAgent   string
+	AccessToken string
+	AppID       string
+	AppSecret   string
+	ToUser      string
+	MsgType     string
+	Data        string
+}
+
+func (t *CmdMiniSendCustomerParams) Validate() error {
+	if t.AccessToken == "" && t.AppID == "" {
+		return flags.ErrMultiRequiredOne
+	}
+	if err := ValidateMiniProgramMsgType(t.MsgType); err != nil {
+		return fmt.Errorf("invalid flags %s: %v", flags.NameMsgType, err)
+	}
+
+	return nil
+}
+
+// CmdMiniSendCustomer 发送微信小程序客服消息
+func CmdMiniSendCustomer(arg *CmdMiniSendCustomerParams) error {
+
+	if err := arg.Validate(); err != nil {
+		return err
+	}
+
+	msg := CustomerMessage{
+		ToUser:  arg.ToUser,
+		MsgType: arg.MsgType,
+	}
+
+	buf := bytes.NewBufferString("")
+	buf.WriteString(arg.Data)
+	switch arg.MsgType {
+	case MiniProgramMsgTypeText:
+		var msgMeta TextMeta
+		msgMeta.Content = buf.String()
+		msg.Text = &msgMeta
+	case MiniProgramMsgTypeImage:
+		var msgMeta ImageMeta
+		msgMeta.MediaID = buf.String()
+		msg.Image = &msgMeta
+	case MiniProgramMsgTypeLink:
+		var msgMeta LinkMeta
+		if err := json.Unmarshal(buf.Bytes(), &msgMeta); err != nil {
+			return fmt.Errorf("invalid json format, %v", err)
+		}
+		if msgMeta.Title == "" {
+			return errors.New("title is empty")
+		}
+		if msgMeta.Description == "" {
+			return errors.New("description is empty")
+		}
+		if msgMeta.Url == "" {
+			return errors.New("url is empty")
+		}
+		if msgMeta.ThumbUrl == "" {
+			return errors.New("thumb_url is empty")
+		}
+		msg.Link = &msgMeta
+	case MiniProgramMsgTypeMiniProgramPage:
+		var msgMeta MiniProgramPageMeta
+		if err := json.Unmarshal(buf.Bytes(), &msgMeta); err != nil {
+			return fmt.Errorf("invalid json format, %v", err)
+		}
+		if msgMeta.Title == "" {
+			return errors.New("title is empty")
+		}
+		if msgMeta.AppID != "" {
+			return errors.New("no appid required")
+		}
+		if msgMeta.PagePath == "" {
+			return errors.New("pagepath is empty")
+		}
+		if msgMeta.ThumbMediaID == "" {
+			return errors.New("thumb_media_id is empty")
+		}
+		msg.MiniProgramPage = &msgMeta
+	}
+
+	client.UserAgent = arg.UserAgent
+
+	if arg.AccessToken == "" {
+		accessTokenResp, err := token.GetAccessToken(arg.AppID, arg.AppSecret)
+		if err != nil {
+			return err
+		}
+		arg.AccessToken = accessTokenResp.AccessToken
+	}
+
+	if err := SendCustomer(arg.AccessToken, &msg); err != nil {
+		return err
+	}
+	fmt.Println(weixin.MessageOK)
+
+	return nil
+}
