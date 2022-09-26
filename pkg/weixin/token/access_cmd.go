@@ -15,9 +15,7 @@ type CmdTokenParams struct {
 
 // CmdGetAccessToken 获取微信接口调用凭证
 func CmdGetAccessToken(arg *CmdTokenParams) error {
-	if arg.UserAgent != "" {
-		client.UserAgent = arg.UserAgent
-	}
+	client.UserAgent = arg.UserAgent
 
 	accessTokenResp, err := GetAccessToken(arg.AppID, arg.AppSecret)
 	if err != nil {
