@@ -6,6 +6,7 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/pkg/flags"
 	"github.com/lenye/pmsg/pkg/weixin/token"
 )
 
@@ -29,9 +30,9 @@ var weiXinAccessTokenCmd = &cobra.Command{
 func init() {
 	weiXinCmd.AddCommand(weiXinAccessTokenCmd)
 
-	weiXinAccessTokenCmd.Flags().StringVarP(&appID, nameAppID, "i", "", "weixin app id (required)")
-	weiXinAccessTokenCmd.MarkFlagRequired(nameAppID)
+	weiXinAccessTokenCmd.Flags().StringVarP(&appID, flags.NameAppID, "i", "", "weixin app id (required)")
+	weiXinAccessTokenCmd.MarkFlagRequired(flags.NameAppID)
 
-	weiXinAccessTokenCmd.Flags().StringVarP(&appSecret, nameAppSecret, "s", "", "weixin app secret (required)")
-	weiXinAccessTokenCmd.MarkFlagRequired(nameAppSecret)
+	weiXinAccessTokenCmd.Flags().StringVarP(&appSecret, flags.NameAppSecret, "s", "", "weixin app secret (required)")
+	weiXinAccessTokenCmd.MarkFlagRequired(flags.NameAppSecret)
 }
