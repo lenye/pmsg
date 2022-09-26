@@ -5,7 +5,6 @@ import (
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
-	"github.com/lenye/pmsg/pkg/weixin/token"
 )
 
 type CmdWorkTokenParams struct {
@@ -19,7 +18,7 @@ func CmdWorkGetAccessToken(arg *CmdWorkTokenParams) error {
 
 	client.UserAgent = arg.UserAgent
 
-	accessTokenResp, err := token.GetAccessToken(arg.CorpID, arg.CorpSecret)
+	accessTokenResp, err := GetAccessToken(arg.CorpID, arg.CorpSecret)
 	if err != nil {
 		return err
 	}
