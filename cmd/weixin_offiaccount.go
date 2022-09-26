@@ -4,16 +4,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const (
-	nameMsgType   = "msgtype"
-	nameKfAccount = "kf_account"
-)
-
-var (
-	msgType   string
-	kfAccount string
-)
-
 // weiXinOfficialAccountCmd 微信公众号
 var weiXinOfficialAccountCmd = &cobra.Command{
 	Use:     "offiaccount",
