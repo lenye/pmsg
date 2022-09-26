@@ -20,7 +20,7 @@ var weiXinAccessTokenCmd = &cobra.Command{
 			AppID:     appID,
 			AppSecret: appSecret,
 		}
-		if err := token.CmdGetAccessToken(arg); err != nil {
+		if err := token.CmdGetAccessToken(&arg); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
