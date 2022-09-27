@@ -18,30 +18,30 @@ Aliases:
 
 -k, --kf_account string     客服帐号
 -o, --to_user string        接收人的open_id (必填)
-    --msgtype string        消息类型 (必填)，text(文本消息)、image(图片消息)、
-                                            voice(语音消息)、video(视频消息)、music(音乐消息)、
-                                            news(图文消息)、mpnews(图文消息)、mpnewsarticle(图文消息)、
-                                            msgmenu(菜单消息)、wxcard(卡券)、miniprogrampage(小程序卡片)
+-m, --msg_type string       消息类型 (必填)，text(文本消息)、image(图片消息)、
+                                           voice(语音消息)、video(视频消息)、music(音乐消息)、
+                                           news(图文消息)、mpnews(图文消息)、mpnewsarticle(图文消息)、
+                                           msgmenu(菜单消息)、wxcard(卡券)、miniprogrampage(小程序卡片)
 ```
 
 消息内容
 
-1. 文本消息 --msgtype text
+1. 文本消息 --msg_type text
     ```text
     "HelloWorld"
     ```
 
-1. 图片消息 --msgtype image
+1. 图片消息 --msg_type image
     ```text
     "MEDIA_ID"
     ```
 
-1. 语音消息 --msgtype voice
+1. 语音消息 --msg_type voice
     ```text
     "MEDIA_ID"
     ```
 
-1. 视频消息 --msgtype video
+1. 视频消息 --msg_type video
     ```json
     {
       "media_id": "MEDIA_ID",
@@ -51,7 +51,7 @@ Aliases:
     }
     ```
 
-1. 音乐消息 --msgtype music
+1. 音乐消息 --msg_type music
     ```json
     {
       "title": "MUSIC_TITLE",
@@ -62,7 +62,7 @@ Aliases:
     }
     ```
 
-1. 图文消息 --msgtype news
+1. 图文消息 --msg_type news
     ```json
     {
       "articles": [
@@ -76,17 +76,17 @@ Aliases:
     }
     ```
 
-1. 图文消息 --msgtype mpnews
+1. 图文消息 --msg_type mpnews
     ```text
     "MEDIA_ID"
     ```
 
-1. 图文消息 --msgtype mpnewsarticle
+1. 图文消息 --msg_type mpnewsarticle
     ```text
     "ARTICLE_ID"
     ```
 
-1. 菜单消息 --msgtype msgmenu
+1. 菜单消息 --msg_type msgmenu
     ```json
     {
       "head_content": "您对本次服务是否满意呢? ",
@@ -104,12 +104,12 @@ Aliases:
     }
     ```
 
-1. 卡券 --msgtype wxcard
+1. 卡券 --msg_type wxcard
     ```text
     "CARD_ID"
     ```
 
-1. 小程序卡片 --msgtype miniprogrampage
+1. 小程序卡片 --msg_type miniprogrampage
     ```json
     {
       "title": "title",
@@ -126,7 +126,7 @@ windows
 发送文本消息
 
 ```shell
-pmsg.exe weixin offiaccount customer -i app_id -s app_secret -o open_id --msgtype text "HelloWorld"
+pmsg.exe weixin offiaccount customer -i app_id -s app_secret -o open_id -m text "HelloWorld"
 
 ok
 ```
@@ -134,7 +134,7 @@ ok
 发送小程序卡片
 
 ```shell
-pmsg.exe weixin offiaccount customer -i app_id -s app_secret -o open_id --msgtype miniprogrampage "{\"title\":\"title\",\"appid\":\"appid\",\"pagepath\":\"pagepath\",\"thumb_media_id\":\"thumb_media_id\"}"
+pmsg.exe weixin offiaccount customer -i app_id -s app_secret -o open_id -m miniprogrampage "{\"title\":\"title\",\"appid\":\"appid\",\"pagepath\":\"pagepath\",\"thumb_media_id\":\"thumb_media_id\"}"
 
 ok
 ```
@@ -144,10 +144,10 @@ linux
 发送文本消息
 
 ```shell
-$ pmsg weixin offiaccount customer -i app_id -s app_secret -o open_id --msgtype text 'HelloWorld'
+$ pmsg weixin offiaccount customer -i app_id -s app_secret -o open_id -m text 'HelloWorld'
 
 使用命令别名
-$ pmsg wx mp kf -i app_id -s app_secret -o open_id --msgtype text 'HelloWorld'
+$ pmsg wx mp kf -i app_id -s app_secret -o open_id --msg_type text 'HelloWorld'
 
 ok
 ```
@@ -155,7 +155,7 @@ ok
 发送小程序卡片
 
 ```shell
-pmsg weixin offiaccount customer -i app_id -s app_secret -o open_id --msgtype miniprogrampage '{"title":"title","appid":"appid","pagepath":"pagepath","thumb_media_id":"thumb_media_id"}'
+pmsg weixin offiaccount customer -i app_id -s app_secret -o open_id -m miniprogrampage '{"title":"title","appid":"appid","pagepath":"pagepath","thumb_media_id":"thumb_media_id"}'
 
 ok
 ```

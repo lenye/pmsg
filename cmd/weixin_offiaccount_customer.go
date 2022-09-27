@@ -41,7 +41,7 @@ func init() {
 	weiXinOfficialAccountCustomerCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "weixin user open id (required)")
 	weiXinOfficialAccountCustomerCmd.MarkFlagRequired(flags.ToUser)
 
-	weiXinOfficialAccountCustomerCmd.Flags().StringVar(&msgType, flags.MsgType, "", "message type (required)")
+	weiXinOfficialAccountCustomerCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
 	weiXinOfficialAccountCustomerCmd.MarkFlagRequired(flags.MsgType)
 
 	weiXinOfficialAccountCustomerCmd.Flags().StringVarP(&kfAccount, flags.KfAccount, "k", "", "customer account")

@@ -40,6 +40,6 @@ func init() {
 	weiXinMiniProgramCustomerCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "weixin user open id (required)")
 	weiXinMiniProgramCustomerCmd.MarkFlagRequired(flags.ToUser)
 
-	weiXinMiniProgramCustomerCmd.Flags().StringVar(&msgType, flags.MsgType, "", "message type (required)")
+	weiXinMiniProgramCustomerCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
 	weiXinMiniProgramCustomerCmd.MarkFlagRequired(flags.MsgType)
 }

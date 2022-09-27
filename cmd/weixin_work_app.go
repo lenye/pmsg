@@ -50,7 +50,7 @@ func init() {
 	weiXinWorkAppCmd.Flags().Int64VarP(&agentID, flags.AgentID, "e", 0, "work weixin agent id (required)")
 	weiXinWorkAppCmd.MarkFlagRequired(flags.AgentID)
 
-	weiXinWorkAppCmd.Flags().StringVar(&msgType, flags.MsgType, "", "message type (required)")
+	weiXinWorkAppCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
 	weiXinWorkAppCmd.MarkFlagRequired(flags.MsgType)
 
 	weiXinWorkAppCmd.Flags().IntVar(&safe, flags.Safe, 0, "safe")
