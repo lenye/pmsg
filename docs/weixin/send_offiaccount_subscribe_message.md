@@ -17,7 +17,7 @@ Aliases:
 如果没有提供access_token，需要提供微信app_id和app_secret来获取access_token
 
 -m, --mini stringToString    跳小程序所需数据, 样例: app_id=XiaoChengXuAppId,page_path=index?foo=bar
--o, --open_id string         接收人的open_id (必填)
+-o, --touser string          接收人的open_id (必填)
 -p, --template_id string     模版id (必填)
     --page string            跳转网页时填写
 

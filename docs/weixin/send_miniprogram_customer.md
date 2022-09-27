@@ -16,7 +16,7 @@ Aliases:
 
 如果没有提供access_token，需要提供微信app_id和app_secret来获取access_token
 
--o, --open_id string        接收人的open_id (必填)
+-o, --touser string         接收人的open_id (必填)
     --msgtype string        消息类型 (必填)，text(文本消息)、image(图片消息)、link(图文链接)、miniprogrampage(小程序卡片)
 ```
 

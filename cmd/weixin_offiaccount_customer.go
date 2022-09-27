@@ -22,7 +22,7 @@ var weiXinOfficialAccountCustomerCmd = &cobra.Command{
 			AccessToken: accessToken,
 			AppID:       appID,
 			AppSecret:   appSecret,
-			ToUser:      openID,
+			ToUser:      toUser,
 			MsgType:     msgType,
 			KfAccount:   kfAccount,
 			Data:        args[0],
@@ -38,11 +38,11 @@ func init() {
 
 	weiXinSetAccessTokenFlags(weiXinOfficialAccountCustomerCmd)
 
-	weiXinOfficialAccountCustomerCmd.Flags().StringVarP(&openID, flags.NameOpenID, "o", "", "weixin user open id (required)")
-	weiXinOfficialAccountCustomerCmd.MarkFlagRequired(flags.NameOpenID)
+	weiXinOfficialAccountCustomerCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "weixin user open id (required)")
+	weiXinOfficialAccountCustomerCmd.MarkFlagRequired(flags.ToUser)
 
-	weiXinOfficialAccountCustomerCmd.Flags().StringVar(&msgType, flags.NameMsgType, "", "message type (required)")
-	weiXinOfficialAccountCustomerCmd.MarkFlagRequired(flags.NameMsgType)
+	weiXinOfficialAccountCustomerCmd.Flags().StringVar(&msgType, flags.MsgType, "", "message type (required)")
+	weiXinOfficialAccountCustomerCmd.MarkFlagRequired(flags.MsgType)
 
-	weiXinOfficialAccountCustomerCmd.Flags().StringVarP(&kfAccount, flags.NameKfAccount, "k", "", "customer account")
+	weiXinOfficialAccountCustomerCmd.Flags().StringVarP(&kfAccount, flags.KfAccount, "k", "", "customer account")
 }

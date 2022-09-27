@@ -22,7 +22,7 @@ var weiXinMiniProgramSubCmd = &cobra.Command{
 			AccessToken:      accessToken,
 			AppID:            appID,
 			AppSecret:        appSecret,
-			ToUser:           openID,
+			ToUser:           toUser,
 			TemplateID:       templateID,
 			MiniProgramState: miniProgramState,
 			Page:             page,
@@ -40,13 +40,13 @@ func init() {
 
 	weiXinSetAccessTokenFlags(weiXinMiniProgramSubCmd)
 
-	weiXinMiniProgramSubCmd.Flags().StringVarP(&openID, flags.NameOpenID, "o", "", "weixin user open id (required)")
-	weiXinMiniProgramSubCmd.MarkFlagRequired(flags.NameOpenID)
+	weiXinMiniProgramSubCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "weixin user open id (required)")
+	weiXinMiniProgramSubCmd.MarkFlagRequired(flags.ToUser)
 
-	weiXinMiniProgramSubCmd.Flags().StringVarP(&templateID, flags.NameTemplateID, "p", "", "weixin template id (required)")
-	weiXinMiniProgramSubCmd.MarkFlagRequired(flags.NameTemplateID)
+	weiXinMiniProgramSubCmd.Flags().StringVarP(&templateID, flags.TemplateID, "p", "", "weixin template id (required)")
+	weiXinMiniProgramSubCmd.MarkFlagRequired(flags.TemplateID)
 
-	weiXinMiniProgramSubCmd.Flags().StringVarP(&miniProgramState, flags.NameMiniProgramState, "g", "", "miniprogram_state")
-	weiXinMiniProgramSubCmd.Flags().StringVar(&page, flags.NamePage, "", "page")
-	weiXinMiniProgramSubCmd.Flags().StringVar(&language, flags.NameLanguage, "", "language")
+	weiXinMiniProgramSubCmd.Flags().StringVarP(&miniProgramState, flags.MiniProgramState, "g", "", "miniprogram_state")
+	weiXinMiniProgramSubCmd.Flags().StringVar(&page, flags.Page, "", "page")
+	weiXinMiniProgramSubCmd.Flags().StringVar(&language, flags.Language, "", "language")
 }

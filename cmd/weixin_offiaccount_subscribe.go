@@ -22,7 +22,7 @@ var weiXinOfficialAccountSubCmd = &cobra.Command{
 			AccessToken: accessToken,
 			AppID:       appID,
 			AppSecret:   appSecret,
-			ToUser:      openID,
+			ToUser:      toUser,
 			TemplateID:  templateID,
 			Page:        page,
 			Mini:        mini,
@@ -39,12 +39,12 @@ func init() {
 
 	weiXinSetAccessTokenFlags(weiXinOfficialAccountSubCmd)
 
-	weiXinOfficialAccountSubCmd.Flags().StringVarP(&openID, flags.NameOpenID, "o", "", "weixin user open id (required)")
-	weiXinOfficialAccountSubCmd.MarkFlagRequired(flags.NameOpenID)
+	weiXinOfficialAccountSubCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "weixin user open id (required)")
+	weiXinOfficialAccountSubCmd.MarkFlagRequired(flags.ToUser)
 
-	weiXinOfficialAccountSubCmd.Flags().StringVarP(&templateID, flags.NameTemplateID, "p", "", "weixin template id (required)")
-	weiXinOfficialAccountSubCmd.MarkFlagRequired(flags.NameTemplateID)
+	weiXinOfficialAccountSubCmd.Flags().StringVarP(&templateID, flags.TemplateID, "p", "", "weixin template id (required)")
+	weiXinOfficialAccountSubCmd.MarkFlagRequired(flags.TemplateID)
 
-	weiXinOfficialAccountSubCmd.Flags().StringVar(&page, flags.NamePage, "", "page")
-	weiXinOfficialAccountSubCmd.Flags().StringToStringVarP(&mini, flags.NameMini, "m", nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
+	weiXinOfficialAccountSubCmd.Flags().StringVar(&page, flags.Page, "", "page")
+	weiXinOfficialAccountSubCmd.Flags().StringToStringVarP(&mini, flags.Mini, "m", nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
 }

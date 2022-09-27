@@ -22,7 +22,7 @@ var weiXinOfficialAccountTplSubCmd = &cobra.Command{
 			AccessToken: accessToken,
 			AppID:       appID,
 			AppSecret:   appSecret,
-			ToUser:      openID,
+			ToUser:      toUser,
 			TemplateID:  templateID,
 			Scene:       scene,
 			Title:       title,
@@ -41,18 +41,18 @@ func init() {
 
 	weiXinSetAccessTokenFlags(weiXinOfficialAccountTplSubCmd)
 
-	weiXinOfficialAccountTplSubCmd.Flags().StringVarP(&openID, flags.NameOpenID, "o", "", "weixin user open id (required)")
-	weiXinOfficialAccountTplSubCmd.MarkFlagRequired(flags.NameOpenID)
+	weiXinOfficialAccountTplSubCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "weixin user open id (required)")
+	weiXinOfficialAccountTplSubCmd.MarkFlagRequired(flags.ToUser)
 
-	weiXinOfficialAccountTplSubCmd.Flags().StringVarP(&templateID, flags.NameTemplateID, "p", "", "weixin template id (required)")
-	weiXinOfficialAccountTplSubCmd.MarkFlagRequired(flags.NameTemplateID)
+	weiXinOfficialAccountTplSubCmd.Flags().StringVarP(&templateID, flags.TemplateID, "p", "", "weixin template id (required)")
+	weiXinOfficialAccountTplSubCmd.MarkFlagRequired(flags.TemplateID)
 
-	weiXinOfficialAccountTplSubCmd.Flags().StringVar(&scene, flags.NameScene, "", "weixin subscribe scene (required)")
-	weiXinOfficialAccountTplSubCmd.MarkFlagRequired(flags.NameScene)
+	weiXinOfficialAccountTplSubCmd.Flags().StringVar(&scene, flags.Scene, "", "weixin subscribe scene (required)")
+	weiXinOfficialAccountTplSubCmd.MarkFlagRequired(flags.Scene)
 
-	weiXinOfficialAccountTplSubCmd.Flags().StringVar(&title, flags.NameTitle, "", "weixin message title (required)")
-	weiXinOfficialAccountTplSubCmd.MarkFlagRequired(flags.NameTitle)
+	weiXinOfficialAccountTplSubCmd.Flags().StringVar(&title, flags.Title, "", "weixin message title (required)")
+	weiXinOfficialAccountTplSubCmd.MarkFlagRequired(flags.Title)
 
-	weiXinOfficialAccountTplSubCmd.Flags().StringVarP(&url, flags.NameUrl, "u", "", "url")
-	weiXinOfficialAccountTplSubCmd.Flags().StringToStringVarP(&mini, flags.NameMini, "m", nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
+	weiXinOfficialAccountTplSubCmd.Flags().StringVarP(&url, flags.Url, "u", "", "url")
+	weiXinOfficialAccountTplSubCmd.Flags().StringToStringVarP(&mini, flags.Mini, "m", nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
 }

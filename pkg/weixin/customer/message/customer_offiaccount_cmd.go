@@ -25,10 +25,10 @@ type CmdMpSendCustomerParams struct {
 
 func (t *CmdMpSendCustomerParams) Validate() error {
 	if t.AccessToken == "" && t.AppID == "" {
-		return flags.ErrMultiRequiredOne
+		return flags.ErrWeixinAccessToken
 	}
 	if err := ValidateMpMsgType(t.MsgType); err != nil {
-		return fmt.Errorf("invalid flags %s: %v", flags.NameMsgType, err)
+		return fmt.Errorf("invalid flags %s: %v", flags.MsgType, err)
 	}
 
 	return nil

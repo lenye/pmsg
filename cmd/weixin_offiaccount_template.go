@@ -22,7 +22,7 @@ var weiXinOfficialAccountTplCmd = &cobra.Command{
 			AccessToken: accessToken,
 			AppID:       appID,
 			AppSecret:   appSecret,
-			ToUser:      openID,
+			ToUser:      toUser,
 			TemplateID:  templateID,
 			Url:         url,
 			Mini:        mini,
@@ -41,15 +41,15 @@ func init() {
 
 	weiXinSetAccessTokenFlags(weiXinOfficialAccountTplCmd)
 
-	weiXinOfficialAccountTplCmd.Flags().StringVarP(&openID, flags.NameOpenID, "o", "", "weixin user open id (required)")
-	weiXinOfficialAccountTplCmd.MarkFlagRequired(flags.NameOpenID)
+	weiXinOfficialAccountTplCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "weixin user open id (required)")
+	weiXinOfficialAccountTplCmd.MarkFlagRequired(flags.ToUser)
 
-	weiXinOfficialAccountTplCmd.Flags().StringVarP(&templateID, flags.NameTemplateID, "p", "", "weixin template id (required)")
-	weiXinOfficialAccountTplCmd.MarkFlagRequired(flags.NameTemplateID)
+	weiXinOfficialAccountTplCmd.Flags().StringVarP(&templateID, flags.TemplateID, "p", "", "weixin template id (required)")
+	weiXinOfficialAccountTplCmd.MarkFlagRequired(flags.TemplateID)
 
-	weiXinOfficialAccountTplCmd.Flags().StringVarP(&url, flags.NameUrl, "u", "", "url")
-	weiXinOfficialAccountTplCmd.Flags().StringToStringVarP(&mini, flags.NameMini, "m", nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
+	weiXinOfficialAccountTplCmd.Flags().StringVarP(&url, flags.Url, "u", "", "url")
+	weiXinOfficialAccountTplCmd.Flags().StringToStringVarP(&mini, flags.Mini, "m", nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
 
-	weiXinOfficialAccountTplCmd.Flags().StringVarP(&color, flags.NameColor, "c", "", "weixin template color")
-	weiXinOfficialAccountTplCmd.Flags().StringVar(&clientMsgID, flags.NameClientMsgID, "", "weixin template client msg id")
+	weiXinOfficialAccountTplCmd.Flags().StringVarP(&color, flags.Color, "c", "", "weixin template color")
+	weiXinOfficialAccountTplCmd.Flags().StringVar(&clientMsgID, flags.ClientMsgID, "", "weixin template client msg id")
 }

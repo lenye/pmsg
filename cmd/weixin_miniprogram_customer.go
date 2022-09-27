@@ -22,7 +22,7 @@ var weiXinMiniProgramCustomerCmd = &cobra.Command{
 			AccessToken: accessToken,
 			AppID:       appID,
 			AppSecret:   appSecret,
-			ToUser:      openID,
+			ToUser:      toUser,
 			MsgType:     msgType,
 			Data:        args[0],
 		}
@@ -37,9 +37,9 @@ func init() {
 
 	weiXinSetAccessTokenFlags(weiXinMiniProgramCustomerCmd)
 
-	weiXinMiniProgramCustomerCmd.Flags().StringVarP(&openID, flags.NameOpenID, "o", "", "weixin user open id (required)")
-	weiXinMiniProgramCustomerCmd.MarkFlagRequired(flags.NameOpenID)
+	weiXinMiniProgramCustomerCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "weixin user open id (required)")
+	weiXinMiniProgramCustomerCmd.MarkFlagRequired(flags.ToUser)
 
-	weiXinMiniProgramCustomerCmd.Flags().StringVar(&msgType, flags.NameMsgType, "", "message type (required)")
-	weiXinMiniProgramCustomerCmd.MarkFlagRequired(flags.NameMsgType)
+	weiXinMiniProgramCustomerCmd.Flags().StringVar(&msgType, flags.MsgType, "", "message type (required)")
+	weiXinMiniProgramCustomerCmd.MarkFlagRequired(flags.MsgType)
 }

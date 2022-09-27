@@ -26,17 +26,17 @@ type CmdMiniSendSubscribeParams struct {
 
 func (t *CmdMiniSendSubscribeParams) Validate() error {
 	if t.AccessToken == "" && t.AppID == "" {
-		return flags.ErrMultiRequiredOne
+		return flags.ErrWeixinAccessToken
 	}
 	if t.Language != "" {
 		if err := ValidateLanguage(t.Language); err != nil {
-			return fmt.Errorf("invalid flags %s: %v", flags.NameLanguage, err)
+			return fmt.Errorf("invalid flags %s: %v", flags.Language, err)
 		}
 	}
 
 	if t.MiniProgramState != "" {
 		if err := ValidateMiniProgramState(t.MiniProgramState); err != nil {
-			return fmt.Errorf("invalid flags %s: %v", flags.NameMiniProgramState, err)
+			return fmt.Errorf("invalid flags %s: %v", flags.MiniProgramState, err)
 		}
 	}
 

@@ -30,9 +30,9 @@ var weiXinAccessTokenCmd = &cobra.Command{
 func init() {
 	weiXinCmd.AddCommand(weiXinAccessTokenCmd)
 
-	weiXinAccessTokenCmd.Flags().StringVarP(&appID, flags.NameAppID, "i", "", "weixin app id (required)")
-	weiXinAccessTokenCmd.MarkFlagRequired(flags.NameAppID)
+	weiXinAccessTokenCmd.Flags().StringVarP(&appID, flags.AppID, "i", "", "weixin app id (required)")
+	weiXinAccessTokenCmd.MarkFlagRequired(flags.AppID)
 
-	weiXinAccessTokenCmd.Flags().StringVarP(&appSecret, flags.NameAppSecret, "s", "", "weixin app secret (required)")
-	weiXinAccessTokenCmd.MarkFlagRequired(flags.NameAppSecret)
+	weiXinAccessTokenCmd.Flags().StringVarP(&appSecret, flags.AppSecret, "s", "", "weixin app secret (required)")
+	weiXinAccessTokenCmd.MarkFlagRequired(flags.AppSecret)
 }

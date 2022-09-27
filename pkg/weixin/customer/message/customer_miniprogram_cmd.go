@@ -24,10 +24,10 @@ type CmdMiniSendCustomerParams struct {
 
 func (t *CmdMiniSendCustomerParams) Validate() error {
 	if t.AccessToken == "" && t.AppID == "" {
-		return flags.ErrMultiRequiredOne
+		return flags.ErrWeixinAccessToken
 	}
 	if err := ValidateMiniProgramMsgType(t.MsgType); err != nil {
-		return fmt.Errorf("invalid flags %s: %v", flags.NameMsgType, err)
+		return fmt.Errorf("invalid flags %s: %v", flags.MsgType, err)
 	}
 
 	return nil

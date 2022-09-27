@@ -27,24 +27,24 @@ type CmdMpSendTemplateParams struct {
 
 func (t *CmdMpSendTemplateParams) Validate() error {
 	if t.AccessToken == "" && t.AppID == "" {
-		return flags.ErrMultiRequiredOne
+		return flags.ErrWeixinAccessToken
 	}
 
 	// 跳小程序
 	if t.Mini != nil {
-		if miniAppID, ok := t.Mini[flags.NameMiniAppID]; !ok {
-			return fmt.Errorf("mini flag %q not set", flags.NameMiniAppID)
+		if miniAppID, ok := t.Mini[flags.MiniAppID]; !ok {
+			return fmt.Errorf("mini flag %q not set", flags.MiniAppID)
 		} else {
 			if miniAppID == "" {
-				return fmt.Errorf("mini flag %q not set", flags.NameMiniAppID)
+				return fmt.Errorf("mini flag %q not set", flags.MiniAppID)
 			}
 		}
 
-		if miniPagePath, ok := t.Mini[flags.NameMiniPagePath]; !ok {
-			return fmt.Errorf("mini flag %q not set", flags.NameMiniPagePath)
+		if miniPagePath, ok := t.Mini[flags.MiniPagePath]; !ok {
+			return fmt.Errorf("mini flag %q not set", flags.MiniPagePath)
 		} else {
 			if miniPagePath == "" {
-				return fmt.Errorf("mini flag %q not set", flags.NameMiniPagePath)
+				return fmt.Errorf("mini flag %q not set", flags.MiniPagePath)
 			}
 		}
 	}
@@ -84,8 +84,8 @@ func CmdMpSendTemplate(arg *CmdMpSendTemplateParams) error {
 
 	// 跳小程序
 	if arg.Mini != nil {
-		miniAppID, _ := arg.Mini[flags.NameMiniAppID]
-		miniPagePath, _ := arg.Mini[flags.NameMiniPagePath]
+		miniAppID, _ := arg.Mini[flags.MiniAppID]
+		miniPagePath, _ := arg.Mini[flags.MiniPagePath]
 		msg.MiniProgram = &MiniProgramMeta{
 			AppID:    miniAppID,
 			PagePath: miniPagePath,
