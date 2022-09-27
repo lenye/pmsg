@@ -53,6 +53,6 @@ func init() {
 	weiXinOfficialAccountTplSubCmd.Flags().StringVar(&title, flags.Title, "", "weixin message title (required)")
 	weiXinOfficialAccountTplSubCmd.MarkFlagRequired(flags.Title)
 
-	weiXinOfficialAccountTplSubCmd.Flags().StringVarP(&url, flags.Url, "u", "", "url")
-	weiXinOfficialAccountTplSubCmd.Flags().StringToStringVarP(&mini, flags.Mini, "m", nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
+	weiXinOfficialAccountTplSubCmd.Flags().StringVar(&url, flags.Url, "", "url")
+	weiXinOfficialAccountTplSubCmd.Flags().StringToStringVar(&mini, flags.Mini, nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
 }
