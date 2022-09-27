@@ -23,4 +23,12 @@ var (
 
 	corpID     string
 	corpSecret string
+
+	toParty                string
+	toTag                  string
+	agentID                int64
+	safe                   int
+	enableIDTrans          int
+	enableDuplicateCheck   int
+	duplicateCheckInterval int
 )
