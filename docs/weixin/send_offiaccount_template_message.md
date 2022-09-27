@@ -19,7 +19,7 @@ Aliases:
     --client_msg_id string   防重入id
 -c, --color string           模板内容字体颜色，不填默认为黑色
 -m, --mini stringToString    跳小程序所需数据, 样例: app_id=XiaoChengXuAppId,page_path=index?foo=bar
--o, --touser string          接收人的open_id (必填)
+-o, --to_user string         接收人的open_id (必填)
 -p, --template_id string     模版id (必填)
 -u, --url string             用户点击后跳转的url
 ```

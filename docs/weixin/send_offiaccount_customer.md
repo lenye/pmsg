@@ -17,7 +17,7 @@ Aliases:
 如果没有提供access_token，需要提供微信app_id和app_secret来获取access_token
 
 -k, --kf_account string     客服帐号
--o, --touser string         接收人的open_id (必填)
+-o, --to_user string        接收人的open_id (必填)
     --msgtype string        消息类型 (必填)，text(文本消息)、image(图片消息)、
                                             voice(语音消息)、video(视频消息)、music(音乐消息)、
                                             news(图文消息)、mpnews(图文消息)、mpnewsarticle(图文消息)、
