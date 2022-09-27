@@ -15,7 +15,7 @@ const (
 	Mini             = "mini"
 	MiniAppID        = "app_id"
 	MiniPagePath     = "page_path"
-	MsgType          = "msgtype"
+	MsgType          = "msg_type"
 	KfAccount        = "kf_account"
 	Page             = "page"
 	MiniProgramState = "miniprogram_state"
