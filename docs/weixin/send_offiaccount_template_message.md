@@ -14,14 +14,14 @@ Aliases:
 -i, --app_id string         微信app_id
 -s, --app_secret string     微信app_secret
 
-如果没有提供access_token，需要提供微信app_id和app_secret来获取access_token
+如果没有提供 access_token，需要提供微信 app_id 和 app_secret 来获取 access_token
 
-    --client_msg_id string   防重入id
--c, --color string           模板内容字体颜色，不填默认为黑色
--m, --mini stringToString    跳小程序所需数据, 样例: app_id=XiaoChengXuAppId,page_path=index?foo=bar
 -o, --to_user string         接收人的open_id (必填)
 -p, --template_id string     模版id (必填)
--u, --url string             用户点击后跳转的url
+-c, --client_msg_id string   防重入id
+    --color string           模板内容字体颜色，不填默认为黑色
+    --mini stringToString    跳小程序所需数据, 样例: app_id=XiaoChengXuAppId,page_path=index?foo=bar
+    --url string             用户点击后跳转的url
 ```
 
 样例

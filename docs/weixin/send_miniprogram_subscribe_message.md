@@ -14,13 +14,13 @@ Aliases:
 -i, --app_id string         微信app_id
 -s, --app_secret string     微信app_secret
 
-如果没有提供access_token，需要提供微信app_id和app_secret来获取access_token
+如果没有提供 access_token，需要提供微信 app_id 和 app_secret 来获取 access_token
 
-    --lang string                进入小程序查看”的语言类型，支持zh_CN(简体中文)、en_US(英文)、zh_HK(繁体中文)、zh_TW(繁体中文)，默认为zh_CN
-    --page string                点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转。    
--g, --miniprogram_state string   跳转小程序类型：developer为开发版；trial为体验版；formal为正式版；默认为正式版
 -o, --to_user string             接收人的open_id (必填)
 -p, --template_id string         模版id (必填)
+-g, --miniprogram_state string   跳转小程序类型：developer为开发版；trial为体验版；formal为正式版；默认为正式版
+    --lang string                进入小程序查看”的语言类型，支持zh_CN(简体中文)、en_US(英文)、zh_HK(繁体中文)、zh_TW(繁体中文)，默认为zh_CN
+    --page string                点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转。
 ```
 
 样例

@@ -14,12 +14,12 @@ Aliases:
 -i, --app_id string         微信app_id
 -s, --app_secret string     微信app_secret
 
-如果没有提供access_token，需要提供微信app_id和app_secret来获取access_token
+如果没有提供 access_token，需要提供微信 app_id 和 app_secret 来获取 access_token
 
--m, --mini stringToString    跳小程序所需数据, 样例: app_id=XiaoChengXuAppId,page_path=index?foo=bar
 -o, --to_user string         接收人的open_id (必填)
 -p, --template_id string     模版id (必填)
--u, --url string             用户点击后跳转的url
+    --mini stringToString    跳小程序所需数据, 样例: app_id=XiaoChengXuAppId,page_path=index?foo=bar
+    --url string             用户点击后跳转的url
     --scene string           订阅场景值 (必填)
     --title string           消息标题，15字以内 (必填)
 

@@ -1,6 +1,6 @@
 `pmsg`是一个发送消息的小工具。
 
-`pmsg` 可运行于 Windows, Linux, macOS, FreeBSD 操作系统。
+`pmsg` 可运行于 Linux, macOS, FreeBSD, Windows 操作系统。
 
 ### 支持的消息类型
 

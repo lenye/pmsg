@@ -14,14 +14,14 @@ Aliases:
 -i, --app_id string         微信app_id
 -s, --app_secret string     微信app_secret
 
-如果没有提供access_token，需要提供微信app_id和app_secret来获取access_token
+如果没有提供 access_token，需要提供微信 app_id 和 app_secret 来获取 access_token
 
--k, --kf_account string     客服帐号
 -o, --to_user string        接收人的open_id (必填)
 -m, --msg_type string       消息类型 (必填)，text(文本消息)、image(图片消息)、
                                            voice(语音消息)、video(视频消息)、music(音乐消息)、
                                            news(图文消息)、mpnews(图文消息)、mpnewsarticle(图文消息)、
                                            msgmenu(菜单消息)、wxcard(卡券)、miniprogrampage(小程序卡片)
+-k, --kf_account string     客服帐号                                           
 ```
 
 消息内容
