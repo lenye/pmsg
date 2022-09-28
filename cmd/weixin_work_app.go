@@ -14,7 +14,7 @@ import (
 var weiXinWorkAppCmd = &cobra.Command{
 	Use:   "app",
 	Short: "publish work weixin app message",
-	Args:  cobra.NoArgs,
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdWorkSendAppParams{
 			UserAgent:              userAgent,
