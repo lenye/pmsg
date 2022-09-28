@@ -229,7 +229,7 @@ linux
 ```shell
 $ pmsg weixin work app -i corp_id -s corp_secret -o '@all' -m text 'HelloWorld'
 
-ok
+ok; msgid: "msgid"
 ```
 
 [企业微信应用消息开发文档](https://developer.work.weixin.qq.com/document/path/90236)
