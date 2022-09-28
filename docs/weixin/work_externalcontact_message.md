@@ -1,0 +1,131 @@
+### 发送企业微信家校消息推送
+
+命令参数说明
+
+```text
+$ pmsg weixin work externalcontact -h
+
+-a, --user_agent string     http user agent
+
+-i, --corp_id string        企业微信corp_id (必填)
+-s, --corp_secret string    企业微信corp_secret (必填)
+
+如果没有提供 access_token，需要提供企业微信 corp_id 和 corp_secret 来获取 access_token
+
+-o, --recv_scope int             指定发送对象，0表示发送给家长，1表示发送给学生，2表示发送给家长和学生，默认为0。
+-n, --to_parent_user_id string   recv_scope为0或2表示发送给对应的家长，recv_scope为1忽略，最多支持1000个，多个接收者用‘|’分隔
+-u, --to_student_user_id string  recv_scope为0表示发送给学生的所有家长，recv_scope为1表示发送给学生，recv_scope为2表示发送给学生和学生的所有家长，最多支持1000个，多个接收者用‘|’分隔
+-p, --to_party string            recv_scope为0表示发送给班级的所有家长，recv_scope为1表示发送给班级的所有学生，recv_scope为2表示发送给班级的所有学生和家长，最多支持100个，多个接收者用‘|’分隔
+-l, --to_all int                 1表示字段生效，0表示字段无效。recv_scope为0表示发送给学校的所有家长，recv_scope为1表示发送给学校的所有学生，recv_scope为2表示发送给学校的所有学生和家长，默认为0
+-e, --agent_id int               企业应用的id (必填)
+-m, --msg_type string            消息类型 (必填)，text(文本消息)、image(图片消息)、
+                                                voice(语音消息)、video(视频消息)、file(文件消息)、
+                                                news(图文消息)、mpnews(图文消息)、
+                                                miniprogram_notice(小程序通知消息)
+
+-d, --duplicate_check_interval int   表示是否重复消息检查的时间间隔，默认1800s，最大不超过4小时(14400)
+-c, --enable_duplicate_check int     表示是否开启重复消息检查，0表示否，1表示是，默认0
+-r, --enable_id_trans int            表示是否开启id转译，0表示否，1表示是，默认0。仅第三方应用需要用到，企业自建应用可以忽略。
+```
+
+消息内容
+
+1. 文本消息 --msg_type text
+    ```text
+    "HelloWorld"
+    ```
+
+1. 图片消息 --msg_type image
+    ```text
+    "MEDIA_ID"
+    ```
+
+1. 语音消息 --msg_type voice
+    ```text
+    "MEDIA_ID"
+    ```
+
+1. 视频消息 --msg_type video
+    ```json
+    {
+      "media_id": "MEDIA_ID",
+      "title": "TITLE",
+      "description": "DESCRIPTION"
+    }
+    ```
+
+1. 文件消息 --msg_type file
+    ```text
+    "MEDIA_ID"
+    ```
+
+1. 图文消息 --msg_type news
+   ```json
+   {
+     "articles": [
+       {
+         "title": "中秋节礼品领取",
+         "description": "今年中秋节公司有豪礼相送",
+         "url": "URL",
+         "picurl": "http://res.mail.qq.com/msg.png",
+         "appid": "wx123123123123123",
+         "pagepath": "pages/index?userid=zhangsan&orderid=123123123"
+       }
+     ]
+   }
+   ```
+
+1. 图文消息 --msg_type mpnews
+   ```json
+   {
+     "articles": [
+       {
+         "title": "Title",
+         "thumb_media_id": "MEDIA_ID",
+         "author": "Author",
+         "content_source_url": "URL",
+         "content": "Content",
+         "digest": "Digest description"
+       }
+     ]
+   }
+   ```
+
+1. 小程序通知消息 --msg_type miniprogram_notice
+   ```json
+   {
+     "appid": "wx123123123123123",
+     "page": "pages/index?userid=zhangsan&orderid=123123123",
+     "title": "会议室预订成功通知",
+     "description": "4月27日 16:16",
+     "emphasis_first_item": true,
+     "content_item": [
+       {
+         "key": "会议室",
+         "value": "402"
+       },
+       {
+         "key": "会议地点",
+         "value": "广州TIT-402会议室"
+       },
+       {
+         "key": "会议时间",
+         "value": "2018年8月1日 09:00-09:30"
+       },
+       {
+         "key": "参与人员",
+         "value": "周剑轩"
+       }
+     ]
+   }
+   ```
+
+样例
+
+```shell
+$ pmsg weixin work externalcontact -i corp_id -s corp_secret -e agent_id -n 'parentuserid1|parentuserid2' -m text 'HelloWorld'
+
+ok
+```
+
+[企业微信家校消息推送开发文档](https://developer.work.weixin.qq.com/document/path/91609)
