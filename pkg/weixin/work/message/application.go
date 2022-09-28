@@ -139,6 +139,12 @@ type AppMessageResponse struct {
 func (t AppMessageResponse) String() string {
 	var sb []string
 
+	if t.MsgID != "" {
+		sb = append(sb, fmt.Sprintf("msgid: %q", t.MsgID))
+	}
+	if t.ResponseCode != "" {
+		sb = append(sb, fmt.Sprintf("response_code: %q", t.ResponseCode))
+	}
 	if t.InvalidUser != "" {
 		sb = append(sb, fmt.Sprintf("invaliduser: %q", t.InvalidUser))
 	}
@@ -150,12 +156,6 @@ func (t AppMessageResponse) String() string {
 	}
 	if t.UnLicensedUser != "" {
 		sb = append(sb, fmt.Sprintf("unlicenseduser: %q", t.UnLicensedUser))
-	}
-	if t.MsgID != "" {
-		sb = append(sb, fmt.Sprintf("msgid: %q", t.MsgID))
-	}
-	if t.ResponseCode != "" {
-		sb = append(sb, fmt.Sprintf("response_code: %q", t.ResponseCode))
 	}
 
 	if !t.ResponseMeta.Succeed() {
