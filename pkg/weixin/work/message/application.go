@@ -1,7 +1,6 @@
 package message
 
 import (
-	"errors"
 	"fmt"
 	"strings"
 
@@ -9,7 +8,7 @@ import (
 	"github.com/lenye/pmsg/pkg/weixin"
 )
 
-// 应用消息 类型
+// 企业微信应用消息 类型
 const (
 	AppMsgTypeText              = "text"               // 文本消息
 	AppMsgTypeImage             = "image"              // 图片消息
@@ -39,7 +38,7 @@ func ValidateAppMsgType(v string) error {
 	return nil
 }
 
-// 应用的模板卡片消息 类型
+// 企业微信应用的模板卡片消息 类型
 const (
 	AppTplCardTypeTextNotice        = "text_notice"        // 文本通知型
 	AppTplCardTypeNewsNotice        = "news_notice"        // 图文展示型
@@ -58,7 +57,7 @@ func ValidateAppTemplateCardType(v string) error {
 	return nil
 }
 
-// AppMessage 应用消息 touser、toparty、totag不能同时为空
+// AppMessage 企业微信应用消息 touser、toparty、totag不能同时为空
 type AppMessage struct {
 	ToUser                 string                 `json:"touser,omitempty"`                   // 指定接收消息的成员，成员ID列表（多个接收者用‘|’分隔，最多支持1000个）。	特殊情况：指定为"@all"，则向该企业应用的全部成员发送
 	ToParty                string                 `json:"toparty,omitempty"`                  // 指定接收消息的部门，部门ID列表，多个接收者用‘|’分隔，最多支持100个。	当touser为"@all"时忽略本参数
@@ -82,50 +81,7 @@ type AppMessage struct {
 	TemplateCard           *TemplateCardMeta      `json:"template_card"`                      // 模板卡片消息
 }
 
-func (t AppMessage) Validate() error {
-	if t.ToUser == "" && t.ToParty == "" && t.ToTag == "" {
-		return errors.New("touser、toparty、totag cannot be empty at the same time")
-	}
-
-	toUsers := strings.Split(t.ToUser, "|")
-	if len(toUsers) > 1000 {
-		return errors.New("touser supports up to 1000")
-	}
-
-	toParty := strings.Split(t.ToParty, "|")
-	if len(toParty) > 100 {
-		return errors.New("toparty supports up to 100")
-	}
-
-	toTag := strings.Split(t.ToTag, "|")
-	if len(toTag) > 100 {
-		return errors.New("totag supports up to 100")
-	}
-
-	if err := ValidateAppMsgType(t.MsgType); err != nil {
-		return fmt.Errorf("msgtype: %v", err)
-	}
-
-	if t.Safe != 0 && t.Safe != 1 {
-		return errors.New("invalid safe")
-	}
-
-	if t.EnableIDTrans != 0 && t.EnableIDTrans != 1 {
-		return errors.New("invalid enable_id_trans")
-	}
-
-	if t.EnableDuplicateCheck != 0 && t.EnableDuplicateCheck != 1 {
-		return errors.New("invalid enable_duplicate_check")
-	}
-
-	if t.DuplicateCheckInterval <= 0 || t.DuplicateCheckInterval > 3600*4 {
-		return errors.New("invalid duplicate_check_interval")
-	}
-
-	return nil
-}
-
-// AppMessageResponse 应用消息响应
+// AppMessageResponse 企业微信应用消息响应
 type AppMessageResponse struct {
 	weixin.ResponseMeta
 	InvalidUser    string `json:"invaliduser"`    // 不合法的userid，不区分大小写，统一转为小写
