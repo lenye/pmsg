@@ -7,7 +7,18 @@ var (
 	appID     string
 	appSecret string
 
-	toUser           string
+	toUser          string
+	toParty         string
+	toTag           string
+	toParentUserID  string
+	toStudentUserID string
+
+	toUsers          []string
+	toPartys         []string
+	toTags           []string
+	toParentUserIDs  []string
+	toStudentUserIDs []string
+
 	templateID       string
 	url              string
 	clientMsgID      string
@@ -24,11 +35,12 @@ var (
 	corpID     string
 	corpSecret string
 
-	toParty                string
-	toTag                  string
 	agentID                int64
 	safe                   int
 	enableIDTrans          int
 	enableDuplicateCheck   int
 	duplicateCheckInterval int
+	chatID                 string
+	toAll                  int
+	recvScope              int
 )

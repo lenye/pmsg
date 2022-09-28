@@ -28,11 +28,16 @@ const (
 
 	ToParty                = "to_party"
 	ToTag                  = "to_tag"
+	ToParentUserID         = "to_parent_user_id"
+	ToStudentUserID        = "to_student_user_id"
 	AgentID                = "agent_id"
 	Safe                   = "safe"
 	EnableIDTrans          = "enable_id_trans"
 	EnableDuplicateCheck   = "enable_duplicate_check"
 	DuplicateCheckInterval = "duplicate_check_interval"
+	ChatID                 = "chat_id"
+	ToAll                  = "to_all"
+	RecvScope              = "recv_scope"
 
 	AllUser = "@all"
 )
