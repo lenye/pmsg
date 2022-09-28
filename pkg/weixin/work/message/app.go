@@ -68,28 +68,28 @@ type AppMessage struct {
 	EnableIDTrans          int                    `json:"enable_id_trans,omitempty"`          // 表示是否开启id转译，0表示否，1表示是，默认0。仅第三方应用需要用到，企业自建应用可以忽略。
 	EnableDuplicateCheck   int                    `json:"enable_duplicate_check,omitempty"`   // 表示是否开启重复消息检查，0表示否，1表示是，默认0
 	DuplicateCheckInterval int                    `json:"duplicate_check_interval,omitempty"` // 表示是否重复消息检查的时间间隔，默认1800s，最大不超过4小时
-	Text                   *TextMeta              `json:"text"`                               // 文本消息
-	Image                  *ImageMeta             `json:"image"`                              // 图片消息
-	Voice                  *VoiceMeta             `json:"voice"`                              // 语音消息
-	Video                  *VideoMeta             `json:"video"`                              // 视频消息
-	File                   *FileMeta              `json:"file"`                               // 文件消息
-	TextCard               *TextCardMeta          `json:"text_card"`                          // 文本卡片消息
-	News                   *NewsMeta              `json:"news"`                               // 图文消息
-	MpNews                 *MpNewsMeta            `json:"mpnews"`                             // 图文消息
-	Markdown               *MarkdownMeta          `json:"markdown"`                           // markdown消息
-	MiniProgramNotice      *MiniProgramNoticeMeta `json:"miniprogram_notice"`                 // 小程序通知消息
-	TemplateCard           *TemplateCardMeta      `json:"template_card"`                      // 模板卡片消息
+	Text                   *TextMeta              `json:"text,omitempty"`                     // 文本消息
+	Image                  *ImageMeta             `json:"image,omitempty"`                    // 图片消息
+	Voice                  *VoiceMeta             `json:"voice,omitempty"`                    // 语音消息
+	Video                  *VideoMeta             `json:"video,omitempty"`                    // 视频消息
+	File                   *FileMeta              `json:"file,omitempty"`                     // 文件消息
+	TextCard               *TextCardMeta          `json:"text_card,omitempty"`                // 文本卡片消息
+	News                   *NewsMeta              `json:"news,omitempty"`                     // 图文消息
+	MpNews                 *MpNewsMeta            `json:"mpnews,omitempty"`                   // 图文消息
+	Markdown               *MarkdownMeta          `json:"markdown,omitempty"`                 // markdown消息
+	MiniProgramNotice      *MiniProgramNoticeMeta `json:"miniprogram_notice,omitempty"`       // 小程序通知消息
+	TemplateCard           *TemplateCardMeta      `json:"template_card,omitempty"`            // 模板卡片消息
 }
 
 // AppMessageResponse 企业微信应用消息响应
 type AppMessageResponse struct {
 	weixin.ResponseMeta
-	InvalidUser    string `json:"invaliduser"`    // 不合法的userid，不区分大小写，统一转为小写
-	InvalidParty   string `json:"invalidparty"`   // 不合法的partyid
-	InvalidTag     string `json:"invalidtag"`     // 不合法的标签id
-	UnLicensedUser string `json:"unlicenseduser"` // 没有基础接口许可(包含已过期)的userid
-	MsgID          string `json:"msgid"`          // 消息id，用于撤回应用消息
-	ResponseCode   string `json:"response_code"`  // 仅消息类型为“按钮交互型”，“投票选择型”和“多项选择型”的模板卡片消息返回，应用可使用response_code调用更新模版卡片消息接口，24小时内有效，且只能使用一次
+	MsgID          string `json:"msgid,omitempty"`          // 消息id，用于撤回应用消息
+	ResponseCode   string `json:"response_code,omitempty"`  // 仅消息类型为“按钮交互型”，“投票选择型”和“多项选择型”的模板卡片消息返回，应用可使用response_code调用更新模版卡片消息接口，24小时内有效，且只能使用一次
+	InvalidUser    string `json:"invaliduser,omitempty"`    // 不合法的userid，不区分大小写，统一转为小写
+	InvalidParty   string `json:"invalidparty,omitempty"`   // 不合法的partyid
+	InvalidTag     string `json:"invalidtag,omitempty"`     // 不合法的标签id
+	UnLicensedUser string `json:"unlicenseduser,omitempty"` // 没有基础接口许可(包含已过期)的userid
 }
 
 func (t AppMessageResponse) String() string {

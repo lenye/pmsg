@@ -43,18 +43,14 @@ func (t *CmdWorkSendAppParams) Validate() error {
 		t.ToParty = ""
 		t.ToTag = ""
 	} else {
-		toUsers := strings.Split(t.ToUser, "|")
-		if len(toUsers) > 1000 {
+		if toUsers := strings.Split(t.ToUser, "|"); len(toUsers) > 1000 {
 			return fmt.Errorf("%v supports up to 1000", flags.ToUser)
 		}
-
-		toParty := strings.Split(t.ToParty, "|")
-		if len(toParty) > 100 {
+		if toPartys := strings.Split(t.ToParty, "|"); len(toPartys) > 100 {
 			return fmt.Errorf("%v supports up to 100", flags.ToParty)
 		}
 
-		toTag := strings.Split(t.ToTag, "|")
-		if len(toTag) > 100 {
+		if toTags := strings.Split(t.ToTag, "|"); len(toTags) > 100 {
 			return fmt.Errorf("%v supports up to 100", flags.ToTag)
 		}
 	}
