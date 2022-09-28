@@ -1,6 +1,11 @@
 `pmsg`是一个发送消息的小工具。
 
-`pmsg` 可运行于 Linux, macOS, FreeBSD, Windows 操作系统。
+### 支持的操作系统
+
+* Windows
+* Linux
+* macOS
+* FreeBSD
 
 ### 支持的消息
 
@@ -23,7 +28,7 @@
 
 ### 文档
 
-完整的文档 [https://github.com/lenye/pmsg/tree/main/docs](https://github.com/lenye/pmsg/tree/main/docs)
+[https://github.com/lenye/pmsg/tree/main/docs](https://github.com/lenye/pmsg/tree/main/docs)
 
 ### 下载
 

@@ -1,6 +1,11 @@
 ### 下载
 
-`pmsg` 可运行于 Linux, macOS, FreeBSD, Windows 操作系统。
+#### 支持的操作系统
+
+* Windows
+* Linux
+* macOS
+* FreeBSD
 
 #### 使用二进制发行版
 

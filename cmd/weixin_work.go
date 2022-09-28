@@ -15,7 +15,8 @@ publish work weixin message:
  app message,
  appchat message,
  linkedcorp message,
- externalcontact message`,
+ externalcontact message,
+ customer message`,
 }
 
 func init() {
