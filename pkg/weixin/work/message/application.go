@@ -137,27 +137,31 @@ type AppMessageResponse struct {
 }
 
 func (t AppMessageResponse) String() string {
-	var sb strings.Builder
-	sb.WriteString(fmt.Sprintf("errcode: %v, errmsg: %q", t.ErrorCode, t.ErrorMessage))
+	var sb []string
+
 	if t.InvalidUser != "" {
-		sb.WriteString(fmt.Sprintf(", invaliduser: %q", t.InvalidUser))
+		sb = append(sb, fmt.Sprintf("invaliduser: %q", t.InvalidUser))
 	}
 	if t.InvalidParty != "" {
-		sb.WriteString(fmt.Sprintf(", invalidparty: %q", t.InvalidParty))
+		sb = append(sb, fmt.Sprintf("invalidparty: %q", t.InvalidParty))
 	}
 	if t.InvalidTag != "" {
-		sb.WriteString(fmt.Sprintf(", invalidtag: %q", t.InvalidTag))
+		sb = append(sb, fmt.Sprintf("invalidtag: %q", t.InvalidTag))
 	}
 	if t.UnLicensedUser != "" {
-		sb.WriteString(fmt.Sprintf(", unlicenseduser: %q", t.UnLicensedUser))
+		sb = append(sb, fmt.Sprintf("unlicenseduser: %q", t.UnLicensedUser))
 	}
 	if t.MsgID != "" {
-		sb.WriteString(fmt.Sprintf(", msgid: %q", t.MsgID))
+		sb = append(sb, fmt.Sprintf("msgid: %q", t.MsgID))
 	}
 	if t.ResponseCode != "" {
-		sb.WriteString(fmt.Sprintf(", response_code: %q", t.ResponseCode))
+		sb = append(sb, fmt.Sprintf("response_code: %q", t.ResponseCode))
 	}
-	return sb.String()
+
+	if !t.ResponseMeta.Succeed() {
+		sb = append([]string{fmt.Sprintf("%v", t.ResponseMeta)}, sb...)
+	}
+	return strings.Join(sb, ", ")
 }
 
 const appSendURL = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=%s"
