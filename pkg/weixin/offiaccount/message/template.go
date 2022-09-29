@@ -80,14 +80,14 @@ type TemplateDataItem struct {
 	Color string `json:"color,omitempty"` // 可选, 模板内容字体颜色，不填默认为黑色
 }
 
-// TemplateMessageResponse 模板消息的响应`
+// TemplateMessageResponse 模板消息的响应
 type TemplateMessageResponse struct {
 	weixin.ResponseMeta
 	MsgID int64 `json:"msgid,omitempty"` // 消息id
 }
 
 func (t TemplateMessageResponse) String() string {
-	return fmt.Sprintf("{errcode: %v, errmsg: %q, msgid: %v}", t.ErrorCode, t.ErrorMessage, t.MsgID)
+	return fmt.Sprintf("errcode: %v, errmsg: %q, msgid: %v", t.ErrorCode, t.ErrorMessage, t.MsgID)
 }
 
 const templateSendURL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s"
