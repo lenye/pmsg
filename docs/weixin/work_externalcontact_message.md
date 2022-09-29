@@ -122,6 +122,8 @@ $ pmsg weixin work externalcontact -h
 
 样例
 
+linux
+
 ```shell
 $ pmsg weixin work externalcontact -i corp_id -s corp_secret -e agent_id -n 'parentuserid1|parentuserid2' -m text 'HelloWorld'
 
