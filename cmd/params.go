@@ -43,4 +43,6 @@ var (
 	chatID                 string
 	toAll                  int
 	recvScope              int
+	openKfID               string
+	msgID                  string
 )

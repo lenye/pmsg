@@ -86,6 +86,66 @@ type NoticeContentItem struct {
 	Value string `json:"value"` // 长度30个汉字以内（支持id转译）
 }
 
+// LinkMeta 图文链接
+type LinkMeta struct {
+	Title        string `json:"title"`
+	Desc         string `json:"desc,omitempty"`
+	Url          string `json:"url"`
+	ThumbMediaID string `json:"thumb_media_id"`
+}
+
+// MiniProgramMeta 小程序消息
+type MiniProgramMeta struct {
+	Title        string `json:"title,omitempty"`
+	AppID        string `json:"appid"`
+	PagePath     string `json:"pagepath"`
+	ThumbMediaID string `json:"thumb_media_id"`
+}
+
+// MsgMenuMeta 菜单消息
+type MsgMenuMeta struct {
+	HeadContent string        `json:"head_content,omitempty"`
+	List        []MsgMenuItem `json:"list"`
+	TailContent string        `json:"tail_content,omitempty"`
+}
+
+// MsgMenuItem 菜单内容
+type MsgMenuItem struct {
+	Type        string              `json:"type"`
+	Click       *MsgMenuClick       `json:"click,omitempty"`
+	View        *MsgMenuView        `json:"view,omitempty"`
+	MiniProgram *MsgMenuMiniProgram `json:"miniprogram,omitempty"`
+	Text        *MsgMenuText        `json:"text,omitempty"`
+}
+
+type MsgMenuClick struct {
+	ID      string `json:"id,omitempty"`
+	Content string `json:"content"`
+}
+
+type MsgMenuView struct {
+	Url     string `json:"url"`
+	Content string `json:"content"`
+}
+
+type MsgMenuMiniProgram struct {
+	AppID    string `json:"appid"`
+	PagePath string `json:"pagepath"`
+	Content  string `json:"content"`
+}
+
+type MsgMenuText struct {
+	Content string `json:"content"`
+}
+
+// LocationMeta 地理位置消息
+type LocationMeta struct {
+	Name      string `json:"name,omitempty"`
+	Address   string `json:"address,omitempty"`
+	Latitude  int    `json:"latitude"`
+	Longitude int    `json:"longitude"`
+}
+
 // TemplateCardMeta 模板卡片消息
 type TemplateCardMeta struct {
 	CardType              string                         `json:"card_type"` // 模板卡片类型

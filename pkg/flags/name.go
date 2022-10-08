@@ -38,6 +38,8 @@ const (
 	ChatID                 = "chat_id"
 	ToAll                  = "to_all"
 	RecvScope              = "recv_scope"
+	OpenKfID               = "open_kf_id"
+	MsgID                  = "msg_id"
 
 	AllUser = "@all"
 )
