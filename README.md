@@ -26,10 +26,6 @@
     * 互联企业消息
     * 客服消息
 
-### 文档
-
-[https://github.com/lenye/pmsg/tree/main/docs](https://github.com/lenye/pmsg/tree/main/docs)
-
 ### 下载
 
 #### 使用二进制发行版
@@ -55,3 +51,11 @@
 ```shell
 git clone https://github.com/lenye/pmsg.git
 ```
+
+### 文档
+
+[https://github.com/lenye/pmsg/tree/main/docs](https://github.com/lenye/pmsg/tree/main/docs)
+
+### License
+
+`pmsg` is released under the [Apache 2.0 license](https://github.com/lenye/pmsg/blob/main/LICENSE). 
