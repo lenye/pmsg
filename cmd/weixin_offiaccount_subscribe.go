@@ -46,5 +46,5 @@ func init() {
 	weiXinOfficialAccountSubCmd.MarkFlagRequired(flags.TemplateID)
 
 	weiXinOfficialAccountSubCmd.Flags().StringVar(&page, flags.Page, "", "page")
-	weiXinOfficialAccountSubCmd.Flags().StringToStringVar(&mini, flags.Mini, nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
+	weiXinOfficialAccountSubCmd.Flags().StringToStringVar(&mini, flags.Mini, nil, "weixin mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
 }

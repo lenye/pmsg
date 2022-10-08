@@ -48,8 +48,8 @@ func init() {
 	weiXinOfficialAccountTplCmd.MarkFlagRequired(flags.TemplateID)
 
 	weiXinOfficialAccountTplCmd.Flags().StringVar(&url, flags.Url, "", "url")
-	weiXinOfficialAccountTplCmd.Flags().StringToStringVar(&mini, flags.Mini, nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
+	weiXinOfficialAccountTplCmd.Flags().StringToStringVar(&mini, flags.Mini, nil, "weixin mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
 
-	weiXinOfficialAccountTplCmd.Flags().StringVar(&color, flags.Color, "", "weixin template color")
-	weiXinOfficialAccountTplCmd.Flags().StringVarP(&clientMsgID, flags.ClientMsgID, "c", "", "weixin template client msg id")
+	weiXinOfficialAccountTplCmd.Flags().StringVar(&color, flags.Color, "", "template color")
+	weiXinOfficialAccountTplCmd.Flags().StringVarP(&clientMsgID, flags.ClientMsgID, "c", "", "client message id")
 }

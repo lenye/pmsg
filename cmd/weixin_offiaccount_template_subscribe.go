@@ -50,9 +50,9 @@ func init() {
 	weiXinOfficialAccountTplSubCmd.Flags().StringVar(&scene, flags.Scene, "", "weixin subscribe scene (required)")
 	weiXinOfficialAccountTplSubCmd.MarkFlagRequired(flags.Scene)
 
-	weiXinOfficialAccountTplSubCmd.Flags().StringVar(&title, flags.Title, "", "weixin message title (required)")
+	weiXinOfficialAccountTplSubCmd.Flags().StringVar(&title, flags.Title, "", "message title (required)")
 	weiXinOfficialAccountTplSubCmd.MarkFlagRequired(flags.Title)
 
 	weiXinOfficialAccountTplSubCmd.Flags().StringVar(&url, flags.Url, "", "url")
-	weiXinOfficialAccountTplSubCmd.Flags().StringToStringVar(&mini, flags.Mini, nil, "weixin template mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
+	weiXinOfficialAccountTplSubCmd.Flags().StringToStringVar(&mini, flags.Mini, nil, "weixin mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
 }
