@@ -18,7 +18,12 @@ publish weixin message:
  offiaccount subscribe message,
  offiaccount customer message,
  miniprogram subscribe message,
- miniprogram customer message`,
+ miniprogram customer message,
+ work app message,
+ work appchat message,
+ work linkedcorp message,
+ work externalcontact message,
+ work customer message`,
 }
 
 func init() {

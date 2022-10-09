@@ -23,7 +23,8 @@ var rootCmd = &cobra.Command{
  work weixin app message,
  work weixin appchat message,
  work weixin linkedcorp message,
- work weixin externalcontact message`,
+ work weixin externalcontact message,
+ work weixin customer message`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
