@@ -5,6 +5,9 @@ on:
     tags:
       - "v*.*.*"      # triggers only if push new tag version, like `v0.1.0`
 
+env:
+  GO_VERSION: 1.19.2
+
 jobs:
 
   build:
@@ -16,16 +19,18 @@ jobs:
         working-directory: ${{ github.workspace }}/go/src/github.com/lenye/pmsg
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Set up Go ${{ env.GO_VERSION }}
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+
+      - name: Check out code
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           path: go/src/github.com/lenye/pmsg
 
-      - name: Set up Go
-        uses: actions/setup-go@v3
-        with:
-          go-version: 1.19.2
-        id: go
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v3
