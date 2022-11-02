@@ -73,7 +73,7 @@ type AppMessage struct {
 	Voice                  *VoiceMeta             `json:"voice,omitempty"`                    // 语音消息
 	Video                  *VideoMeta             `json:"video,omitempty"`                    // 视频消息
 	File                   *FileMeta              `json:"file,omitempty"`                     // 文件消息
-	TextCard               *TextCardMeta          `json:"text_card,omitempty"`                // 文本卡片消息
+	TextCard               *TextCardMeta          `json:"textcard,omitempty"`                 // 文本卡片消息
 	News                   *NewsMeta              `json:"news,omitempty"`                     // 图文消息
 	MpNews                 *MpNewsMeta            `json:"mpnews,omitempty"`                   // 图文消息
 	Markdown               *MarkdownMeta          `json:"markdown,omitempty"`                 // markdown消息
