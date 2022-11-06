@@ -9,11 +9,6 @@ var weiXinOfficialAccountCmd = &cobra.Command{
 	Use:     "offiaccount",
 	Aliases: []string{"mp"},
 	Short:   "publish weixin offiaccount message",
-	Long: `publish weixin offiaccount message:
- template message,
- template subscribe message (onetime),
- subscribe message,
- customer message`,
 }
 
 func init() {

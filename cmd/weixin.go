@@ -11,19 +11,6 @@ var weiXinCmd = &cobra.Command{
 	Use:     "weixin",
 	Aliases: []string{"wx"},
 	Short:   "weixin message",
-	Long: `get weixin access token,
-publish weixin message:
- offiaccount template message,
- offiaccount template subscribe message (onetime),
- offiaccount subscribe message,
- offiaccount customer message,
- miniprogram subscribe message,
- miniprogram customer message,
- work app message,
- work appchat message,
- work linkedcorp message,
- work externalcontact message,
- work customer message`,
 }
 
 func init() {

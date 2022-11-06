@@ -13,18 +13,6 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "pmsg",
 	Short: "publish message",
-	Long: `publish message:
- weixin offiaccount template message,
- weixin offiaccount template subscribe message (onetime),
- weixin offiaccount subscribe message,
- weixin offiaccount customer message,
- weixin miniprogram subscribe message,
- weixin miniprogram customer message,
- work weixin app message,
- work weixin appchat message,
- work weixin linkedcorp message,
- work weixin externalcontact message,
- work weixin customer message`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.

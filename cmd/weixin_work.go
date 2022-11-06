@@ -10,13 +10,6 @@ import (
 var weiXinWorkCmd = &cobra.Command{
 	Use:   "work",
 	Short: "publish work weixin message",
-	Long: `get work weixin access token,
-publish work weixin message:
- app message,
- appchat message,
- linkedcorp message,
- externalcontact message,
- customer message`,
 }
 
 func init() {

@@ -9,9 +9,6 @@ var weiXinMiniProgramCmd = &cobra.Command{
 	Use:     "miniprogram",
 	Aliases: []string{"mini"},
 	Short:   "publish weixin miniprogram message",
-	Long: `publish weixin miniprogram message:
- subscribe message,
- customer message`,
 }
 
 func init() {
