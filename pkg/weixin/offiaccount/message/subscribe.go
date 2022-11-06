@@ -52,11 +52,11 @@ type SubscribeDataItem struct {
 	Value string `json:"value"`
 }
 
-const subscribeBizSendURL = "https://api.weixin.qq.com/cgi-bin/message/subscribe/bizsend?access_token=%s"
+const subscribeBizSendURL = "https://api.weixin.qq.com/cgi-bin/message/subscribe/bizsend?access_token="
 
 // BizSendSubscribe 发送微信公众号订阅通知消息
 func BizSendSubscribe(accessToken string, msg *SubscribeMessage) error {
-	url := fmt.Sprintf(subscribeBizSendURL, accessToken)
+	url := subscribeBizSendURL + accessToken
 	var resp weixin.ResponseMeta
 	_, err := client.PostJSON(url, msg, &resp)
 	if err != nil {

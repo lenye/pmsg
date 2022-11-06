@@ -83,11 +83,11 @@ func (t ExternalContactMessageResponse) String() string {
 	return strings.Join(sb, ", ")
 }
 
-const externalContactSendURL = "https://qyapi.weixin.qq.com/cgi-bin/externalcontact/message/send?access_token=%s"
+const externalContactSendURL = "https://qyapi.weixin.qq.com/cgi-bin/externalcontact/message/send?access_token="
 
 // SendExternalContact 发送企业微信家校消息
 func SendExternalContact(accessToken string, msg *ExternalContactMessage) (*ExternalContactMessageResponse, error) {
-	url := fmt.Sprintf(externalContactSendURL, accessToken)
+	url := externalContactSendURL + accessToken
 	var resp ExternalContactMessageResponse
 	_, err := client.PostJSON(url, msg, &resp)
 	if err != nil {

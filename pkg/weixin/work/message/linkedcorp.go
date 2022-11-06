@@ -84,11 +84,11 @@ func (t LinkedCorpMessageResponse) String() string {
 	return strings.Join(sb, ", ")
 }
 
-const linkedCorpSendURL = "https://qyapi.weixin.qq.com/cgi-bin/linkedcorp/message/send?access_token=%s"
+const linkedCorpSendURL = "https://qyapi.weixin.qq.com/cgi-bin/linkedcorp/message/send?access_token="
 
 // SendLinkedCorp 发送企业微信互联企业消息
 func SendLinkedCorp(accessToken string, msg *LinkedCorpMessage) (*LinkedCorpMessageResponse, error) {
-	url := fmt.Sprintf(linkedCorpSendURL, accessToken)
+	url := linkedCorpSendURL + accessToken
 	var resp LinkedCorpMessageResponse
 	_, err := client.PostJSON(url, msg, &resp)
 	if err != nil {

@@ -68,11 +68,11 @@ func (t CustomerMessageResponse) String() string {
 	return fmt.Sprintf("errcode: %v, errmsg: %q, msgid: %q", t.ErrorCode, t.ErrorMessage, t.MsgID)
 }
 
-const customerSendURL = "https://qyapi.weixin.qq.com/cgi-bin/kf/send_msg?access_token=%s"
+const customerSendURL = "https://qyapi.weixin.qq.com/cgi-bin/kf/send_msg?access_token="
 
 // SendCustomer 发送微信客服消息
 func SendCustomer(accessToken string, msg *CustomerMessage) (*CustomerMessageResponse, error) {
-	url := fmt.Sprintf(customerSendURL, accessToken)
+	url := customerSendURL + accessToken
 	var resp CustomerMessageResponse
 	_, err := client.PostJSON(url, msg, &resp)
 	if err != nil {

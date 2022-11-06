@@ -26,11 +26,11 @@ type CustomerMessage struct {
 	Link            *LinkMeta            `json:"link,omitempty"`
 }
 
-const customerSendURL = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=%s"
+const customerSendURL = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token="
 
 // SendCustomer 发送微信客服消息
 func SendCustomer(accessToken string, msg *CustomerMessage) error {
-	url := fmt.Sprintf(customerSendURL, accessToken)
+	url := customerSendURL + accessToken
 	var resp weixin.ResponseMeta
 	_, err := client.PostJSON(url, msg, &resp)
 	if err != nil {

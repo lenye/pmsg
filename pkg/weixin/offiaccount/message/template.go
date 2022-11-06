@@ -90,11 +90,11 @@ func (t TemplateMessageResponse) String() string {
 	return fmt.Sprintf("errcode: %v, errmsg: %q, msgid: %v", t.ErrorCode, t.ErrorMessage, t.MsgID)
 }
 
-const templateSendURL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s"
+const templateSendURL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="
 
 // SendTemplate 发送微信公众号模板消息
 func SendTemplate(accessToken string, msg *TemplateMessage) (int64, error) {
-	url := fmt.Sprintf(templateSendURL, accessToken)
+	url := templateSendURL + accessToken
 	var resp TemplateMessageResponse
 	_, err := client.PostJSON(url, msg, &resp)
 	if err != nil {

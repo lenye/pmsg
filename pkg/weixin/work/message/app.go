@@ -120,11 +120,11 @@ func (t AppMessageResponse) String() string {
 	return strings.Join(sb, ", ")
 }
 
-const appSendURL = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=%s"
+const appSendURL = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token="
 
 // SendApp 发送企业微信应用消息
 func SendApp(accessToken string, msg *AppMessage) (*AppMessageResponse, error) {
-	url := fmt.Sprintf(appSendURL, accessToken)
+	url := appSendURL + accessToken
 	var resp AppMessageResponse
 	_, err := client.PostJSON(url, msg, &resp)
 	if err != nil {

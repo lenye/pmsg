@@ -51,11 +51,11 @@ type AppChatMessage struct {
 	Markdown *MarkdownMeta `json:"markdown,omitempty"` // markdown消息
 }
 
-const appChatSendURL = "https://qyapi.weixin.qq.com/cgi-bin/appchat/send?access_token=%s"
+const appChatSendURL = "https://qyapi.weixin.qq.com/cgi-bin/appchat/send?access_token="
 
 // SendAppChat 发送企业微信群聊推送消息
 func SendAppChat(accessToken string, msg *AppChatMessage) error {
-	url := fmt.Sprintf(appChatSendURL, accessToken)
+	url := appChatSendURL + accessToken
 	var resp weixin.ResponseMeta
 	_, err := client.PostJSON(url, msg, &resp)
 	if err != nil {
