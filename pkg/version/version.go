@@ -23,7 +23,7 @@ import (
 var (
 	Version   = "dev"                  // 版本
 	AppName   = "app"                  // 名称
-	BuildTime = "2018-09-01T16:03:59Z" // 编译时间   $(date +%Y%m%d.%H%M%S)
+	BuildTime = "2006-01-02T15:04:05Z" // 编译时间   $(date +%Y%m%d.%H%M%S)
 	BuildGit  = "git"                  // 版本号     $(git rev-parse HEAD)
 	StartTime = time.Now()
 )
@@ -33,7 +33,8 @@ const versionTemplate = `%s
  Git commit: %s
  Built:      %s
  Go version: %s
- OS/Arch:    %s/%s`
+ OS/Arch:    %s/%s
+`
 
 func Print() string {
 	return fmt.Sprintf(versionTemplate, AppName, Version, BuildGit, BuildTime, runtime.Version(), runtime.GOOS, runtime.GOARCH)
