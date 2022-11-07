@@ -31,7 +31,7 @@
 ### 发送企业微信消息
 
 * [应用消息](weixin/work_app_message.md)
-* [撤回应用消息](weixin/work_undo_app_message.md)
+* [撤回应用消息](weixin/work_app_undo_message.md)
 * [群聊推送消息](weixin/work_appchat_message.md)
 * [互联企业消息推送](weixin/work_linkedcorp_message.md)
 * [家校消息推送](weixin/work_externalcontact_message.md)

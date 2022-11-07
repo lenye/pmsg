@@ -14,7 +14,7 @@ Aliases:
 -i, --app_id string         微信app_id
 -s, --app_secret string     微信app_secret
 
-如果没有提供 access_token，需要提供微信 app_id 和 app_secret 来获取 access_token
+如果没有提供 access_token，需要提供微信 app_id 和 app_secret 获取 access_token
 
 -o, --to_user string        接收人的open_id (必填)
 -m, --msg_type string       消息类型 (必填)，text(文本消息)、image(图片消息)、

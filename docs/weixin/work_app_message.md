@@ -11,7 +11,7 @@ $ pmsg weixin work app -h
 -i, --corp_id string        企业微信corp_id
 -s, --corp_secret string    企业微信corp_secret
 
-如果没有提供 access_token，需要提供企业微信 corp_id 和 corp_secret 来获取 access_token
+如果没有提供 access_token，需要提供企业微信 corp_id 和 corp_secret 获取 access_token
 
 -o, --to_user string        指定接收消息的成员，成员ID列表，最多支持1000个，多个接收者用‘|’分隔。指定为"@all"，则向该企业应用的全部成员发送
 -p, --to_party string       指定接收消息的部门，部门ID列表，最多支持100个，多个接收者用‘|’分隔。to_user"@all"时忽略本参数

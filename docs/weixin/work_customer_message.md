@@ -11,7 +11,7 @@ $ pmsg weixin work customer -h
 -i, --corp_id string        企业微信corp_id
 -s, --corp_secret string    企业微信corp_secret
 
-如果没有提供 access_token，需要提供企业微信 corp_id 和 corp_secret 来获取 access_token
+如果没有提供 access_token，需要提供企业微信 corp_id 和 corp_secret 获取 access_token
 
 -c, --msg_id string         指定消息ID
 -k, --open_kf_id string     指定发送消息的客服帐号ID (必填)

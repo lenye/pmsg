@@ -10,7 +10,7 @@ $ pmsg weixin work externalcontact -h
 -i, --corp_id string        企业微信corp_id (必填)
 -s, --corp_secret string    企业微信corp_secret (必填)
 
-如果没有提供 access_token，需要提供企业微信 corp_id 和 corp_secret 来获取 access_token
+如果没有提供 access_token，需要提供企业微信 corp_id 和 corp_secret 获取 access_token
 
 -o, --recv_scope int             指定发送对象，0表示发送给家长，1表示发送给学生，2表示发送给家长和学生，默认为0。
 -n, --to_parent_user_id string   recv_scope为0或2表示发送给对应的家长，recv_scope为1忽略，最多支持1000个，多个接收者用‘|’分隔

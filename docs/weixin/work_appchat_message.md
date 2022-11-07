@@ -11,7 +11,7 @@ $ pmsg weixin work chat -h
 -i, --corp_id string        企业微信corp_id
 -s, --corp_secret string    企业微信corp_secret
 
-如果没有提供 access_token，需要提供企业微信 corp_id 和 corp_secret 来获取 access_token
+如果没有提供 access_token，需要提供企业微信 corp_id 和 corp_secret 获取 access_token
 
 -c, --chat_id string        群聊id (必填) 
 -m, --msg_type string       消息类型 (必填)，text(文本消息)、image(图片消息)、
