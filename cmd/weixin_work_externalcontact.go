@@ -32,15 +32,6 @@ var weiXinWorkExternalContactCmd = &cobra.Command{
 	Short:   "publish work weixin externalcontact message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		if toParentUserID != "" {
-			toParentUserIDs = strings.Split(toParentUserID, "|")
-		}
-		if toStudentUserID != "" {
-			toStudentUserIDs = strings.Split(toStudentUserID, "|")
-		}
-		if toParty != "" {
-			toPartys = strings.Split(toParty, "|")
-		}
 
 		arg := message.CmdWorkSendExternalContactParams{
 			UserAgent:              userAgent,
@@ -48,9 +39,6 @@ var weiXinWorkExternalContactCmd = &cobra.Command{
 			CorpID:                 corpID,
 			CorpSecret:             corpSecret,
 			RecvScope:              recvScope,
-			ToParentUserID:         toParentUserIDs,
-			ToStudentUserID:        toStudentUserIDs,
-			ToParty:                toPartys,
 			ToAll:                  toAll,
 			MsgType:                msgType,
 			AgentID:                agentID,
@@ -59,6 +47,17 @@ var weiXinWorkExternalContactCmd = &cobra.Command{
 			DuplicateCheckInterval: duplicateCheckInterval,
 			Data:                   args[0],
 		}
+
+		if toParentUserID != "" {
+			arg.ToParentUserID = strings.Split(toParentUserID, "|")
+		}
+		if toStudentUserID != "" {
+			arg.ToStudentUserID = strings.Split(toStudentUserID, "|")
+		}
+		if toParty != "" {
+			arg.ToParty = strings.Split(toParty, "|")
+		}
+
 		if err := message.CmdWorkSendExternalContact(&arg); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}

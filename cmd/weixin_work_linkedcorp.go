@@ -32,30 +32,28 @@ var weiXinWorkLinkedCorpCmd = &cobra.Command{
 	Short:   "publish work weixin linkedcorp message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		if toUser != "" {
-			toUsers = strings.Split(toUser, "|")
-		}
-		if toParty != "" {
-			toPartys = strings.Split(toParty, "|")
-		}
-		if toTag != "" {
-			toTags = strings.Split(toTag, "|")
-		}
-
 		arg := message.CmdWorkSendLinkedCorpParams{
 			UserAgent:   userAgent,
 			AccessToken: accessToken,
 			CorpID:      corpID,
 			CorpSecret:  corpSecret,
-			ToUser:      toUsers,
-			ToParty:     toPartys,
-			ToTag:       toTags,
 			ToAll:       toAll,
 			AgentID:     agentID,
 			MsgType:     msgType,
 			Safe:        safe,
 			Data:        args[0],
 		}
+
+		if toUser != "" {
+			arg.ToUser = strings.Split(toUser, "|")
+		}
+		if toParty != "" {
+			arg.ToParty = strings.Split(toParty, "|")
+		}
+		if toTag != "" {
+			arg.ToTag = strings.Split(toTag, "|")
+		}
+
 		if err := message.CmdWorkSendLinkedCorp(&arg); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}

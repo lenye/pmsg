@@ -15,7 +15,8 @@
 package cmd
 
 var (
-	userAgent   string
+	userAgent string
+
 	accessToken string
 
 	appID     string
@@ -27,17 +28,12 @@ var (
 	toParentUserID  string
 	toStudentUserID string
 
-	toUsers          []string
-	toPartys         []string
-	toTags           []string
-	toParentUserIDs  []string
-	toStudentUserIDs []string
+	mini map[string]string
 
 	templateID       string
 	url              string
 	clientMsgID      string
 	color            string
-	mini             map[string]string
 	msgType          string
 	kfAccount        string
 	page             string
