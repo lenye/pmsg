@@ -26,5 +26,6 @@ var weiXinMiniProgramCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinCmd.AddCommand(weiXinMiniProgramCmd)
+	weiXinMiniProgramCmd.AddCommand(weiXinMiniProgramCustomerCmd)
+	weiXinMiniProgramCmd.AddCommand(weiXinMiniProgramSubCmd)
 }

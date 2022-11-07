@@ -61,8 +61,6 @@ var weiXinWorkLinkedCorpCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinWorkCmd.AddCommand(weiXinWorkLinkedCorpCmd)
-
 	weiXinWorkSetAccessTokenFlags(weiXinWorkLinkedCorpCmd)
 
 	weiXinWorkLinkedCorpCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "work weixin user id list")

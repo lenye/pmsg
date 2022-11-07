@@ -65,8 +65,6 @@ var weiXinWorkExternalContactCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinWorkCmd.AddCommand(weiXinWorkExternalContactCmd)
-
 	weiXinWorkSetAccessTokenFlags(weiXinWorkExternalContactCmd)
 
 	weiXinWorkExternalContactCmd.Flags().IntVarP(&recvScope, flags.RecvScope, "o", 0, "receive scope")

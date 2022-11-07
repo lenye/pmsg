@@ -51,8 +51,6 @@ var weiXinOfficialAccountTplSubCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinOfficialAccountTplCmd.AddCommand(weiXinOfficialAccountTplSubCmd)
-
 	weiXinSetAccessTokenFlags(weiXinOfficialAccountTplSubCmd)
 
 	weiXinOfficialAccountTplSubCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "weixin user open id (required)")

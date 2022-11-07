@@ -44,8 +44,6 @@ var weiXinWorkUndoAppCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinWorkAppCmd.AddCommand(weiXinWorkUndoAppCmd)
-
 	weiXinWorkSetAccessTokenFlags(weiXinWorkUndoAppCmd)
 
 	weiXinWorkUndoAppCmd.Flags().StringVarP(&msgID, flags.MsgID, "c", "", "message id")

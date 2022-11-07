@@ -51,7 +51,7 @@ var weiXinOfficialAccountTplCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialAccountTplCmd)
+	weiXinOfficialAccountTplCmd.AddCommand(weiXinOfficialAccountTplSubCmd)
 
 	weiXinSetAccessTokenFlags(weiXinOfficialAccountTplCmd)
 

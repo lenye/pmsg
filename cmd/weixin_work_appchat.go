@@ -48,8 +48,6 @@ var weiXinWorkAppChatCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinWorkCmd.AddCommand(weiXinWorkAppChatCmd)
-
 	weiXinWorkSetAccessTokenFlags(weiXinWorkAppChatCmd)
 
 	weiXinWorkAppChatCmd.Flags().StringVarP(&chatID, flags.ChatID, "c", "", "work weixin chat id (required)")

@@ -49,8 +49,6 @@ var weiXinWorkCustomerCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinWorkCmd.AddCommand(weiXinWorkCustomerCmd)
-
 	weiXinWorkSetAccessTokenFlags(weiXinWorkCustomerCmd)
 
 	weiXinWorkCustomerCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "work weixin user id (required)")

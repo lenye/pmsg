@@ -42,8 +42,6 @@ var weiXinAccessTokenCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinCmd.AddCommand(weiXinAccessTokenCmd)
-
 	weiXinAccessTokenCmd.Flags().StringVarP(&appID, flags.AppID, "i", "", "weixin app id (required)")
 	weiXinAccessTokenCmd.MarkFlagRequired(flags.AppID)
 

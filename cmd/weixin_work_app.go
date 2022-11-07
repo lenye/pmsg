@@ -53,7 +53,7 @@ var weiXinWorkAppCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinWorkCmd.AddCommand(weiXinWorkAppCmd)
+	weiXinWorkAppCmd.AddCommand(weiXinWorkUndoAppCmd)
 
 	weiXinWorkSetAccessTokenFlags(weiXinWorkAppCmd)
 

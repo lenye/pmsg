@@ -28,7 +28,10 @@ var weiXinCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(weiXinCmd)
+	weiXinCmd.AddCommand(weiXinAccessTokenCmd)
+	weiXinCmd.AddCommand(weiXinMiniProgramCmd)
+	weiXinCmd.AddCommand(weiXinOfficialAccountCmd)
+	weiXinCmd.AddCommand(weiXinWorkCmd)
 
 	weiXinCmd.PersistentFlags().StringVarP(&userAgent, flags.UserAgent, "a", "", "http user agent")
 }

@@ -47,8 +47,6 @@ var weiXinMiniProgramCustomerCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinMiniProgramCmd.AddCommand(weiXinMiniProgramCustomerCmd)
-
 	weiXinSetAccessTokenFlags(weiXinMiniProgramCustomerCmd)
 
 	weiXinMiniProgramCustomerCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "weixin user open id (required)")

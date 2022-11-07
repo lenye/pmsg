@@ -26,5 +26,7 @@ var weiXinOfficialAccountCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinCmd.AddCommand(weiXinOfficialAccountCmd)
+	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialAccountCustomerCmd)
+	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialAccountSubCmd)
+	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialAccountTplCmd)
 }

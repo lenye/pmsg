@@ -27,7 +27,12 @@ var weiXinWorkCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinCmd.AddCommand(weiXinWorkCmd)
+	weiXinWorkCmd.AddCommand(weiXinWorkAccessTokenCmd)
+	weiXinWorkCmd.AddCommand(weiXinWorkAppCmd)
+	weiXinWorkCmd.AddCommand(weiXinWorkAppChatCmd)
+	weiXinWorkCmd.AddCommand(weiXinWorkCustomerCmd)
+	weiXinWorkCmd.AddCommand(weiXinWorkExternalContactCmd)
+	weiXinWorkCmd.AddCommand(weiXinWorkLinkedCorpCmd)
 }
 
 // weiXinWorkSetAccessTokenFlags 设置企业微信access_token或者corp_id/corp_secret命令行参数
