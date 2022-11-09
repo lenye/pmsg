@@ -19,19 +19,17 @@ jobs:
         working-directory: ${{ github.workspace }}/go/src/github.com/lenye/pmsg
 
     steps:
-      - name: Set up Go ${{ env.GO_VERSION }}
-        uses: actions/setup-go@v3
-        with:
-          go-version: ${{ env.GO_VERSION }}
-          check-latest: true
-
-
       - name: Check out code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
           path: go/src/github.com/lenye/pmsg
 
+      - name: Set up Go ${{ env.GO_VERSION }}
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          check-latest: true
 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v3

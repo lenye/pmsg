@@ -54,4 +54,11 @@ checksum:
   name_template: "{{ .ProjectName }}_v{{ .Version }}_checksums.txt"
 
 changelog:
-  skip: true
+  filters:
+    exclude:
+      - '^wip:'
+      - '^docs:'
+      - '^test:'
+      - '^style:'
+      - '^chore:'
+      - '^ci:'
