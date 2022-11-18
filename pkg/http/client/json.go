@@ -22,9 +22,9 @@ import (
 )
 
 // CheckHttpResponseStatusCode 检查HTTP响应状态码
-func CheckHttpResponseStatusCode(url string, statusCode int) error {
+func CheckHttpResponseStatusCode(method, url string, statusCode int) error {
 	if statusCode/100 != 2 {
-		return fmt.Errorf("%w; http response status code: %v, url: %q", ErrHttpRequest, statusCode, url)
+		return fmt.Errorf("%w; http response status code: %v, %s %s", ErrHttpRequest, statusCode, method, url)
 	}
 	return nil
 }
@@ -32,11 +32,11 @@ func CheckHttpResponseStatusCode(url string, statusCode int) error {
 func GetJSON(url string, respBody interface{}) (http.Header, error) {
 	resp, err := Get(url)
 	if err != nil {
-		return nil, fmt.Errorf("%w; get %q, %v", ErrHttpRequest, url, err)
+		return nil, fmt.Errorf("%w; %s %s, %v", ErrHttpRequest, http.MethodGet, url, err)
 	}
 	defer resp.Body.Close()
 
-	if err := CheckHttpResponseStatusCode(url, resp.StatusCode); err != nil {
+	if err := CheckHttpResponseStatusCode(http.MethodGet, url, resp.StatusCode); err != nil {
 		return nil, err
 	}
 
@@ -59,11 +59,11 @@ func PostJSON(url string, reqBody, respBody interface{}) (http.Header, error) {
 
 	resp, err := POST(url, contentTypeJson, buf)
 	if err != nil {
-		return nil, fmt.Errorf("%w; post %q, %v", ErrHttpRequest, url, err)
+		return nil, fmt.Errorf("%w; %s %s, %v", ErrHttpRequest, http.MethodPost, url, err)
 	}
 	defer resp.Body.Close()
 
-	if err := CheckHttpResponseStatusCode(url, resp.StatusCode); err != nil {
+	if err := CheckHttpResponseStatusCode(http.MethodPost, url, resp.StatusCode); err != nil {
 		return nil, err
 	}
 

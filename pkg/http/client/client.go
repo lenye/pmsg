@@ -45,7 +45,7 @@ func userAgent() string {
 
 // Get http get
 func Get(url string) (*http.Response, error) {
-	req, err := http.NewRequest("GET", url, nil)
+	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func Get(url string) (*http.Response, error) {
 
 // POST http post
 func POST(url string, bodyType string, body io.Reader) (*http.Response, error) {
-	req, err := http.NewRequest("POST", url, body)
+	req, err := http.NewRequest(http.MethodPost, url, body)
 	if err != nil {
 		return nil, err
 	}
