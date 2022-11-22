@@ -57,7 +57,7 @@ func PostJSON(url string, reqBody, respBody interface{}) (http.Header, error) {
 		return nil, err
 	}
 
-	resp, err := POST(url, contentTypeJson, buf)
+	resp, err := Post(url, contentTypeJson, buf)
 	if err != nil {
 		return nil, fmt.Errorf("%w; %s %s, %v", ErrHttpRequest, http.MethodPost, url, err)
 	}

@@ -15,10 +15,13 @@
 package client
 
 import (
+	"bufio"
 	"errors"
 	"fmt"
 	"io"
+	"mime/multipart"
 	"net/http"
+	"os"
 	"runtime"
 
 	"github.com/lenye/pmsg/pkg/version"
@@ -45,7 +48,7 @@ func userAgent() string {
 
 // Get http get
 func Get(url string) (*http.Response, error) {
-	req, err := http.NewRequest(http.MethodGet, url, nil)
+	req, err := http.NewRequest(http.MethodGet, url, http.NoBody)
 	if err != nil {
 		return nil, err
 	}
@@ -54,8 +57,8 @@ func Get(url string) (*http.Response, error) {
 	return http.DefaultClient.Do(req)
 }
 
-// POST http post
-func POST(url string, bodyType string, body io.Reader) (*http.Response, error) {
+// Post http post
+func Post(url string, bodyType string, body io.Reader) (*http.Response, error) {
 	req, err := http.NewRequest(http.MethodPost, url, body)
 	if err != nil {
 		return nil, err
@@ -64,4 +67,32 @@ func POST(url string, bodyType string, body io.Reader) (*http.Response, error) {
 	req.Header.Set("User-Agent", userAgent())
 
 	return http.DefaultClient.Do(req)
+}
+
+// PostFile 上传文件
+func PostFile(url string, fieldName, fileName string) (*http.Response, error) {
+	var bodyBuf bufio.ReadWriter
+	bodyWriter := multipart.NewWriter(&bodyBuf)
+
+	fileWriter, err := bodyWriter.CreateFormFile(fieldName, fileName)
+	if err != nil {
+		return nil, fmt.Errorf("multipart.Writer.CreateFormFile failed, %w", err)
+	}
+
+	f, err := os.Open(fileName)
+	if err != nil {
+		return nil, fmt.Errorf("open file failed, %w", err)
+	}
+	defer f.Close()
+
+	if _, err := io.Copy(fileWriter, f); err != nil {
+		return nil, fmt.Errorf("file io.Copy failed, %w", err)
+	}
+
+	contentType := bodyWriter.FormDataContentType()
+	if err := bodyWriter.Close(); err != nil {
+		return nil, fmt.Errorf("multipart.Writer.Close failed, %w", err)
+	}
+
+	return Post(url, contentType, bodyBuf)
 }
