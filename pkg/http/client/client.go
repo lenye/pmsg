@@ -22,6 +22,7 @@ import (
 	"mime/multipart"
 	"net/http"
 	"os"
+	"path/filepath"
 	"runtime"
 
 	"github.com/lenye/pmsg/pkg/version"
@@ -58,7 +59,7 @@ func Get(url string) (*http.Response, error) {
 }
 
 // Post http post
-func Post(url string, bodyType string, body io.Reader) (*http.Response, error) {
+func Post(url, bodyType string, body io.Reader) (*http.Response, error) {
 	req, err := http.NewRequest(http.MethodPost, url, body)
 	if err != nil {
 		return nil, err
@@ -70,11 +71,11 @@ func Post(url string, bodyType string, body io.Reader) (*http.Response, error) {
 }
 
 // PostFile 上传文件
-func PostFile(url string, fieldName, fileName string) (*http.Response, error) {
+func PostFile(url, fieldName, fileName string) (*http.Response, error) {
 	var bodyBuf bufio.ReadWriter
 	bodyWriter := multipart.NewWriter(&bodyBuf)
 
-	fileWriter, err := bodyWriter.CreateFormFile(fieldName, fileName)
+	fileWriter, err := bodyWriter.CreateFormFile(fieldName, filepath.Base(fileName))
 	if err != nil {
 		return nil, fmt.Errorf("multipart.Writer.CreateFormFile failed, %w", err)
 	}
