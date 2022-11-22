@@ -73,3 +73,21 @@ func PostJSON(url string, reqBody, respBody interface{}) (http.Header, error) {
 
 	return resp.Header, json.NewDecoder(resp.Body).Decode(respBody)
 }
+
+func PostFileJSON(url, fieldName, fileName string, respBody interface{}) (http.Header, error) {
+	resp, err := PostFile(url, fieldName, fileName)
+	if err != nil {
+		return nil, fmt.Errorf("%w; %s %s, %v", ErrHttpRequest, http.MethodPost, url, err)
+	}
+	defer resp.Body.Close()
+
+	if err := CheckHttpResponseStatusCode(http.MethodPost, url, resp.StatusCode); err != nil {
+		return nil, err
+	}
+
+	if respBody == nil {
+		return resp.Header, nil
+	}
+
+	return resp.Header, json.NewDecoder(resp.Body).Decode(respBody)
+}
