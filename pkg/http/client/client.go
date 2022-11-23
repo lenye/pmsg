@@ -70,24 +70,28 @@ func Post(url, bodyType string, body io.Reader) (*http.Response, error) {
 	return http.DefaultClient.Do(req)
 }
 
-func fileToBody(bodyWriter *multipart.Writer, formName, fileName string) error {
-	fileWriter, err := bodyWriter.CreateFormFile(formName, filepath.Base(fileName))
+func fileToBody(bodyWriter *multipart.Writer, formName, fileName string) (err error) {
+	var fileWriter io.Writer
+	fileWriter, err = bodyWriter.CreateFormFile(formName, filepath.Base(fileName))
 	if err != nil {
 		return fmt.Errorf("multipart.Writer.CreateFormFile failed, %w", err)
 	}
 
-	f, err := os.Open(fileName)
+	var f *os.File
+	f, err = os.Open(fileName)
 	if err != nil {
 		return fmt.Errorf("open file failed, %w", err)
 	}
+	defer func() {
+		if tmpErr := f.Close(); tmpErr != nil {
+			err = fmt.Errorf("close file failed, %w", tmpErr)
+		}
+	}()
 
 	if _, err := io.Copy(fileWriter, f); err != nil {
 		return fmt.Errorf("file io.Copy failed, %w", err)
 	}
 
-	if err := f.Close(); err != nil {
-		return fmt.Errorf("close file  failed, %w", err)
-	}
 	return nil
 }
 
