@@ -6,9 +6,8 @@
 
 ## 微信
 
-### 接口调用凭证 access_token
-
-* [获取接口调用凭证（公众号、小程序）](weixin/access_token.md)
+* [获取接口调用凭证（公众号、小程序）](weixin/access_token.md)access_token
+* [新增临时素材](weixin/media_upload.md)
 
 ### 公众号
 
@@ -16,7 +15,6 @@
 * [一次性订阅消息](weixin/official_account_template_subscribe_message.md)
 * [订阅通知](weixin/official_account_subscribe_message.md)
 * [客服消息](weixin/official_account_customer_message.md)
-* [新增临时素材](weixin/official_account_media_upload.md)
 
 ### 小程序
 
@@ -25,7 +23,7 @@
 
 ## 企业微信
 
-* [获取接口调用凭证](weixin/work_access_token.md)
+* [获取接口调用凭证](weixin/work_access_token.md) access_token
 * [应用消息](weixin/work_app_message.md)
 * [撤回应用消息](weixin/work_app_undo_message.md)
 * [群聊推送消息](weixin/work_appchat_message.md)
