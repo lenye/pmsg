@@ -19,7 +19,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"net/http/httputil"
 )
 
 // CheckHttpResponseStatusCode 检查HTTP响应状态码
@@ -43,10 +42,6 @@ func GetJSON(url string, respBody any) (http.Header, error) {
 
 	if respBody == nil {
 		return resp.Header, nil
-	}
-
-	if buf, err := httputil.DumpResponse(resp, true); err == nil {
-		fmt.Printf("DumpResponse:\n%s\n\n", string(buf))
 	}
 
 	return resp.Header, json.NewDecoder(resp.Body).Decode(respBody)
