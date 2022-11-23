@@ -41,6 +41,8 @@ var (
 	language         string
 	scene            string
 	title            string
+	mediaType        string
+	mediaID          string
 
 	corpID     string
 	corpSecret string

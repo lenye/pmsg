@@ -12,22 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package file
 
-import (
-	"github.com/spf13/cobra"
-)
+import "os"
 
-// weiXinOfficialAccountCmd 微信公众号
-var weiXinOfficialAccountCmd = &cobra.Command{
-	Use:     "offiaccount",
-	Aliases: []string{"mp"},
-	Short:   "publish weixin offiaccount message",
-}
-
-func init() {
-	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialAccountCustomerCmd)
-	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialAccountSubCmd)
-	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialAccountTplCmd)
-	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialMediaUploadCmd)
+// Exists reports whether the named file or directory exists.
+func Exists(name string) bool {
+	if _, err := os.Stat(name); err != nil {
+		if os.IsNotExist(err) {
+			return false
+		}
+	}
+	return true
 }

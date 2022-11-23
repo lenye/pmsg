@@ -19,6 +19,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"net/http/httputil"
 )
 
 // CheckHttpResponseStatusCode 检查HTTP响应状态码
@@ -29,7 +30,7 @@ func CheckHttpResponseStatusCode(method, url string, statusCode int) error {
 	return nil
 }
 
-func GetJSON(url string, respBody interface{}) (http.Header, error) {
+func GetJSON(url string, respBody any) (http.Header, error) {
 	resp, err := Get(url)
 	if err != nil {
 		return nil, fmt.Errorf("%w; %s %s, %v", ErrHttpRequest, http.MethodGet, url, err)
@@ -44,11 +45,15 @@ func GetJSON(url string, respBody interface{}) (http.Header, error) {
 		return resp.Header, nil
 	}
 
+	if buf, err := httputil.DumpResponse(resp, true); err == nil {
+		fmt.Printf("DumpResponse:\n%s\n\n", string(buf))
+	}
+
 	return resp.Header, json.NewDecoder(resp.Body).Decode(respBody)
 }
 
 // PostJSON http post json
-func PostJSON(url string, reqBody, respBody interface{}) (http.Header, error) {
+func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 	buf := bytes.NewBufferString("")
 	enc := json.NewEncoder(buf)
 	enc.SetEscapeHTML(false)
@@ -74,7 +79,7 @@ func PostJSON(url string, reqBody, respBody interface{}) (http.Header, error) {
 	return resp.Header, json.NewDecoder(resp.Body).Decode(respBody)
 }
 
-func PostFileJSON(url, fieldName, fileName string, respBody interface{}) (http.Header, error) {
+func PostFileJSON(url, fieldName, fileName string, respBody any) (http.Header, error) {
 	resp, err := PostFile(url, fieldName, fileName)
 	if err != nil {
 		return nil, fmt.Errorf("%w; %s %s, %v", ErrHttpRequest, http.MethodPost, url, err)

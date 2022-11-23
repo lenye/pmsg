@@ -36,6 +36,9 @@ const (
 	Language         = "lang"
 	Scene            = "scene"
 	Title            = "title"
+	MediaType        = "media_type"
+	MediaID          = "media_id"
+	File             = "file"
 
 	CorpID     = "corp_id"
 	CorpSecret = "corp_secret"
