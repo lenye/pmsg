@@ -13,6 +13,8 @@ $ pmsg weixin work token -h
 
 样例
 
+linux
+
 ```shell
 $ pmsg weixin work token -i corp_id -s corp_secret
 

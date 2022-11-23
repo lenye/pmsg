@@ -6,30 +6,26 @@
 
 ## 微信
 
-### 微信 access_token
+### 接口调用凭证 access_token
 
 * [获取接口调用凭证（公众号、小程序）](weixin/access_token.md)
 
-### 发送微信公众号消息
+### 公众号
 
 * [模板消息](weixin/official_account_template_message.md)
 * [一次性订阅消息](weixin/official_account_template_subscribe_message.md)
 * [订阅通知](weixin/official_account_subscribe_message.md)
 * [客服消息](weixin/official_account_customer_message.md)
+* [新增临时素材](weixin/official_account_media_upload.md)
 
-### 发送微信小程序消息
+### 小程序
 
 * [订阅消息](weixin/miniprogram_subscribe_message.md)
 * [客服消息](weixin/miniprogram_customer_message.md)
 
 ## 企业微信
 
-### 企业微信 access_token
-
 * [获取接口调用凭证](weixin/work_access_token.md)
-
-### 发送企业微信消息
-
 * [应用消息](weixin/work_app_message.md)
 * [撤回应用消息](weixin/work_app_undo_message.md)
 * [群聊推送消息](weixin/work_appchat_message.md)
