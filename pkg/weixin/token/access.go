@@ -16,6 +16,7 @@ package token
 
 import (
 	"fmt"
+	"net/url"
 	"time"
 
 	"github.com/lenye/pmsg/pkg/http/client"
@@ -41,17 +42,15 @@ type AccessTokenResponse struct {
 	AccessTokenMeta
 }
 
-const accessTokenURL = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s"
-
 // GetAccessToken 获取微信接口调用凭证
 // 正常情况下，微信会返回下述 JSON
 // {"access_token":"ACCESS_TOKEN","expires_in":7200}
 // 错误时微信会返回错误码等信息，JSON数据包示例如下:
 // {"errcode":40013,"errmsg":"invalid appid"}
 func GetAccessToken(appID, appSecret string) (*AccessTokenMeta, error) {
-	url := fmt.Sprintf(accessTokenURL, appID, appSecret)
+	u := "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + url.QueryEscape(appID) + "&secret=" + url.QueryEscape(appSecret)
 	var resp AccessTokenResponse
-	_, err := client.GetJSON(url, &resp)
+	_, err := client.GetJSON(u, &resp)
 	if err != nil {
 		return nil, err
 	}

@@ -16,6 +16,7 @@ package message
 
 import (
 	"fmt"
+	"net/url"
 	"strings"
 
 	"github.com/lenye/pmsg/pkg/http/client"
@@ -138,9 +139,9 @@ const appSendURL = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_toke
 
 // SendApp 发送企业微信应用消息
 func SendApp(accessToken string, msg *AppMessage) (*AppMessageResponse, error) {
-	url := appSendURL + accessToken
+	u := appSendURL + url.QueryEscape(accessToken)
 	var resp AppMessageResponse
-	_, err := client.PostJSON(url, msg, &resp)
+	_, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
 		return nil, err
 	}

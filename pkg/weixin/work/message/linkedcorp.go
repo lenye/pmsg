@@ -16,6 +16,7 @@ package message
 
 import (
 	"fmt"
+	"net/url"
 	"strings"
 
 	"github.com/lenye/pmsg/pkg/http/client"
@@ -102,9 +103,9 @@ const linkedCorpSendURL = "https://qyapi.weixin.qq.com/cgi-bin/linkedcorp/messag
 
 // SendLinkedCorp 发送企业微信互联企业消息
 func SendLinkedCorp(accessToken string, msg *LinkedCorpMessage) (*LinkedCorpMessageResponse, error) {
-	url := linkedCorpSendURL + accessToken
+	u := linkedCorpSendURL + url.QueryEscape(accessToken)
 	var resp LinkedCorpMessageResponse
-	_, err := client.PostJSON(url, msg, &resp)
+	_, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
 		return nil, err
 	}

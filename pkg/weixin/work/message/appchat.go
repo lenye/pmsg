@@ -16,6 +16,7 @@ package message
 
 import (
 	"fmt"
+	"net/url"
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
@@ -69,9 +70,9 @@ const appChatSendURL = "https://qyapi.weixin.qq.com/cgi-bin/appchat/send?access_
 
 // SendAppChat 发送企业微信群聊推送消息
 func SendAppChat(accessToken string, msg *AppChatMessage) error {
-	url := appChatSendURL + accessToken
+	u := appChatSendURL + url.QueryEscape(accessToken)
 	var resp weixin.ResponseMeta
-	_, err := client.PostJSON(url, msg, &resp)
+	_, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
 		return err
 	}

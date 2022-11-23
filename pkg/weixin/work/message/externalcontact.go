@@ -16,6 +16,7 @@ package message
 
 import (
 	"fmt"
+	"net/url"
 	"strings"
 
 	"github.com/lenye/pmsg/pkg/http/client"
@@ -101,9 +102,9 @@ const externalContactSendURL = "https://qyapi.weixin.qq.com/cgi-bin/externalcont
 
 // SendExternalContact 发送企业微信家校消息
 func SendExternalContact(accessToken string, msg *ExternalContactMessage) (*ExternalContactMessageResponse, error) {
-	url := externalContactSendURL + accessToken
+	u := externalContactSendURL + url.QueryEscape(accessToken)
 	var resp ExternalContactMessageResponse
-	_, err := client.PostJSON(url, msg, &resp)
+	_, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
 		return nil, err
 	}

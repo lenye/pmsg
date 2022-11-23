@@ -16,6 +16,7 @@ package message
 
 import (
 	"fmt"
+	"net/url"
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
@@ -108,9 +109,9 @@ const templateSendURL = "https://api.weixin.qq.com/cgi-bin/message/template/send
 
 // SendTemplate 发送微信公众号模板消息
 func SendTemplate(accessToken string, msg *TemplateMessage) (int64, error) {
-	url := templateSendURL + accessToken
+	u := templateSendURL + url.QueryEscape(accessToken)
 	var resp TemplateMessageResponse
-	_, err := client.PostJSON(url, msg, &resp)
+	_, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
 		return 0, err
 	}

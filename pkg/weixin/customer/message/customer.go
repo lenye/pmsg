@@ -16,6 +16,7 @@ package message
 
 import (
 	"fmt"
+	"net/url"
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
@@ -44,9 +45,9 @@ const customerSendURL = "https://api.weixin.qq.com/cgi-bin/message/custom/send?a
 
 // SendCustomer 发送微信客服消息
 func SendCustomer(accessToken string, msg *CustomerMessage) error {
-	url := customerSendURL + accessToken
+	u := customerSendURL + url.QueryEscape(accessToken)
 	var resp weixin.ResponseMeta
-	_, err := client.PostJSON(url, msg, &resp)
+	_, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
 		return err
 	}

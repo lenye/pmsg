@@ -16,6 +16,7 @@ package token
 
 import (
 	"fmt"
+	"net/url"
 	"time"
 
 	"github.com/lenye/pmsg/pkg/http/client"
@@ -41,8 +42,6 @@ type AccessTokenResponse struct {
 	AccessTokenMeta
 }
 
-const accessTokenURL = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=%s&corpsecret=%s"
-
 // GetAccessToken 获取微信接口调用凭证
 //
 //	{
@@ -52,9 +51,9 @@ const accessTokenURL = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=%s&c
 //	 "expires_in": 7200
 //	}
 func GetAccessToken(corpID, corpSecret string) (*AccessTokenMeta, error) {
-	url := fmt.Sprintf(accessTokenURL, corpID, corpSecret)
+	u := "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=" + url.QueryEscape(corpID) + "&corpsecret=" + url.QueryEscape(corpSecret)
 	var resp AccessTokenResponse
-	_, err := client.GetJSON(url, &resp)
+	_, err := client.GetJSON(u, &resp)
 	if err != nil {
 		return nil, err
 	}

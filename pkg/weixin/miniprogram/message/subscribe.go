@@ -16,6 +16,7 @@ package message
 
 import (
 	"fmt"
+	"net/url"
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
@@ -104,9 +105,9 @@ const subscribeSendURL = "https://api.weixin.qq.com/cgi-bin/message/subscribe/se
 
 // SendSubscribe 发送微信小程序订阅消息
 func SendSubscribe(accessToken string, msg *SubscribeMessage) error {
-	url := subscribeSendURL + accessToken
+	u := subscribeSendURL + url.QueryEscape(accessToken)
 	var resp weixin.ResponseMeta
-	_, err := client.PostJSON(url, msg, &resp)
+	_, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
 		return err
 	}

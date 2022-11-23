@@ -16,6 +16,7 @@ package message
 
 import (
 	"fmt"
+	"net/url"
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
@@ -36,9 +37,9 @@ const undoAppSendURL = "https://qyapi.weixin.qq.com/cgi-bin/message/recall?acces
 
 // UndoApp 撤回企业微信应用消息
 func UndoApp(accessToken string, msg *UndoAppMessage) error {
-	url := appSendURL + accessToken
+	u := appSendURL + url.QueryEscape(accessToken)
 	var resp UndoAppMessageResponse
-	_, err := client.PostJSON(url, msg, &resp)
+	_, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
 		return err
 	}
