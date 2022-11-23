@@ -23,6 +23,8 @@ $ pmsg weixin work linkedcorp -h
                                            markdown(markdown消息)、miniprogram_notice(小程序通知消息)
 
     --safe int              表示是否是保密消息，0表示否，1表示是，默认0
+    
+args                        参数：消息内容    
 ```
 
 消息内容

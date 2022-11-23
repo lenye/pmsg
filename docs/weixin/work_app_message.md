@@ -27,6 +27,8 @@ $ pmsg weixin work app -h
 -c, --enable_duplicate_check int     表示是否开启重复消息检查，0表示否，1表示是，默认0
 -r, --enable_id_trans int            表示是否开启id转译，0表示否，1表示是，默认0。仅第三方应用需要用到，企业自建应用可以忽略。
     --safe int                       表示是否是保密消息，0表示可对外分享，1表示不能分享且内容显示水印，默认为0
+    
+args                        参数：消息内容    
 ```
 
 消息内容

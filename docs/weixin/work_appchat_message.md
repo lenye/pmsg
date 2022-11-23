@@ -20,6 +20,8 @@ $ pmsg weixin work chat -h
                                            markdown(markdown消息)
 
     --safe int              表示是否是保密消息，0表示可对外分享，1表示不能分享且内容显示水印，默认为0
+    
+args                        参数：消息内容    
 ```
 
 消息内容

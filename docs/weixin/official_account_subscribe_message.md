@@ -21,6 +21,7 @@ Aliases:
     --mini stringToString    跳小程序所需数据, 样例: app_id=XiaoChengXuAppId,page_path=index?foo=bar
     --page string            跳转网页时填写
 
+args                         参数：模板数据
 ```
 
 样例

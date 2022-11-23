@@ -21,7 +21,9 @@ Aliases:
                                            voice(语音消息)、video(视频消息)、music(音乐消息)、
                                            news(图文消息)、mpnews(图文消息)、mpnewsarticle(图文消息)、
                                            msgmenu(菜单消息)、wxcard(卡券)、miniprogrampage(小程序卡片)
--k, --kf_account string     客服帐号                                           
+-k, --kf_account string     客服帐号
+
+args                        参数：消息内容                                           
 ```
 
 消息内容

@@ -18,7 +18,7 @@ Aliases:
 
 -m, --media_type string     临时素材的格式类型 (必填)，image(图片)、voice(语音)、video(视频)、thumb(缩略图)、
 
-
+args                        参数：文件名称含路径
 ```
 
 样例

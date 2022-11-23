@@ -21,6 +21,7 @@ $ pmsg weixin work customer -h
                                            link(图文链接消息)、miniprogram(小程序消息)、
                                            msgmenu(菜单消息)、location(地理位置消息)
 
+args                        参数：消息内容
 ```
 
 消息内容

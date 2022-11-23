@@ -23,6 +23,7 @@ Aliases:
     --scene string           订阅场景值 (必填)
     --title string           消息标题，15字以内 (必填)
 
+args                         参数：模板数据
 ```
 
 样例

@@ -18,6 +18,8 @@ Aliases:
 
 -o, --to_user string        接收人的open_id (必填)
 -m, --msg_type string       消息类型 (必填)，text(文本消息)、image(图片消息)、link(图文链接)、miniprogrampage(小程序卡片)
+
+args                        参数：消息内容
 ```
 
 消息内容
