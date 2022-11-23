@@ -32,6 +32,7 @@ func init() {
 	weiXinCmd.AddCommand(weiXinMiniProgramCmd)
 	weiXinCmd.AddCommand(weiXinOfficialAccountCmd)
 	weiXinCmd.AddCommand(weiXinWorkCmd)
+	weiXinCmd.AddCommand(weiXinMediaUploadCmd)
 
 	weiXinCmd.PersistentFlags().StringVarP(&userAgent, flags.UserAgent, "a", "", "http user agent")
 }

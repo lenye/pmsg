@@ -33,8 +33,8 @@ const (
 	TypeThumb = "thumb" // 缩略图（thumb）：64KB，支持 JPG 格式
 )
 
-// ValidateMpMediaType 验证
-func ValidateMpMediaType(v string) error {
+// ValidateMediaType 验证
+func ValidateMediaType(v string) error {
 	switch v {
 	case TypeImage, TypeVoice, TypeVideo, TypeThumb:
 	default:
@@ -69,7 +69,7 @@ func (t MediaMeta) String() string {
 	return strings.Join(sb, ", ")
 }
 
-// MediaUpload 微信公众号新增临时素材 媒体文件在微信后台保存时间为3天，即3天后media_id失效。
+// MediaUpload 微信公众号/小程序 新增临时素材 媒体文件在微信后台保存时间为3天，即3天后media_id失效。
 func MediaUpload(accessToken, mediaType, filename string) (*MediaMeta, error) {
 	u := "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=" + url.QueryEscape(accessToken) + "&type=" + url.QueryEscape(mediaType)
 	var resp MediaResponse

@@ -24,14 +24,14 @@ import (
 	"github.com/lenye/pmsg/pkg/weixin/asset"
 )
 
-// weiXinOfficialMediaUploadCmd 微信公众号新增临时素材
-var weiXinOfficialMediaUploadCmd = &cobra.Command{
+// weiXinMediaUploadCmd 微信公众号新增临时素材
+var weiXinMediaUploadCmd = &cobra.Command{
 	Use:     "mediaupload",
 	Aliases: []string{"mu"},
-	Short:   "weixin offiaccount media upload",
+	Short:   "weixin media upload",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		arg := asset.CmdMpMediaUploadParams{
+		arg := asset.CmdMediaUploadParams{
 			UserAgent:   userAgent,
 			AccessToken: accessToken,
 			AppID:       appID,
@@ -39,15 +39,15 @@ var weiXinOfficialMediaUploadCmd = &cobra.Command{
 			MediaType:   mediaType,
 			File:        args[0],
 		}
-		if err := asset.CmdMpMediaUpload(&arg); err != nil {
+		if err := asset.CmdMediaUpload(&arg); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
 }
 
 func init() {
-	weiXinSetAccessTokenFlags(weiXinOfficialMediaUploadCmd)
+	weiXinSetAccessTokenFlags(weiXinMediaUploadCmd)
 
-	weiXinOfficialMediaUploadCmd.Flags().StringVarP(&mediaType, flags.MediaType, "m", "", "media type (required)")
-	weiXinOfficialMediaUploadCmd.MarkFlagRequired(flags.MediaType)
+	weiXinMediaUploadCmd.Flags().StringVarP(&mediaType, flags.MediaType, "m", "", "media type (required)")
+	weiXinMediaUploadCmd.MarkFlagRequired(flags.MediaType)
 }

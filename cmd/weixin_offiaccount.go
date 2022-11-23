@@ -29,5 +29,4 @@ func init() {
 	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialAccountCustomerCmd)
 	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialAccountSubCmd)
 	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialAccountTplCmd)
-	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialMediaUploadCmd)
 }

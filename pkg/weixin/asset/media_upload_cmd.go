@@ -24,7 +24,7 @@ import (
 	"github.com/lenye/pmsg/pkg/weixin/token"
 )
 
-type CmdMpMediaUploadParams struct {
+type CmdMediaUploadParams struct {
 	UserAgent   string
 	AccessToken string
 	AppID       string
@@ -33,11 +33,11 @@ type CmdMpMediaUploadParams struct {
 	File        string
 }
 
-func (t *CmdMpMediaUploadParams) Validate() error {
+func (t *CmdMediaUploadParams) Validate() error {
 	if t.AccessToken == "" && t.AppID == "" {
 		return flags.ErrWeixinAccessToken
 	}
-	if err := ValidateMpMediaType(t.MediaType); err != nil {
+	if err := ValidateMediaType(t.MediaType); err != nil {
 		return fmt.Errorf("invalid flags %s: %v", flags.MediaType, err)
 	}
 
@@ -48,8 +48,8 @@ func (t *CmdMpMediaUploadParams) Validate() error {
 	return nil
 }
 
-// CmdMpMediaUpload 微信公众号新增临时素材
-func CmdMpMediaUpload(arg *CmdMpMediaUploadParams) error {
+// CmdMediaUpload 新增临时素材 微信公众号/小程序
+func CmdMediaUpload(arg *CmdMediaUploadParams) error {
 
 	if err := arg.Validate(); err != nil {
 		return err
