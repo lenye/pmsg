@@ -89,7 +89,7 @@ func fileToBody(bodyWriter *multipart.Writer, formName, fileName string) (err er
 	}()
 
 	if _, err := io.Copy(fileWriter, f); err != nil {
-		return fmt.Errorf("file io.Copy failed, %w", err)
+		return fmt.Errorf("io.Copy failed, %w", err)
 	}
 
 	return nil
@@ -108,16 +108,16 @@ func NewMultipartForm() *MultipartForm {
 	}
 }
 
-func (t *MultipartForm) AddFile(formName, fileName string) *MultipartForm {
-	t.files[formName] = fileName
+func (t *MultipartForm) AddFile(name, fileName string) *MultipartForm {
+	t.files[name] = fileName
 	return t
 }
 
-func (t *MultipartForm) AddParam(key, value string) *MultipartForm {
-	if param, ok := t.params[key]; ok {
-		t.params[key] = append(param, value)
+func (t *MultipartForm) AddParam(name, value string) *MultipartForm {
+	if param, ok := t.params[name]; ok {
+		t.params[name] = append(param, value)
 	} else {
-		t.params[key] = []string{value}
+		t.params[name] = []string{value}
 	}
 	return t
 }

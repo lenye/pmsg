@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package media
+package asset
 
 import (
 	"fmt"
@@ -24,7 +24,7 @@ import (
 	"github.com/lenye/pmsg/pkg/weixin/token"
 )
 
-type CmdMpUploadParams struct {
+type CmdMpMediaUploadParams struct {
 	UserAgent   string
 	AccessToken string
 	AppID       string
@@ -33,7 +33,7 @@ type CmdMpUploadParams struct {
 	File        string
 }
 
-func (t *CmdMpUploadParams) Validate() error {
+func (t *CmdMpMediaUploadParams) Validate() error {
 	if t.AccessToken == "" && t.AppID == "" {
 		return flags.ErrWeixinAccessToken
 	}
@@ -48,8 +48,8 @@ func (t *CmdMpUploadParams) Validate() error {
 	return nil
 }
 
-// CmdMpUpload 新增临时素材
-func CmdMpUpload(arg *CmdMpUploadParams) error {
+// CmdMpMediaUpload 微信公众号新增临时素材
+func CmdMpMediaUpload(arg *CmdMpMediaUploadParams) error {
 
 	if err := arg.Validate(); err != nil {
 		return err
@@ -65,7 +65,7 @@ func CmdMpUpload(arg *CmdMpUploadParams) error {
 		arg.AccessToken = accessTokenResp.AccessToken
 	}
 
-	if meta, err := Upload(arg.AccessToken, arg.MediaType, arg.File); err != nil {
+	if meta, err := MediaUpload(arg.AccessToken, arg.MediaType, arg.File); err != nil {
 		return err
 	} else {
 		fmt.Println(fmt.Sprintf("%v; %v", weixin.MessageOK, meta))

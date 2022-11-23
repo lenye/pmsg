@@ -12,12 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package media
+package asset
 
 import (
 	"fmt"
 	"net/url"
 	"strings"
+	"time"
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
@@ -43,18 +44,18 @@ func ValidateMpMediaType(v string) error {
 	return nil
 }
 
-type Response struct {
+type MediaResponse struct {
 	weixin.ResponseMeta
-	Meta
+	MediaMeta
 }
 
-type Meta struct {
+type MediaMeta struct {
 	Type      string `json:"type"`
 	MediaID   string `json:"media_id"`
 	CreatedAt int64  `json:"created_at"`
 }
 
-func (t Meta) String() string {
+func (t MediaMeta) String() string {
 	var sb []string
 
 	if t.Type != "" {
@@ -63,14 +64,15 @@ func (t Meta) String() string {
 	if t.MediaID != "" {
 		sb = append(sb, fmt.Sprintf("media_id: %q", t.MediaID))
 	}
-	sb = append(sb, fmt.Sprintf("created_at: %v", t.CreatedAt))
+	locCreatedAt := time.Unix(t.CreatedAt, 0).Local()
+	sb = append(sb, fmt.Sprintf("created_at: %v (%v)", t.CreatedAt, locCreatedAt.Format(time.RFC3339)))
 	return strings.Join(sb, ", ")
 }
 
-// Upload 新增临时素材 媒体文件在微信后台保存时间为3天，即3天后media_id失效。
-func Upload(accessToken, mediaType, filename string) (*Meta, error) {
+// MediaUpload 微信公众号新增临时素材 媒体文件在微信后台保存时间为3天，即3天后media_id失效。
+func MediaUpload(accessToken, mediaType, filename string) (*MediaMeta, error) {
 	u := "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=" + url.QueryEscape(accessToken) + "&type=" + url.QueryEscape(mediaType)
-	var resp Response
+	var resp MediaResponse
 	_, err := client.PostFileJSON(u, FieldName, filename, &resp)
 	if err != nil {
 		return nil, err
@@ -78,5 +80,5 @@ func Upload(accessToken, mediaType, filename string) (*Meta, error) {
 	if !resp.Succeed() {
 		return nil, fmt.Errorf("%w; %v", weixin.ErrWeiXinRequest, resp)
 	}
-	return &resp.Meta, nil
+	return &resp.MediaMeta, nil
 }
