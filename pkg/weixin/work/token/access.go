@@ -21,6 +21,7 @@ import (
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/work"
 )
 
 type AccessTokenMeta struct {
@@ -42,6 +43,8 @@ type AccessTokenResponse struct {
 	AccessTokenMeta
 }
 
+const reqURL = work.Host + "/cgi-bin/gettoken?corpid="
+
 // GetAccessToken 获取微信接口调用凭证
 //
 //	{
@@ -51,7 +54,7 @@ type AccessTokenResponse struct {
 //	 "expires_in": 7200
 //	}
 func GetAccessToken(corpID, corpSecret string) (*AccessTokenMeta, error) {
-	u := "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=" + url.QueryEscape(corpID) + "&corpsecret=" + url.QueryEscape(corpSecret)
+	u := reqURL + url.QueryEscape(corpID) + "&corpsecret=" + url.QueryEscape(corpSecret)
 	var resp AccessTokenResponse
 	_, err := client.GetJSON(u, &resp)
 	if err != nil {

@@ -20,6 +20,7 @@ import (
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/work"
 )
 
 // 企业微信群聊推送消息 类型
@@ -66,7 +67,7 @@ type AppChatMessage struct {
 	Markdown *MarkdownMeta `json:"markdown,omitempty"` // markdown消息
 }
 
-const appChatSendURL = "https://qyapi.weixin.qq.com/cgi-bin/appchat/send?access_token="
+const appChatSendURL = work.Host + "/cgi-bin/appchat/send?access_token="
 
 // SendAppChat 发送企业微信群聊推送消息
 func SendAppChat(accessToken string, msg *AppChatMessage) error {

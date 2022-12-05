@@ -20,6 +20,7 @@ import (
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/work"
 )
 
 // 企业微信客服消息 类型
@@ -83,7 +84,7 @@ func (t CustomerMessageResponse) String() string {
 	return fmt.Sprintf("errcode: %v, errmsg: %q, msgid: %q", t.ErrorCode, t.ErrorMessage, t.MsgID)
 }
 
-const customerSendURL = "https://qyapi.weixin.qq.com/cgi-bin/kf/send_msg?access_token="
+const customerSendURL = work.Host + "/cgi-bin/kf/send_msg?access_token="
 
 // SendCustomer 发送微信客服消息
 func SendCustomer(accessToken string, msg *CustomerMessage) (*CustomerMessageResponse, error) {

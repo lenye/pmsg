@@ -20,6 +20,7 @@ import (
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/work"
 )
 
 // UndoAppMessage 撤回企业微信应用消息
@@ -33,7 +34,7 @@ type UndoAppMessageResponse struct {
 	weixin.ResponseMeta
 }
 
-const undoAppSendURL = "https://qyapi.weixin.qq.com/cgi-bin/message/recall?access_token="
+const undoAppSendURL = work.Host + "/cgi-bin/message/recall?access_token="
 
 // UndoApp 撤回企业微信应用消息
 func UndoApp(accessToken string, msg *UndoAppMessage) error {

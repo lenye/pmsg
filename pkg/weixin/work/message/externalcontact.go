@@ -21,6 +21,7 @@ import (
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/work"
 )
 
 // 企业微信家校消息 类型
@@ -98,7 +99,7 @@ func (t ExternalContactMessageResponse) String() string {
 	return strings.Join(sb, ", ")
 }
 
-const externalContactSendURL = "https://qyapi.weixin.qq.com/cgi-bin/externalcontact/message/send?access_token="
+const externalContactSendURL = work.Host + "/cgi-bin/externalcontact/message/send?access_token="
 
 // SendExternalContact 发送企业微信家校消息
 func SendExternalContact(accessToken string, msg *ExternalContactMessage) (*ExternalContactMessageResponse, error) {

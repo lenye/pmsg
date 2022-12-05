@@ -21,6 +21,7 @@ import (
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/work"
 )
 
 // 企业微信互联企业消息 类型
@@ -99,7 +100,7 @@ func (t LinkedCorpMessageResponse) String() string {
 	return strings.Join(sb, ", ")
 }
 
-const linkedCorpSendURL = "https://qyapi.weixin.qq.com/cgi-bin/linkedcorp/message/send?access_token="
+const linkedCorpSendURL = work.Host + "/cgi-bin/linkedcorp/message/send?access_token="
 
 // SendLinkedCorp 发送企业微信互联企业消息
 func SendLinkedCorp(accessToken string, msg *LinkedCorpMessage) (*LinkedCorpMessageResponse, error) {

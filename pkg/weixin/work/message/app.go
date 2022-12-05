@@ -21,6 +21,7 @@ import (
 
 	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/work"
 )
 
 // 企业微信应用消息 类型
@@ -135,7 +136,7 @@ func (t AppMessageResponse) String() string {
 	return strings.Join(sb, ", ")
 }
 
-const appSendURL = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token="
+const appSendURL = work.Host + "/cgi-bin/message/send?access_token="
 
 // SendApp 发送企业微信应用消息
 func SendApp(accessToken string, msg *AppMessage) (*AppMessageResponse, error) {
