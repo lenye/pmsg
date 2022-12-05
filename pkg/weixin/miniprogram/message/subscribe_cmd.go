@@ -98,7 +98,7 @@ func CmdMiniProgramSendSubscribe(arg *CmdMiniSendSubscribeParams) error {
 	client.UserAgent = arg.UserAgent
 
 	if arg.AccessToken == "" {
-		accessTokenResp, err := token.GetAccessToken(arg.AppID, arg.AppSecret)
+		accessTokenResp, err := token.FetchAccessToken(arg.AppID, arg.AppSecret)
 		if err != nil {
 			return err
 		}

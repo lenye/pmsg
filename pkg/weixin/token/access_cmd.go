@@ -31,7 +31,7 @@ type CmdTokenParams struct {
 func CmdGetAccessToken(arg *CmdTokenParams) error {
 	client.UserAgent = arg.UserAgent
 
-	accessTokenResp, err := GetAccessToken(arg.AppID, arg.AppSecret)
+	accessTokenResp, err := FetchAccessToken(arg.AppID, arg.AppSecret)
 	if err != nil {
 		return err
 	}

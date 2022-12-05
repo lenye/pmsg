@@ -193,7 +193,7 @@ func CmdWorkSendApp(arg *CmdWorkSendAppParams) error {
 	client.UserAgent = arg.UserAgent
 
 	if arg.AccessToken == "" {
-		accessTokenResp, err := token.GetAccessToken(arg.CorpID, arg.CorpSecret)
+		accessTokenResp, err := token.FetchAccessToken(arg.CorpID, arg.CorpSecret)
 		if err != nil {
 			return err
 		}

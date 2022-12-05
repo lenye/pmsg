@@ -45,7 +45,7 @@ type AccessTokenResponse struct {
 
 const reqURL = work.Host + "/cgi-bin/gettoken?corpid="
 
-// GetAccessToken 获取微信接口调用凭证
+// FetchAccessToken 获取微信接口调用凭证
 //
 //	{
 //	 "errcode": 0,
@@ -53,7 +53,7 @@ const reqURL = work.Host + "/cgi-bin/gettoken?corpid="
 //	 "access_token": "accesstoken000001",
 //	 "expires_in": 7200
 //	}
-func GetAccessToken(corpID, corpSecret string) (*AccessTokenMeta, error) {
+func FetchAccessToken(corpID, corpSecret string) (*AccessTokenMeta, error) {
 	u := reqURL + url.QueryEscape(corpID) + "&corpsecret=" + url.QueryEscape(corpSecret)
 	var resp AccessTokenResponse
 	_, err := client.GetJSON(u, &resp)

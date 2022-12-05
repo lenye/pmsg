@@ -44,12 +44,12 @@ type AccessTokenResponse struct {
 
 const reqURL = weixin.Host + "/cgi-bin/token?grant_type=client_credential&appid="
 
-// GetAccessToken 获取微信接口调用凭证
+// FetchAccessToken 获取微信接口调用凭证
 // 正常情况下，微信会返回下述 JSON
 // {"access_token":"ACCESS_TOKEN","expires_in":7200}
 // 错误时微信会返回错误码等信息，JSON数据包示例如下:
 // {"errcode":40013,"errmsg":"invalid appid"}
-func GetAccessToken(appID, appSecret string) (*AccessTokenMeta, error) {
+func FetchAccessToken(appID, appSecret string) (*AccessTokenMeta, error) {
 	u := reqURL + url.QueryEscape(appID) + "&secret=" + url.QueryEscape(appSecret)
 	var resp AccessTokenResponse
 	_, err := client.GetJSON(u, &resp)
