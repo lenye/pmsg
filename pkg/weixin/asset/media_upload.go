@@ -69,9 +69,11 @@ func (t MediaMeta) String() string {
 	return strings.Join(sb, ", ")
 }
 
+const reqURL = weixin.Host + "/cgi-bin/media/upload?access_token="
+
 // MediaUpload 微信公众号/小程序 新增临时素材 媒体文件在微信后台保存时间为3天，即3天后media_id失效。
 func MediaUpload(accessToken, mediaType, filename string) (*MediaMeta, error) {
-	u := "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=" + url.QueryEscape(accessToken) + "&type=" + url.QueryEscape(mediaType)
+	u := reqURL + url.QueryEscape(accessToken) + "&type=" + url.QueryEscape(mediaType)
 	var resp MediaResponse
 	_, err := client.PostFileJSON(u, FieldName, filename, &resp)
 	if err != nil {

@@ -101,11 +101,11 @@ func ValidateLanguage(v string) error {
 	return nil
 }
 
-const subscribeSendURL = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token="
+const reqURL = weixin.Host + "/cgi-bin/message/subscribe/send?access_token="
 
 // SendSubscribe 发送微信小程序订阅消息
 func SendSubscribe(accessToken string, msg *SubscribeMessage) error {
-	u := subscribeSendURL + url.QueryEscape(accessToken)
+	u := reqURL + url.QueryEscape(accessToken)
 	var resp weixin.ResponseMeta
 	_, err := client.PostJSON(u, msg, &resp)
 	if err != nil {

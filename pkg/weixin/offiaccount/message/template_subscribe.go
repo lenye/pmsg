@@ -60,11 +60,11 @@ type TemplateSubscribeMessage struct {
 	Data        map[string]TemplateDataItem `json:"data"`                  // 必须, 模板数据, JSON 格式的 []byte, 满足特定的模板需求
 }
 
-const subscribeTemplateSendURL = "https://api.weixin.qq.com/cgi-bin/message/template/subscribe?access_token="
+const subscribeTplURL = weixin.Host + "/cgi-bin/message/template/subscribe?access_token="
 
 // SendTemplateSubscribe 发送微信公众号一次性订阅消息
 func SendTemplateSubscribe(accessToken string, msg *TemplateSubscribeMessage) error {
-	u := subscribeTemplateSendURL + url.QueryEscape(accessToken)
+	u := subscribeTplURL + url.QueryEscape(accessToken)
 	var resp weixin.ResponseMeta
 	_, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
