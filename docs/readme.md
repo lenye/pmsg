@@ -24,6 +24,7 @@
 ## 企业微信
 
 * [获取接口调用凭证](weixin/work_access_token.md) access_token
+* [上传临时素材](weixin/work_media_upload.md)
 * [应用消息](weixin/work_app_message.md)
 * [撤回应用消息](weixin/work_app_undo_message.md)
 * [群聊推送消息](weixin/work_appchat_message.md)
