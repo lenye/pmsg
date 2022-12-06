@@ -7,8 +7,9 @@ $ pmsg weixin work externalcontact -h
 
 -a, --user_agent string     http user agent
 
--i, --corp_id string        企业微信corp_id (必填)
--s, --corp_secret string    企业微信corp_secret (必填)
+-t, --access_token string   企业微信接口调用凭证
+-i, --corp_id string        企业微信corp_id
+-s, --corp_secret string    企业微信corp_secret
 
 如果没有提供 access_token，需要提供企业微信 corp_id 和 corp_secret 获取 access_token
 
