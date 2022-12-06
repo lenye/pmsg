@@ -33,6 +33,7 @@ func init() {
 	weiXinWorkCmd.AddCommand(weiXinWorkCustomerCmd)
 	weiXinWorkCmd.AddCommand(weiXinWorkExternalContactCmd)
 	weiXinWorkCmd.AddCommand(weiXinWorkLinkedCorpCmd)
+	weiXinWorkCmd.AddCommand(weiXinWorkMediaUploadCmd)
 }
 
 // weiXinWorkSetAccessTokenFlags 设置企业微信access_token或者corp_id/corp_secret命令行参数
