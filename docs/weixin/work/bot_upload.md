@@ -3,10 +3,7 @@
 命令参数说明
 
 ```text
-$ pmsg weixin work webhookupload -h
-
-Aliases:
-  webhookupload, whu
+$ pmsg weixin work bot upload -h
 
 -a, --user_agent string     http user agent
 
@@ -19,7 +16,7 @@ args                        参数：文件名称含路径
 linux
 
 ```shell
-$ pmsg weixin work webhookupload -k key /img/app.png
+$ pmsg weixin work bot upload -k key /img/app.png
 
 ok; type: "file", media_id: "media_id", created_at: 1670472324 (2022-12-08T12:05:24+08:00)
 ```

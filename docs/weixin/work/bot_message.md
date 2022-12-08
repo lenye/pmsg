@@ -3,10 +3,7 @@
 命令参数说明
 
 ```text
-$ pmsg weixin work webhooksend -h
-
-Aliases:
-  webhooksend, whs
+$ pmsg weixin work bot -h
 
 -a, --user_agent string     http user agent
 
@@ -61,11 +58,11 @@ args                        参数：消息内容
 linux
 
 ```shell
-$ pmsg weixin work webhooksend -k key -m text 'HelloWorld'
+$ pmsg weixin work bot -k key -m text 'HelloWorld'
 
 ok
 
-$ pmsg weixin work webhooksend -k key -m image /img/app.png
+$ pmsg weixin work bot -k key -m image /img/app.png
 
 ok
 ```

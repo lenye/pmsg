@@ -1,4 +1,4 @@
-# `pmsg`文档
+# 文档
 
 ### 下载
 
@@ -34,5 +34,5 @@
 
 ### 群机器人
 
-* [文件上传接口](weixin/work/webhook_upload.md)
-* [推送消息](weixin/work/webhook_message.md)
+* [文件上传接口](weixin/work/bot_upload.md)
+* [推送消息](weixin/work/bot_message.md)
