@@ -31,3 +31,7 @@
 * [互联企业消息推送](weixin/work_linkedcorp_message.md)
 * [家校消息推送](weixin/work_externalcontact_message.md)
 * [客服消息](weixin/work_customer_message.md)
+
+### 企业微信群机器人
+* [文件上传接口](weixin/work_webhook_upload.md)
+* [推送消息](weixin/work_webhook_message.md)

@@ -17,6 +17,7 @@ package cmd
 var (
 	userAgent string
 
+	key         string
 	accessToken string
 
 	appID     string
@@ -27,6 +28,7 @@ var (
 	toTag           string
 	toParentUserID  string
 	toStudentUserID string
+	toMobile        string
 
 	mini map[string]string
 

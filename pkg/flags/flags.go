@@ -16,6 +16,7 @@ package flags
 
 const (
 	UserAgent   = "user_agent"
+	Key         = "key"
 	AccessToken = "access_token"
 
 	AppID     = "app_id"
@@ -43,10 +44,12 @@ const (
 	CorpID     = "corp_id"
 	CorpSecret = "corp_secret"
 
-	ToParty                = "to_party"
-	ToTag                  = "to_tag"
-	ToParentUserID         = "to_parent_user_id"
-	ToStudentUserID        = "to_student_user_id"
+	ToParty         = "to_party"
+	ToTag           = "to_tag"
+	ToParentUserID  = "to_parent_user_id"
+	ToStudentUserID = "to_student_user_id"
+	ToMobile        = "to_mobile"
+
 	AgentID                = "agent_id"
 	Safe                   = "safe"
 	EnableIDTrans          = "enable_id_trans"
