@@ -16,14 +16,9 @@ package webhook
 
 import (
 	"bytes"
-	"crypto/md5"
-	"encoding/base64"
-	"encoding/hex"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
-	"os"
 	"strings"
 
 	"github.com/lenye/pmsg/pkg/file"
@@ -55,35 +50,6 @@ func (t *CmdSendParams) Validate() error {
 	return nil
 }
 
-func handlerImageFile(file string) (*ImageMeta, error) {
-	var msgMeta ImageMeta
-	f, err := os.Open(file)
-	if err != nil {
-		return nil, fmt.Errorf("file: %q, open file failed: %w", file, err)
-	}
-	defer f.Close()
-	buf := new(bytes.Buffer)
-	encoder := base64.NewEncoder(base64.StdEncoding, buf)
-	if _, err := io.Copy(encoder, f); err != nil {
-		return nil, fmt.Errorf("file: %q, io.Copy failed: %w", file, err)
-	}
-
-	_, err = f.Seek(0, io.SeekStart)
-	if err != nil {
-		return nil, fmt.Errorf("file: %q, Seek failed: %w", file, err)
-	}
-
-	hash := md5.New()
-	if _, err := io.Copy(hash, f); err != nil {
-		return nil, fmt.Errorf("file: %q, io.Copy failed: %w", file, err)
-	}
-
-	msgMeta.Base64 = buf.String()
-	msgMeta.MD5 = hex.EncodeToString(hash.Sum(nil))
-
-	return &msgMeta, nil
-}
-
 // CmdSend 发送企业微信群机器人消息
 func CmdSend(arg *CmdSendParams) error {
 
@@ -113,7 +79,7 @@ func CmdSend(arg *CmdSendParams) error {
 		msgMeta.Content = buf.String()
 		msg.Markdown = &msgMeta
 	case MsgTypeImage:
-		msgMeta, err := handlerImageFile(arg.Data)
+		msgMeta, err := ImageFile2Meta(buf.String())
 		if err != nil {
 			return err
 		}
