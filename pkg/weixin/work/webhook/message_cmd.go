@@ -41,7 +41,7 @@ func (t *CmdSendParams) Validate() error {
 		return fmt.Errorf("invalid flags %s: %v", flags.MsgType, err)
 	}
 
-	if t.MsgType == MsgTypeFile {
+	if t.MsgType == MsgTypeImage {
 		if !file.Exists(t.Data) {
 			return fmt.Errorf("file is not exist, %v", t.Data)
 		}
