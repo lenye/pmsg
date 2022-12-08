@@ -23,16 +23,16 @@
 
 ## 企业微信
 
-* [获取接口调用凭证](weixin/work_access_token.md) access_token
-* [上传临时素材](weixin/work_media_upload.md)
-* [应用消息](weixin/work_app_message.md)
-* [撤回应用消息](weixin/work_app_undo_message.md)
-* [群聊推送消息](weixin/work_appchat_message.md)
-* [互联企业消息推送](weixin/work_linkedcorp_message.md)
-* [家校消息推送](weixin/work_externalcontact_message.md)
-* [客服消息](weixin/work_customer_message.md)
+* [获取接口调用凭证](weixin/work/access_token.md) access_token
+* [上传临时素材](weixin/work/media_upload.md)
+* [应用消息](weixin/work/app_message.md)
+* [撤回应用消息](weixin/work/app_undo_message.md)
+* [群聊推送消息](weixin/work/appchat_message.md)
+* [互联企业消息推送](weixin/work/linkedcorp_message.md)
+* [家校消息推送](weixin/work/externalcontact_message.md)
+* [客服消息](weixin/work/customer_message.md)
 
 ### 群机器人
 
-* [文件上传接口](weixin/work_webhook_upload.md)
-* [推送消息](weixin/work_webhook_message.md)
+* [文件上传接口](weixin/work/webhook_upload.md)
+* [推送消息](weixin/work/webhook_message.md)
