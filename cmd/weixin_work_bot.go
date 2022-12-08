@@ -21,17 +21,16 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/weixin/work/webhook"
+	"github.com/lenye/pmsg/pkg/weixin/work/bot"
 )
 
-// weiXinWorkWebHookMessageCmd 推送企业微信群机器人消息
-var weiXinWorkWebHookMessageCmd = &cobra.Command{
-	Use:     "webhooksend",
-	Aliases: []string{"whs"},
-	Short:   "publish work weixin webhook message",
-	Args:    cobra.ExactArgs(1),
+// weiXinWorkCmd 企业微信群机器人
+var weiXinWorkBotCmd = &cobra.Command{
+	Use:   "bot",
+	Short: "publish work weixin group bot message",
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		arg := webhook.CmdSendParams{
+		arg := bot.CmdSendParams{
 			UserAgent: userAgent,
 			Key:       key,
 			MsgType:   msgType,
@@ -39,18 +38,26 @@ var weiXinWorkWebHookMessageCmd = &cobra.Command{
 			ToMobile:  toMobile,
 			Data:      args[0],
 		}
-		if err := webhook.CmdSend(&arg); err != nil {
+		if err := bot.CmdSend(&arg); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
 }
 
 func init() {
-	weiXinWorkSetKeyFlags(weiXinWorkWebHookMessageCmd)
+	weiXinWorkBotCmd.AddCommand(weiXinWorkBotUploadCmd)
 
-	weiXinWorkWebHookMessageCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
-	weiXinWorkWebHookMessageCmd.MarkFlagRequired(flags.MsgType)
+	weiXinWorkSetKeyFlags(weiXinWorkBotCmd)
 
-	weiXinWorkWebHookMessageCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "work weixin user id list")
-	weiXinWorkWebHookMessageCmd.Flags().StringVarP(&toMobile, flags.ToMobile, "b", "", "mobile list")
+	weiXinWorkBotCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
+	weiXinWorkBotCmd.MarkFlagRequired(flags.MsgType)
+
+	weiXinWorkBotCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "work weixin user id list")
+	weiXinWorkBotCmd.Flags().StringVarP(&toMobile, flags.ToMobile, "b", "", "mobile list")
+}
+
+// weiXinWorkSetKeyFlags 设置企业微信key命令行参数
+func weiXinWorkSetKeyFlags(cmd *cobra.Command) {
+	cmd.Flags().StringVarP(&key, flags.Key, "k", "", "work weixin bot key (required)")
+	cmd.MarkFlagRequired(flags.Key)
 }

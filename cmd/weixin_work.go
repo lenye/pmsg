@@ -34,8 +34,7 @@ func init() {
 	weiXinWorkCmd.AddCommand(weiXinWorkExternalContactCmd)
 	weiXinWorkCmd.AddCommand(weiXinWorkLinkedCorpCmd)
 	weiXinWorkCmd.AddCommand(weiXinWorkMediaUploadCmd)
-	weiXinWorkCmd.AddCommand(weiXinWorkWebHookUploadCmd)
-	weiXinWorkCmd.AddCommand(weiXinWorkWebHookMessageCmd)
+	weiXinWorkCmd.AddCommand(weiXinWorkBotCmd)
 }
 
 // weiXinWorkSetAccessTokenFlags 设置企业微信access_token或者corp_id/corp_secret命令行参数
@@ -47,10 +46,4 @@ func weiXinWorkSetAccessTokenFlags(cmd *cobra.Command) {
 
 	cmd.MarkFlagsMutuallyExclusive(flags.AccessToken, flags.CorpID)
 	cmd.MarkFlagsRequiredTogether(flags.CorpID, flags.CorpSecret)
-}
-
-// weiXinWorkSetKeyFlags 设置企业微信key命令行参数
-func weiXinWorkSetKeyFlags(cmd *cobra.Command) {
-	cmd.Flags().StringVarP(&key, flags.Key, "k", "", "work weixin webhook key (required)")
-	cmd.MarkFlagRequired(flags.Key)
 }

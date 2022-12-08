@@ -20,27 +20,26 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/lenye/pmsg/pkg/weixin/work/webhook"
+	"github.com/lenye/pmsg/pkg/weixin/work/bot"
 )
 
-// weiXinWorkWebHookUploadCmd 企业微信群机器人上传文件
-var weiXinWorkWebHookUploadCmd = &cobra.Command{
-	Use:     "webhookupload",
-	Aliases: []string{"whu"},
-	Short:   "work weixin webhook file upload",
-	Args:    cobra.ExactArgs(1),
+// weiXinWorkBotUploadCmd 企业微信群机器人上传文件
+var weiXinWorkBotUploadCmd = &cobra.Command{
+	Use:   "upload",
+	Short: "work weixin group bot file upload",
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		arg := webhook.CmdUploadParams{
+		arg := bot.CmdUploadParams{
 			UserAgent: userAgent,
 			Key:       key,
 			File:      args[0],
 		}
-		if err := webhook.CmdUpload(&arg); err != nil {
+		if err := bot.CmdUpload(&arg); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
 }
 
 func init() {
-	weiXinWorkSetKeyFlags(weiXinWorkWebHookUploadCmd)
+	weiXinWorkSetKeyFlags(weiXinWorkBotUploadCmd)
 }
