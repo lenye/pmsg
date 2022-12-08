@@ -10,7 +10,11 @@ builds:
     env:
       - CGO_ENABLED=0
     ldflags:
-      - -s -w -X github.com/lenye/pmsg/pkg/version.Version={{.Version}} -X github.com/lenye/pmsg/pkg/version.AppName={{.ProjectName}} -X github.com/lenye/pmsg/pkg/version.BuildTime={{.CommitDate}} -X github.com/lenye/pmsg/pkg/version.BuildGit={{.ShortCommit}}
+      - -s -w
+      - -X github.com/lenye/pmsg/pkg/version.Version={{.Version}}
+      - -X github.com/lenye/pmsg/pkg/version.AppName={{.ProjectName}}
+      - -X github.com/lenye/pmsg/pkg/version.BuildTime={{.CommitDate}}
+      - -X github.com/lenye/pmsg/pkg/version.BuildGit={{.ShortCommit}}
     flags:
       - -trimpath
     goos:
