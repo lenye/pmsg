@@ -22,8 +22,8 @@ import (
 
 var (
 	Version   = "dev"                  // 版本
-	AppName   = "app"                  // 名称
-	BuildTime = "2006-01-02T15:04:05Z" // 编译时间   $(date +%Y%m%d.%H%M%S)
+	AppName   = "pmsg"                 // 名称
+	BuildTime = "2022-09-15T12:49:05Z" // 编译时间   $(date +%Y%m%d.%H%M%S)
 	BuildGit  = "git"                  // 版本号     $(git rev-parse HEAD)
 	StartTime = time.Now()
 )
