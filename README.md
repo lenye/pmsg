@@ -55,7 +55,7 @@ git clone https://github.com/lenye/pmsg.git
 
 ### 文档
 
-[https://lenye.github.io/pmsg/](https://lenye.github.io/pmsg/)
+[https://github.com/lenye/pmsg/tree/main/docs](https://github.com/lenye/pmsg/tree/main/docs)
 
 ### License
 
