@@ -27,6 +27,9 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "pmsg",
 	Short: "publish message",
+	CompletionOptions: cobra.CompletionOptions{
+		HiddenDefaultCmd: true,
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
