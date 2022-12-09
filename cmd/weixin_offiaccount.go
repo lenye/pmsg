@@ -22,7 +22,7 @@ import (
 var weiXinOfficialAccountCmd = &cobra.Command{
 	Use:     "offiaccount",
 	Aliases: []string{"mp"},
-	Short:   "publish weixin offiaccount message",
+	Short:   "weixin official account",
 }
 
 func init() {

@@ -22,7 +22,7 @@ import (
 var weiXinMiniProgramCmd = &cobra.Command{
 	Use:     "miniprogram",
 	Aliases: []string{"mini"},
-	Short:   "publish weixin miniprogram message",
+	Short:   "weixin miniprogram",
 }
 
 func init() {

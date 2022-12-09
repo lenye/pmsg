@@ -29,7 +29,7 @@ import (
 var weiXinWorkExternalContactCmd = &cobra.Command{
 	Use:     "externalcontact",
 	Aliases: []string{"ec"},
-	Short:   "publish work weixin externalcontact message",
+	Short:   "publish work weixin external contact message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 

@@ -28,7 +28,7 @@ import (
 var weiXinOfficialAccountTplCmd = &cobra.Command{
 	Use:     "template",
 	Aliases: []string{"tpl"},
-	Short:   "publish weixin offiaccount template message",
+	Short:   "publish weixin official account template message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdMpSendTemplateParams{

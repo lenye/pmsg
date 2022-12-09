@@ -29,7 +29,7 @@ import (
 var weiXinWorkLinkedCorpCmd = &cobra.Command{
 	Use:     "linkedcorp",
 	Aliases: []string{"lc"},
-	Short:   "publish work weixin linkedcorp message",
+	Short:   "publish work weixin linked corp message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdWorkSendLinkedCorpParams{

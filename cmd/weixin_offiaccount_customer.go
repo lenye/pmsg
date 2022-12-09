@@ -28,7 +28,7 @@ import (
 var weiXinOfficialAccountCustomerCmd = &cobra.Command{
 	Use:     "customer",
 	Aliases: []string{"kf"},
-	Short:   "publish weixin offiaccount customer message",
+	Short:   "publish weixin official account customer message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdMpSendCustomerParams{

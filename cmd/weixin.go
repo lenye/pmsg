@@ -24,7 +24,7 @@ import (
 var weiXinCmd = &cobra.Command{
 	Use:     "weixin",
 	Aliases: []string{"wx"},
-	Short:   "weixin message",
+	Short:   "weixin",
 }
 
 func init() {

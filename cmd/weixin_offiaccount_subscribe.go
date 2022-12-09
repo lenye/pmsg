@@ -28,7 +28,7 @@ import (
 var weiXinOfficialAccountSubCmd = &cobra.Command{
 	Use:     "subscribe",
 	Aliases: []string{"sub"},
-	Short:   "publish weixin offiaccount subscribe message",
+	Short:   "publish weixin official account subscribe message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdMpBizSendSubscribeParams{

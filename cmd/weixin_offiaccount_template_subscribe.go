@@ -28,7 +28,7 @@ import (
 var weiXinOfficialAccountTplSubCmd = &cobra.Command{
 	Use:     "subscribe",
 	Aliases: []string{"sub"},
-	Short:   "publish weixin offiaccount template subscribe message (onetime)",
+	Short:   "publish weixin official account template subscribe message (onetime)",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdMpSendTemplateSubscribeParams{

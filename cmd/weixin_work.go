@@ -23,7 +23,7 @@ import (
 // weiXinWorkCmd 企业微信
 var weiXinWorkCmd = &cobra.Command{
 	Use:   "work",
-	Short: "publish work weixin message",
+	Short: "work weixin",
 }
 
 func init() {
