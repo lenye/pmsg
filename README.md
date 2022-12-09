@@ -35,17 +35,24 @@
 
 1. 开始运行它:
 
-   windows
-
-    ```shell
-    pmsg.exe --help
-    ```
-
    linux
 
-    ```shell
-    ./pmsg --help
-    ```
+   ```shell
+   ./pmsg --help
+   
+   Usage:
+     pmsg [command]
+   
+   Available Commands:
+     help        Help about any command
+     weixin      weixin message        
+   
+   Flags:
+     -h, --help      help for pmsg
+     -v, --version   version for pmsg
+   
+   Use "pmsg [command] --help" for more information about a command.
+   ```
 
 #### 源代码
 
