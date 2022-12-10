@@ -46,4 +46,5 @@ func init() {
 	rootCmd.Version = version.Print()
 
 	rootCmd.AddCommand(weiXinCmd)
+	rootCmd.AddCommand(weiXinWorkCmd)
 }
