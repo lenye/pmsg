@@ -98,6 +98,26 @@ func CmdSend(arg *CmdSendParams) error {
 		var msgMeta FileMeta
 		msgMeta.MediaID = buf.String()
 		msg.File = &msgMeta
+	case MsgTypeTplCardText:
+		var msgMeta TemplateCardText
+		if err := json.Unmarshal(buf.Bytes(), &msgMeta); err != nil {
+			return fmt.Errorf("invalid json format, %v", err)
+		}
+		if msgMeta.CardType != TplCardTypeText {
+			return errors.New("invalid card_type")
+		}
+		msg.MsgType = MsgTypeTplCard
+		msg.TplCardText = &msgMeta
+	case MsgTypeTplCardNews:
+		var msgMeta TemplateCardNews
+		if err := json.Unmarshal(buf.Bytes(), &msgMeta); err != nil {
+			return fmt.Errorf("invalid json format, %v", err)
+		}
+		if msgMeta.CardType != TplCardTypeNews {
+			return errors.New("invalid card_type")
+		}
+		msg.MsgType = MsgTypeTplCard
+		msg.TplCardNews = &msgMeta
 	}
 
 	client.UserAgent = arg.UserAgent

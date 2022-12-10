@@ -24,32 +24,40 @@ import (
 )
 
 const (
-	MsgTypeText     = "text"     // 文本
-	MsgTypeMarkdown = "markdown" // markdown
-	MsgTypeImage    = "image"    // 图片
-	MsgTypeNews     = "news"     // 图文
-	MsgTypeFile     = "file"     // 文件
+	MsgTypeText        = "text"          // 文本
+	MsgTypeMarkdown    = "markdown"      // markdown
+	MsgTypeImage       = "image"         // 图片
+	MsgTypeNews        = "news"          // 图文
+	MsgTypeFile        = "file"          // 文件
+	MsgTypeTplCard     = "template_card" // 模版卡片
+	MsgTypeTplCardText = "tpl_card_text" // 文本通知模版卡片
+	MsgTypeTplCardNews = "tpl_card_news" // 图文展示模版卡片
+
+	TplCardTypeText = "text_notice"
+	TplCardTypeNews = "news_notice"
 )
 
 // ValidateMsgType 验证
 func ValidateMsgType(v string) error {
 	switch v {
-	case MsgTypeText, MsgTypeMarkdown, MsgTypeImage, MsgTypeNews, MsgTypeFile:
+	case MsgTypeText, MsgTypeMarkdown, MsgTypeImage, MsgTypeNews, MsgTypeFile, MsgTypeTplCardText, MsgTypeTplCardNews:
 	default:
-		return fmt.Errorf("%s not in [%q %q %q %q %q]", v,
-			MsgTypeText, MsgTypeMarkdown, MsgTypeImage, MsgTypeNews, MsgTypeFile)
+		return fmt.Errorf("%s not in [%q %q %q %q %q %q %q]", v,
+			MsgTypeText, MsgTypeMarkdown, MsgTypeImage, MsgTypeNews, MsgTypeFile, MsgTypeTplCardText, MsgTypeTplCardNews)
 	}
 	return nil
 }
 
 // Message 企业微信群机器人消息
 type Message struct {
-	MsgType  string        `json:"msgtype"`            // 消息类型
-	Text     *TextMeta     `json:"text,omitempty"`     // 文本消息
-	Markdown *MarkdownMeta `json:"markdown,omitempty"` // markdown消息
-	Image    *ImageMeta    `json:"image,omitempty"`    // 图片消息
-	News     *NewsMeta     `json:"news,omitempty"`     // 图文消息
-	File     *FileMeta     `json:"file,omitempty"`     // 文件消息
+	MsgType     string            `json:"msgtype"`                 // 消息类型
+	Text        *TextMeta         `json:"text,omitempty"`          // 文本消息
+	Markdown    *MarkdownMeta     `json:"markdown,omitempty"`      // markdown消息
+	Image       *ImageMeta        `json:"image,omitempty"`         // 图片消息
+	News        *NewsMeta         `json:"news,omitempty"`          // 图文消息
+	File        *FileMeta         `json:"file,omitempty"`          // 文件消息
+	TplCardText *TemplateCardText `json:"template_card,omitempty"` // 文本通知模版卡片
+	TplCardNews *TemplateCardNews `json:"template_card,omitempty"` // 图文展示模版卡片
 }
 
 const sendURL = work.Host + "/cgi-bin/webhook/send?key="
