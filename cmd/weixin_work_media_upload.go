@@ -26,7 +26,7 @@ import (
 
 // weiXinWorkMediaUploadCmd 企业微信上传临时素材
 var weiXinWorkMediaUploadCmd = &cobra.Command{
-	Use:     "mediaupload",
+	Use:     "upload",
 	Aliases: []string{"mu"},
 	Short:   "work weixin media upload",
 	Args:    cobra.ExactArgs(1),
