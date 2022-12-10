@@ -28,12 +28,13 @@ var weiXinCmd = &cobra.Command{
 }
 
 func init() {
+	weiXinCmd.PersistentFlags().StringVarP(&userAgent, flags.UserAgent, "a", "", "http user agent")
+
 	weiXinCmd.AddCommand(weiXinAccessTokenCmd)
 	weiXinCmd.AddCommand(weiXinMiniProgramCmd)
 	weiXinCmd.AddCommand(weiXinOfficialAccountCmd)
 	weiXinCmd.AddCommand(weiXinMediaUploadCmd)
 
-	weiXinCmd.PersistentFlags().StringVarP(&userAgent, flags.UserAgent, "a", "", "http user agent")
 }
 
 // weiXinSetAccessTokenFlags 设置微信access_token或者app_id/app_secret命令行参数

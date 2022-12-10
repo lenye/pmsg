@@ -28,6 +28,8 @@ var weiXinWorkCmd = &cobra.Command{
 }
 
 func init() {
+	weiXinWorkCmd.PersistentFlags().StringVarP(&userAgent, flags.UserAgent, "a", "", "http user agent")
+
 	weiXinWorkCmd.AddCommand(weiXinWorkAccessTokenCmd)
 	weiXinWorkCmd.AddCommand(weiXinWorkAppCmd)
 	weiXinWorkCmd.AddCommand(weiXinWorkAppChatCmd)
@@ -36,6 +38,7 @@ func init() {
 	weiXinWorkCmd.AddCommand(weiXinWorkLinkedCorpCmd)
 	weiXinWorkCmd.AddCommand(weiXinWorkMediaUploadCmd)
 	weiXinWorkCmd.AddCommand(weiXinWorkBotCmd)
+
 }
 
 // weiXinWorkSetAccessTokenFlags 设置企业微信access_token或者corp_id/corp_secret命令行参数
