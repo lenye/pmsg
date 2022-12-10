@@ -26,10 +26,9 @@ import (
 
 // weiXinMediaUploadCmd 微信公众号新增临时素材
 var weiXinMediaUploadCmd = &cobra.Command{
-	Use:     "upload",
-	Aliases: []string{"mu"},
-	Short:   "weixin media upload",
-	Args:    cobra.ExactArgs(1),
+	Use:   "upload",
+	Short: "weixin media upload",
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := asset.CmdMediaUploadParams{
 			UserAgent:   userAgent,
