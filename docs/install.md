@@ -22,8 +22,10 @@
      pmsg [command]
    
    Available Commands:
+     dingtalk    ding talk
      help        Help about any command
-     weixin      weixin message        
+     weixin      weixin        
+     workweixin  work weixin
    
    Flags:
      -h, --help      help for pmsg

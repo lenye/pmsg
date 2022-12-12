@@ -3,7 +3,7 @@
 命令参数说明
 
 ```text
-$ pmsg weixin work linkedcorp -h
+$ pmsg workweixin linkedcorp -h
 
 -a, --user_agent string     http user agent
 
@@ -144,7 +144,7 @@ linux
 样例
 
 ```shell
-$ pmsg weixin work linkedcorp -i corp_id -s corp_secret -o 'userid1|userid2' -m text 'HelloWorld'
+$ pmsg workweixin linkedcorp -i corp_id -s corp_secret -o 'userid1|userid2' -m text 'HelloWorld'
 
 ok
 ```

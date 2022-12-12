@@ -3,7 +3,7 @@
 命令参数说明
 
 ```text
-$ pmsg weixin work app -h
+$ pmsg workweixin app -h
 
 -a, --user_agent string     http user agent
 
@@ -229,7 +229,7 @@ linux
 发送文本消息
 
 ```shell
-$ pmsg weixin work app -i corp_id -s corp_secret -e agent_id -o '@all' -m text 'HelloWorld'
+$ pmsg workweixin app -i corp_id -s corp_secret -e agent_id -o '@all' -m text 'HelloWorld'
 
 ok; msgid: "msgid"
 ```

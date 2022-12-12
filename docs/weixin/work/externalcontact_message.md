@@ -3,7 +3,7 @@
 命令参数说明
 
 ```text
-$ pmsg weixin work externalcontact -h
+$ pmsg workweixin externalcontact -h
 
 -a, --user_agent string     http user agent
 
@@ -128,7 +128,7 @@ args                             参数：消息内容
 linux
 
 ```shell
-$ pmsg weixin work externalcontact -i corp_id -s corp_secret -e agent_id -n 'parentuserid1|parentuserid2' -m text 'HelloWorld'
+$ pmsg workweixin externalcontact -i corp_id -s corp_secret -e agent_id -n 'parentuserid1|parentuserid2' -m text 'HelloWorld'
 
 ok
 ```

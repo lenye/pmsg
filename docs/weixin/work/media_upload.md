@@ -3,10 +3,7 @@
 命令参数说明
 
 ```text
-$ pmsg weixin work mediaupload -h
-
-Aliases:
-  mediaupload, mu
+$ pmsg workweixin upload -h
 
 -a, --user_agent string     http user agent
 
@@ -26,7 +23,7 @@ args                        参数：文件名称含路径
 linux
 
 ```shell
-$ pmsg weixin work mediaupload -i corp_id -s corp_secret -m image /img/app.png
+$ pmsg workweixin upload -i corp_id -s corp_secret -m image /img/app.png
 
 ok; type: "image", media_id: "media_id", created_at: 1670301152 (2022-12-06T12:32:32+08:00)
 ```

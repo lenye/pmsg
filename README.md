@@ -27,6 +27,9 @@
     * 客服消息
     * 群机器人消息
 
+1. 钉钉
+    * 自定义机器人消息
+
 ### 下载
 
 #### 使用二进制发行版
@@ -44,8 +47,10 @@
      pmsg [command]
    
    Available Commands:
+     dingtalk    ding talk
      help        Help about any command
-     weixin      weixin message        
+     weixin      weixin
+     workweixin  work weixin
    
    Flags:
      -h, --help      help for pmsg

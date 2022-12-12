@@ -3,7 +3,7 @@
 命令参数说明
 
 ```text
-$ pmsg weixin work app undo -h
+$ pmsg workweixin app undo -h
 
 -a, --user_agent string     http user agent
 
@@ -21,7 +21,7 @@ $ pmsg weixin work app undo -h
 linux
 
 ```shell
-$ pmsg weixin work app undo -i corp_id -s corp_secret -c msg_id
+$ pmsg workweixin app undo -i corp_id -s corp_secret -c msg_id
 
 ok
 ```

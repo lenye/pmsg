@@ -3,7 +3,7 @@
 命令参数说明
 
 ```text
-$ pmsg weixin work token -h
+$ pmsg workweixin token -h
 
 -a, --user_agent string     http user agent
 
