@@ -32,7 +32,7 @@ var weiXinWorkBotCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := bot.CmdSendParams{
 			UserAgent: userAgent,
-			Key:       key,
+			Key:       secret,
 			MsgType:   msgType,
 			ToUser:    toUser,
 			ToMobile:  toMobile,
@@ -58,6 +58,6 @@ func init() {
 
 // weiXinWorkSetKeyFlags 设置企业微信key命令行参数
 func weiXinWorkSetKeyFlags(cmd *cobra.Command) {
-	cmd.Flags().StringVarP(&key, flags.Key, "k", "", "work weixin bot key (required)")
+	cmd.Flags().StringVarP(&secret, flags.Key, "k", "", "work weixin bot key (required)")
 	cmd.MarkFlagRequired(flags.Key)
 }

@@ -31,7 +31,7 @@ var weiXinWorkBotUploadCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := bot.CmdUploadParams{
 			UserAgent: userAgent,
-			Key:       key,
+			Key:       secret,
 			File:      args[0],
 		}
 		if err := bot.CmdUpload(&arg); err != nil {
