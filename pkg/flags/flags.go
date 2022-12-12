@@ -15,9 +15,11 @@
 package flags
 
 const (
-	UserAgent   = "user_agent"
-	Key         = "key"
+	UserAgent = "user_agent"
+
 	AccessToken = "access_token"
+	Key         = "key"
+	Secret      = "secret"
 
 	AppID     = "app_id"
 	AppSecret = "app_secret"
@@ -62,4 +64,8 @@ const (
 	MsgID                  = "msg_id"
 
 	AllUser = "@all"
+
+	AtUser   = "at_user"
+	AtMobile = "at_mobile"
+	IsAtAll  = "is_at_all"
 )

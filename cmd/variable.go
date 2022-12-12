@@ -17,7 +17,7 @@ package cmd
 var (
 	userAgent string
 
-	key         string
+	secret      string
 	accessToken string
 
 	appID     string
@@ -59,4 +59,8 @@ var (
 	recvScope              int
 	openKfID               string
 	msgID                  string
+
+	atUser   string
+	atMobile string
+	isAtAll  bool
 )
