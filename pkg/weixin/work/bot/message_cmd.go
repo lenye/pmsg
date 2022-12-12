@@ -31,8 +31,8 @@ type CmdSendParams struct {
 	UserAgent string
 	Key       string
 	MsgType   string
-	ToUser    string
-	ToMobile  string
+	AtUser    string
+	AtMobile  string
 	Data      string
 }
 
@@ -67,11 +67,11 @@ func CmdSend(arg *CmdSendParams) error {
 	case MsgTypeText:
 		var msgMeta TextMeta
 		msgMeta.Content = buf.String()
-		if arg.ToUser != "" {
-			msgMeta.MentionedList = strings.Split(arg.ToUser, "|")
+		if arg.AtUser != "" {
+			msgMeta.MentionedList = strings.Split(arg.AtUser, "|")
 		}
-		if arg.ToMobile != "" {
-			msgMeta.MentionedMobileList = strings.Split(arg.ToMobile, "|")
+		if arg.AtMobile != "" {
+			msgMeta.MentionedMobileList = strings.Split(arg.AtMobile, "|")
 		}
 		msg.Text = &msgMeta
 	case MsgTypeMarkdown:

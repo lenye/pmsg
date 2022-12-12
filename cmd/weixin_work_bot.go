@@ -34,8 +34,8 @@ var weiXinWorkBotCmd = &cobra.Command{
 			UserAgent: userAgent,
 			Key:       secret,
 			MsgType:   msgType,
-			ToUser:    toUser,
-			ToMobile:  toMobile,
+			AtUser:    atUser,
+			AtMobile:  atMobile,
 			Data:      args[0],
 		}
 		if err := bot.CmdSend(&arg); err != nil {
@@ -52,8 +52,8 @@ func init() {
 	weiXinWorkBotCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
 	weiXinWorkBotCmd.MarkFlagRequired(flags.MsgType)
 
-	weiXinWorkBotCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "work weixin user id list")
-	weiXinWorkBotCmd.Flags().StringVarP(&toMobile, flags.ToMobile, "b", "", "mobile list")
+	weiXinWorkBotCmd.Flags().StringVarP(&atUser, flags.AtUser, "o", "", "work weixin user id list")
+	weiXinWorkBotCmd.Flags().StringVarP(&atMobile, flags.AtMobile, "b", "", "mobile list")
 }
 
 // weiXinWorkSetKeyFlags 设置企业微信key命令行参数
