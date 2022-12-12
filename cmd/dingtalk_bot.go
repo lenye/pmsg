@@ -47,10 +47,10 @@ var dingTalkBotCmd = &cobra.Command{
 }
 
 func init() {
-	dingTalkBotCmd.Flags().StringVarP(&accessToken, flags.AccessToken, "t", "", "dingtalk access token (required)")
+	dingTalkBotCmd.Flags().StringVarP(&accessToken, flags.AccessToken, "t", "", "dingtalk bot access token (required)")
 	dingTalkBotCmd.MarkFlagRequired(flags.AccessToken)
 
-	dingTalkBotCmd.Flags().StringVarP(&secret, flags.Secret, "s", "", "secret")
+	dingTalkBotCmd.Flags().StringVarP(&secret, flags.Secret, "s", "", "sign secret")
 
 	dingTalkBotCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
 	dingTalkBotCmd.MarkFlagRequired(flags.MsgType)
