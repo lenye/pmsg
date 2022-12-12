@@ -44,7 +44,7 @@ func ValidateMsgType(v string) error {
 	return nil
 }
 
-// Message 企业微信群机器人消息
+// Message 钉钉自定义机器人消息
 type Message struct {
 	MsgType    string        `json:"msgtype"`              // 消息类型
 	Text       *TextMeta     `json:"text,omitempty"`       // 文本消息

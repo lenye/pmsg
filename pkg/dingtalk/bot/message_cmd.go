@@ -44,7 +44,7 @@ func (t *CmdSendParams) Validate() error {
 	return nil
 }
 
-// CmdSend 发送企业微信群机器人消息
+// CmdSend 发送钉钉自定义机器人消息
 func CmdSend(arg *CmdSendParams) error {
 
 	if err := arg.Validate(); err != nil {
