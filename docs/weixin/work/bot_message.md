@@ -9,7 +9,8 @@ $ pmsg workweixin bot -h
 
 -k, --key string            企业微信群机器人key (必填)
 -m, --msg_type string       消息类型 (必填)，text(文本消息)、markdown(markdown消息)、
-                                           image(图片消息)、news(图文消息)、file(文件消息)
+                                           image(图片消息)、news(图文消息)、file(文件消息)、
+                                           text_notice(文本通知模版卡片)、news_notice(图文展示模版卡片)
 -o, --to_user string        文本消息时，提醒群中的指定成员(@某个成员)，多个接收者用‘|’分隔，@all表示提醒所有人。
                             如果开发者获取不到userid，可以使用to_mobile
 -b, --to_mobile string      文本消息时，提醒手机号对应的群成员(@某个成员)，多个接收者用‘|’分隔，@all表示提醒所有人
@@ -53,7 +54,7 @@ args                        参数：消息内容
     "MEDIA_ID"
     ```
 
-1. 文本通知模版卡片 --msg_type tpl_card_text
+1. 文本通知模版卡片 --msg_type text_notice
    ```json
    {
       "card_type": "text_notice",
@@ -119,7 +120,7 @@ args                        参数：消息内容
    }
    ```
 
-1. 图文展示模版卡片 --msg_type tpl_card_news
+1. 图文展示模版卡片 --msg_type news_notice
    ```json
    {
       "card_type": "news_notice",

@@ -31,8 +31,8 @@ const (
 	MsgTypeFile     = "file"          // 文件
 	MsgTypeTplCard  = "template_card" // 模版卡片
 
-	TplCardTypeText = "text_notice"
-	TplCardTypeNews = "news_notice"
+	TplCardTypeText = "text_notice" // 文本通知模版卡片
+	TplCardTypeNews = "news_notice" // 图文展示模版卡片
 )
 
 // ValidateMsgType 验证
