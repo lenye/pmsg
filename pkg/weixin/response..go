@@ -24,9 +24,9 @@ const (
 	MessageOK = "ok"
 )
 
-var ErrWeiXinRequest = errors.New("weixin request error")
+var ErrRequest = errors.New("weixin request error")
 
-// ResponseMeta 微信响应操作信息
+// ResponseMeta 响应操作信息
 type ResponseMeta struct {
 	ErrorCode    int64  `json:"errcode"`          // 出错返回码，为0表示成功，非0表示调用失败
 	ErrorMessage string `json:"errmsg,omitempty"` // 返回码提示语

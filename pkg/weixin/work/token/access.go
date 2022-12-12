@@ -19,8 +19,8 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/client"
 	"github.com/lenye/pmsg/pkg/weixin/work"
 )
 
@@ -61,7 +61,7 @@ func FetchAccessToken(corpID, corpSecret string) (*AccessTokenMeta, error) {
 		return nil, err
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w; %v", weixin.ErrWeiXinRequest, resp.ResponseMeta)
+		return nil, fmt.Errorf("%w; %v", weixin.ErrRequest, resp.ResponseMeta)
 	}
 
 	resp.AccessTokenMeta.ExpireAt = time.Now().Add(time.Second * time.Duration(resp.AccessTokenMeta.ExpireIn))

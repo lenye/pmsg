@@ -19,20 +19,22 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	httpClient "github.com/lenye/pmsg/pkg/http/client"
 )
 
 // CheckHttpResponseStatusCode 检查HTTP响应状态码
 func CheckHttpResponseStatusCode(method, url string, statusCode int) error {
 	if statusCode/100 != 2 {
-		return fmt.Errorf("%w; http response status code: %v, %s %s", ErrHttpRequest, statusCode, method, url)
+		return fmt.Errorf("%w; http response status code: %v, %s %s", httpClient.ErrRequest, statusCode, method, url)
 	}
 	return nil
 }
 
 func GetJSON(url string, respBody any) (http.Header, error) {
-	resp, err := Get(url)
+	resp, err := httpClient.Get(url)
 	if err != nil {
-		return nil, fmt.Errorf("%w; %s %s, %v", ErrHttpRequest, http.MethodGet, url, err)
+		return nil, fmt.Errorf("%w; %s %s, %v", httpClient.ErrRequest, http.MethodGet, url, err)
 	}
 	defer resp.Body.Close()
 
@@ -49,7 +51,7 @@ func GetJSON(url string, respBody any) (http.Header, error) {
 
 // PostJSON http post json
 func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
-	buf := bytes.NewBufferString("")
+	buf := new(bytes.Buffer)
 	enc := json.NewEncoder(buf)
 	enc.SetEscapeHTML(false)
 	err := enc.Encode(reqBody)
@@ -57,9 +59,9 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 		return nil, err
 	}
 
-	resp, err := Post(url, contentTypeJson, buf)
+	resp, err := httpClient.Post(url, httpClient.ContentTypeJson, buf)
 	if err != nil {
-		return nil, fmt.Errorf("%w; %s %s, %v", ErrHttpRequest, http.MethodPost, url, err)
+		return nil, fmt.Errorf("%w; %s %s, %v", httpClient.ErrRequest, http.MethodPost, url, err)
 	}
 	defer resp.Body.Close()
 
@@ -75,9 +77,9 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 }
 
 func PostFileJSON(url, fieldName, fileName string, respBody any) (http.Header, error) {
-	resp, err := PostFile(url, fieldName, fileName)
+	resp, err := httpClient.PostFile(url, fieldName, fileName)
 	if err != nil {
-		return nil, fmt.Errorf("%w; %s %s, %v", ErrHttpRequest, http.MethodPost, url, err)
+		return nil, fmt.Errorf("%w; %s %s, %v", httpClient.ErrRequest, http.MethodPost, url, err)
 	}
 	defer resp.Body.Close()
 

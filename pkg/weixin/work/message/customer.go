@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/client"
 	"github.com/lenye/pmsg/pkg/weixin/work"
 )
 
@@ -95,7 +95,7 @@ func SendCustomer(accessToken string, msg *CustomerMessage) (*CustomerMessageRes
 		return nil, err
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w; %v", weixin.ErrWeiXinRequest, resp)
+		return nil, fmt.Errorf("%w; %v", weixin.ErrRequest, resp)
 	}
 	return &resp, nil
 }

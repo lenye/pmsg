@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/client"
 )
 
 /*
@@ -116,7 +116,7 @@ func SendTemplate(accessToken string, msg *TemplateMessage) (int64, error) {
 		return 0, err
 	}
 	if !resp.Succeed() {
-		return 0, fmt.Errorf("%w; %v", weixin.ErrWeiXinRequest, resp.ResponseMeta)
+		return 0, fmt.Errorf("%w; %v", weixin.ErrRequest, resp.ResponseMeta)
 	}
 	return resp.MsgID, nil
 }

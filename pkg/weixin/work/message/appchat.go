@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/client"
 	"github.com/lenye/pmsg/pkg/weixin/work"
 )
 
@@ -78,7 +78,7 @@ func SendAppChat(accessToken string, msg *AppChatMessage) error {
 		return err
 	}
 	if !resp.Succeed() {
-		return fmt.Errorf("%w; %v", weixin.ErrWeiXinRequest, resp)
+		return fmt.Errorf("%w; %v", weixin.ErrRequest, resp)
 	}
 	return nil
 }

@@ -21,7 +21,7 @@ import (
 	"time"
 
 	"github.com/lenye/pmsg/pkg/dingtalk"
-	"github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/dingtalk/client"
 )
 
 const (
@@ -77,7 +77,7 @@ func Send(accessToken, secret string, msg *Message) error {
 		return err
 	}
 	if !resp.Succeed() {
-		return fmt.Errorf("%w; %v", dingtalk.ErrDingTalkRequest, resp)
+		return fmt.Errorf("%w; %v", dingtalk.ErrRequest, resp)
 	}
 	return nil
 }

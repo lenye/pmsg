@@ -20,8 +20,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/client"
 	"github.com/lenye/pmsg/pkg/weixin/work"
 )
 
@@ -63,7 +63,7 @@ func Upload(key, filename string) (*MediaMeta, error) {
 		return nil, err
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w; %v", weixin.ErrWeiXinRequest, resp)
+		return nil, fmt.Errorf("%w; %v", weixin.ErrRequest, resp)
 	}
 	return &resp.MediaMeta, nil
 }

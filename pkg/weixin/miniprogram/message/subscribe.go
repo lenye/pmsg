@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/client"
 )
 
 /*
@@ -112,7 +112,7 @@ func SendSubscribe(accessToken string, msg *SubscribeMessage) error {
 		return err
 	}
 	if !resp.Succeed() {
-		return fmt.Errorf("%w; %v", weixin.ErrWeiXinRequest, resp)
+		return fmt.Errorf("%w; %v", weixin.ErrRequest, resp)
 	}
 	return nil
 }

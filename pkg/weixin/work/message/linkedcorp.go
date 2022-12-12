@@ -19,8 +19,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/client"
 	"github.com/lenye/pmsg/pkg/weixin/work"
 )
 
@@ -111,7 +111,7 @@ func SendLinkedCorp(accessToken string, msg *LinkedCorpMessage) (*LinkedCorpMess
 		return nil, err
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w; %v", weixin.ErrWeiXinRequest, resp)
+		return nil, fmt.Errorf("%w; %v", weixin.ErrRequest, resp)
 	}
 	return &resp, nil
 }

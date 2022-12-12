@@ -30,10 +30,10 @@ import (
 
 var UserAgent string
 
-var ErrHttpRequest = errors.New("http request error")
+var ErrRequest = errors.New("http request error")
 
 const (
-	contentTypeJson = "application/json;charset=utf-8"
+	ContentTypeJson = "application/json; charset=utf-8"
 )
 
 func DefaultUserAgent() string {

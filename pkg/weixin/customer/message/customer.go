@@ -18,8 +18,8 @@ import (
 	"fmt"
 	"net/url"
 
-	"github.com/lenye/pmsg/pkg/http/client"
 	"github.com/lenye/pmsg/pkg/weixin"
+	"github.com/lenye/pmsg/pkg/weixin/client"
 )
 
 // CustomerMessage 微信客服消息
@@ -52,7 +52,7 @@ func SendCustomer(accessToken string, msg *CustomerMessage) error {
 		return err
 	}
 	if !resp.Succeed() {
-		return fmt.Errorf("%w; %v", weixin.ErrWeiXinRequest, resp)
+		return fmt.Errorf("%w; %v", weixin.ErrRequest, resp)
 	}
 	return nil
 }
