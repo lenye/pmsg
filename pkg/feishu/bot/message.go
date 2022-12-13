@@ -44,7 +44,7 @@ func ValidateMsgType(v string) error {
 // Message 飞书自定义机器人消息
 type Message struct {
 	MsgType   string       `json:"msg_type"`            // 消息类型
-	TimeStamp string       `json:"timeStamp,omitempty"` // 为距当前时间不超过 1 小时(3600)的时间戳，时间单位s
+	TimeStamp string       `json:"timestamp,omitempty"` // 为距当前时间不超过 1 小时(3600)的时间戳，时间单位s
 	Sign      string       `json:"sign,omitempty"`      // 签名
 	Content   *ContentMeta `json:"content,omitempty"`   // 消息内容
 	Card      *CardMeta    `json:"card,omitempty"`      // 消息卡片
