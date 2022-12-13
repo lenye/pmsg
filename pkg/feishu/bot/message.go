@@ -51,10 +51,7 @@ type Message struct {
 
 const sendURL = "https://open.feishu.cn/open-apis/bot/v2/hook/"
 
-// Send 发送钉钉自定义机器人消息
-//
-// 消息发送频率限制
-// 每个机器人每分钟最多发送20条消息到群里，如果超过20条，会限流10分钟
+// Send 发送飞书自定义机器人消息
 func Send(accessToken string, msg *Message) error {
 	u := sendURL + accessToken
 	var resp feishu.ResponseMeta
