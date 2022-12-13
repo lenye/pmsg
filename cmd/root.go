@@ -48,4 +48,5 @@ func init() {
 	rootCmd.AddCommand(weiXinCmd)
 	rootCmd.AddCommand(weiXinWorkCmd)
 	rootCmd.AddCommand(dingTalkCmd)
+	rootCmd.AddCommand(feiShuCmd)
 }
