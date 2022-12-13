@@ -20,7 +20,6 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/lenye/pmsg/pkg/flags"
 	"github.com/lenye/pmsg/pkg/weixin/work/message"
 )
 
@@ -28,14 +27,14 @@ import (
 var weiXinWorkUndoAppCmd = &cobra.Command{
 	Use:   "undo",
 	Short: "undo work weixin app message",
-	Args:  cobra.NoArgs,
+	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdWorkUndoAppParams{
 			UserAgent:   userAgent,
 			AccessToken: accessToken,
 			CorpID:      corpID,
 			CorpSecret:  corpSecret,
-			MsgID:       msgID,
+			MsgID:       args[0],
 		}
 		if err := message.CmdWorkUndoApp(&arg); err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -45,6 +44,4 @@ var weiXinWorkUndoAppCmd = &cobra.Command{
 
 func init() {
 	weiXinWorkSetAccessTokenFlags(weiXinWorkUndoAppCmd)
-
-	weiXinWorkUndoAppCmd.Flags().StringVarP(&msgID, flags.MsgID, "c", "", "message id")
 }
