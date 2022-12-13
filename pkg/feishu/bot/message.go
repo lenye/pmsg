@@ -16,7 +16,6 @@ package bot
 
 import (
 	"fmt"
-	"net/url"
 
 	"github.com/lenye/pmsg/pkg/feishu"
 	"github.com/lenye/pmsg/pkg/feishu/client"
@@ -57,7 +56,7 @@ const sendURL = "https://open.feishu.cn/open-apis/bot/v2/hook/"
 // 消息发送频率限制
 // 每个机器人每分钟最多发送20条消息到群里，如果超过20条，会限流10分钟
 func Send(accessToken string, msg *Message) error {
-	u := sendURL + url.QueryEscape(accessToken)
+	u := sendURL + accessToken
 	var resp feishu.ResponseMeta
 	_, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
