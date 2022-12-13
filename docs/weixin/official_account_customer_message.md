@@ -30,17 +30,17 @@ args                        参数：消息内容
 
 1. 文本消息 --msg_type text
     ```text
-    "HelloWorld"
+    HelloWorld
     ```
 
 1. 图片消息 --msg_type image
     ```text
-    "MEDIA_ID"
+    MEDIA_ID
     ```
 
 1. 语音消息 --msg_type voice
     ```text
-    "MEDIA_ID"
+    MEDIA_ID
     ```
 
 1. 视频消息 --msg_type video
@@ -80,12 +80,12 @@ args                        参数：消息内容
 
 1. 图文消息 --msg_type mpnews
     ```text
-    "MEDIA_ID"
+    MEDIA_ID
     ```
 
 1. 图文消息 --msg_type mpnewsarticle
     ```text
-    "ARTICLE_ID"
+    ARTICLE_ID
     ```
 
 1. 菜单消息 --msg_type msgmenu
@@ -108,7 +108,7 @@ args                        参数：消息内容
 
 1. 卡券 --msg_type wxcard
     ```text
-    "CARD_ID"
+    CARD_ID
     ```
 
 1. 小程序卡片 --msg_type miniprogrampage

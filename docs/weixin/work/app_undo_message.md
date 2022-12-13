@@ -13,7 +13,7 @@ $ pmsg workweixin app undo -h
 
 如果没有提供 access_token，需要提供企业微信 corp_id 和 corp_secret 获取 access_token
 
--c, --msg_id string         消息ID。从应用发送消息接口处获得
+args                        参数：消息ID。从应用发送消息接口处获得
 ```
 
 样例
@@ -21,7 +21,7 @@ $ pmsg workweixin app undo -h
 linux
 
 ```shell
-$ pmsg workweixin app undo -i corp_id -s corp_secret -c msg_id
+$ pmsg workweixin app undo -i corp_id -s corp_secret msg_id
 
 ok
 ```

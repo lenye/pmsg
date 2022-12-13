@@ -32,11 +32,15 @@
 * [家校消息推送](weixin/work/externalcontact_message.md)
 * [客服消息](weixin/work/customer_message.md)
 
-### 群机器人
+### 企业微信群机器人
 
-* [文件上传接口](weixin/work/bot_upload.md)
+* [文件上传](weixin/work/bot_upload.md)
 * [推送消息](weixin/work/bot_message.md)
 
 ## 钉钉
 
 * [自定义机器人消息](dingtalk/bot_message.md)
+
+## 飞书
+
+* [自定义机器人消息](feishu/bot_message.md)

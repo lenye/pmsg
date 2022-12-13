@@ -22,7 +22,7 @@ args                        参数：消息内容
 
 1. 文本消息 --msg_type text
     ```text
-    "HelloWorld"
+    HelloWorld
     ```
 1. 链接消息 --msg_type link
    ```json

@@ -23,6 +23,7 @@
    
    Available Commands:
      dingtalk    ding talk
+     feishu      fei shu
      help        Help about any command
      weixin      weixin        
      workweixin  work weixin

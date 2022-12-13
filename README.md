@@ -30,6 +30,9 @@
 1. 钉钉
     * 自定义机器人消息
 
+1. 飞书
+    * 自定义机器人消息
+
 ### 下载
 
 #### 使用二进制发行版
@@ -48,6 +51,7 @@
    
    Available Commands:
      dingtalk    ding talk
+     feishu      fei shu
      help        Help about any command
      weixin      weixin
      workweixin  work weixin

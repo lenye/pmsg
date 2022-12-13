@@ -26,12 +26,12 @@ args                        参数：消息内容
 
 1. 文本消息 --msg_type text
     ```text
-    "HelloWorld"
+    HelloWorld
     ```
 
 1. 图片消息 --msg_type image
     ```text
-    "MEDIA_ID"
+    MEDIA_ID
     ```
 
 1. 图文链接 --msg_type link
