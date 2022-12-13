@@ -25,7 +25,7 @@ import (
 	"time"
 )
 
-// timestamp 当前时间戳，单位是毫秒。
+// timestamp 当前时间戳，单位是秒
 
 // Validate 验证
 func Validate(signStr, timestamp, secret string) (bool, error) {

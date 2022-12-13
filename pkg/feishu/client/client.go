@@ -23,15 +23,6 @@ import (
 	httpClient "github.com/lenye/pmsg/pkg/http/client"
 )
 
-// CheckHttpResponseStatusCode 检查HTTP响应状态码
-func CheckHttpResponseStatusCode(method, url string, statusCode int) error {
-	if statusCode/100 != 2 {
-
-		return fmt.Errorf("%w; http response status code: %v, %s %s", httpClient.ErrRequest, statusCode, method, url)
-	}
-	return nil
-}
-
 // PostJSON http post json
 func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 	buf := new(bytes.Buffer)
