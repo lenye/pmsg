@@ -145,19 +145,19 @@ dockers:
       - "--label=org.opencontainers.image.version={{.Version}}"
 
 docker_manifests:
-  - name_template: ghcr.io/lenye/pmsg:{{ .Tag }}
+  - name_template: ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}
     image_templates:
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-amd64
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-arm64
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-armv6
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-armv7
-  - name_template: ghcr.io/lenye/pmsg:{{ .Version }}
+  - name_template: ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}
     image_templates:
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-amd64
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-arm64
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-armv6
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-armv7
-  - name_template: ghcr.io/lenye/pmsg:latest
+  - name_template: ghcr.io/lenye/{{ .ProjectName }}:latest
     image_templates:
       - ghcr.io/lenye/{{ .ProjectName }}:latest-amd64
       - ghcr.io/lenye/{{ .ProjectName }}:latest-arm64
