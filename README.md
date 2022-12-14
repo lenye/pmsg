@@ -63,6 +63,14 @@
    Use "pmsg [command] --help" for more information about a command.
    ```
 
+#### 容器 Docker
+
+https://github.com/lenye/pmsg/pkgs/container/pmsg
+
+```shell
+docker pull ghcr.io/lenye/pmsg:latest
+```
+
 #### 源代码
 
 ```shell
@@ -71,7 +79,7 @@ git clone https://github.com/lenye/pmsg.git
 
 ### 文档
 
-[https://github.com/lenye/pmsg/tree/main/docs](https://github.com/lenye/pmsg/tree/main/docs)
+https://github.com/lenye/pmsg/tree/main/docs
 
 ### License
 

@@ -35,6 +35,14 @@
    Use "pmsg [command] --help" for more information about a command.
    ```
 
+#### 容器 Docker
+
+https://github.com/lenye/pmsg/pkgs/container/pmsg
+
+```shell
+docker pull ghcr.io/lenye/pmsg:latest
+```
+
 #### 源代码
 
 ```shell
