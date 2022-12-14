@@ -13,7 +13,7 @@ builds:
       - -s -w
       - -X github.com/lenye/pmsg/pkg/version.Version={{.Version}}
       - -X github.com/lenye/pmsg/pkg/version.AppName={{.ProjectName}}
-      - -X github.com/lenye/pmsg/pkg/version.BuildTime={{.CommitDate}}
+      - -X github.com/lenye/pmsg/pkg/version.BuildTime={{.Date}}
       - -X github.com/lenye/pmsg/pkg/version.BuildGit={{.ShortCommit}}
     flags:
       - -trimpath
@@ -34,7 +34,6 @@ builds:
     goarm:
       - 7
       - 6
-      - 5
     ignore:
       - goos: windows
         goarch: arm
@@ -42,9 +41,6 @@ builds:
         goarch: 386
       - goos: darwin
         goarch: arm
-      - goos: freebsd
-        goarm: 5
-    mod_timestamp: '{{ .CommitTimestamp }}'
 
 archives:
   - id: pmsg
