@@ -1,8 +1,10 @@
 project_name: pmsg
 
+
 before:
   hooks:
     - go mod tidy
+
 
 builds:
   - binary: pmsg
@@ -13,7 +15,7 @@ builds:
       - -s -w
       - -X github.com/lenye/pmsg/pkg/version.Version={{.Version}}
       - -X github.com/lenye/pmsg/pkg/version.AppName={{.ProjectName}}
-      - -X github.com/lenye/pmsg/pkg/version.BuildTime={{.Date}}
+      - -X github.com/lenye/pmsg/pkg/version.BuildTime={{.CommitDate}}
       - -X github.com/lenye/pmsg/pkg/version.BuildGit={{.ShortCommit}}
     flags:
       - -trimpath
@@ -41,6 +43,8 @@ builds:
         goarch: 386
       - goos: darwin
         goarch: arm
+    mod_timestamp: '{{ .CommitTimestamp }}'
+
 
 archives:
   - id: pmsg
@@ -50,8 +54,10 @@ archives:
       - goos: windows
         format: zip
 
+
 checksum:
   name_template: "{{ .ProjectName }}_v{{ .Version }}_checksums.txt"
+
 
 changelog:
   sort: asc
@@ -64,3 +70,101 @@ changelog:
       - '^style:'
       - '^chore:'
       - '^ci:'
+
+
+dockers:
+  - image_templates:
+      - "ghcr.io/lenye/pmsg:{{ .Tag }}-amd64"
+      - "ghcr.io/lenye/pmsg:{{ .Version }}-amd64"
+      - "ghcr.io/lenye/pmsg:latest-amd64"
+    dockerfile: Dockerfile
+    use: buildx
+    goos: linux
+    goarch: amd64
+    build_flag_templates:
+      - "--platform=linux/amd64"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+  - image_templates:
+      - "ghcr.io/lenye/pmsg:{{ .Tag }}-386"
+      - "ghcr.io/lenye/pmsg:{{ .Version }}-386"
+      - "ghcr.io/lenye/pmsg:latest-386"
+    dockerfile: Dockerfile
+    use: buildx
+    goos: linux
+    goarch: "386"
+    build_flag_templates:
+      - "--platform=linux/386"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+  - image_templates:
+      - "ghcr.io/lenye/pmsg:{{ .Tag }}-arm64"
+      - "ghcr.io/lenye/pmsg:{{ .Version }}-arm64"
+      - "ghcr.io/lenye/pmsg:latest-arm64"
+    use: buildx
+    goos: linux
+    goarch: arm64
+    dockerfile: Dockerfile
+    build_flag_templates:
+      - "--platform=linux/arm64"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+  - image_templates:
+      - "ghcr.io/lenye/pmsg:{{ .Tag }}-armv6"
+      - "ghcr.io/lenye/pmsg:{{ .Version }}-armv6"
+      - "ghcr.io/lenye/pmsg:latest-armv6"
+    use: buildx
+    goos: linux
+    goarch: arm
+    goarm: "6"
+    dockerfile: Dockerfile
+    build_flag_templates:
+      - "--platform=linux/arm/v6"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+  - image_templates:
+      - "ghcr.io/lenye/pmsg:{{ .Tag }}-armv7"
+      - "ghcr.io/lenye/pmsg:{{ .Version }}-armv7"
+      - "ghcr.io/lenye/pmsg:latest-armv7"
+    use: buildx
+    goos: linux
+    goarch: arm
+    goarm: "7"
+    dockerfile: Dockerfile
+    build_flag_templates:
+      - "--platform=linux/arm/v7"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+
+docker_manifests:
+  - name_template: ghcr.io/lenye/pmsg:{{ .Tag }}
+    image_templates:
+      - ghcr.io/lenye/pmsg:{{ .Tag }}-amd64
+      - ghcr.io/lenye/pmsg:{{ .Tag }}-386
+      - ghcr.io/lenye/pmsg:{{ .Tag }}-arm64
+      - ghcr.io/lenye/pmsg:{{ .Tag }}-armv6
+      - ghcr.io/lenye/pmsg:{{ .Tag }}-armv7
+  - name_template: ghcr.io/lenye/pmsg:{{ .Version }}
+    image_templates:
+      - ghcr.io/lenye/pmsg:{{ .Version }}-amd64
+      - ghcr.io/lenye/pmsg:{{ .Version }}-386
+      - ghcr.io/lenye/pmsg:{{ .Version }}-arm64
+      - ghcr.io/lenye/pmsg:{{ .Version }}-armv6
+      - ghcr.io/lenye/pmsg:{{ .Version }}-armv7
+  - name_template: ghcr.io/lenye/pmsg:latest
+    image_templates:
+      - ghcr.io/lenye/pmsg:latest-amd64
+      - ghcr.io/lenye/pmsg:latest-386
+      - ghcr.io/lenye/pmsg:latest-arm64
+      - ghcr.io/lenye/pmsg:latest-armv6
+      - ghcr.io/lenye/pmsg:latest-armv7
