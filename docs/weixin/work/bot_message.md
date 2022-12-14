@@ -12,7 +12,7 @@ $ pmsg workweixin bot -h
                                            image(图片消息)、news(图文消息)、file(文件消息)、
                                            text_notice(文本通知模版卡片)、news_notice(图文展示模版卡片)
 -o, --at_user string        文本消息时，提醒群中的指定成员(@某个成员)，多个接收者用‘|’分隔，@all表示提醒所有人。
-                            如果开发者获取不到userid，可以使用to_mobile
+                            如果开发者获取不到userid，可以使用at_mobile
 -b, --at_mobile string      文本消息时，提醒手机号对应的群成员(@某个成员)，多个接收者用‘|’分隔，@all表示提醒所有人
 
 args                        参数：消息内容

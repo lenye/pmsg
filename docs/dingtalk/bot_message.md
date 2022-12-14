@@ -14,7 +14,8 @@ $ pmsg dingtalk bot -h
                                            feedCard
 -o, --at_user string        文本或markdown消息时，被@人的用户userid，多个接收者用‘|’分隔。
 -b, --at_mobile string      文本或markdown消息时，被@人的手机号，多个接收者用‘|’分隔
--i, --is_at_all             是否@所有人
+-i, --is_at_all             文本或markdown消息时，是否@所有人
+
 args                        参数：消息内容
 ```
 
