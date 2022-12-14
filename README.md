@@ -33,6 +33,10 @@
 1. 飞书
     * 自定义机器人消息
 
+### 文档
+
+https://github.com/lenye/pmsg/tree/main/docs
+
 ### 下载
 
 #### 使用二进制发行版
@@ -97,10 +101,6 @@
 ```shell
 $ git clone https://github.com/lenye/pmsg.git
 ```
-
-### 文档
-
-https://github.com/lenye/pmsg/tree/main/docs
 
 ### License
 
