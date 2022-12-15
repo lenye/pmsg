@@ -20,10 +20,12 @@ import (
 	"fmt"
 	"io"
 	"mime/multipart"
+	"net"
 	"net/http"
 	"os"
 	"path/filepath"
 	"runtime"
+	"time"
 
 	"github.com/lenye/pmsg/pkg/version"
 )
@@ -33,8 +35,31 @@ var UserAgent string
 var ErrRequest = errors.New("http request error")
 
 const (
-	ContentTypeJson = "application/json; charset=utf-8"
+	HdrKeyUserAgent              = "User-Agent"
+	HdrKeyContentType            = "Content-Type"
+	HdrValContentTypeJsonCharset = "application/json; charset=utf-8"
 )
+
+const (
+	DialTimeout = 5 * time.Second
+)
+
+var DefaultClient = &http.Client{
+	Transport: defaultTransport(),
+}
+
+func defaultTransport() *http.Transport {
+	return &http.Transport{
+		Proxy: http.ProxyFromEnvironment,
+		DialContext: (&net.Dialer{
+			Timeout: DialTimeout,
+		}).DialContext,
+	}
+}
+
+func SetTransport(v *http.Transport) {
+	DefaultClient.Transport = v
+}
 
 func DefaultUserAgent() string {
 	return fmt.Sprintf("%s/%s (%s; %s) %s/%s", version.AppName, version.Version, runtime.GOOS, runtime.GOARCH, version.BuildGit, version.BuildTime)
@@ -53,9 +78,9 @@ func Get(url string) (*http.Response, error) {
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", userAgent())
+	req.Header.Set(HdrKeyUserAgent, userAgent())
 
-	return http.DefaultClient.Do(req)
+	return DefaultClient.Do(req)
 }
 
 // Post http post
@@ -64,10 +89,10 @@ func Post(url, bodyType string, body io.Reader) (*http.Response, error) {
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("Content-Type", bodyType)
-	req.Header.Set("User-Agent", userAgent())
+	req.Header.Set(HdrKeyUserAgent, userAgent())
+	req.Header.Set(HdrKeyContentType, bodyType)
 
-	return http.DefaultClient.Do(req)
+	return DefaultClient.Do(req)
 }
 
 func fileToBody(bodyWriter *multipart.Writer, formName, fileName string) (err error) {
