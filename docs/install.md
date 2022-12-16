@@ -47,21 +47,22 @@
 1. 开始运行它
    ```shell
    $ docker run --rm ghcr.io/lenye/pmsg --help
-      Usage:
-        pmsg [command]
-      
-      Available Commands:
-        dingtalk    ding talk
-        feishu      fei shu
-        help        Help about any command
-        weixin      weixin
-        workweixin  work weixin
-      
-      Flags:
-        -h, --help      help for pmsg
-        -v, --version   version for pmsg
-      
-      Use "pmsg [command] --help" for more information about a command.
+   
+   Usage:
+     pmsg [command]
+   
+   Available Commands:
+     dingtalk    ding talk
+     feishu      fei shu
+     help        Help about any command
+     weixin      weixin
+     workweixin  work weixin
+   
+   Flags:
+     -h, --help      help for pmsg
+     -v, --version   version for pmsg
+   
+   Use "pmsg [command] --help" for more information about a command.
    ```
 
 #### 源代码
