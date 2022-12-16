@@ -20,7 +20,6 @@ import (
 	"fmt"
 	"io"
 	"mime/multipart"
-	"net"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -41,24 +40,11 @@ const (
 )
 
 const (
-	DialTimeout = 5 * time.Second
+	Timeout = 5 * time.Second
 )
 
 var DefaultClient = &http.Client{
-	Transport: defaultTransport(),
-}
-
-func defaultTransport() *http.Transport {
-	return &http.Transport{
-		Proxy: http.ProxyFromEnvironment,
-		DialContext: (&net.Dialer{
-			Timeout: DialTimeout,
-		}).DialContext,
-	}
-}
-
-func SetTransport(v *http.Transport) {
-	DefaultClient.Transport = v
+	Timeout: Timeout,
 }
 
 func DefaultUserAgent() string {
