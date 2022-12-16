@@ -114,7 +114,7 @@ dockers:
     use: buildx
     goos: linux
     goarch: arm
-    goarm: "6"
+    goarm: 6
     dockerfile: Dockerfile
     build_flag_templates:
       - "--platform=linux/arm/v6"
@@ -132,7 +132,7 @@ dockers:
     use: buildx
     goos: linux
     goarch: arm
-    goarm: "7"
+    goarm: 7
     dockerfile: Dockerfile
     build_flag_templates:
       - "--platform=linux/arm/v7"
