@@ -48,6 +48,7 @@ var weiXinOfficialAccountTplSubCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
+	Example: "pmsg weixin offiaccount template subscribe -i app_id -s app_secret --scene scene --title title -p template_id -o open_id '{\"first\":{\"value\":\"test\"}}'",
 }
 
 func init() {

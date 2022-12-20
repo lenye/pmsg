@@ -42,6 +42,7 @@ var weiXinWorkBotCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
+	Example: "pmsg workweixin bot -k key -m text 'hello world'",
 }
 
 func init() {

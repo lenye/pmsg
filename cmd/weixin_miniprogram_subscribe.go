@@ -47,6 +47,7 @@ var weiXinMiniProgramSubCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
+	Example: "pmsg weixin miniprogram subscribe -i app_id -s app_secret -p template_id -o open_id '{\"first\":{\"value\":\"test\"}}'",
 }
 
 func init() {

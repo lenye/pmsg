@@ -41,6 +41,7 @@ var feiShuBotCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
+	Example: "pmsg feishu bot -t access_token -m text 'hello world'",
 }
 
 func init() {

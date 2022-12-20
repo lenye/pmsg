@@ -39,6 +39,7 @@ var weiXinAccessTokenCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
+	Example: "pmsg weixin token -i app_id -s app_secret",
 }
 
 func init() {

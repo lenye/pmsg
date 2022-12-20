@@ -62,6 +62,7 @@ var weiXinWorkExternalContactCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
+	Example: "pmsg workweixin externalcontact -i corp_id -s corp_secret -e agent_id -n 'parentuserid1|parentuserid2' -m text 'hello world'",
 }
 
 func init() {

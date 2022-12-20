@@ -42,6 +42,7 @@ var weiXinWorkMediaUploadCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
+	Example: "pmsg workweixin upload -i corp_id -m image /img/app.png",
 }
 
 func init() {

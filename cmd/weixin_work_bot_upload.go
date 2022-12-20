@@ -38,6 +38,7 @@ var weiXinWorkBotUploadCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
+	Example: "pmsg workweixin bot upload -k key /img/app.png",
 }
 
 func init() {

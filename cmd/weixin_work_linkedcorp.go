@@ -58,6 +58,7 @@ var weiXinWorkLinkedCorpCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
+	Example: "pmsg workweixin linkedcorp -i corp_id -s corp_secret -o 'userid1|userid2' -m text 'hello world'",
 }
 
 func init() {

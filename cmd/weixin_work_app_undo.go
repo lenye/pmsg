@@ -40,6 +40,7 @@ var weiXinWorkUndoAppCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
+	Example: "pmsg workweixin app undo -i corp_id -s corp_secret msg_id",
 }
 
 func init() {

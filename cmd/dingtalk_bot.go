@@ -44,6 +44,7 @@ var dingTalkBotCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
+	Example: "pmsg dingtalk bot -t access_token -m text 'hello world'",
 }
 
 func init() {

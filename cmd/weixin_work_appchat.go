@@ -45,6 +45,7 @@ var weiXinWorkAppChatCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
+	Example: "pmsg workweixin appchat -i corp_id -s corp_secret -c chat_id -m text 'hello world'",
 }
 
 func init() {

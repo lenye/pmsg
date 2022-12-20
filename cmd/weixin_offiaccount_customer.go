@@ -45,6 +45,7 @@ var weiXinOfficialAccountCustomerCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
+	Example: "pmsg weixin offiaccount customer -i app_id -s app_secret -o open_id -m text 'hello world'",
 }
 
 func init() {

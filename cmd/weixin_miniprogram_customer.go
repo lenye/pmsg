@@ -44,6 +44,7 @@ var weiXinMiniProgramCustomerCmd = &cobra.Command{
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
+	Example: "pmsg weixin miniprogram customer -i app_id -s app_secret -o open_id -m text 'hello world'",
 }
 
 func init() {
