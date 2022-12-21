@@ -162,4 +162,4 @@ pmsg weixin offiaccount customer -i app_id -s app_secret -o open_id -m miniprogr
 ok
 ```
 
-[微信公众号客服消息开发文档](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html#7)
+官方开发文档 [微信公众号客服消息](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Service_Center_messages.html#7)

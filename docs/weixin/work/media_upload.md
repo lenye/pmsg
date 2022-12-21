@@ -28,4 +28,4 @@ $ pmsg workweixin upload -i corp_id -s corp_secret -m image /img/app.png
 ok; type: "image", media_id: "media_id", created_at: 1670301152 (2022-12-06T12:32:32+08:00)
 ```
 
-[企业微信上传临时素材开发文档](https://developer.work.weixin.qq.com/document/path/90389)
+官方开发文档 [企业微信上传临时素材](https://developer.work.weixin.qq.com/document/path/90389)

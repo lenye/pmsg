@@ -138,4 +138,4 @@ $ pmsg workweixin customer -i corp_id -s corp_secret -o user_id -k kf_id -m text
 ok; msgid: "msgid"
 ```
 
-[企业微信客服消息开发文档](https://developer.work.weixin.qq.com/document/path/94677)
+官方开发文档 [企业微信客服消息](https://developer.work.weixin.qq.com/document/path/94677)

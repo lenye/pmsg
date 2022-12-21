@@ -45,4 +45,4 @@ $ pmsg wx mp sub -i app_id -s app_secret -p template_id -o open_id '{"first":{"v
 ok
 ```
 
-[微信公众号订阅通知开发文档](https://developers.weixin.qq.com/doc/offiaccount/Subscription_Messages/api.html#send%E5%8F%91%E9%80%81%E8%AE%A2%E9%98%85%E9%80%9A%E7%9F%A5)
+官方开发文档 [微信公众号订阅通知](https://developers.weixin.qq.com/doc/offiaccount/Subscription_Messages/api.html#send%E5%8F%91%E9%80%81%E8%AE%A2%E9%98%85%E9%80%9A%E7%9F%A5)

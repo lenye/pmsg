@@ -47,4 +47,4 @@ $ pmsg wx mp tpl sub -i app_id -s app_secret -p template_id -o open_id --scene s
 ok
 ```
 
-[微信公众号一次性订阅消息开发文档](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/One-time_subscription_info.html)
+官方开发文档 [微信公众号一次性订阅消息](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/One-time_subscription_info.html)

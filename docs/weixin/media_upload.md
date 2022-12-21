@@ -28,4 +28,4 @@ $ pmsg weixin upload -i app_id -s app_secret -m image /img/app.png
 ok; type: "image", media_id: "media_id", created_at: 1669210730 (2022-11-23T21:38:50+08:00)
 ```
 
-[微信公众号新增临时素材开发文档](https://developers.weixin.qq.com/doc/offiaccount/Asset_Management/New_temporary_materials.html)
+官方开发文档 [微信公众号新增临时素材](https://developers.weixin.qq.com/doc/offiaccount/Asset_Management/New_temporary_materials.html)

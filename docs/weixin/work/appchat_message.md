@@ -114,4 +114,4 @@ $ pmsg workweixin appchat -i corp_id -s corp_secret -c chat_id -m text 'HelloWor
 ok
 ```
 
-[企业微信群聊推送消息开发文档](https://developer.work.weixin.qq.com/document/path/90248)
+官方开发文档 [企业微信群聊推送消息](https://developer.work.weixin.qq.com/document/path/90248)

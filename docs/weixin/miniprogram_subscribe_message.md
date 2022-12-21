@@ -57,4 +57,4 @@ $ pmsg wx mini sub -i app_id -s app_secret -p template_id -o open_id '{"first":{
 ok
 ```
 
-[微信小程序订阅消息开发文档](https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.send.html)
+官方开发文档 [微信小程序订阅消息](https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/subscribe-message/subscribeMessage.send.html)

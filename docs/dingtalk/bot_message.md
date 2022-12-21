@@ -101,4 +101,4 @@ $ pmsg dingtalk bot -t access_token -m text 'HelloWorld'
 ok
 ```
 
-[推送钉钉自定义机器人消息开发文档](https://open.dingtalk.com/document/robots/custom-robot-access)
+官方开发文档 [推送钉钉自定义机器人消息](https://open.dingtalk.com/document/robots/custom-robot-access)

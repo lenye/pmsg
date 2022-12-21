@@ -103,4 +103,4 @@ $ pmsg feishu bot -t access_token -m text 'HelloWorld'
 ok
 ```
 
-[推送飞书自定义机器人消息开发文档](https://open.feishu.cn/document/ukTMukTMukTM/ucTM5YjL3ETO24yNxkjN)
+官方开发文档 [推送飞书自定义机器人消息](https://open.feishu.cn/document/ukTMukTMukTM/ucTM5YjL3ETO24yNxkjN)

@@ -133,4 +133,4 @@ $ pmsg workweixin externalcontact -i corp_id -s corp_secret -e agent_id -n 'pare
 ok
 ```
 
-[企业微信家校消息推送开发文档](https://developer.work.weixin.qq.com/document/path/91609)
+官方开发文档 [企业微信家校消息推送](https://developer.work.weixin.qq.com/document/path/91609)

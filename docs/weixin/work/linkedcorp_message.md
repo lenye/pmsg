@@ -149,4 +149,4 @@ $ pmsg workweixin linkedcorp -i corp_id -s corp_secret -o 'userid1|userid2' -m t
 ok
 ```
 
-[企业微信互联企业消息推送开发文档](https://developer.work.weixin.qq.com/document/path/90250)
+官方开发文档 [企业微信互联企业消息推送](https://developer.work.weixin.qq.com/document/path/90250)

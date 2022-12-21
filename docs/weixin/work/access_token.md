@@ -21,4 +21,4 @@ $ pmsg weixin work token -i corp_id -s corp_secret
 ok; access_token: "access_token", expires_in: 7200, expire_at: "2022-09-20T15:00:20+08:00"
 ```
 
-[获取企业微信接口调用凭证开发文档](https://developer.work.weixin.qq.com/document/path/91039)
+官方开发文档 [获取企业微信接口调用凭证](https://developer.work.weixin.qq.com/document/path/91039)

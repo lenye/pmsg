@@ -26,4 +26,4 @@ $ pmsg workweixin app undo -i corp_id -s corp_secret msg_id
 ok
 ```
 
-[撤回企业微信应用消息开发文档](https://developer.work.weixin.qq.com/document/path/94867)
+官方开发文档 [撤回企业微信应用消息](https://developer.work.weixin.qq.com/document/path/94867)

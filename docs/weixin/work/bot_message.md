@@ -212,4 +212,4 @@ $ pmsg wwx bot -k key -m image /img/app.png
 ok
 ```
 
-[推送企业微信群机器人消息开发文档](https://developer.work.weixin.qq.com/document/path/91770)
+官方开发文档 [推送企业微信群机器人消息](https://developer.work.weixin.qq.com/document/path/91770)

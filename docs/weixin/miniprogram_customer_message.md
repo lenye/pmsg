@@ -97,4 +97,4 @@ pmsg weixin miniprogram customer -i app_id -s app_secret -o open_id -m miniprogr
 ok
 ```
 
-[微信小程序客服消息开发文档](https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/customer-message/customerServiceMessage.send.html)
+官方开发文档 [微信小程序客服消息](https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/customer-message/customerServiceMessage.send.html)
