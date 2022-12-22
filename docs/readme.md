@@ -1,6 +1,6 @@
 # 文档
 
-### 下载
+## 下载
 
 * `pmsg` [最新版本及源代码](install.md)
 
@@ -34,10 +34,10 @@
 
 ## WebHook
 
-### 企业微信群机器人
+### 企业微信
 
-* [文件上传](weixin/work/bot_upload.md)
-* [推送消息](weixin/work/bot_message.md)
+* [群机器人文件上传](weixin/work/bot_upload.md)
+* [群机器人消息](weixin/work/bot_message.md)
 
 ### 钉钉
 
