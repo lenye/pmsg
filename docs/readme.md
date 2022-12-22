@@ -4,6 +4,21 @@
 
 * `pmsg` [最新版本及源代码](install.md)
 
+## WebHook
+
+### 企业微信
+
+* [群机器人文件上传](weixin/work/bot_upload.md)
+* [群机器人消息](weixin/work/bot_message.md)
+
+### 钉钉
+
+* [自定义机器人消息](dingtalk/bot_message.md)
+
+### 飞书
+
+* [自定义机器人消息](feishu/bot_message.md)
+
 ## 微信
 
 * [获取接口调用凭证（公众号、小程序）](weixin/access_token.md)access_token
@@ -32,17 +47,4 @@
 * [家校消息推送](weixin/work/externalcontact_message.md)
 * [客服消息](weixin/work/customer_message.md)
 
-## WebHook
 
-### 企业微信
-
-* [群机器人文件上传](weixin/work/bot_upload.md)
-* [群机器人消息](weixin/work/bot_message.md)
-
-### 钉钉
-
-* [自定义机器人消息](dingtalk/bot_message.md)
-
-### 飞书
-
-* [自定义机器人消息](feishu/bot_message.md)
