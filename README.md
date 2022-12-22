@@ -1,14 +1,14 @@
 `pmsg`是一个发送消息的小工具。
 
-### 支持的消息
+## 支持的消息
 
-#### WebHook
+### WebHook
 
 * 企业微信群机器人消息
 * 钉钉自定义机器人消息
 * 飞书自定义机器人消息
 
-#### 微信
+### 微信
 
 * 微信公众号
     * 模板消息
@@ -20,7 +20,7 @@
     * 订阅消息
     * 客服消息
 
-#### 企业微信
+### 企业微信
 
 * 应用消息
 * 群聊消息
@@ -28,20 +28,20 @@
 * 互联企业消息
 * 客服消息
 
-### 支持的操作系统
+## 支持的操作系统
 
 * Windows
 * Linux
 * macOS
 * FreeBSD
 
-### 文档
+## 文档
 
 https://github.com/lenye/pmsg/tree/main/docs
 
-### 下载
+## 下载
 
-#### 使用二进制发行版
+### 使用二进制发行版
 
 1. 下载 `pmsg` [最新版本](https://github.com/lenye/pmsg/releases)
 
@@ -69,7 +69,7 @@ https://github.com/lenye/pmsg/tree/main/docs
    Use "pmsg [command] --help" for more information about a command.
    ```
 
-#### linux容器映像
+### linux容器映像
 
 1. `Packages` https://github.com/lenye/pmsg/pkgs/container/pmsg
 
@@ -99,12 +99,12 @@ https://github.com/lenye/pmsg/tree/main/docs
    Use "pmsg [command] --help" for more information about a command.
    ```
 
-#### 源代码
+### 源代码
 
 ```shell
 $ git clone https://github.com/lenye/pmsg.git
 ```
 
-### License
+## License
 
 `pmsg` is released under the [Apache 2.0 license](https://github.com/lenye/pmsg/blob/main/LICENSE). 
