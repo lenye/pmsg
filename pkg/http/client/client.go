@@ -34,10 +34,9 @@ var UserAgent string
 var ErrRequest = errors.New("http request error")
 
 const (
-	HdrKeyUserAgent              = "User-Agent"
-	HdrKeyContentType            = "Content-Type"
-	HdrValContentTypeJson        = "application/json"
-	HdrValContentTypeJsonCharset = "application/json; charset=utf-8"
+	HdrKeyUserAgent       = "User-Agent"
+	HdrKeyContentType     = "Content-Type"
+	HdrValContentTypeJson = "application/json"
 )
 
 const (
@@ -71,13 +70,13 @@ func Get(url string) (*http.Response, error) {
 }
 
 // Post http post
-func Post(url, bodyType string, body io.Reader) (*http.Response, error) {
+func Post(url, contentType string, body io.Reader) (*http.Response, error) {
 	req, err := http.NewRequest(http.MethodPost, url, body)
 	if err != nil {
 		return nil, err
 	}
 	req.Header.Set(HdrKeyUserAgent, userAgent())
-	req.Header.Set(HdrKeyContentType, bodyType)
+	req.Header.Set(HdrKeyContentType, contentType)
 
 	return DefaultClient.Do(req)
 }
