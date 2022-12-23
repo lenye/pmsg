@@ -19,6 +19,10 @@
 
 * [自定义机器人消息](feishu/bot_message.md)
 
+### Slack
+
+* [机器人消息](slack/bot_message.md)
+
 ## 微信
 
 * [获取接口调用凭证（公众号、小程序）](weixin/access_token.md)access_token
