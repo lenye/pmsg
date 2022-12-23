@@ -196,7 +196,7 @@ func CmdMpSendCustomer(arg *CmdMpSendCustomerParams) error {
 		msg.MiniProgramPage = &msgMeta
 	}
 
-	client.UserAgent = arg.UserAgent
+	client.SetUserAgent(arg.UserAgent)
 
 	if arg.AccessToken == "" {
 		accessTokenResp, err := token.FetchAccessToken(arg.AppID, arg.AppSecret)

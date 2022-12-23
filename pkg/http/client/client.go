@@ -29,8 +29,6 @@ import (
 	"github.com/lenye/pmsg/pkg/version"
 )
 
-var UserAgent string
-
 var ErrRequest = errors.New("http request error")
 
 const (
@@ -47,13 +45,19 @@ var DefaultClient = &http.Client{
 	Timeout: Timeout,
 }
 
+var userAgent string
+
 func DefaultUserAgent() string {
 	return fmt.Sprintf("%s/%s (%s; %s) %s/%s", version.AppName, version.Version, runtime.GOOS, runtime.GOARCH, version.BuildGit, version.BuildTime)
 }
 
-func userAgent() string {
-	if UserAgent != "" {
-		return UserAgent
+func SetUserAgent(value string) {
+	userAgent = value
+}
+
+func UserAgent() string {
+	if userAgent != "" {
+		return userAgent
 	}
 	return DefaultUserAgent()
 }
@@ -64,7 +68,7 @@ func Get(url string) (*http.Response, error) {
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set(HdrKeyUserAgent, userAgent())
+	req.Header.Set(HdrKeyUserAgent, UserAgent())
 
 	return DefaultClient.Do(req)
 }
@@ -75,7 +79,7 @@ func Post(url, contentType string, body io.Reader) (*http.Response, error) {
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set(HdrKeyUserAgent, userAgent())
+	req.Header.Set(HdrKeyUserAgent, UserAgent())
 	req.Header.Set(HdrKeyContentType, contentType)
 
 	return DefaultClient.Do(req)

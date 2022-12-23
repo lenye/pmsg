@@ -95,7 +95,7 @@ func CmdSend(arg *CmdSendParams) error {
 		msg.Card = &msgMeta
 	}
 
-	client.UserAgent = arg.UserAgent
+	client.SetUserAgent(arg.UserAgent)
 
 	if err := Send(arg.AccessToken, &msg); err != nil {
 		return err

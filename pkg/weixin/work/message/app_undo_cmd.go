@@ -37,7 +37,7 @@ func CmdWorkUndoApp(arg *CmdWorkUndoAppParams) error {
 		MsgID: arg.MsgID,
 	}
 
-	client.UserAgent = arg.UserAgent
+	client.SetUserAgent(arg.UserAgent)
 
 	if arg.AccessToken == "" {
 		accessTokenResp, err := token.FetchAccessToken(arg.CorpID, arg.CorpSecret)

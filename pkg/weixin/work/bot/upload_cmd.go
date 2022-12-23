@@ -43,7 +43,7 @@ func CmdUpload(arg *CmdUploadParams) error {
 		return err
 	}
 
-	client.UserAgent = arg.UserAgent
+	client.SetUserAgent(arg.UserAgent)
 
 	if meta, err := Upload(arg.Key, arg.File); err != nil {
 		return err

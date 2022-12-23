@@ -120,7 +120,7 @@ func CmdSend(arg *CmdSendParams) error {
 		msg.TemplateCard = &msgMeta
 	}
 
-	client.UserAgent = arg.UserAgent
+	client.SetUserAgent(arg.UserAgent)
 
 	if err := Send(arg.Key, &msg); err != nil {
 		return err

@@ -30,7 +30,7 @@ type CmdWorkTokenParams struct {
 // CmdWorkGetAccessToken 获取企业微信接口调用凭证
 func CmdWorkGetAccessToken(arg *CmdWorkTokenParams) error {
 
-	client.UserAgent = arg.UserAgent
+	client.SetUserAgent(arg.UserAgent)
 
 	accessTokenResp, err := FetchAccessToken(arg.CorpID, arg.CorpSecret)
 	if err != nil {
