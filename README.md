@@ -60,6 +60,7 @@ https://github.com/lenye/pmsg/tree/main/docs
      dingtalk    ding talk
      feishu      fei shu
      help        Help about any command
+     slack       slack   
      weixin      weixin
      workweixin  work weixin
    
@@ -90,6 +91,7 @@ https://github.com/lenye/pmsg/tree/main/docs
      dingtalk    ding talk
      feishu      fei shu
      help        Help about any command
+     slack       slack   
      weixin      weixin
      workweixin  work weixin
    

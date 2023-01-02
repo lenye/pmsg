@@ -25,6 +25,7 @@
      dingtalk    ding talk
      feishu      fei shu
      help        Help about any command
+     slack       slack   
      weixin      weixin        
      workweixin  work weixin
    
@@ -55,6 +56,7 @@
      dingtalk    ding talk
      feishu      fei shu
      help        Help about any command
+     slack       slack   
      weixin      weixin
      workweixin  work weixin
    
