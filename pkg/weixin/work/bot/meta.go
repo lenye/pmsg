@@ -73,6 +73,9 @@ func ImageFile2Meta(filename string) (*ImageMeta, error) {
 	if _, err := io.Copy(encoder, f); err != nil {
 		return nil, fmt.Errorf("file: %q, base64 io.Copy failed: %w", filename, err)
 	}
+	if err := encoder.Close(); err != nil {
+		return nil, fmt.Errorf("base64 encoder close failed: %w", err)
+	}
 
 	_, err = f.Seek(0, io.SeekStart)
 	if err != nil {
