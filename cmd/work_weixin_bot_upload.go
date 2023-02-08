@@ -20,29 +20,27 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/lenye/pmsg/pkg/weixin/work/message"
+	"github.com/lenye/pmsg/pkg/weixin/work/bot"
 )
 
-// weiXinWorkUndoAppCmd 撤回企业微信应用消息
-var weiXinWorkUndoAppCmd = &cobra.Command{
-	Use:   "undo",
-	Short: "undo work weixin app message",
+// workWeiXinBotUploadCmd 企业微信群机器人上传文件
+var workWeiXinBotUploadCmd = &cobra.Command{
+	Use:   "upload",
+	Short: "work weixin group bot file upload",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		arg := message.CmdWorkUndoAppParams{
-			UserAgent:   userAgent,
-			AccessToken: accessToken,
-			CorpID:      corpID,
-			CorpSecret:  corpSecret,
-			MsgID:       args[0],
+		arg := bot.CmdUploadParams{
+			UserAgent: userAgent,
+			Key:       secret,
+			File:      args[0],
 		}
-		if err := message.CmdWorkUndoApp(&arg); err != nil {
+		if err := bot.CmdUpload(&arg); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
-	Example: "pmsg workweixin app undo -i corp_id -s corp_secret msg_id",
+	Example: "pmsg workweixin bot upload -k key /img/app.png",
 }
 
 func init() {
-	weiXinWorkSetAccessTokenFlags(weiXinWorkUndoAppCmd)
+	workWeiXinBotSetKeyFlags(workWeiXinBotUploadCmd)
 }

@@ -24,8 +24,8 @@ import (
 	"github.com/lenye/pmsg/pkg/weixin/work/token"
 )
 
-// weiXinWorkAccessTokenCmd 获取企业微信接口调用凭证
-var weiXinWorkAccessTokenCmd = &cobra.Command{
+// workWeiXinAccessTokenCmd 获取企业微信接口调用凭证
+var workWeiXinAccessTokenCmd = &cobra.Command{
 	Use:   "token",
 	Short: "get work weixin access token",
 	Args:  cobra.NoArgs,
@@ -43,9 +43,9 @@ var weiXinWorkAccessTokenCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinWorkAccessTokenCmd.Flags().StringVarP(&corpID, flags.CorpID, "i", "", "work weixin corp id (required)")
-	weiXinWorkAccessTokenCmd.MarkFlagRequired(flags.CorpID)
+	workWeiXinAccessTokenCmd.Flags().StringVarP(&corpID, flags.CorpID, "i", "", "work weixin corp id (required)")
+	workWeiXinAccessTokenCmd.MarkFlagRequired(flags.CorpID)
 
-	weiXinWorkAccessTokenCmd.Flags().StringVarP(&corpSecret, flags.CorpSecret, "s", "", "work weixin corp secret (required)")
-	weiXinWorkAccessTokenCmd.MarkFlagRequired(flags.CorpSecret)
+	workWeiXinAccessTokenCmd.Flags().StringVarP(&corpSecret, flags.CorpSecret, "s", "", "work weixin corp secret (required)")
+	workWeiXinAccessTokenCmd.MarkFlagRequired(flags.CorpSecret)
 }

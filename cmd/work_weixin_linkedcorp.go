@@ -25,8 +25,8 @@ import (
 	"github.com/lenye/pmsg/pkg/weixin/work/message"
 )
 
-// weiXinWorkLinkedCorpCmd 企业微信互联企业消息
-var weiXinWorkLinkedCorpCmd = &cobra.Command{
+// workWeiXinLinkedCorpCmd 企业微信互联企业消息
+var workWeiXinLinkedCorpCmd = &cobra.Command{
 	Use:     "linkedcorp",
 	Aliases: []string{"lc"},
 	Short:   "publish work weixin linked corp message",
@@ -62,19 +62,19 @@ var weiXinWorkLinkedCorpCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinWorkSetAccessTokenFlags(weiXinWorkLinkedCorpCmd)
+	workWeiXinSetAccessTokenFlags(workWeiXinLinkedCorpCmd)
 
-	weiXinWorkLinkedCorpCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "work weixin user id list")
-	weiXinWorkLinkedCorpCmd.Flags().StringVarP(&toParty, flags.ToParty, "p", "", "work weixin party id list")
-	weiXinWorkLinkedCorpCmd.Flags().StringVarP(&toTag, flags.ToTag, "g", "", "work weixin tag id list")
-	weiXinWorkLinkedCorpCmd.Flags().IntVarP(&toAll, flags.ToAll, "l", 0, "send to all user")
+	workWeiXinLinkedCorpCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "work weixin user id list")
+	workWeiXinLinkedCorpCmd.Flags().StringVarP(&toParty, flags.ToParty, "p", "", "work weixin party id list")
+	workWeiXinLinkedCorpCmd.Flags().StringVarP(&toTag, flags.ToTag, "g", "", "work weixin tag id list")
+	workWeiXinLinkedCorpCmd.Flags().IntVarP(&toAll, flags.ToAll, "l", 0, "send to all user")
 
-	weiXinWorkLinkedCorpCmd.Flags().Int64VarP(&agentID, flags.AgentID, "e", 0, "work weixin agent id (required)")
-	weiXinWorkLinkedCorpCmd.MarkFlagRequired(flags.AgentID)
+	workWeiXinLinkedCorpCmd.Flags().Int64VarP(&agentID, flags.AgentID, "e", 0, "work weixin agent id (required)")
+	workWeiXinLinkedCorpCmd.MarkFlagRequired(flags.AgentID)
 
-	weiXinWorkLinkedCorpCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
-	weiXinWorkLinkedCorpCmd.MarkFlagRequired(flags.MsgType)
+	workWeiXinLinkedCorpCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
+	workWeiXinLinkedCorpCmd.MarkFlagRequired(flags.MsgType)
 
-	weiXinWorkLinkedCorpCmd.Flags().IntVar(&safe, flags.Safe, 0, "safe")
+	workWeiXinLinkedCorpCmd.Flags().IntVar(&safe, flags.Safe, 0, "safe")
 
 }

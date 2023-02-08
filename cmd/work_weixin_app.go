@@ -24,8 +24,8 @@ import (
 	"github.com/lenye/pmsg/pkg/weixin/work/message"
 )
 
-// weiXinWorkAppCmd 企业微信应用消息
-var weiXinWorkAppCmd = &cobra.Command{
+// workWeiXinAppCmd 企业微信应用消息
+var workWeiXinAppCmd = &cobra.Command{
 	Use:   "app",
 	Short: "publish work weixin app message",
 	Args:  cobra.ExactArgs(1),
@@ -54,22 +54,22 @@ var weiXinWorkAppCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinWorkAppCmd.AddCommand(weiXinWorkUndoAppCmd)
+	workWeiXinAppCmd.AddCommand(workWeiXinUndoAppCmd)
 
-	weiXinWorkSetAccessTokenFlags(weiXinWorkAppCmd)
+	workWeiXinSetAccessTokenFlags(workWeiXinAppCmd)
 
-	weiXinWorkAppCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "work weixin user id list")
-	weiXinWorkAppCmd.Flags().StringVarP(&toParty, flags.ToParty, "p", "", "work weixin party id list")
-	weiXinWorkAppCmd.Flags().StringVarP(&toTag, flags.ToTag, "g", "", "work weixin tag id list")
+	workWeiXinAppCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "work weixin user id list")
+	workWeiXinAppCmd.Flags().StringVarP(&toParty, flags.ToParty, "p", "", "work weixin party id list")
+	workWeiXinAppCmd.Flags().StringVarP(&toTag, flags.ToTag, "g", "", "work weixin tag id list")
 
-	weiXinWorkAppCmd.Flags().Int64VarP(&agentID, flags.AgentID, "e", 0, "work weixin agent id (required)")
-	weiXinWorkAppCmd.MarkFlagRequired(flags.AgentID)
+	workWeiXinAppCmd.Flags().Int64VarP(&agentID, flags.AgentID, "e", 0, "work weixin agent id (required)")
+	workWeiXinAppCmd.MarkFlagRequired(flags.AgentID)
 
-	weiXinWorkAppCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
-	weiXinWorkAppCmd.MarkFlagRequired(flags.MsgType)
+	workWeiXinAppCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
+	workWeiXinAppCmd.MarkFlagRequired(flags.MsgType)
 
-	weiXinWorkAppCmd.Flags().IntVar(&safe, flags.Safe, 0, "safe")
-	weiXinWorkAppCmd.Flags().IntVarP(&enableIDTrans, flags.EnableIDTrans, "r", 0, "enable id translated")
-	weiXinWorkAppCmd.Flags().IntVarP(&enableDuplicateCheck, flags.EnableDuplicateCheck, "c", 0, "enable duplicate check")
-	weiXinWorkAppCmd.Flags().IntVarP(&duplicateCheckInterval, flags.DuplicateCheckInterval, "d", 1800, "duplicate check interval")
+	workWeiXinAppCmd.Flags().IntVar(&safe, flags.Safe, 0, "safe")
+	workWeiXinAppCmd.Flags().IntVarP(&enableIDTrans, flags.EnableIDTrans, "r", 0, "enable id translated")
+	workWeiXinAppCmd.Flags().IntVarP(&enableDuplicateCheck, flags.EnableDuplicateCheck, "c", 0, "enable duplicate check")
+	workWeiXinAppCmd.Flags().IntVarP(&duplicateCheckInterval, flags.DuplicateCheckInterval, "d", 1800, "duplicate check interval")
 }

@@ -20,34 +20,29 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/weixin/work/asset"
+	"github.com/lenye/pmsg/pkg/weixin/work/message"
 )
 
-// weiXinWorkMediaUploadCmd 企业微信上传临时素材
-var weiXinWorkMediaUploadCmd = &cobra.Command{
-	Use:   "upload",
-	Short: "work weixin media upload",
+// workWeiXinUndoAppCmd 撤回企业微信应用消息
+var workWeiXinUndoAppCmd = &cobra.Command{
+	Use:   "undo",
+	Short: "undo work weixin app message",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		arg := asset.CmdWorkMediaUploadParams{
+		arg := message.CmdWorkUndoAppParams{
 			UserAgent:   userAgent,
 			AccessToken: accessToken,
 			CorpID:      corpID,
 			CorpSecret:  corpSecret,
-			MediaType:   mediaType,
-			File:        args[0],
+			MsgID:       args[0],
 		}
-		if err := asset.CmdWorkMediaUpload(&arg); err != nil {
+		if err := message.CmdWorkUndoApp(&arg); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
-	Example: "pmsg workweixin upload -i corp_id -m image /img/app.png",
+	Example: "pmsg workweixin app undo -i corp_id -s corp_secret msg_id",
 }
 
 func init() {
-	weiXinWorkSetAccessTokenFlags(weiXinWorkMediaUploadCmd)
-
-	weiXinWorkMediaUploadCmd.Flags().StringVarP(&mediaType, flags.MediaType, "m", "", "media type (required)")
-	weiXinWorkMediaUploadCmd.MarkFlagRequired(flags.MediaType)
+	workWeiXinSetAccessTokenFlags(workWeiXinUndoAppCmd)
 }

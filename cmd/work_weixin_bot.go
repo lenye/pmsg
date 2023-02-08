@@ -24,8 +24,8 @@ import (
 	"github.com/lenye/pmsg/pkg/weixin/work/bot"
 )
 
-// weiXinWorkCmd 企业微信群机器人
-var weiXinWorkBotCmd = &cobra.Command{
+// workWeiXinBotCmd 企业微信群机器人
+var workWeiXinBotCmd = &cobra.Command{
 	Use:   "bot",
 	Short: "publish work weixin group bot message",
 	Args:  cobra.ExactArgs(1),
@@ -46,19 +46,19 @@ var weiXinWorkBotCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinWorkBotCmd.AddCommand(weiXinWorkBotUploadCmd)
+	workWeiXinBotCmd.AddCommand(workWeiXinBotUploadCmd)
 
-	weiXinWorkSetKeyFlags(weiXinWorkBotCmd)
+	workWeiXinBotSetKeyFlags(workWeiXinBotCmd)
 
-	weiXinWorkBotCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
-	weiXinWorkBotCmd.MarkFlagRequired(flags.MsgType)
+	workWeiXinBotCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
+	workWeiXinBotCmd.MarkFlagRequired(flags.MsgType)
 
-	weiXinWorkBotCmd.Flags().StringVarP(&atUser, flags.AtUser, "o", "", "work weixin user id list")
-	weiXinWorkBotCmd.Flags().StringVarP(&atMobile, flags.AtMobile, "b", "", "mobile list")
+	workWeiXinBotCmd.Flags().StringVarP(&atUser, flags.AtUser, "o", "", "work weixin user id list")
+	workWeiXinBotCmd.Flags().StringVarP(&atMobile, flags.AtMobile, "b", "", "mobile list")
 }
 
-// weiXinWorkSetKeyFlags 设置企业微信key命令行参数
-func weiXinWorkSetKeyFlags(cmd *cobra.Command) {
+// workWeiXinBotSetKeyFlags 设置企业微信群机器人key命令行参数
+func workWeiXinBotSetKeyFlags(cmd *cobra.Command) {
 	cmd.Flags().StringVarP(&secret, flags.Key, "k", "", "work weixin bot key (required)")
 	cmd.MarkFlagRequired(flags.Key)
 }

@@ -24,8 +24,8 @@ import (
 	"github.com/lenye/pmsg/pkg/weixin/work/message"
 )
 
-// weiXinWorkAppChatCmd 企业微信群聊推送消息
-var weiXinWorkAppChatCmd = &cobra.Command{
+// workWeiXinAppChatCmd 企业微信群聊推送消息
+var workWeiXinAppChatCmd = &cobra.Command{
 	Use:     "appchat",
 	Aliases: []string{"chat"},
 	Short:   "publish work weixin appchat message",
@@ -49,13 +49,13 @@ var weiXinWorkAppChatCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinWorkSetAccessTokenFlags(weiXinWorkAppChatCmd)
+	workWeiXinSetAccessTokenFlags(workWeiXinAppChatCmd)
 
-	weiXinWorkAppChatCmd.Flags().StringVarP(&chatID, flags.ChatID, "c", "", "work weixin chat id (required)")
-	weiXinWorkAppChatCmd.MarkFlagRequired(flags.ChatID)
+	workWeiXinAppChatCmd.Flags().StringVarP(&chatID, flags.ChatID, "c", "", "work weixin chat id (required)")
+	workWeiXinAppChatCmd.MarkFlagRequired(flags.ChatID)
 
-	weiXinWorkAppChatCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
-	weiXinWorkAppChatCmd.MarkFlagRequired(flags.MsgType)
+	workWeiXinAppChatCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
+	workWeiXinAppChatCmd.MarkFlagRequired(flags.MsgType)
 
-	weiXinWorkAppChatCmd.Flags().IntVar(&safe, flags.Safe, 0, "safe")
+	workWeiXinAppChatCmd.Flags().IntVar(&safe, flags.Safe, 0, "safe")
 }

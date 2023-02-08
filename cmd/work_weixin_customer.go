@@ -24,8 +24,8 @@ import (
 	"github.com/lenye/pmsg/pkg/weixin/work/message"
 )
 
-// weiXinWorkCustomerCmd 微信客服消息
-var weiXinWorkCustomerCmd = &cobra.Command{
+// workWeiXinCustomerCmd 微信客服消息
+var workWeiXinCustomerCmd = &cobra.Command{
 	Use:     "customer",
 	Aliases: []string{"kf"},
 	Short:   "publish work weixin customer message",
@@ -50,16 +50,16 @@ var weiXinWorkCustomerCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinWorkSetAccessTokenFlags(weiXinWorkCustomerCmd)
+	workWeiXinSetAccessTokenFlags(workWeiXinCustomerCmd)
 
-	weiXinWorkCustomerCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "work weixin user id (required)")
-	weiXinWorkCustomerCmd.MarkFlagRequired(flags.ToUser)
+	workWeiXinCustomerCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "work weixin user id (required)")
+	workWeiXinCustomerCmd.MarkFlagRequired(flags.ToUser)
 
-	weiXinWorkCustomerCmd.Flags().StringVarP(&openKfID, flags.OpenKfID, "k", "", "work weixin customer account id (required)")
-	weiXinWorkCustomerCmd.MarkFlagRequired(flags.OpenKfID)
+	workWeiXinCustomerCmd.Flags().StringVarP(&openKfID, flags.OpenKfID, "k", "", "work weixin customer account id (required)")
+	workWeiXinCustomerCmd.MarkFlagRequired(flags.OpenKfID)
 
-	weiXinWorkCustomerCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
-	weiXinWorkCustomerCmd.MarkFlagRequired(flags.MsgType)
+	workWeiXinCustomerCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
+	workWeiXinCustomerCmd.MarkFlagRequired(flags.MsgType)
 
-	weiXinWorkCustomerCmd.Flags().StringVarP(&msgID, flags.MsgID, "c", "", "message id")
+	workWeiXinCustomerCmd.Flags().StringVarP(&msgID, flags.MsgID, "c", "", "message id")
 }

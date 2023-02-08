@@ -20,29 +20,29 @@ import (
 	"github.com/lenye/pmsg/pkg/flags"
 )
 
-// weiXinWorkCmd 企业微信
-var weiXinWorkCmd = &cobra.Command{
+// workWeiXinCmd 企业微信
+var workWeiXinCmd = &cobra.Command{
 	Use:     "workweixin",
 	Aliases: []string{"wwx"},
 	Short:   "work weixin",
 }
 
 func init() {
-	weiXinWorkCmd.PersistentFlags().StringVarP(&userAgent, flags.UserAgent, "a", "", "http user agent")
+	workWeiXinCmd.PersistentFlags().StringVarP(&userAgent, flags.UserAgent, "a", "", "http user agent")
 
-	weiXinWorkCmd.AddCommand(weiXinWorkAccessTokenCmd)
-	weiXinWorkCmd.AddCommand(weiXinWorkAppCmd)
-	weiXinWorkCmd.AddCommand(weiXinWorkAppChatCmd)
-	weiXinWorkCmd.AddCommand(weiXinWorkCustomerCmd)
-	weiXinWorkCmd.AddCommand(weiXinWorkExternalContactCmd)
-	weiXinWorkCmd.AddCommand(weiXinWorkLinkedCorpCmd)
-	weiXinWorkCmd.AddCommand(weiXinWorkMediaUploadCmd)
-	weiXinWorkCmd.AddCommand(weiXinWorkBotCmd)
+	workWeiXinCmd.AddCommand(workWeiXinAccessTokenCmd)
+	workWeiXinCmd.AddCommand(workWeiXinAppCmd)
+	workWeiXinCmd.AddCommand(workWeiXinAppChatCmd)
+	workWeiXinCmd.AddCommand(workWeiXinCustomerCmd)
+	workWeiXinCmd.AddCommand(workWeiXinExternalContactCmd)
+	workWeiXinCmd.AddCommand(workWeiXinLinkedCorpCmd)
+	workWeiXinCmd.AddCommand(workWeiXinMediaUploadCmd)
+	workWeiXinCmd.AddCommand(workWeiXinBotCmd)
 
 }
 
-// weiXinWorkSetAccessTokenFlags 设置企业微信access_token或者corp_id/corp_secret命令行参数
-func weiXinWorkSetAccessTokenFlags(cmd *cobra.Command) {
+// workWeiXinSetAccessTokenFlags 设置企业微信access_token或者corp_id/corp_secret命令行参数
+func workWeiXinSetAccessTokenFlags(cmd *cobra.Command) {
 	cmd.Flags().StringVarP(&accessToken, flags.AccessToken, "t", "", "work weixin access token")
 
 	cmd.Flags().StringVarP(&corpID, flags.CorpID, "i", "", "work weixin corp id (required if corp secret is set)")

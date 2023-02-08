@@ -46,7 +46,7 @@ func init() {
 	rootCmd.Version = version.Print()
 
 	rootCmd.AddCommand(weiXinCmd)
-	rootCmd.AddCommand(weiXinWorkCmd)
+	rootCmd.AddCommand(workWeiXinCmd)
 	rootCmd.AddCommand(dingTalkCmd)
 	rootCmd.AddCommand(feiShuCmd)
 	rootCmd.AddCommand(slackCmd)
