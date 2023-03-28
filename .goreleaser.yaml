@@ -60,8 +60,6 @@ checksum:
 
 
 changelog:
-  sort: asc
-  use: github
   filters:
     exclude:
       - '^wip:'
