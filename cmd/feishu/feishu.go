@@ -12,23 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package feishu
 
 import (
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/pkg/flags"
 )
 
-// feiShuCmd 飞书
-var feiShuCmd = &cobra.Command{
+// Cmd 飞书
+var Cmd = &cobra.Command{
 	Use:     "feishu",
 	Aliases: []string{"fs"},
 	Short:   "fei shu",
 }
 
 func init() {
-	feiShuCmd.PersistentFlags().StringVarP(&userAgent, flags.UserAgent, "a", "", "http user agent")
+	Cmd.PersistentFlags().StringVarP(&variable.UserAgent, flags.UserAgent, "a", "", "http user agent")
 
-	feiShuCmd.AddCommand(feiShuBotCmd)
+	Cmd.AddCommand(botCmd)
 }
