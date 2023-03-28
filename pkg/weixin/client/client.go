@@ -20,21 +20,21 @@ import (
 	"fmt"
 	"net/http"
 
-	httpClient "github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/httpclient"
 )
 
 // CheckHttpResponseStatusCode 检查HTTP响应状态码
 func CheckHttpResponseStatusCode(method, url string, statusCode int) error {
 	if statusCode/100 != 2 {
-		return fmt.Errorf("%w; http response status code: %v, %s %s", httpClient.ErrRequest, statusCode, method, url)
+		return fmt.Errorf("%w; http response status code: %v, %s %s", httpclient.ErrRequest, statusCode, method, url)
 	}
 	return nil
 }
 
 func GetJSON(url string, respBody any) (http.Header, error) {
-	resp, err := httpClient.Get(url)
+	resp, err := httpclient.Get(url)
 	if err != nil {
-		return nil, fmt.Errorf("%w; %s %s, %v", httpClient.ErrRequest, http.MethodGet, url, err)
+		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodGet, url, err)
 	}
 	defer resp.Body.Close()
 
@@ -59,9 +59,9 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 		return nil, err
 	}
 
-	resp, err := httpClient.Post(url, httpClient.HdrValContentTypeJson, bytes.NewReader(buf.Bytes()))
+	resp, err := httpclient.Post(url, httpclient.HdrValContentTypeJson, bytes.NewReader(buf.Bytes()))
 	if err != nil {
-		return nil, fmt.Errorf("%w; %s %s, %v", httpClient.ErrRequest, http.MethodPost, url, err)
+		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodPost, url, err)
 	}
 	defer resp.Body.Close()
 
@@ -77,9 +77,9 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 }
 
 func PostFileJSON(url, fieldName, fileName string, respBody any) (http.Header, error) {
-	resp, err := httpClient.PostFile(url, fieldName, fileName)
+	resp, err := httpclient.PostFile(url, fieldName, fileName)
 	if err != nil {
-		return nil, fmt.Errorf("%w; %s %s, %v", httpClient.ErrRequest, http.MethodPost, url, err)
+		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodPost, url, err)
 	}
 	defer resp.Body.Close()
 

@@ -23,7 +23,7 @@ import (
 
 	"github.com/lenye/pmsg/pkg/file"
 	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/httpclient"
 	"github.com/lenye/pmsg/pkg/weixin"
 )
 
@@ -120,7 +120,7 @@ func CmdSend(arg *CmdSendParams) error {
 		msg.TemplateCard = &msgMeta
 	}
 
-	client.SetUserAgent(arg.UserAgent)
+	httpclient.SetUserAgent(arg.UserAgent)
 
 	if err := Send(arg.Key, &msg); err != nil {
 		return err

@@ -19,15 +19,15 @@ import (
 	"net/http"
 	"strings"
 
-	httpClient "github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/httpclient"
 	"github.com/lenye/pmsg/pkg/slack"
 )
 
 // PostJSON http post json
 func PostJSON(url, reqBody string) (http.Header, error) {
-	resp, err := httpClient.Post(url, httpClient.HdrValContentTypeJson, strings.NewReader(reqBody))
+	resp, err := httpclient.Post(url, httpclient.HdrValContentTypeJson, strings.NewReader(reqBody))
 	if err != nil {
-		return nil, fmt.Errorf("%w; %s %s, %v", httpClient.ErrRequest, http.MethodPost, url, err)
+		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodPost, url, err)
 	}
 	defer resp.Body.Close()
 

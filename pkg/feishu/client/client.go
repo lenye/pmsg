@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"net/http"
 
-	httpClient "github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/httpclient"
 )
 
 // PostJSON http post json
@@ -33,9 +33,9 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 		return nil, err
 	}
 
-	resp, err := httpClient.Post(url, httpClient.HdrValContentTypeJson, bytes.NewReader(buf.Bytes()))
+	resp, err := httpclient.Post(url, httpclient.HdrValContentTypeJson, bytes.NewReader(buf.Bytes()))
 	if err != nil {
-		return nil, fmt.Errorf("%w; %s %s, %v", httpClient.ErrRequest, http.MethodPost, url, err)
+		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodPost, url, err)
 	}
 	defer resp.Body.Close()
 

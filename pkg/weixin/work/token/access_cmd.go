@@ -17,7 +17,7 @@ package token
 import (
 	"fmt"
 
-	"github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/httpclient"
 	"github.com/lenye/pmsg/pkg/weixin"
 )
 
@@ -30,7 +30,7 @@ type CmdWorkTokenParams struct {
 // CmdWorkGetAccessToken 获取企业微信接口调用凭证
 func CmdWorkGetAccessToken(arg *CmdWorkTokenParams) error {
 
-	client.SetUserAgent(arg.UserAgent)
+	httpclient.SetUserAgent(arg.UserAgent)
 
 	accessTokenResp, err := FetchAccessToken(arg.CorpID, arg.CorpSecret)
 	if err != nil {

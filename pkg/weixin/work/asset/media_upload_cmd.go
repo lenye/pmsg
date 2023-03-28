@@ -19,7 +19,7 @@ import (
 
 	"github.com/lenye/pmsg/pkg/file"
 	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/httpclient"
 	"github.com/lenye/pmsg/pkg/weixin"
 	"github.com/lenye/pmsg/pkg/weixin/work/token"
 )
@@ -56,7 +56,7 @@ func CmdWorkMediaUpload(arg *CmdWorkMediaUploadParams) error {
 		return err
 	}
 
-	client.SetUserAgent(arg.UserAgent)
+	httpclient.SetUserAgent(arg.UserAgent)
 
 	if arg.AccessToken == "" {
 		accessTokenResp, err := token.FetchAccessToken(arg.CorpID, arg.CorpSecret)

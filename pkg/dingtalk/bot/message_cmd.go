@@ -22,7 +22,7 @@ import (
 
 	"github.com/lenye/pmsg/pkg/dingtalk"
 	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/httpclient"
 )
 
 type CmdSendParams struct {
@@ -119,7 +119,7 @@ func CmdSend(arg *CmdSendParams) error {
 		msg.FeedCard = &msgMeta
 	}
 
-	client.SetUserAgent(arg.UserAgent)
+	httpclient.SetUserAgent(arg.UserAgent)
 
 	if err := Send(arg.AccessToken, arg.Secret, &msg); err != nil {
 		return err

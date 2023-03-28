@@ -23,7 +23,7 @@ import (
 
 	"github.com/lenye/pmsg/pkg/feishu"
 	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/httpclient"
 )
 
 type CmdSendParams struct {
@@ -95,7 +95,7 @@ func CmdSend(arg *CmdSendParams) error {
 		msg.Card = &msgMeta
 	}
 
-	client.SetUserAgent(arg.UserAgent)
+	httpclient.SetUserAgent(arg.UserAgent)
 
 	if err := Send(arg.AccessToken, &msg); err != nil {
 		return err

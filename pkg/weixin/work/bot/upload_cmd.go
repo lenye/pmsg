@@ -18,7 +18,7 @@ import (
 	"fmt"
 
 	"github.com/lenye/pmsg/pkg/file"
-	"github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/httpclient"
 	"github.com/lenye/pmsg/pkg/weixin"
 )
 
@@ -43,7 +43,7 @@ func CmdUpload(arg *CmdUploadParams) error {
 		return err
 	}
 
-	client.SetUserAgent(arg.UserAgent)
+	httpclient.SetUserAgent(arg.UserAgent)
 
 	if meta, err := Upload(arg.Key, arg.File); err != nil {
 		return err

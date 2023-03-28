@@ -17,7 +17,7 @@ package bot
 import (
 	"fmt"
 
-	"github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/httpclient"
 	"github.com/lenye/pmsg/pkg/slack"
 )
 
@@ -30,7 +30,7 @@ type CmdSendParams struct {
 // CmdSend 发送消息
 func CmdSend(arg *CmdSendParams) error {
 
-	client.SetUserAgent(arg.UserAgent)
+	httpclient.SetUserAgent(arg.UserAgent)
 
 	if err := Send(arg.URL, arg.Data); err != nil {
 		return err

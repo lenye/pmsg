@@ -20,7 +20,7 @@ import (
 	"fmt"
 
 	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/http/client"
+	"github.com/lenye/pmsg/pkg/httpclient"
 	"github.com/lenye/pmsg/pkg/weixin"
 	"github.com/lenye/pmsg/pkg/weixin/token"
 )
@@ -113,7 +113,7 @@ func CmdMpSendTemplateSubscribe(arg *CmdMpSendTemplateSubscribeParams) error {
 		}
 	}
 
-	client.SetUserAgent(arg.UserAgent)
+	httpclient.SetUserAgent(arg.UserAgent)
 
 	if arg.AccessToken == "" {
 		accessTokenResp, err := token.FetchAccessToken(arg.AppID, arg.AppSecret)
