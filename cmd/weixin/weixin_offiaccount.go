@@ -12,23 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package weixin
 
 import (
 	"github.com/spf13/cobra"
-
-	"github.com/lenye/pmsg/pkg/flags"
 )
 
-// slackCmd slack
-var slackCmd = &cobra.Command{
-	Use:     "slack",
-	Aliases: []string{"sk"},
-	Short:   "slack",
+// officialAccountCmd 微信公众号
+var officialAccountCmd = &cobra.Command{
+	Use:     "offiaccount",
+	Aliases: []string{"oa"},
+	Short:   "weixin official account",
 }
 
 func init() {
-	slackCmd.PersistentFlags().StringVarP(&userAgent, flags.UserAgent, "a", "", "http user agent")
-
-	slackCmd.AddCommand(slackBotCmd)
+	officialAccountCmd.AddCommand(officialAccountCustomerCmd)
+	officialAccountCmd.AddCommand(officialAccountSubCmd)
+	officialAccountCmd.AddCommand(officialAccountTplCmd)
 }

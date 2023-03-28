@@ -12,35 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package dingtalk
 
 import (
-	"fmt"
-	"os"
-
 	"github.com/spf13/cobra"
 
-	"github.com/lenye/pmsg/pkg/weixin/work/bot"
+	"github.com/lenye/pmsg/cmd/variable"
+	"github.com/lenye/pmsg/pkg/flags"
 )
 
-// workWeiXinBotUploadCmd 企业微信群机器人上传文件
-var workWeiXinBotUploadCmd = &cobra.Command{
-	Use:   "upload",
-	Short: "work weixin group bot file upload",
-	Args:  cobra.ExactArgs(1),
-	Run: func(cmd *cobra.Command, args []string) {
-		arg := bot.CmdUploadParams{
-			UserAgent: userAgent,
-			Key:       secret,
-			File:      args[0],
-		}
-		if err := bot.CmdUpload(&arg); err != nil {
-			fmt.Fprintln(os.Stderr, err)
-		}
-	},
-	Example: "pmsg workweixin bot upload -k key /img/app.png",
+// Cmd 钉钉
+var Cmd = &cobra.Command{
+	Use:     "dingtalk",
+	Aliases: []string{"dt"},
+	Short:   "ding talk",
 }
 
 func init() {
-	workWeiXinBotSetKeyFlags(workWeiXinBotUploadCmd)
+	Cmd.PersistentFlags().StringVarP(&variable.UserAgent, flags.UserAgent, "a", "", "http user agent")
+
+	Cmd.AddCommand(botCmd)
 }

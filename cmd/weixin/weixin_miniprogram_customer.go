@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package weixin
 
 import (
 	"fmt"
@@ -20,24 +20,25 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/pkg/flags"
 	"github.com/lenye/pmsg/pkg/weixin/customer/message"
 )
 
-// weiXinMiniProgramCustomerCmd 发送微信小程序客服消息
-var weiXinMiniProgramCustomerCmd = &cobra.Command{
+// miniProgramCustomerCmd 发送微信小程序客服消息
+var miniProgramCustomerCmd = &cobra.Command{
 	Use:     "customer",
 	Aliases: []string{"kf"},
 	Short:   "publish weixin miniprogram customer message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdMiniSendCustomerParams{
-			UserAgent:   userAgent,
-			AccessToken: accessToken,
-			AppID:       appID,
-			AppSecret:   appSecret,
-			ToUser:      toUser,
-			MsgType:     msgType,
+			UserAgent:   variable.UserAgent,
+			AccessToken: variable.AccessToken,
+			AppID:       variable.AppID,
+			AppSecret:   variable.AppSecret,
+			ToUser:      variable.ToUser,
+			MsgType:     variable.MsgType,
 			Data:        args[0],
 		}
 		if err := message.CmdMiniSendCustomer(&arg); err != nil {
@@ -48,11 +49,11 @@ var weiXinMiniProgramCustomerCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinSetAccessTokenFlags(weiXinMiniProgramCustomerCmd)
+	weiXinSetAccessTokenFlags(miniProgramCustomerCmd)
 
-	weiXinMiniProgramCustomerCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "weixin user open id (required)")
-	weiXinMiniProgramCustomerCmd.MarkFlagRequired(flags.ToUser)
+	miniProgramCustomerCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "weixin user open id (required)")
+	miniProgramCustomerCmd.MarkFlagRequired(flags.ToUser)
 
-	weiXinMiniProgramCustomerCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
-	weiXinMiniProgramCustomerCmd.MarkFlagRequired(flags.MsgType)
+	miniProgramCustomerCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
+	miniProgramCustomerCmd.MarkFlagRequired(flags.MsgType)
 }

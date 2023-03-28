@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package dingtalk
 
 import (
 	"fmt"
@@ -20,24 +20,25 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/pkg/dingtalk/bot"
 	"github.com/lenye/pmsg/pkg/flags"
 )
 
-// dingTalkBotCmd 钉钉自定义机器人
-var dingTalkBotCmd = &cobra.Command{
+// botCmd 钉钉自定义机器人
+var botCmd = &cobra.Command{
 	Use:   "bot",
 	Short: "publish ding talk bot message",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := bot.CmdSendParams{
-			UserAgent:   userAgent,
-			AccessToken: accessToken,
-			Secret:      secret,
-			MsgType:     msgType,
-			AtUser:      atUser,
-			AtMobile:    atMobile,
-			IsAtAll:     isAtAll,
+			UserAgent:   variable.UserAgent,
+			AccessToken: variable.AccessToken,
+			Secret:      variable.Secret,
+			MsgType:     variable.MsgType,
+			AtUser:      variable.AtUser,
+			AtMobile:    variable.AtMobile,
+			IsAtAll:     variable.IsAtAll,
 			Data:        args[0],
 		}
 		if err := bot.CmdSend(&arg); err != nil {
@@ -48,16 +49,16 @@ var dingTalkBotCmd = &cobra.Command{
 }
 
 func init() {
-	dingTalkBotCmd.Flags().StringVarP(&accessToken, flags.AccessToken, "t", "", "dingtalk bot access token (required)")
-	dingTalkBotCmd.MarkFlagRequired(flags.AccessToken)
+	botCmd.Flags().StringVarP(&variable.AccessToken, flags.AccessToken, "t", "", "dingtalk bot access token (required)")
+	botCmd.MarkFlagRequired(flags.AccessToken)
 
-	dingTalkBotCmd.Flags().StringVarP(&secret, flags.Secret, "s", "", "sign secret")
+	botCmd.Flags().StringVarP(&variable.Secret, flags.Secret, "s", "", "sign Secret")
 
-	dingTalkBotCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
-	dingTalkBotCmd.MarkFlagRequired(flags.MsgType)
+	botCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
+	botCmd.MarkFlagRequired(flags.MsgType)
 
-	dingTalkBotCmd.Flags().StringVarP(&atUser, flags.AtUser, "o", "", "dingtalk user id list")
-	dingTalkBotCmd.Flags().StringVarP(&atMobile, flags.AtMobile, "b", "", "mobile list")
-	dingTalkBotCmd.Flags().BoolVarP(&isAtAll, flags.IsAtAll, "i", false, "is @all")
+	botCmd.Flags().StringVarP(&variable.AtUser, flags.AtUser, "o", "", "dingtalk user id list")
+	botCmd.Flags().StringVarP(&variable.AtMobile, flags.AtMobile, "b", "", "mobile list")
+	botCmd.Flags().BoolVarP(&variable.IsAtAll, flags.IsAtAll, "i", false, "is @all")
 
 }

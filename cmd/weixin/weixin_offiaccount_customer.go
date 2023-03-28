@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package weixin
 
 import (
 	"fmt"
@@ -20,25 +20,26 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/pkg/flags"
 	"github.com/lenye/pmsg/pkg/weixin/customer/message"
 )
 
-// weiXinOfficialAccountCustomerCmd 微信公众号客服
-var weiXinOfficialAccountCustomerCmd = &cobra.Command{
+// officialAccountCustomerCmd 微信公众号客服
+var officialAccountCustomerCmd = &cobra.Command{
 	Use:     "customer",
 	Aliases: []string{"kf"},
 	Short:   "publish weixin official account customer message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdMpSendCustomerParams{
-			UserAgent:   userAgent,
-			AccessToken: accessToken,
-			AppID:       appID,
-			AppSecret:   appSecret,
-			ToUser:      toUser,
-			MsgType:     msgType,
-			KfAccount:   kfAccount,
+			UserAgent:   variable.UserAgent,
+			AccessToken: variable.AccessToken,
+			AppID:       variable.AppID,
+			AppSecret:   variable.AppSecret,
+			ToUser:      variable.ToUser,
+			MsgType:     variable.MsgType,
+			KfAccount:   variable.KfAccount,
 			Data:        args[0],
 		}
 		if err := message.CmdMpSendCustomer(&arg); err != nil {
@@ -49,13 +50,13 @@ var weiXinOfficialAccountCustomerCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinSetAccessTokenFlags(weiXinOfficialAccountCustomerCmd)
+	weiXinSetAccessTokenFlags(officialAccountCustomerCmd)
 
-	weiXinOfficialAccountCustomerCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "weixin user open id (required)")
-	weiXinOfficialAccountCustomerCmd.MarkFlagRequired(flags.ToUser)
+	officialAccountCustomerCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "weixin user open id (required)")
+	officialAccountCustomerCmd.MarkFlagRequired(flags.ToUser)
 
-	weiXinOfficialAccountCustomerCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
-	weiXinOfficialAccountCustomerCmd.MarkFlagRequired(flags.MsgType)
+	officialAccountCustomerCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
+	officialAccountCustomerCmd.MarkFlagRequired(flags.MsgType)
 
-	weiXinOfficialAccountCustomerCmd.Flags().StringVarP(&kfAccount, flags.KfAccount, "k", "", "customer account")
+	officialAccountCustomerCmd.Flags().StringVarP(&variable.KfAccount, flags.KfAccount, "k", "", "customer account")
 }

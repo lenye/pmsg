@@ -20,6 +20,11 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/dingtalk"
+	"github.com/lenye/pmsg/cmd/feishu"
+	"github.com/lenye/pmsg/cmd/slack"
+	"github.com/lenye/pmsg/cmd/weixin"
+	"github.com/lenye/pmsg/cmd/workweixin"
 	"github.com/lenye/pmsg/pkg/version"
 )
 
@@ -55,9 +60,9 @@ func init() {
 	rootCmd.SetVersionTemplate(`{{printf "%s" .Version}}`)
 	rootCmd.Version = version.Print()
 
-	rootCmd.AddCommand(weiXinCmd)
-	rootCmd.AddCommand(workWeiXinCmd)
-	rootCmd.AddCommand(dingTalkCmd)
-	rootCmd.AddCommand(feiShuCmd)
-	rootCmd.AddCommand(slackCmd)
+	rootCmd.AddCommand(weixin.Cmd)
+	rootCmd.AddCommand(workweixin.Cmd)
+	rootCmd.AddCommand(dingtalk.Cmd)
+	rootCmd.AddCommand(feishu.Cmd)
+	rootCmd.AddCommand(slack.Cmd)
 }

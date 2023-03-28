@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package workweixin
 
 import (
 	"fmt"
@@ -20,20 +20,21 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/pkg/weixin/work/message"
 )
 
-// workWeiXinUndoAppCmd 撤回企业微信应用消息
-var workWeiXinUndoAppCmd = &cobra.Command{
+// undoAppCmd 撤回企业微信应用消息
+var undoAppCmd = &cobra.Command{
 	Use:   "undo",
 	Short: "undo work weixin app message",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdWorkUndoAppParams{
-			UserAgent:   userAgent,
-			AccessToken: accessToken,
-			CorpID:      corpID,
-			CorpSecret:  corpSecret,
+			UserAgent:   variable.UserAgent,
+			AccessToken: variable.AccessToken,
+			CorpID:      variable.CorpID,
+			CorpSecret:  variable.CorpSecret,
 			MsgID:       args[0],
 		}
 		if err := message.CmdWorkUndoApp(&arg); err != nil {
@@ -44,5 +45,5 @@ var workWeiXinUndoAppCmd = &cobra.Command{
 }
 
 func init() {
-	workWeiXinSetAccessTokenFlags(workWeiXinUndoAppCmd)
+	workWeiXinSetAccessTokenFlags(undoAppCmd)
 }

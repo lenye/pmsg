@@ -12,21 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package weixin
 
 import (
 	"github.com/spf13/cobra"
 )
 
-// weiXinOfficialAccountCmd 微信公众号
-var weiXinOfficialAccountCmd = &cobra.Command{
-	Use:     "offiaccount",
-	Aliases: []string{"oa"},
-	Short:   "weixin official account",
+// miniProgramCmd 微信小程序
+var miniProgramCmd = &cobra.Command{
+	Use:     "miniprogram",
+	Aliases: []string{"mini"},
+	Short:   "weixin miniprogram",
 }
 
 func init() {
-	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialAccountCustomerCmd)
-	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialAccountSubCmd)
-	weiXinOfficialAccountCmd.AddCommand(weiXinOfficialAccountTplCmd)
+	miniProgramCmd.AddCommand(miniProgramCustomerCmd)
+	miniProgramCmd.AddCommand(miniProgramSubCmd)
 }

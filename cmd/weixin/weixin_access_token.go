@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package weixin
 
 import (
 	"fmt"
@@ -20,20 +20,21 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/pkg/flags"
 	"github.com/lenye/pmsg/pkg/weixin/token"
 )
 
-// weiXinAccessTokenCmd 获取微信接口调用凭证
-var weiXinAccessTokenCmd = &cobra.Command{
+// accessTokenCmd 获取微信接口调用凭证
+var accessTokenCmd = &cobra.Command{
 	Use:   "token",
 	Short: "get weixin access token",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := token.CmdTokenParams{
-			UserAgent: userAgent,
-			AppID:     appID,
-			AppSecret: appSecret,
+			UserAgent: variable.UserAgent,
+			AppID:     variable.AppID,
+			AppSecret: variable.AppSecret,
 		}
 		if err := token.CmdGetAccessToken(&arg); err != nil {
 			fmt.Fprintln(os.Stderr, err)
@@ -43,9 +44,9 @@ var weiXinAccessTokenCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinAccessTokenCmd.Flags().StringVarP(&appID, flags.AppID, "i", "", "weixin app id (required)")
-	weiXinAccessTokenCmd.MarkFlagRequired(flags.AppID)
+	accessTokenCmd.Flags().StringVarP(&variable.AppID, flags.AppID, "i", "", "weixin app id (required)")
+	accessTokenCmd.MarkFlagRequired(flags.AppID)
 
-	weiXinAccessTokenCmd.Flags().StringVarP(&appSecret, flags.AppSecret, "s", "", "weixin app secret (required)")
-	weiXinAccessTokenCmd.MarkFlagRequired(flags.AppSecret)
+	accessTokenCmd.Flags().StringVarP(&variable.AppSecret, flags.AppSecret, "s", "", "weixin app Secret (required)")
+	accessTokenCmd.MarkFlagRequired(flags.AppSecret)
 }

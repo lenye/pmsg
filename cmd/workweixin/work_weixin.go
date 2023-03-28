@@ -12,41 +12,42 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package workweixin
 
 import (
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/pkg/flags"
 )
 
-// workWeiXinCmd 企业微信
-var workWeiXinCmd = &cobra.Command{
+// Cmd 企业微信
+var Cmd = &cobra.Command{
 	Use:     "workweixin",
 	Aliases: []string{"wwx"},
 	Short:   "work weixin",
 }
 
 func init() {
-	workWeiXinCmd.PersistentFlags().StringVarP(&userAgent, flags.UserAgent, "a", "", "http user agent")
+	Cmd.PersistentFlags().StringVarP(&variable.UserAgent, flags.UserAgent, "a", "", "http user agent")
 
-	workWeiXinCmd.AddCommand(workWeiXinAccessTokenCmd)
-	workWeiXinCmd.AddCommand(workWeiXinAppCmd)
-	workWeiXinCmd.AddCommand(workWeiXinAppChatCmd)
-	workWeiXinCmd.AddCommand(workWeiXinCustomerCmd)
-	workWeiXinCmd.AddCommand(workWeiXinExternalContactCmd)
-	workWeiXinCmd.AddCommand(workWeiXinLinkedCorpCmd)
-	workWeiXinCmd.AddCommand(workWeiXinMediaUploadCmd)
-	workWeiXinCmd.AddCommand(workWeiXinBotCmd)
+	Cmd.AddCommand(accessTokenCmd)
+	Cmd.AddCommand(appCmd)
+	Cmd.AddCommand(appChatCmd)
+	Cmd.AddCommand(customerCmd)
+	Cmd.AddCommand(externalContactCmd)
+	Cmd.AddCommand(linkedCorpCmd)
+	Cmd.AddCommand(mediaUploadCmd)
+	Cmd.AddCommand(botCmd)
 
 }
 
 // workWeiXinSetAccessTokenFlags 设置企业微信access_token或者corp_id/corp_secret命令行参数
 func workWeiXinSetAccessTokenFlags(cmd *cobra.Command) {
-	cmd.Flags().StringVarP(&accessToken, flags.AccessToken, "t", "", "work weixin access token")
+	cmd.Flags().StringVarP(&variable.AccessToken, flags.AccessToken, "t", "", "work weixin access token")
 
-	cmd.Flags().StringVarP(&corpID, flags.CorpID, "i", "", "work weixin corp id (required if corp secret is set)")
-	cmd.Flags().StringVarP(&corpSecret, flags.CorpSecret, "s", "", "work weixin corp secret (required if corp id is set)")
+	cmd.Flags().StringVarP(&variable.CorpID, flags.CorpID, "i", "", "work weixin corp id (required if corp Secret is set)")
+	cmd.Flags().StringVarP(&variable.CorpSecret, flags.CorpSecret, "s", "", "work weixin corp Secret (required if corp id is set)")
 
 	cmd.MarkFlagsMutuallyExclusive(flags.AccessToken, flags.CorpID)
 	cmd.MarkFlagsRequiredTogether(flags.CorpID, flags.CorpSecret)

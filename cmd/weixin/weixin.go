@@ -12,37 +12,38 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package weixin
 
 import (
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/pkg/flags"
 )
 
-// weiXinCmd 微信
-var weiXinCmd = &cobra.Command{
+// Cmd 微信
+var Cmd = &cobra.Command{
 	Use:     "weixin",
 	Aliases: []string{"wx"},
 	Short:   "weixin",
 }
 
 func init() {
-	weiXinCmd.PersistentFlags().StringVarP(&userAgent, flags.UserAgent, "a", "", "http user agent")
+	Cmd.PersistentFlags().StringVarP(&variable.UserAgent, flags.UserAgent, "a", "", "http user agent")
 
-	weiXinCmd.AddCommand(weiXinAccessTokenCmd)
-	weiXinCmd.AddCommand(weiXinMiniProgramCmd)
-	weiXinCmd.AddCommand(weiXinOfficialAccountCmd)
-	weiXinCmd.AddCommand(weiXinMediaUploadCmd)
+	Cmd.AddCommand(accessTokenCmd)
+	Cmd.AddCommand(miniProgramCmd)
+	Cmd.AddCommand(officialAccountCmd)
+	Cmd.AddCommand(mediaUploadCmd)
 
 }
 
 // weiXinSetAccessTokenFlags 设置微信access_token或者app_id/app_secret命令行参数
 func weiXinSetAccessTokenFlags(cmd *cobra.Command) {
-	cmd.Flags().StringVarP(&accessToken, flags.AccessToken, "t", "", "weixin access token")
+	cmd.Flags().StringVarP(&variable.AccessToken, flags.AccessToken, "t", "", "weixin access token")
 
-	cmd.Flags().StringVarP(&appID, flags.AppID, "i", "", "weixin app id (required if app secret is set)")
-	cmd.Flags().StringVarP(&appSecret, flags.AppSecret, "s", "", "weixin app secret (required if app id is set)")
+	cmd.Flags().StringVarP(&variable.AppID, flags.AppID, "i", "", "weixin app id (required if app Secret is set)")
+	cmd.Flags().StringVarP(&variable.AppSecret, flags.AppSecret, "s", "", "weixin app Secret (required if app id is set)")
 
 	cmd.MarkFlagsMutuallyExclusive(flags.AccessToken, flags.AppID)
 	cmd.MarkFlagsRequiredTogether(flags.AppID, flags.AppSecret)

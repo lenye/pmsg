@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package workweixin
 
 import (
 	"fmt"
@@ -20,29 +20,35 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/slack/bot"
+	"github.com/lenye/pmsg/pkg/weixin/work/asset"
 )
 
-// slackBotCmd slack bot
-var slackBotCmd = &cobra.Command{
-	Use:   "bot",
-	Short: "publish slack bot message",
+// mediaUploadCmd 企业微信上传临时素材
+var mediaUploadCmd = &cobra.Command{
+	Use:   "upload",
+	Short: "work weixin media upload",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		arg := bot.CmdSendParams{
-			UserAgent: userAgent,
-			URL:       url,
-			Data:      args[0],
+		arg := asset.CmdWorkMediaUploadParams{
+			UserAgent:   variable.UserAgent,
+			AccessToken: variable.AccessToken,
+			CorpID:      variable.CorpID,
+			CorpSecret:  variable.CorpSecret,
+			MediaType:   variable.MediaType,
+			File:        args[0],
 		}
-		if err := bot.CmdSend(&arg); err != nil {
+		if err := asset.CmdWorkMediaUpload(&arg); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
-	Example: "pmsg slack bot --url webhook_url '{\"text\": \"Hello, World!\"}'",
+	Example: "pmsg workweixin upload -i corp_id -m image /img/app.png",
 }
 
 func init() {
-	slackBotCmd.Flags().StringVar(&url, flags.Url, "", "slack webhook url")
-	slackBotCmd.MarkFlagRequired(flags.Url)
+	workWeiXinSetAccessTokenFlags(mediaUploadCmd)
+
+	mediaUploadCmd.Flags().StringVarP(&variable.MediaType, flags.MediaType, "m", "", "media type (required)")
+	mediaUploadCmd.MarkFlagRequired(flags.MediaType)
 }

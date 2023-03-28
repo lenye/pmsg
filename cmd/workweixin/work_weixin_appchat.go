@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package workweixin
 
 import (
 	"fmt"
@@ -20,25 +20,26 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/pkg/flags"
 	"github.com/lenye/pmsg/pkg/weixin/work/message"
 )
 
-// workWeiXinAppChatCmd 企业微信群聊推送消息
-var workWeiXinAppChatCmd = &cobra.Command{
+// appChatCmd 企业微信群聊推送消息
+var appChatCmd = &cobra.Command{
 	Use:     "appchat",
 	Aliases: []string{"chat"},
 	Short:   "publish work weixin appchat message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdWorkSendAppChatParams{
-			UserAgent:   userAgent,
-			AccessToken: accessToken,
-			CorpID:      corpID,
-			CorpSecret:  corpSecret,
-			ChatID:      chatID,
-			MsgType:     msgType,
-			Safe:        safe,
+			UserAgent:   variable.UserAgent,
+			AccessToken: variable.AccessToken,
+			CorpID:      variable.CorpID,
+			CorpSecret:  variable.CorpSecret,
+			ChatID:      variable.ChatID,
+			MsgType:     variable.MsgType,
+			Safe:        variable.Safe,
 			Data:        args[0],
 		}
 		if err := message.CmdWorkSendAppChat(&arg); err != nil {
@@ -49,13 +50,13 @@ var workWeiXinAppChatCmd = &cobra.Command{
 }
 
 func init() {
-	workWeiXinSetAccessTokenFlags(workWeiXinAppChatCmd)
+	workWeiXinSetAccessTokenFlags(appChatCmd)
 
-	workWeiXinAppChatCmd.Flags().StringVarP(&chatID, flags.ChatID, "c", "", "work weixin chat id (required)")
-	workWeiXinAppChatCmd.MarkFlagRequired(flags.ChatID)
+	appChatCmd.Flags().StringVarP(&variable.ChatID, flags.ChatID, "c", "", "work weixin chat id (required)")
+	appChatCmd.MarkFlagRequired(flags.ChatID)
 
-	workWeiXinAppChatCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
-	workWeiXinAppChatCmd.MarkFlagRequired(flags.MsgType)
+	appChatCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
+	appChatCmd.MarkFlagRequired(flags.MsgType)
 
-	workWeiXinAppChatCmd.Flags().IntVar(&safe, flags.Safe, 0, "safe")
+	appChatCmd.Flags().IntVar(&variable.Safe, flags.Safe, 0, "Safe")
 }

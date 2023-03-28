@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package feishu
 
 import (
 	"fmt"
@@ -20,21 +20,22 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/pkg/feishu/bot"
 	"github.com/lenye/pmsg/pkg/flags"
 )
 
-// feiShuBotCmd 飞书自定义机器人
-var feiShuBotCmd = &cobra.Command{
+// botCmd 飞书自定义机器人
+var botCmd = &cobra.Command{
 	Use:   "bot",
 	Short: "publish fei shu bot message",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := bot.CmdSendParams{
-			UserAgent:   userAgent,
-			AccessToken: accessToken,
-			Secret:      secret,
-			MsgType:     msgType,
+			UserAgent:   variable.UserAgent,
+			AccessToken: variable.AccessToken,
+			Secret:      variable.Secret,
+			MsgType:     variable.MsgType,
 			Data:        args[0],
 		}
 		if err := bot.CmdSend(&arg); err != nil {
@@ -45,12 +46,12 @@ var feiShuBotCmd = &cobra.Command{
 }
 
 func init() {
-	feiShuBotCmd.Flags().StringVarP(&accessToken, flags.AccessToken, "t", "", "feishu bot access token (required)")
-	feiShuBotCmd.MarkFlagRequired(flags.AccessToken)
+	botCmd.Flags().StringVarP(&variable.AccessToken, flags.AccessToken, "t", "", "feishu bot access token (required)")
+	botCmd.MarkFlagRequired(flags.AccessToken)
 
-	feiShuBotCmd.Flags().StringVarP(&secret, flags.Secret, "s", "", "sign secret")
+	botCmd.Flags().StringVarP(&variable.Secret, flags.Secret, "s", "", "sign Secret")
 
-	feiShuBotCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
-	feiShuBotCmd.MarkFlagRequired(flags.MsgType)
+	botCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
+	botCmd.MarkFlagRequired(flags.MsgType)
 
 }

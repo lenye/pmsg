@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package workweixin
 
 import (
 	"fmt"
@@ -20,34 +20,28 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/weixin/asset"
+	"github.com/lenye/pmsg/cmd/variable"
+	"github.com/lenye/pmsg/pkg/weixin/work/bot"
 )
 
-// weiXinMediaUploadCmd 微信公众号新增临时素材
-var weiXinMediaUploadCmd = &cobra.Command{
+// botUploadCmd 企业微信群机器人上传文件
+var botUploadCmd = &cobra.Command{
 	Use:   "upload",
-	Short: "weixin media upload",
+	Short: "work weixin group bot file upload",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		arg := asset.CmdMediaUploadParams{
-			UserAgent:   userAgent,
-			AccessToken: accessToken,
-			AppID:       appID,
-			AppSecret:   appSecret,
-			MediaType:   mediaType,
-			File:        args[0],
+		arg := bot.CmdUploadParams{
+			UserAgent: variable.UserAgent,
+			Key:       variable.Secret,
+			File:      args[0],
 		}
-		if err := asset.CmdMediaUpload(&arg); err != nil {
+		if err := bot.CmdUpload(&arg); err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
 	},
-	Example: "pmsg weixin upload -i app_id -s app_secret -m image /img/app.png",
+	Example: "pmsg workweixin bot upload -k key /img/app.png",
 }
 
 func init() {
-	weiXinSetAccessTokenFlags(weiXinMediaUploadCmd)
-
-	weiXinMediaUploadCmd.Flags().StringVarP(&mediaType, flags.MediaType, "m", "", "media type (required)")
-	weiXinMediaUploadCmd.MarkFlagRequired(flags.MediaType)
+	workWeiXinBotSetKeyFlags(botUploadCmd)
 }

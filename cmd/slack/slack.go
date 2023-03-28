@@ -12,20 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package slack
 
 import (
 	"github.com/spf13/cobra"
+
+	"github.com/lenye/pmsg/cmd/variable"
+	"github.com/lenye/pmsg/pkg/flags"
 )
 
-// weiXinMiniProgramCmd 微信小程序
-var weiXinMiniProgramCmd = &cobra.Command{
-	Use:     "miniprogram",
-	Aliases: []string{"mini"},
-	Short:   "weixin miniprogram",
+// Cmd slack
+var Cmd = &cobra.Command{
+	Use:     "slack",
+	Aliases: []string{"sk"},
+	Short:   "slack",
 }
 
 func init() {
-	weiXinMiniProgramCmd.AddCommand(weiXinMiniProgramCustomerCmd)
-	weiXinMiniProgramCmd.AddCommand(weiXinMiniProgramSubCmd)
+	Cmd.PersistentFlags().StringVarP(&variable.UserAgent, flags.UserAgent, "a", "", "http user agent")
+
+	Cmd.AddCommand(botCmd)
 }

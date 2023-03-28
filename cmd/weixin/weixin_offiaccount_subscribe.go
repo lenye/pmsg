@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package weixin
 
 import (
 	"fmt"
@@ -20,26 +20,27 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/pkg/flags"
 	"github.com/lenye/pmsg/pkg/weixin/offiaccount/message"
 )
 
-// weiXinOfficialAccountSubCmd 微信公众号订阅通知消息
-var weiXinOfficialAccountSubCmd = &cobra.Command{
+// officialAccountSubCmd 微信公众号订阅通知消息
+var officialAccountSubCmd = &cobra.Command{
 	Use:     "subscribe",
 	Aliases: []string{"sub"},
 	Short:   "publish weixin official account subscribe message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdMpBizSendSubscribeParams{
-			UserAgent:   userAgent,
-			AccessToken: accessToken,
-			AppID:       appID,
-			AppSecret:   appSecret,
-			ToUser:      toUser,
-			TemplateID:  templateID,
-			Page:        page,
-			Mini:        mini,
+			UserAgent:   variable.UserAgent,
+			AccessToken: variable.AccessToken,
+			AppID:       variable.AppID,
+			AppSecret:   variable.AppSecret,
+			ToUser:      variable.ToUser,
+			TemplateID:  variable.TemplateID,
+			Page:        variable.Page,
+			Mini:        variable.Mini,
 			Data:        args[0],
 		}
 		if err := message.CmdMpBizSendSubscribe(&arg); err != nil {
@@ -50,14 +51,14 @@ var weiXinOfficialAccountSubCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinSetAccessTokenFlags(weiXinOfficialAccountSubCmd)
+	weiXinSetAccessTokenFlags(officialAccountSubCmd)
 
-	weiXinOfficialAccountSubCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "weixin user open id (required)")
-	weiXinOfficialAccountSubCmd.MarkFlagRequired(flags.ToUser)
+	officialAccountSubCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "weixin user open id (required)")
+	officialAccountSubCmd.MarkFlagRequired(flags.ToUser)
 
-	weiXinOfficialAccountSubCmd.Flags().StringVarP(&templateID, flags.TemplateID, "p", "", "weixin template id (required)")
-	weiXinOfficialAccountSubCmd.MarkFlagRequired(flags.TemplateID)
+	officialAccountSubCmd.Flags().StringVarP(&variable.TemplateID, flags.TemplateID, "p", "", "weixin template id (required)")
+	officialAccountSubCmd.MarkFlagRequired(flags.TemplateID)
 
-	weiXinOfficialAccountSubCmd.Flags().StringVar(&page, flags.Page, "", "page")
-	weiXinOfficialAccountSubCmd.Flags().StringToStringVar(&mini, flags.Mini, nil, "weixin mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
+	officialAccountSubCmd.Flags().StringVar(&variable.Page, flags.Page, "", "Page")
+	officialAccountSubCmd.Flags().StringToStringVar(&variable.Mini, flags.Mini, nil, "weixin Mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
 }

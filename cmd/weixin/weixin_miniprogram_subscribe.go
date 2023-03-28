@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package weixin
 
 import (
 	"fmt"
@@ -20,27 +20,28 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/pkg/flags"
 	"github.com/lenye/pmsg/pkg/weixin/miniprogram/message"
 )
 
-// weiXinMiniProgramSubCmd 微信小程序订阅消息
-var weiXinMiniProgramSubCmd = &cobra.Command{
+// miniProgramSubCmd 微信小程序订阅消息
+var miniProgramSubCmd = &cobra.Command{
 	Use:     "subscribe",
 	Aliases: []string{"sub"},
 	Short:   "publish weixin miniprogram subscribe message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdMiniSendSubscribeParams{
-			UserAgent:        userAgent,
-			AccessToken:      accessToken,
-			AppID:            appID,
-			AppSecret:        appSecret,
-			ToUser:           toUser,
-			TemplateID:       templateID,
-			MiniProgramState: miniProgramState,
-			Page:             page,
-			Language:         language,
+			UserAgent:        variable.UserAgent,
+			AccessToken:      variable.AccessToken,
+			AppID:            variable.AppID,
+			AppSecret:        variable.AppSecret,
+			ToUser:           variable.ToUser,
+			TemplateID:       variable.TemplateID,
+			MiniProgramState: variable.MiniProgramState,
+			Page:             variable.Page,
+			Language:         variable.Language,
 			Data:             args[0],
 		}
 		if err := message.CmdMiniProgramSendSubscribe(&arg); err != nil {
@@ -51,15 +52,15 @@ var weiXinMiniProgramSubCmd = &cobra.Command{
 }
 
 func init() {
-	weiXinSetAccessTokenFlags(weiXinMiniProgramSubCmd)
+	weiXinSetAccessTokenFlags(miniProgramSubCmd)
 
-	weiXinMiniProgramSubCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "weixin user open id (required)")
-	weiXinMiniProgramSubCmd.MarkFlagRequired(flags.ToUser)
+	miniProgramSubCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "weixin user open id (required)")
+	miniProgramSubCmd.MarkFlagRequired(flags.ToUser)
 
-	weiXinMiniProgramSubCmd.Flags().StringVarP(&templateID, flags.TemplateID, "p", "", "weixin template id (required)")
-	weiXinMiniProgramSubCmd.MarkFlagRequired(flags.TemplateID)
+	miniProgramSubCmd.Flags().StringVarP(&variable.TemplateID, flags.TemplateID, "p", "", "weixin template id (required)")
+	miniProgramSubCmd.MarkFlagRequired(flags.TemplateID)
 
-	weiXinMiniProgramSubCmd.Flags().StringVarP(&miniProgramState, flags.MiniProgramState, "g", "", "miniprogram_state")
-	weiXinMiniProgramSubCmd.Flags().StringVar(&page, flags.Page, "", "page")
-	weiXinMiniProgramSubCmd.Flags().StringVar(&language, flags.Language, "", "language")
+	miniProgramSubCmd.Flags().StringVarP(&variable.MiniProgramState, flags.MiniProgramState, "g", "", "miniprogram_state")
+	miniProgramSubCmd.Flags().StringVar(&variable.Page, flags.Page, "", "Page")
+	miniProgramSubCmd.Flags().StringVar(&variable.Language, flags.Language, "", "Language")
 }

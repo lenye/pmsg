@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package workweixin
 
 import (
 	"fmt"
@@ -20,26 +20,27 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/pkg/flags"
 	"github.com/lenye/pmsg/pkg/weixin/work/message"
 )
 
-// workWeiXinCustomerCmd 微信客服消息
-var workWeiXinCustomerCmd = &cobra.Command{
+// customerCmd 微信客服消息
+var customerCmd = &cobra.Command{
 	Use:     "customer",
 	Aliases: []string{"kf"},
 	Short:   "publish work weixin customer message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdWorkSendCustomerParams{
-			UserAgent:   userAgent,
-			AccessToken: accessToken,
-			CorpID:      corpID,
-			CorpSecret:  corpSecret,
-			ToUser:      toUser,
-			OpenKfID:    openKfID,
-			MsgID:       msgID,
-			MsgType:     msgType,
+			UserAgent:   variable.UserAgent,
+			AccessToken: variable.AccessToken,
+			CorpID:      variable.CorpID,
+			CorpSecret:  variable.CorpSecret,
+			ToUser:      variable.ToUser,
+			OpenKfID:    variable.OpenKfID,
+			MsgID:       variable.MsgID,
+			MsgType:     variable.MsgType,
 			Data:        args[0],
 		}
 		if err := message.CmdWorkSendCustomer(&arg); err != nil {
@@ -50,16 +51,16 @@ var workWeiXinCustomerCmd = &cobra.Command{
 }
 
 func init() {
-	workWeiXinSetAccessTokenFlags(workWeiXinCustomerCmd)
+	workWeiXinSetAccessTokenFlags(customerCmd)
 
-	workWeiXinCustomerCmd.Flags().StringVarP(&toUser, flags.ToUser, "o", "", "work weixin user id (required)")
-	workWeiXinCustomerCmd.MarkFlagRequired(flags.ToUser)
+	customerCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "work weixin user id (required)")
+	customerCmd.MarkFlagRequired(flags.ToUser)
 
-	workWeiXinCustomerCmd.Flags().StringVarP(&openKfID, flags.OpenKfID, "k", "", "work weixin customer account id (required)")
-	workWeiXinCustomerCmd.MarkFlagRequired(flags.OpenKfID)
+	customerCmd.Flags().StringVarP(&variable.OpenKfID, flags.OpenKfID, "k", "", "work weixin customer account id (required)")
+	customerCmd.MarkFlagRequired(flags.OpenKfID)
 
-	workWeiXinCustomerCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
-	workWeiXinCustomerCmd.MarkFlagRequired(flags.MsgType)
+	customerCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
+	customerCmd.MarkFlagRequired(flags.MsgType)
 
-	workWeiXinCustomerCmd.Flags().StringVarP(&msgID, flags.MsgID, "c", "", "message id")
+	customerCmd.Flags().StringVarP(&variable.MsgID, flags.MsgID, "c", "", "message id")
 }

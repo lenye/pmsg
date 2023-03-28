@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package cmd
+package workweixin
 
 import (
 	"fmt"
@@ -20,22 +20,23 @@ import (
 
 	"github.com/spf13/cobra"
 
+	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/pkg/flags"
 	"github.com/lenye/pmsg/pkg/weixin/work/bot"
 )
 
-// workWeiXinBotCmd 企业微信群机器人
-var workWeiXinBotCmd = &cobra.Command{
+// botCmd 企业微信群机器人
+var botCmd = &cobra.Command{
 	Use:   "bot",
 	Short: "publish work weixin group bot message",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := bot.CmdSendParams{
-			UserAgent: userAgent,
-			Key:       secret,
-			MsgType:   msgType,
-			AtUser:    atUser,
-			AtMobile:  atMobile,
+			UserAgent: variable.UserAgent,
+			Key:       variable.Secret,
+			MsgType:   variable.MsgType,
+			AtUser:    variable.AtUser,
+			AtMobile:  variable.AtMobile,
 			Data:      args[0],
 		}
 		if err := bot.CmdSend(&arg); err != nil {
@@ -46,19 +47,19 @@ var workWeiXinBotCmd = &cobra.Command{
 }
 
 func init() {
-	workWeiXinBotCmd.AddCommand(workWeiXinBotUploadCmd)
+	botCmd.AddCommand(botUploadCmd)
 
-	workWeiXinBotSetKeyFlags(workWeiXinBotCmd)
+	workWeiXinBotSetKeyFlags(botCmd)
 
-	workWeiXinBotCmd.Flags().StringVarP(&msgType, flags.MsgType, "m", "", "message type (required)")
-	workWeiXinBotCmd.MarkFlagRequired(flags.MsgType)
+	botCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
+	botCmd.MarkFlagRequired(flags.MsgType)
 
-	workWeiXinBotCmd.Flags().StringVarP(&atUser, flags.AtUser, "o", "", "work weixin user id list")
-	workWeiXinBotCmd.Flags().StringVarP(&atMobile, flags.AtMobile, "b", "", "mobile list")
+	botCmd.Flags().StringVarP(&variable.AtUser, flags.AtUser, "o", "", "work weixin user id list")
+	botCmd.Flags().StringVarP(&variable.AtMobile, flags.AtMobile, "b", "", "mobile list")
 }
 
 // workWeiXinBotSetKeyFlags 设置企业微信群机器人key命令行参数
 func workWeiXinBotSetKeyFlags(cmd *cobra.Command) {
-	cmd.Flags().StringVarP(&secret, flags.Key, "k", "", "work weixin bot key (required)")
+	cmd.Flags().StringVarP(&variable.Secret, flags.Key, "k", "", "work weixin bot key (required)")
 	cmd.MarkFlagRequired(flags.Key)
 }
