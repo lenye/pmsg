@@ -33,7 +33,7 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 		return nil, err
 	}
 
-	resp, err := httpclient.Post(url, httpclient.HdrValContentTypeJson, bytes.NewReader(buf.Bytes()))
+	resp, err := httpclient.Post(url, httpclient.HdrValApplicationJson, bytes.NewReader(buf.Bytes()))
 	if err != nil {
 		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodPost, url, err)
 	}

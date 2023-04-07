@@ -34,7 +34,7 @@ var ErrRequest = errors.New("http request error")
 const (
 	HdrKeyUserAgent       = "User-Agent"
 	HdrKeyContentType     = "Content-Type"
-	HdrValContentTypeJson = "application/json"
+	HdrValApplicationJson = "application/json"
 )
 
 const (

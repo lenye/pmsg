@@ -25,7 +25,7 @@ import (
 
 // PostJSON http post json
 func PostJSON(url, reqBody string) (http.Header, error) {
-	resp, err := httpclient.Post(url, httpclient.HdrValContentTypeJson, strings.NewReader(reqBody))
+	resp, err := httpclient.Post(url, httpclient.HdrValApplicationJson, strings.NewReader(reqBody))
 	if err != nil {
 		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodPost, url, err)
 	}
