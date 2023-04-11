@@ -41,7 +41,7 @@ const (
 	Timeout = 5 * time.Second
 )
 
-var DefaultClient = &http.Client{
+var Default = &http.Client{
 	Timeout: Timeout,
 }
 
@@ -51,8 +51,8 @@ func DefaultUserAgent() string {
 	return fmt.Sprintf("%s/%s (%s; %s) %s/%s", version.AppName, version.Version, runtime.GOOS, runtime.GOARCH, version.BuildGit, version.BuildTime)
 }
 
-func SetUserAgent(value string) {
-	userAgent = value
+func SetUserAgent(v string) {
+	userAgent = v
 }
 
 func UserAgent() string {
@@ -60,6 +60,10 @@ func UserAgent() string {
 		return userAgent
 	}
 	return DefaultUserAgent()
+}
+
+func SetTransport(v *http.Transport) {
+	Default.Transport = v
 }
 
 // Get http get
@@ -70,7 +74,7 @@ func Get(url string) (*http.Response, error) {
 	}
 	req.Header.Set(HdrKeyUserAgent, UserAgent())
 
-	return DefaultClient.Do(req)
+	return Default.Do(req)
 }
 
 // Post http post
@@ -82,7 +86,7 @@ func Post(url, contentType string, body io.Reader) (*http.Response, error) {
 	req.Header.Set(HdrKeyUserAgent, UserAgent())
 	req.Header.Set(HdrKeyContentType, contentType)
 
-	return DefaultClient.Do(req)
+	return Default.Do(req)
 }
 
 func fileToBody(bodyWriter *multipart.Writer, formName, fileName string) (err error) {
@@ -123,11 +127,13 @@ func NewMultipartForm() *MultipartForm {
 	}
 }
 
+// AddFile 保存文件信息
 func (t *MultipartForm) AddFile(name, fileName string) *MultipartForm {
 	t.files[name] = fileName
 	return t
 }
 
+// AddParam 保存参数信息
 func (t *MultipartForm) AddParam(name, value string) *MultipartForm {
 	if param, ok := t.params[name]; ok {
 		t.params[name] = append(param, value)
