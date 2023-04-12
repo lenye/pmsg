@@ -17,25 +17,23 @@ package version
 import (
 	"fmt"
 	"runtime"
-	"time"
 )
 
 var (
-	Version   = "dev"                  // 版本
-	AppName   = "pmsg"                 // 名称
-	BuildTime = "2022-09-15T12:49:05Z" // 编译时间   $(date +%Y%m%d.%H%M%S)
-	BuildGit  = "git"                  // 版本号     $(git rev-parse HEAD)
-	StartTime = time.Now()
+	Version     = "dev"     // 版本
+	AppName     = "pmsg"    // 名称
+	BuildTime   = "unknown" // 编译时间
+	BuildCommit = "none"    // git commit
 )
 
 const versionTemplate = `%s
  Version:    %s
- Git commit: %s
+ Commit:     %s
  Built:      %s
  Go version: %s
  OS/Arch:    %s/%s
 `
 
 func Print() string {
-	return fmt.Sprintf(versionTemplate, AppName, Version, BuildGit, BuildTime, runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	return fmt.Sprintf(versionTemplate, AppName, Version, BuildCommit, BuildTime, runtime.Version(), runtime.GOOS, runtime.GOARCH)
 }

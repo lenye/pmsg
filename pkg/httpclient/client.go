@@ -48,7 +48,7 @@ var Default = &http.Client{
 var userAgent string
 
 func DefaultUserAgent() string {
-	return fmt.Sprintf("%s/%s (%s; %s) %s/%s", version.AppName, version.Version, runtime.GOOS, runtime.GOARCH, version.BuildGit, version.BuildTime)
+	return fmt.Sprintf("%s/%s (%s; %s) %s/%s", version.AppName, version.Version, runtime.GOOS, runtime.GOARCH, version.BuildCommit, version.BuildTime)
 }
 
 func SetUserAgent(v string) {
