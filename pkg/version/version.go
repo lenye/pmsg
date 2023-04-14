@@ -20,10 +20,10 @@ import (
 )
 
 var (
-	Version     = "dev"     // 版本
 	AppName     = "pmsg"    // 名称
-	BuildTime   = "unknown" // 编译时间
+	Version     = "dev"     // 版本
 	BuildCommit = "none"    // git commit
+	BuildTime   = "unknown" // 编译时间
 )
 
 const versionTemplate = `%s
