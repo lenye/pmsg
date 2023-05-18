@@ -51,9 +51,5 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 		return nil, err
 	}
 
-	if respBody == nil {
-		return resp.Header, nil
-	}
-
-	return resp.Header, json.NewDecoder(resp.Body).Decode(respBody)
+	return resp.Header, httpclient.DecodeResponse(resp.Body, respBody)
 }

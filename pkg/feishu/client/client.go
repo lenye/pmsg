@@ -40,7 +40,7 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode/100 != 2 {
-		return resp.Header, json.NewDecoder(resp.Body).Decode(respBody)
+		return resp.Header, httpclient.DecodeResponse(resp.Body, respBody)
 	}
 
 	return resp.Header, nil
