@@ -18,7 +18,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/pkg/flags"
+	"github.com/lenye/pmsg/internal/flags"
 )
 
 // Cmd 钉钉

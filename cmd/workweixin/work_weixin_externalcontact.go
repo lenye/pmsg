@@ -16,14 +16,13 @@ package workweixin
 
 import (
 	"fmt"
-	"os"
 	"strings"
 
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/weixin/work/message"
+	"github.com/lenye/pmsg/internal/flags"
+	"github.com/lenye/pmsg/internal/im/weixin/work/message"
 )
 
 // externalContactCmd 企业微信家校消息
@@ -60,7 +59,7 @@ var externalContactCmd = &cobra.Command{
 		}
 
 		if err := message.CmdWorkSendExternalContact(&arg); err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Println(err)
 		}
 	},
 	Example: "pmsg workweixin externalcontact -i corp_id -s corp_secret -e agent_id -n 'parentuserid1|parentuserid2' -m text 'hello world'",

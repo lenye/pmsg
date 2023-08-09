@@ -16,13 +16,12 @@ package workweixin
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/weixin/work/asset"
+	"github.com/lenye/pmsg/internal/flags"
+	"github.com/lenye/pmsg/internal/im/weixin/work/asset"
 )
 
 // mediaUploadCmd 企业微信上传临时素材
@@ -40,7 +39,7 @@ var mediaUploadCmd = &cobra.Command{
 			File:        args[0],
 		}
 		if err := asset.CmdWorkMediaUpload(&arg); err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Println(err)
 		}
 	},
 	Example: "pmsg workweixin upload -i corp_id -m image /img/app.png",

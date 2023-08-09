@@ -16,13 +16,12 @@ package workweixin
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/weixin/work/token"
+	"github.com/lenye/pmsg/internal/flags"
+	"github.com/lenye/pmsg/internal/im/weixin/work/token"
 )
 
 // accessTokenCmd 获取企业微信接口调用凭证
@@ -37,7 +36,7 @@ var accessTokenCmd = &cobra.Command{
 			CorpSecret: variable.CorpSecret,
 		}
 		if err := token.CmdWorkGetAccessToken(&arg); err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Println(err)
 		}
 	},
 	Example: "pmsg workweixin token -i corp_id -s corp_secret",

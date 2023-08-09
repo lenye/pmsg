@@ -16,13 +16,12 @@ package weixin
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/weixin/asset"
+	"github.com/lenye/pmsg/internal/flags"
+	"github.com/lenye/pmsg/internal/im/weixin/asset"
 )
 
 // mediaUploadCmd 微信公众号新增临时素材
@@ -40,7 +39,7 @@ var mediaUploadCmd = &cobra.Command{
 			File:        args[0],
 		}
 		if err := asset.CmdMediaUpload(&arg); err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Println(err)
 		}
 	},
 	Example: "pmsg weixin upload -i app_id -s app_secret -m image /img/app.png",

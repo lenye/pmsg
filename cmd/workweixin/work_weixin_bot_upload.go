@@ -16,12 +16,11 @@ package workweixin
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/pkg/weixin/work/bot"
+	"github.com/lenye/pmsg/internal/im/weixin/work/bot"
 )
 
 // botUploadCmd 企业微信群机器人上传文件
@@ -36,7 +35,7 @@ var botUploadCmd = &cobra.Command{
 			File:      args[0],
 		}
 		if err := bot.CmdUpload(&arg); err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Println(err)
 		}
 	},
 	Example: "pmsg workweixin bot upload -k key /img/app.png",

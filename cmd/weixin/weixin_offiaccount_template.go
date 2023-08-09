@@ -16,13 +16,12 @@ package weixin
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/weixin/offiaccount/message"
+	"github.com/lenye/pmsg/internal/flags"
+	"github.com/lenye/pmsg/internal/im/weixin/offiaccount/message"
 )
 
 // officialAccountTplCmd 微信公众号模板消息
@@ -46,7 +45,7 @@ var officialAccountTplCmd = &cobra.Command{
 			Data:        args[0],
 		}
 		if err := message.CmdMpSendTemplate(&arg); err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Println(err)
 		}
 	},
 	Example: "pmsg weixin offiaccount template -i app_id -s app_secret -p template_id -o open_id '{\"first\":{\"value\":\"test\"}}'",

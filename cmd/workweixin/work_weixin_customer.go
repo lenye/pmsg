@@ -16,13 +16,12 @@ package workweixin
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/weixin/work/message"
+	"github.com/lenye/pmsg/internal/flags"
+	"github.com/lenye/pmsg/internal/im/weixin/work/message"
 )
 
 // customerCmd 微信客服消息
@@ -44,7 +43,7 @@ var customerCmd = &cobra.Command{
 			Data:        args[0],
 		}
 		if err := message.CmdWorkSendCustomer(&arg); err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Println(err)
 		}
 	},
 	Example: "pmsg workweixin customer -i corp_id -s corp_secret -o user_id -k kf_id -m text 'hello world'",

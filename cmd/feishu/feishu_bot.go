@@ -16,13 +16,12 @@ package feishu
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/pkg/feishu/bot"
-	"github.com/lenye/pmsg/pkg/flags"
+	"github.com/lenye/pmsg/internal/flags"
+	"github.com/lenye/pmsg/internal/im/feishu/bot"
 )
 
 // botCmd 飞书自定义机器人
@@ -39,7 +38,7 @@ var botCmd = &cobra.Command{
 			Data:        args[0],
 		}
 		if err := bot.CmdSend(&arg); err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Println(err)
 		}
 	},
 	Example: "pmsg feishu bot -t access_token -m text 'hello world'",

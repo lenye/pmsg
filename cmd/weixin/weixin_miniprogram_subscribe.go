@@ -16,13 +16,12 @@ package weixin
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/weixin/miniprogram/message"
+	"github.com/lenye/pmsg/internal/flags"
+	"github.com/lenye/pmsg/internal/im/weixin/miniprogram/message"
 )
 
 // miniProgramSubCmd 微信小程序订阅消息
@@ -45,7 +44,7 @@ var miniProgramSubCmd = &cobra.Command{
 			Data:             args[0],
 		}
 		if err := message.CmdMiniProgramSendSubscribe(&arg); err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Println(err)
 		}
 	},
 	Example: "pmsg weixin miniprogram subscribe -i app_id -s app_secret -p template_id -o open_id '{\"first\":{\"value\":\"test\"}}'",

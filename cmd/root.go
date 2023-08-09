@@ -40,8 +40,7 @@ var rootCmd = &cobra.Command{
     微信消息
     微信客服消息
     企业微信消息
-    企业微信客服消息
-    使用文档: https://github.com/lenye/pmsg`,
+    企业微信客服消息`,
 	CompletionOptions: cobra.CompletionOptions{
 		HiddenDefaultCmd: true,
 	},
@@ -51,7 +50,7 @@ var rootCmd = &cobra.Command{
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Fprintln(os.Stderr, err)
+		fmt.Println(err)
 		os.Exit(1)
 	}
 }

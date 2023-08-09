@@ -16,13 +16,12 @@ package slack
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/slack/bot"
+	"github.com/lenye/pmsg/internal/flags"
+	"github.com/lenye/pmsg/internal/im/slack/bot"
 )
 
 // botCmd slack bot
@@ -37,7 +36,7 @@ var botCmd = &cobra.Command{
 			Data:      args[0],
 		}
 		if err := bot.CmdSend(&arg); err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Println(err)
 		}
 	},
 	Example: "pmsg slack bot --Url webhook_url '{\"text\": \"Hello, World!\"}'",

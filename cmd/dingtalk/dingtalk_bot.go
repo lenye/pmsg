@@ -16,13 +16,12 @@ package dingtalk
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/pkg/dingtalk/bot"
-	"github.com/lenye/pmsg/pkg/flags"
+	"github.com/lenye/pmsg/internal/flags"
+	"github.com/lenye/pmsg/internal/im/dingtalk/bot"
 )
 
 // botCmd 钉钉自定义机器人
@@ -42,7 +41,7 @@ var botCmd = &cobra.Command{
 			Data:        args[0],
 		}
 		if err := bot.CmdSend(&arg); err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Println(err)
 		}
 	},
 	Example: "pmsg dingtalk bot -t access_token -m text 'hello world'",

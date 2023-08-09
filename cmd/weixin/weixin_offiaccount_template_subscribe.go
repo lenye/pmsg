@@ -16,13 +16,12 @@ package weixin
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/weixin/offiaccount/message"
+	"github.com/lenye/pmsg/internal/flags"
+	"github.com/lenye/pmsg/internal/im/weixin/offiaccount/message"
 )
 
 // officialAccountTplSubCmd 微信公众号一次性订阅消息
@@ -46,7 +45,7 @@ var officialAccountTplSubCmd = &cobra.Command{
 			Data:        args[0],
 		}
 		if err := message.CmdMpSendTemplateSubscribe(&arg); err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Println(err)
 		}
 	},
 	Example: "pmsg weixin offiaccount template subscribe -i app_id -s app_secret --Scene Scene --Title Title -p template_id -o open_id '{\"first\":{\"value\":\"test\"}}'",

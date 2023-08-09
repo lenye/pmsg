@@ -16,14 +16,13 @@ package workweixin
 
 import (
 	"fmt"
-	"os"
 	"strings"
 
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/pkg/flags"
-	"github.com/lenye/pmsg/pkg/weixin/work/message"
+	"github.com/lenye/pmsg/internal/flags"
+	"github.com/lenye/pmsg/internal/im/weixin/work/message"
 )
 
 // linkedCorpCmd 企业微信互联企业消息
@@ -56,7 +55,7 @@ var linkedCorpCmd = &cobra.Command{
 		}
 
 		if err := message.CmdWorkSendLinkedCorp(&arg); err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Println(err)
 		}
 	},
 	Example: "pmsg workweixin linkedcorp -i corp_id -s corp_secret -o 'userid1|userid2' -m text 'hello world'",

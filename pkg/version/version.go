@@ -24,16 +24,22 @@ var (
 	Version     = "dev"     // 版本
 	BuildCommit = "none"    // git commit
 	BuildTime   = "unknown" // 编译时间
+
+	OpenSource = "https://github.com/lenye/pmsg" // 开发人
 )
 
 const versionTemplate = `%s
- Version:    %s
- Commit:     %s
- Built:      %s
- Go version: %s
- OS/Arch:    %s/%s
+  Version:     %s
+  Commit:      %s
+  Built:       %s
+  Go version:  %s
+  OS/Arch:     %s/%s
+  Open source: %s
 `
 
 func Print() string {
-	return fmt.Sprintf(versionTemplate, AppName, Version, BuildCommit, BuildTime, runtime.Version(), runtime.GOOS, runtime.GOARCH)
+	return fmt.Sprintf(versionTemplate,
+		AppName, Version, BuildCommit, BuildTime,
+		runtime.Version(), runtime.GOOS, runtime.GOARCH,
+		OpenSource)
 }
