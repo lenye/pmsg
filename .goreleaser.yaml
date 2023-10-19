@@ -113,24 +113,6 @@ dockers:
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
   - image_templates:
-      - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-armv6"
-      - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-armv6"
-      - "ghcr.io/lenye/{{ .ProjectName }}:latest-armv6"
-    use: buildx
-    goos: linux
-    goarch: arm
-    goarm: 6
-    dockerfile: Dockerfile
-    build_flag_templates:
-      - "--platform=linux/arm/v6"
-      - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.title={{.ProjectName}}"
-      - "--label=org.opencontainers.image.description={{.ProjectName}}"
-      - "--label=org.opencontainers.image.url=https://github.com/lenye/{{.ProjectName}}"
-      - "--label=org.opencontainers.image.source=https://github.com/lenye/{{.ProjectName}}"
-      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-      - "--label=org.opencontainers.image.version={{.Version}}"
-  - image_templates:
       - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-armv7"
       - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-armv7"
       - "ghcr.io/lenye/{{ .ProjectName }}:latest-armv7"
@@ -154,17 +136,14 @@ docker_manifests:
     image_templates:
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-amd64
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-arm64
-      - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-armv6
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-armv7
   - name_template: ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}
     image_templates:
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-amd64
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-arm64
-      - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-armv6
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-armv7
   - name_template: ghcr.io/lenye/{{ .ProjectName }}:latest
     image_templates:
       - ghcr.io/lenye/{{ .ProjectName }}:latest-amd64
       - ghcr.io/lenye/{{ .ProjectName }}:latest-arm64
-      - ghcr.io/lenye/{{ .ProjectName }}:latest-armv6
       - ghcr.io/lenye/{{ .ProjectName }}:latest-armv7
