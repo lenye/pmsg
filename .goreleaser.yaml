@@ -17,6 +17,8 @@ builds:
       - -X github.com/lenye/pmsg/pkg/version.Version={{.Version}}
       - -X github.com/lenye/pmsg/pkg/version.BuildCommit={{.ShortCommit}}
       - -X github.com/lenye/pmsg/pkg/version.BuildTime={{.CommitDate}}
+      - -extldflags
+      - -static
     flags:
       - -trimpath
     goos:
@@ -68,6 +70,11 @@ changelog:
       - '^style:'
       - '^chore:'
       - '^ci:'
+
+
+release:
+  draft: true
+  replace_existing_draft: true
 
 
 dockers:

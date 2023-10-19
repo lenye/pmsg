@@ -3,10 +3,10 @@ name: Build Binaries with GoReleaser
 on:
   push:
     tags:
-      - "v*.*.*"      # triggers only if push new tag version, like `v0.1.0`
+      - "v*.*.*"
 
 env:
-  GO_VERSION: "1.20"
+  GO_VERSION: "1.21"
 
 jobs:
 
