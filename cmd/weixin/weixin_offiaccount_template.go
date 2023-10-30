@@ -22,6 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/offiaccount/message"
+	"github.com/lenye/pmsg/pkg/conv"
 )
 
 // officialAccountTplCmd 微信公众号模板消息
@@ -31,6 +32,11 @@ var officialAccountTplCmd = &cobra.Command{
 	Short:   "publish weixin official account template message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
+		data, err := conv.StrRaw2Interpreted(args[0])
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 		arg := message.CmdMpSendTemplateParams{
 			UserAgent:   variable.UserAgent,
 			AccessToken: variable.AccessToken,
@@ -42,7 +48,7 @@ var officialAccountTplCmd = &cobra.Command{
 			Mini:        variable.Mini,
 			Color:       variable.Color,
 			ClientMsgID: variable.ClientMsgID,
-			Data:        args[0],
+			Data:        data,
 		}
 		if err := message.CmdMpSendTemplate(&arg); err != nil {
 			fmt.Println(err)

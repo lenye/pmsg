@@ -22,6 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/offiaccount/message"
+	"github.com/lenye/pmsg/pkg/conv"
 )
 
 // officialAccountTplSubCmd 微信公众号一次性订阅消息
@@ -31,6 +32,11 @@ var officialAccountTplSubCmd = &cobra.Command{
 	Short:   "publish weixin official account template subscribe message (onetime)",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
+		data, err := conv.StrRaw2Interpreted(args[0])
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 		arg := message.CmdMpSendTemplateSubscribeParams{
 			UserAgent:   variable.UserAgent,
 			AccessToken: variable.AccessToken,
@@ -42,7 +48,7 @@ var officialAccountTplSubCmd = &cobra.Command{
 			Title:       variable.Title,
 			Url:         variable.Url,
 			Mini:        variable.Mini,
-			Data:        args[0],
+			Data:        data,
 		}
 		if err := message.CmdMpSendTemplateSubscribe(&arg); err != nil {
 			fmt.Println(err)

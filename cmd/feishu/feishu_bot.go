@@ -22,6 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/feishu/bot"
+	"github.com/lenye/pmsg/pkg/conv"
 )
 
 // botCmd 飞书自定义机器人
@@ -30,12 +31,17 @@ var botCmd = &cobra.Command{
 	Short: "publish fei shu bot message",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
+		data, err := conv.StrRaw2Interpreted(args[0])
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 		arg := bot.CmdSendParams{
 			UserAgent:   variable.UserAgent,
 			AccessToken: variable.AccessToken,
 			Secret:      variable.Secret,
 			MsgType:     variable.MsgType,
-			Data:        args[0],
+			Data:        data,
 		}
 		if err := bot.CmdSend(&arg); err != nil {
 			fmt.Println(err)

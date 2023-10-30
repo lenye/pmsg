@@ -23,6 +23,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/work/message"
+	"github.com/lenye/pmsg/pkg/conv"
 )
 
 // linkedCorpCmd 企业微信互联企业消息
@@ -32,6 +33,11 @@ var linkedCorpCmd = &cobra.Command{
 	Short:   "publish work weixin linked corp message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
+		data, err := conv.StrRaw2Interpreted(args[0])
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 		arg := message.CmdWorkSendLinkedCorpParams{
 			UserAgent:   variable.UserAgent,
 			AccessToken: variable.AccessToken,
@@ -41,7 +47,7 @@ var linkedCorpCmd = &cobra.Command{
 			AgentID:     variable.AgentID,
 			MsgType:     variable.MsgType,
 			Safe:        variable.Safe,
-			Data:        args[0],
+			Data:        data,
 		}
 
 		if variable.ToUser != "" {

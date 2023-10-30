@@ -23,6 +23,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/work/message"
+	"github.com/lenye/pmsg/pkg/conv"
 )
 
 // externalContactCmd 企业微信家校消息
@@ -32,7 +33,11 @@ var externalContactCmd = &cobra.Command{
 	Short:   "publish work weixin external contact message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-
+		data, err := conv.StrRaw2Interpreted(args[0])
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 		arg := message.CmdWorkSendExternalContactParams{
 			UserAgent:              variable.UserAgent,
 			AccessToken:            variable.AccessToken,
@@ -45,7 +50,7 @@ var externalContactCmd = &cobra.Command{
 			EnableIDTrans:          variable.EnableIDTrans,
 			EnableDuplicateCheck:   variable.EnableDuplicateCheck,
 			DuplicateCheckInterval: variable.DuplicateCheckInterval,
-			Data:                   args[0],
+			Data:                   data,
 		}
 
 		if variable.ToParentUserID != "" {

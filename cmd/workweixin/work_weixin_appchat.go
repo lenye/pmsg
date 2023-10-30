@@ -22,6 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/work/message"
+	"github.com/lenye/pmsg/pkg/conv"
 )
 
 // appChatCmd 企业微信群聊推送消息
@@ -31,6 +32,11 @@ var appChatCmd = &cobra.Command{
 	Short:   "publish work weixin appchat message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
+		data, err := conv.StrRaw2Interpreted(args[0])
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 		arg := message.CmdWorkSendAppChatParams{
 			UserAgent:   variable.UserAgent,
 			AccessToken: variable.AccessToken,
@@ -39,7 +45,7 @@ var appChatCmd = &cobra.Command{
 			ChatID:      variable.ChatID,
 			MsgType:     variable.MsgType,
 			Safe:        variable.Safe,
-			Data:        args[0],
+			Data:        data,
 		}
 		if err := message.CmdWorkSendAppChat(&arg); err != nil {
 			fmt.Println(err)

@@ -22,6 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/slack/bot"
+	"github.com/lenye/pmsg/pkg/conv"
 )
 
 // botCmd slack bot
@@ -30,10 +31,15 @@ var botCmd = &cobra.Command{
 	Short: "publish slack bot message",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
+		data, err := conv.StrRaw2Interpreted(args[0])
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
 		arg := bot.CmdSendParams{
 			UserAgent: variable.UserAgent,
 			URL:       variable.Url,
-			Data:      args[0],
+			Data:      data,
 		}
 		if err := bot.CmdSend(&arg); err != nil {
 			fmt.Println(err)
