@@ -32,11 +32,6 @@ var officialAccountTplSubCmd = &cobra.Command{
 	Short:   "publish weixin official account template subscribe message (onetime)",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		data, err := conv.StrRaw2Interpreted(args[0])
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 		arg := message.CmdMpSendTemplateSubscribeParams{
 			UserAgent:   variable.UserAgent,
 			AccessToken: variable.AccessToken,
@@ -48,8 +43,19 @@ var officialAccountTplSubCmd = &cobra.Command{
 			Title:       variable.Title,
 			Url:         variable.Url,
 			Mini:        variable.Mini,
-			Data:        data,
 		}
+
+		if variable.IsRaw {
+			arg.Data = args[0]
+		} else {
+			var err error
+			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+
 		if err := message.CmdMpSendTemplateSubscribe(&arg); err != nil {
 			fmt.Println(err)
 		}
@@ -74,4 +80,6 @@ func init() {
 
 	officialAccountTplSubCmd.Flags().StringVar(&variable.Url, flags.Url, "", "Url")
 	officialAccountTplSubCmd.Flags().StringToStringVar(&variable.Mini, flags.Mini, nil, "weixin Mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
+
+	officialAccountTplSubCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 }

@@ -20,8 +20,9 @@ Aliases:
 -p, --template_id string     模版id (必填)
     --mini stringToString    跳小程序所需数据, 样例: app_id=XiaoChengXuAppId,page_path=index?foo=bar
     --page string            跳转网页时填写
+    --raw                    模板数据是原始字符串字面值，没有任何转义处理
 
-args                         参数：模板数据
+args                         参数：模板数据，默认是解释字符串，支持“\”转义
 ```
 
 样例

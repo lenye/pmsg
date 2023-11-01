@@ -14,8 +14,9 @@ $ pmsg workweixin upload -h
 如果没有提供 access_token，需要提供微信 app_id 和 app_secret 获取 access_token
 
 -m, --media_type string     临时素材的格式类型 (必填)，image(图片)、voice(语音)、video(视频)、file(普通文件)、
+    --raw                   文件名称含路径是原始字符串字面值，没有任何转义处理
 
-args                        参数：文件名称含路径
+args                        参数：文件名称含路径，默认是解释字符串，支持“\”转义
 ```
 
 样例
@@ -23,7 +24,7 @@ args                        参数：文件名称含路径
 linux
 
 ```shell
-$ pmsg workweixin upload -i corp_id -s corp_secret -m image /img/app.png
+$ pmsg workweixin upload -i corp_id -s corp_secret -m image --raw /img/app.png
 
 ok; type: "image", media_id: "media_id", created_at: 1670301152 (2022-12-06T12:32:32+08:00)
 ```

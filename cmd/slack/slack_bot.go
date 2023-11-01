@@ -31,16 +31,22 @@ var botCmd = &cobra.Command{
 	Short: "publish slack bot message",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		data, err := conv.StrRaw2Interpreted(args[0])
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 		arg := bot.CmdSendParams{
 			UserAgent: variable.UserAgent,
 			URL:       variable.Url,
-			Data:      data,
 		}
+
+		if variable.IsRaw {
+			arg.Data = args[0]
+		} else {
+			var err error
+			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+
 		if err := bot.CmdSend(&arg); err != nil {
 			fmt.Println(err)
 		}
@@ -51,4 +57,6 @@ var botCmd = &cobra.Command{
 func init() {
 	botCmd.Flags().StringVar(&variable.Url, flags.Url, "", "slack webhook Url")
 	botCmd.MarkFlagRequired(flags.Url)
+
+	botCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 }

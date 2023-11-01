@@ -33,11 +33,6 @@ var linkedCorpCmd = &cobra.Command{
 	Short:   "publish work weixin linked corp message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		data, err := conv.StrRaw2Interpreted(args[0])
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 		arg := message.CmdWorkSendLinkedCorpParams{
 			UserAgent:   variable.UserAgent,
 			AccessToken: variable.AccessToken,
@@ -47,7 +42,17 @@ var linkedCorpCmd = &cobra.Command{
 			AgentID:     variable.AgentID,
 			MsgType:     variable.MsgType,
 			Safe:        variable.Safe,
-			Data:        data,
+		}
+
+		if variable.IsRaw {
+			arg.Data = args[0]
+		} else {
+			var err error
+			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
 		}
 
 		if variable.ToUser != "" {
@@ -82,5 +87,7 @@ func init() {
 	linkedCorpCmd.MarkFlagRequired(flags.MsgType)
 
 	linkedCorpCmd.Flags().IntVar(&variable.Safe, flags.Safe, 0, "Safe")
+
+	linkedCorpCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 
 }

@@ -32,11 +32,6 @@ var officialAccountCustomerCmd = &cobra.Command{
 	Short:   "publish weixin official account customer message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		data, err := conv.StrRaw2Interpreted(args[0])
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 		arg := message.CmdMpSendCustomerParams{
 			UserAgent:   variable.UserAgent,
 			AccessToken: variable.AccessToken,
@@ -45,8 +40,19 @@ var officialAccountCustomerCmd = &cobra.Command{
 			ToUser:      variable.ToUser,
 			MsgType:     variable.MsgType,
 			KfAccount:   variable.KfAccount,
-			Data:        data,
 		}
+
+		if variable.IsRaw {
+			arg.Data = args[0]
+		} else {
+			var err error
+			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+
 		if err := message.CmdMpSendCustomer(&arg); err != nil {
 			fmt.Println(err)
 		}
@@ -64,4 +70,6 @@ func init() {
 	officialAccountCustomerCmd.MarkFlagRequired(flags.MsgType)
 
 	officialAccountCustomerCmd.Flags().StringVarP(&variable.KfAccount, flags.KfAccount, "k", "", "customer account")
+
+	officialAccountCustomerCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 }

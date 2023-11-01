@@ -32,11 +32,6 @@ var miniProgramCustomerCmd = &cobra.Command{
 	Short:   "publish weixin miniprogram customer message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		data, err := conv.StrRaw2Interpreted(args[0])
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 		arg := message.CmdMiniSendCustomerParams{
 			UserAgent:   variable.UserAgent,
 			AccessToken: variable.AccessToken,
@@ -44,8 +39,19 @@ var miniProgramCustomerCmd = &cobra.Command{
 			AppSecret:   variable.AppSecret,
 			ToUser:      variable.ToUser,
 			MsgType:     variable.MsgType,
-			Data:        data,
 		}
+
+		if variable.IsRaw {
+			arg.Data = args[0]
+		} else {
+			var err error
+			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+
 		if err := message.CmdMiniSendCustomer(&arg); err != nil {
 			fmt.Println(err)
 		}
@@ -61,4 +67,6 @@ func init() {
 
 	miniProgramCustomerCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
 	miniProgramCustomerCmd.MarkFlagRequired(flags.MsgType)
+
+	miniProgramCustomerCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 }

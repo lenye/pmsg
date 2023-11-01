@@ -22,8 +22,9 @@ Aliases:
     --url string             用户点击后跳转的url
     --scene string           订阅场景值 (必填)
     --title string           消息标题，15字以内 (必填)
+    --raw                    模板数据是原始字符串字面值，没有任何转义处理
 
-args                         参数：模板数据
+args                         参数：模板数据，默认是解释字符串，支持“\”转义
 ```
 
 样例

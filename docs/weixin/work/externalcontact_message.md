@@ -27,8 +27,9 @@ $ pmsg workweixin externalcontact -h
 -d, --duplicate_check_interval int   表示是否重复消息检查的时间间隔，默认1800s，最大不超过4小时(14400)
 -c, --enable_duplicate_check int     表示是否开启重复消息检查，0表示否，1表示是，默认0
 -r, --enable_id_trans int            表示是否开启id转译，0表示否，1表示是，默认0。仅第三方应用需要用到，企业自建应用可以忽略。
+    --raw                        消息内容是原始字符串字面值，没有任何转义处理
 
-args                             参数：消息内容
+args                             参数：消息内容，默认是解释字符串，支持“\”转义
 ```
 
 消息内容

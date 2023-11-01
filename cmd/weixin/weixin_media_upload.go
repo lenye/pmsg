@@ -22,6 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/asset"
+	"github.com/lenye/pmsg/pkg/conv"
 )
 
 // mediaUploadCmd 微信公众号新增临时素材
@@ -36,8 +37,19 @@ var mediaUploadCmd = &cobra.Command{
 			AppID:       variable.AppID,
 			AppSecret:   variable.AppSecret,
 			MediaType:   variable.MediaType,
-			File:        args[0],
 		}
+
+		if variable.IsRaw {
+			arg.File = args[0]
+		} else {
+			var err error
+			arg.File, err = conv.StrRaw2Interpreted(args[0])
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+
 		if err := asset.CmdMediaUpload(&arg); err != nil {
 			fmt.Println(err)
 		}
@@ -50,4 +62,6 @@ func init() {
 
 	mediaUploadCmd.Flags().StringVarP(&variable.MediaType, flags.MediaType, "m", "", "media type (required)")
 	mediaUploadCmd.MarkFlagRequired(flags.MediaType)
+
+	mediaUploadCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 }

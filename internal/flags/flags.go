@@ -68,4 +68,6 @@ const (
 	AtUser   = "at_user"
 	AtMobile = "at_mobile"
 	IsAtAll  = "is_at_all"
+
+	IsRaw = "raw"
 )

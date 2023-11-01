@@ -22,8 +22,9 @@ Aliases:
                                            news(图文消息)、mpnews(图文消息)、mpnewsarticle(图文消息)、
                                            msgmenu(菜单消息)、wxcard(卡券)、miniprogrampage(小程序卡片)
 -k, --kf_account string     客服帐号
+    --raw                   消息内容是原始字符串字面值，没有任何转义处理
 
-args                        参数：消息内容                                           
+args                        参数：消息内容，默认是解释字符串，支持“\”转义
 ```
 
 消息内容

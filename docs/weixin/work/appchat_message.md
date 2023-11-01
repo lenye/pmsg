@@ -20,8 +20,9 @@ $ pmsg workweixin appchat -h
                                            markdown(markdown消息)
 
     --safe int              表示是否是保密消息，0表示可对外分享，1表示不能分享且内容显示水印，默认为0
-    
-args                        参数：消息内容    
+    --raw                   消息内容是原始字符串字面值，没有任何转义处理
+
+args                        参数：消息内容，默认是解释字符串，支持“\”转义
 ```
 
 消息内容

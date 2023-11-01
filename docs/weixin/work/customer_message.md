@@ -20,8 +20,9 @@ $ pmsg workweixin customer -h
                                            voice(语音消息)、video(视频消息)、file(文件消息)、
                                            link(图文链接消息)、miniprogram(小程序消息)、
                                            msgmenu(菜单消息)、location(地理位置消息)
+    --raw                   消息内容是原始字符串字面值，没有任何转义处理
 
-args                        参数：消息内容
+args                        参数：消息内容，默认是解释字符串，支持“\”转义
 ```
 
 消息内容

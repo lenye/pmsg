@@ -20,7 +20,9 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
+	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/work/bot"
+	"github.com/lenye/pmsg/pkg/conv"
 )
 
 // botUploadCmd 企业微信群机器人上传文件
@@ -32,8 +34,19 @@ var botUploadCmd = &cobra.Command{
 		arg := bot.CmdUploadParams{
 			UserAgent: variable.UserAgent,
 			Key:       variable.Secret,
-			File:      args[0],
 		}
+
+		if variable.IsRaw {
+			arg.File = args[0]
+		} else {
+			var err error
+			arg.File, err = conv.StrRaw2Interpreted(args[0])
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+
 		if err := bot.CmdUpload(&arg); err != nil {
 			fmt.Println(err)
 		}
@@ -43,4 +56,6 @@ var botUploadCmd = &cobra.Command{
 
 func init() {
 	workWeiXinBotSetKeyFlags(botUploadCmd)
+
+	botUploadCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 }

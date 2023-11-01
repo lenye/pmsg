@@ -33,11 +33,6 @@ var externalContactCmd = &cobra.Command{
 	Short:   "publish work weixin external contact message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		data, err := conv.StrRaw2Interpreted(args[0])
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 		arg := message.CmdWorkSendExternalContactParams{
 			UserAgent:              variable.UserAgent,
 			AccessToken:            variable.AccessToken,
@@ -50,7 +45,17 @@ var externalContactCmd = &cobra.Command{
 			EnableIDTrans:          variable.EnableIDTrans,
 			EnableDuplicateCheck:   variable.EnableDuplicateCheck,
 			DuplicateCheckInterval: variable.DuplicateCheckInterval,
-			Data:                   data,
+		}
+
+		if variable.IsRaw {
+			arg.Data = args[0]
+		} else {
+			var err error
+			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
 		}
 
 		if variable.ToParentUserID != "" {
@@ -89,5 +94,7 @@ func init() {
 	externalContactCmd.Flags().IntVarP(&variable.EnableIDTrans, flags.EnableIDTrans, "r", 0, "enable id translated")
 	externalContactCmd.Flags().IntVarP(&variable.EnableDuplicateCheck, flags.EnableDuplicateCheck, "c", 0, "enable duplicate check")
 	externalContactCmd.Flags().IntVarP(&variable.DuplicateCheckInterval, flags.DuplicateCheckInterval, "d", 1800, "duplicate check interval")
+
+	externalContactCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 
 }

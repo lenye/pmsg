@@ -31,18 +31,24 @@ var botCmd = &cobra.Command{
 	Short: "publish fei shu bot message",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		data, err := conv.StrRaw2Interpreted(args[0])
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 		arg := bot.CmdSendParams{
 			UserAgent:   variable.UserAgent,
 			AccessToken: variable.AccessToken,
 			Secret:      variable.Secret,
 			MsgType:     variable.MsgType,
-			Data:        data,
 		}
+
+		if variable.IsRaw {
+			arg.Data = args[0]
+		} else {
+			var err error
+			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+
 		if err := bot.CmdSend(&arg); err != nil {
 			fmt.Println(err)
 		}
@@ -58,5 +64,7 @@ func init() {
 
 	botCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
 	botCmd.MarkFlagRequired(flags.MsgType)
+
+	botCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 
 }

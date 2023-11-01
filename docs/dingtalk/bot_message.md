@@ -15,8 +15,9 @@ $ pmsg dingtalk bot -h
 -o, --at_user string        文本或markdown消息时，被@人的用户userid，多个接收者用‘|’分隔。
 -b, --at_mobile string      文本或markdown消息时，被@人的手机号，多个接收者用‘|’分隔
 -i, --is_at_all             文本或markdown消息时，是否@所有人
+    --raw                   消息内容是原始字符串字面值，没有任何转义处理
 
-args                        参数：消息内容
+args                        参数：消息内容，默认是解释字符串，支持“\”转义
 ```
 
 消息内容

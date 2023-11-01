@@ -18,8 +18,9 @@ Aliases:
 
 -o, --to_user string        接收人的open_id (必填)
 -m, --msg_type string       消息类型 (必填)，text(文本消息)、image(图片消息)、link(图文链接)、miniprogrampage(小程序卡片)
+    --raw                   消息内容是原始字符串字面值，没有任何转义处理
 
-args                        参数：消息内容
+args                        参数：消息内容，默认是解释字符串，支持“\”转义
 ```
 
 消息内容

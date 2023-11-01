@@ -24,8 +24,9 @@ $ pmsg workweixin linkedcorp -h
                                            markdown(markdown消息)、miniprogram_notice(小程序通知消息)
 
     --safe int              表示是否是保密消息，0表示否，1表示是，默认0
-    
-args                        参数：消息内容    
+    --raw                   消息内容是原始字符串字面值，没有任何转义处理
+
+args                        参数：消息内容，默认是解释字符串，支持“\”转义
 ```
 
 消息内容

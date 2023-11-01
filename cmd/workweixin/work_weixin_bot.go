@@ -31,19 +31,25 @@ var botCmd = &cobra.Command{
 	Short: "publish work weixin group bot message",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		data, err := conv.StrRaw2Interpreted(args[0])
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 		arg := bot.CmdSendParams{
 			UserAgent: variable.UserAgent,
 			Key:       variable.Secret,
 			MsgType:   variable.MsgType,
 			AtUser:    variable.AtUser,
 			AtMobile:  variable.AtMobile,
-			Data:      data,
 		}
+
+		if variable.IsRaw {
+			arg.Data = args[0]
+		} else {
+			var err error
+			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+
 		if err := bot.CmdSend(&arg); err != nil {
 			fmt.Println(err)
 		}
@@ -61,6 +67,8 @@ func init() {
 
 	botCmd.Flags().StringVarP(&variable.AtUser, flags.AtUser, "o", "", "work weixin user id list")
 	botCmd.Flags().StringVarP(&variable.AtMobile, flags.AtMobile, "b", "", "mobile list")
+
+	botCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 }
 
 // workWeiXinBotSetKeyFlags 设置企业微信群机器人key命令行参数

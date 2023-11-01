@@ -32,11 +32,6 @@ var appChatCmd = &cobra.Command{
 	Short:   "publish work weixin appchat message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		data, err := conv.StrRaw2Interpreted(args[0])
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 		arg := message.CmdWorkSendAppChatParams{
 			UserAgent:   variable.UserAgent,
 			AccessToken: variable.AccessToken,
@@ -45,8 +40,19 @@ var appChatCmd = &cobra.Command{
 			ChatID:      variable.ChatID,
 			MsgType:     variable.MsgType,
 			Safe:        variable.Safe,
-			Data:        data,
 		}
+
+		if variable.IsRaw {
+			arg.Data = args[0]
+		} else {
+			var err error
+			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+
 		if err := message.CmdWorkSendAppChat(&arg); err != nil {
 			fmt.Println(err)
 		}
@@ -64,4 +70,6 @@ func init() {
 	appChatCmd.MarkFlagRequired(flags.MsgType)
 
 	appChatCmd.Flags().IntVar(&variable.Safe, flags.Safe, 0, "Safe")
+
+	appChatCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 }

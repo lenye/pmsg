@@ -31,11 +31,6 @@ var appCmd = &cobra.Command{
 	Short: "publish work weixin app message",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		data, err := conv.StrRaw2Interpreted(args[0])
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 		arg := message.CmdWorkSendAppParams{
 			UserAgent:              variable.UserAgent,
 			AccessToken:            variable.AccessToken,
@@ -50,8 +45,19 @@ var appCmd = &cobra.Command{
 			EnableIDTrans:          variable.EnableIDTrans,
 			EnableDuplicateCheck:   variable.EnableDuplicateCheck,
 			DuplicateCheckInterval: variable.DuplicateCheckInterval,
-			Data:                   data,
 		}
+
+		if variable.IsRaw {
+			arg.Data = args[0]
+		} else {
+			var err error
+			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+
 		if err := message.CmdWorkSendApp(&arg); err != nil {
 			fmt.Println(err)
 		}
@@ -78,4 +84,6 @@ func init() {
 	appCmd.Flags().IntVarP(&variable.EnableIDTrans, flags.EnableIDTrans, "r", 0, "enable id translated")
 	appCmd.Flags().IntVarP(&variable.EnableDuplicateCheck, flags.EnableDuplicateCheck, "c", 0, "enable duplicate check")
 	appCmd.Flags().IntVarP(&variable.DuplicateCheckInterval, flags.DuplicateCheckInterval, "d", 1800, "duplicate check interval")
+
+	appCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 }

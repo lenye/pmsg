@@ -63,4 +63,6 @@ var (
 	AtUser   string
 	AtMobile string
 	IsAtAll  bool
+
+	IsRaw bool
 )

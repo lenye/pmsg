@@ -22,8 +22,9 @@ Aliases:
     --color string           模板内容字体颜色，不填默认为黑色
     --mini stringToString    跳小程序所需数据, 样例: app_id=XiaoChengXuAppId,page_path=index?foo=bar
     --url string             用户点击后跳转的url
-    
-args                         参数：模板数据    
+    --raw                    模板数据是原始字符串字面值，没有任何转义处理
+
+args                         参数：模板数据，默认是解释字符串，支持“\”转义    
 ```
 
 样例

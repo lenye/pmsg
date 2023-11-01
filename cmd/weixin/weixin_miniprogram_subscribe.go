@@ -32,11 +32,6 @@ var miniProgramSubCmd = &cobra.Command{
 	Short:   "publish weixin miniprogram subscribe message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		data, err := conv.StrRaw2Interpreted(args[0])
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 		arg := message.CmdMiniSendSubscribeParams{
 			UserAgent:        variable.UserAgent,
 			AccessToken:      variable.AccessToken,
@@ -47,8 +42,19 @@ var miniProgramSubCmd = &cobra.Command{
 			MiniProgramState: variable.MiniProgramState,
 			Page:             variable.Page,
 			Language:         variable.Language,
-			Data:             data,
 		}
+
+		if variable.IsRaw {
+			arg.Data = args[0]
+		} else {
+			var err error
+			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+
 		if err := message.CmdMiniProgramSendSubscribe(&arg); err != nil {
 			fmt.Println(err)
 		}
@@ -68,4 +74,6 @@ func init() {
 	miniProgramSubCmd.Flags().StringVarP(&variable.MiniProgramState, flags.MiniProgramState, "g", "", "miniprogram_state")
 	miniProgramSubCmd.Flags().StringVar(&variable.Page, flags.Page, "", "Page")
 	miniProgramSubCmd.Flags().StringVar(&variable.Language, flags.Language, "", "Language")
+
+	miniProgramSubCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 }

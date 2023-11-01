@@ -32,11 +32,6 @@ var officialAccountTplCmd = &cobra.Command{
 	Short:   "publish weixin official account template message",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		data, err := conv.StrRaw2Interpreted(args[0])
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 		arg := message.CmdMpSendTemplateParams{
 			UserAgent:   variable.UserAgent,
 			AccessToken: variable.AccessToken,
@@ -48,8 +43,19 @@ var officialAccountTplCmd = &cobra.Command{
 			Mini:        variable.Mini,
 			Color:       variable.Color,
 			ClientMsgID: variable.ClientMsgID,
-			Data:        data,
 		}
+
+		if variable.IsRaw {
+			arg.Data = args[0]
+		} else {
+			var err error
+			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+
 		if err := message.CmdMpSendTemplate(&arg); err != nil {
 			fmt.Println(err)
 		}
@@ -73,4 +79,6 @@ func init() {
 
 	officialAccountTplCmd.Flags().StringVar(&variable.Color, flags.Color, "", "template Color")
 	officialAccountTplCmd.Flags().StringVarP(&variable.ClientMsgID, flags.ClientMsgID, "c", "", "client message id")
+
+	officialAccountTplCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 }

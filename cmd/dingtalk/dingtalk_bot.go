@@ -31,11 +31,6 @@ var botCmd = &cobra.Command{
 	Short: "publish ding talk bot message",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		data, err := conv.StrRaw2Interpreted(args[0])
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
 		arg := bot.CmdSendParams{
 			UserAgent:   variable.UserAgent,
 			AccessToken: variable.AccessToken,
@@ -44,8 +39,19 @@ var botCmd = &cobra.Command{
 			AtUser:      variable.AtUser,
 			AtMobile:    variable.AtMobile,
 			IsAtAll:     variable.IsAtAll,
-			Data:        data,
 		}
+
+		if variable.IsRaw {
+			arg.Data = args[0]
+		} else {
+			var err error
+			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			if err != nil {
+				fmt.Println(err)
+				return
+			}
+		}
+
 		if err := bot.CmdSend(&arg); err != nil {
 			fmt.Println(err)
 		}
@@ -65,5 +71,7 @@ func init() {
 	botCmd.Flags().StringVarP(&variable.AtUser, flags.AtUser, "o", "", "dingtalk user id list")
 	botCmd.Flags().StringVarP(&variable.AtMobile, flags.AtMobile, "b", "", "mobile list")
 	botCmd.Flags().BoolVarP(&variable.IsAtAll, flags.IsAtAll, "i", false, "is @all")
+
+	botCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 
 }

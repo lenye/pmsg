@@ -11,8 +11,9 @@ $ pmsg feishu bot -h
 -s, --secret string         签名密钥
 -m, --msg_type string       消息类型 (必填)，text(文本消息)、post(富文本)、image(图片)、
                                            share_chat(分享群名片)、interactive(消息卡片)
-                                           
-args                        参数：消息内容
+    --raw                   消息内容是原始字符串字面值，没有任何转义处理
+
+args                        参数：消息内容，默认是解释字符串，支持“\”转义
 ```
 
 消息内容
