@@ -40,7 +40,9 @@ var rootCmd = &cobra.Command{
     微信消息
     微信客服消息
     企业微信消息
-    企业微信客服消息`,
+    企业微信客服消息
+
+    ` + version.OpenSource,
 	CompletionOptions: cobra.CompletionOptions{
 		HiddenDefaultCmd: true,
 	},
