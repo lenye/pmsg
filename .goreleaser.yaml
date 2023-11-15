@@ -26,6 +26,7 @@ builds:
       - windows
       - darwin
       - freebsd
+      - openbsd
     goarch:
       - amd64
       - arm64
@@ -41,10 +42,9 @@ builds:
     ignore:
       - goos: windows
         goarch: arm
-      - goos: darwin
-        goarch: 386
-      - goos: darwin
+      - goos: openbsd
         goarch: arm
+        goarm: 6
     mod_timestamp: '{{ .CommitTimestamp }}'
 
 
