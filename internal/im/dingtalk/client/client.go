@@ -15,8 +15,6 @@
 package client
 
 import (
-	"bytes"
-	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -33,15 +31,12 @@ func CheckHttpResponseStatusCode(method, url string, statusCode int) error {
 
 // PostJSON http post json
 func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
-	buf := new(bytes.Buffer)
-	enc := json.NewEncoder(buf)
-	enc.SetEscapeHTML(false)
-	err := enc.Encode(reqBody)
+	body, err := httpclient.JsonEncode(reqBody)
 	if err != nil {
 		return nil, err
 	}
 
-	resp, err := httpclient.Post(url, httpclient.HdrValApplicationJson, bytes.NewReader(buf.Bytes()))
+	resp, err := httpclient.Post(url, httpclient.HdrValApplicationJson, body)
 	if err != nil {
 		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodPost, url, err)
 	}
@@ -51,5 +46,5 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 		return nil, err
 	}
 
-	return resp.Header, httpclient.DecodeResponse(resp.Body, respBody)
+	return resp.Header, httpclient.JsonDecode(resp.Body, respBody)
 }

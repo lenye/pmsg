@@ -16,7 +16,6 @@ package httpclient
 
 import (
 	"bytes"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
@@ -172,16 +171,4 @@ func PostMultipartForm(url string, form *MultipartForm) (*http.Response, error) 
 func PostFile(url, formName, fileName string) (*http.Response, error) {
 	form := NewMultipartForm().AddFile(formName, fileName)
 	return PostMultipartForm(url, form)
-}
-
-func decodeJson(body io.Reader, v any) error {
-	return json.NewDecoder(body).Decode(v)
-}
-
-// DecodeResponse 解码响应
-func DecodeResponse(body io.Reader, v any) error {
-	if v == nil {
-		return nil
-	}
-	return decodeJson(body, v)
 }

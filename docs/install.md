@@ -6,6 +6,7 @@
 * Linux
 * macOS
 * FreeBSD
+* OpenBSD
 
 #### 使用二进制发行版
 

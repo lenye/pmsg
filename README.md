@@ -35,6 +35,7 @@
 * Linux
 * macOS
 * FreeBSD
+* OpenBSD
 
 ## 文档
 

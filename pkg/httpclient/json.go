@@ -12,31 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package client
+package httpclient
 
 import (
-	"fmt"
-	"net/http"
-
-	"github.com/lenye/pmsg/pkg/httpclient"
+	"bytes"
+	"encoding/json"
+	"io"
 )
 
-// PostJSON http post json
-func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
-	body, err := httpclient.JsonEncode(reqBody)
+func JsonDecode(body io.Reader, v any) error {
+	if v == nil {
+		return nil
+	}
+	return json.NewDecoder(body).Decode(v)
+}
+
+func JsonEncode(v any) (io.Reader, error) {
+	if v == nil {
+		return nil, nil
+	}
+	buf := new(bytes.Buffer)
+	enc := json.NewEncoder(buf)
+	enc.SetEscapeHTML(false)
+	err := enc.Encode(v)
 	if err != nil {
 		return nil, err
 	}
-
-	resp, err := httpclient.Post(url, httpclient.HdrValApplicationJson, body)
-	if err != nil {
-		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodPost, url, err)
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode/100 != 2 {
-		return resp.Header, httpclient.JsonDecode(resp.Body, respBody)
-	}
-
-	return resp.Header, nil
+	return buf, nil
 }
