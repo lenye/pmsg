@@ -22,7 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/feishu/bot"
-	"github.com/lenye/pmsg/pkg/conv"
+	"github.com/lenye/pmsg/pkg/helper"
 )
 
 // botCmd 飞书自定义机器人
@@ -42,7 +42,7 @@ var botCmd = &cobra.Command{
 			arg.Data = args[0]
 		} else {
 			var err error
-			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			arg.Data, err = helper.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -58,12 +58,12 @@ var botCmd = &cobra.Command{
 
 func init() {
 	botCmd.Flags().StringVarP(&variable.AccessToken, flags.AccessToken, "t", "", "feishu bot access token (required)")
-	botCmd.MarkFlagRequired(flags.AccessToken)
+	_ = botCmd.MarkFlagRequired(flags.AccessToken)
 
 	botCmd.Flags().StringVarP(&variable.Secret, flags.Secret, "s", "", "sign Secret")
 
 	botCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
-	botCmd.MarkFlagRequired(flags.MsgType)
+	_ = botCmd.MarkFlagRequired(flags.MsgType)
 
 	botCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 

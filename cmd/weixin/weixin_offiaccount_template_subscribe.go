@@ -22,7 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/offiaccount/message"
-	"github.com/lenye/pmsg/pkg/conv"
+	"github.com/lenye/pmsg/pkg/helper"
 )
 
 // officialAccountTplSubCmd 微信公众号一次性订阅消息
@@ -49,7 +49,7 @@ var officialAccountTplSubCmd = &cobra.Command{
 			arg.Data = args[0]
 		} else {
 			var err error
-			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			arg.Data, err = helper.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -67,16 +67,16 @@ func init() {
 	weiXinSetAccessTokenFlags(officialAccountTplSubCmd)
 
 	officialAccountTplSubCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "weixin user open id (required)")
-	officialAccountTplSubCmd.MarkFlagRequired(flags.ToUser)
+	_ = officialAccountTplSubCmd.MarkFlagRequired(flags.ToUser)
 
 	officialAccountTplSubCmd.Flags().StringVarP(&variable.TemplateID, flags.TemplateID, "p", "", "weixin template id (required)")
-	officialAccountTplSubCmd.MarkFlagRequired(flags.TemplateID)
+	_ = officialAccountTplSubCmd.MarkFlagRequired(flags.TemplateID)
 
 	officialAccountTplSubCmd.Flags().StringVar(&variable.Scene, flags.Scene, "", "weixin subscribe Scene (required)")
-	officialAccountTplSubCmd.MarkFlagRequired(flags.Scene)
+	_ = officialAccountTplSubCmd.MarkFlagRequired(flags.Scene)
 
 	officialAccountTplSubCmd.Flags().StringVar(&variable.Title, flags.Title, "", "message Title (required)")
-	officialAccountTplSubCmd.MarkFlagRequired(flags.Title)
+	_ = officialAccountTplSubCmd.MarkFlagRequired(flags.Title)
 
 	officialAccountTplSubCmd.Flags().StringVar(&variable.Url, flags.Url, "", "Url")
 	officialAccountTplSubCmd.Flags().StringToStringVar(&variable.Mini, flags.Mini, nil, "weixin Mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")

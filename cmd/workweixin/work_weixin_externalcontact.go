@@ -23,7 +23,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/work/message"
-	"github.com/lenye/pmsg/pkg/conv"
+	"github.com/lenye/pmsg/pkg/helper"
 )
 
 // externalContactCmd 企业微信家校消息
@@ -51,7 +51,7 @@ var externalContactCmd = &cobra.Command{
 			arg.Data = args[0]
 		} else {
 			var err error
-			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			arg.Data, err = helper.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -86,10 +86,10 @@ func init() {
 	externalContactCmd.Flags().IntVarP(&variable.ToAll, flags.ToAll, "l", 0, "send to all user")
 
 	externalContactCmd.Flags().Int64VarP(&variable.AgentID, flags.AgentID, "e", 0, "work weixin agent id (required)")
-	externalContactCmd.MarkFlagRequired(flags.AgentID)
+	_ = externalContactCmd.MarkFlagRequired(flags.AgentID)
 
 	externalContactCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
-	externalContactCmd.MarkFlagRequired(flags.MsgType)
+	_ = externalContactCmd.MarkFlagRequired(flags.MsgType)
 
 	externalContactCmd.Flags().IntVarP(&variable.EnableIDTrans, flags.EnableIDTrans, "r", 0, "enable id translated")
 	externalContactCmd.Flags().IntVarP(&variable.EnableDuplicateCheck, flags.EnableDuplicateCheck, "c", 0, "enable duplicate check")

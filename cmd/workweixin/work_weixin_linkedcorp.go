@@ -23,7 +23,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/work/message"
-	"github.com/lenye/pmsg/pkg/conv"
+	"github.com/lenye/pmsg/pkg/helper"
 )
 
 // linkedCorpCmd 企业微信互联企业消息
@@ -48,7 +48,7 @@ var linkedCorpCmd = &cobra.Command{
 			arg.Data = args[0]
 		} else {
 			var err error
-			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			arg.Data, err = helper.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -81,10 +81,10 @@ func init() {
 	linkedCorpCmd.Flags().IntVarP(&variable.ToAll, flags.ToAll, "l", 0, "send to all user")
 
 	linkedCorpCmd.Flags().Int64VarP(&variable.AgentID, flags.AgentID, "e", 0, "work weixin agent id (required)")
-	linkedCorpCmd.MarkFlagRequired(flags.AgentID)
+	_ = linkedCorpCmd.MarkFlagRequired(flags.AgentID)
 
 	linkedCorpCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
-	linkedCorpCmd.MarkFlagRequired(flags.MsgType)
+	_ = linkedCorpCmd.MarkFlagRequired(flags.MsgType)
 
 	linkedCorpCmd.Flags().IntVar(&variable.Safe, flags.Safe, 0, "Safe")
 

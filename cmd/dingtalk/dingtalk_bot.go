@@ -22,7 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/dingtalk/bot"
-	"github.com/lenye/pmsg/pkg/conv"
+	"github.com/lenye/pmsg/pkg/helper"
 )
 
 // botCmd 钉钉自定义机器人
@@ -45,7 +45,7 @@ var botCmd = &cobra.Command{
 			arg.Data = args[0]
 		} else {
 			var err error
-			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			arg.Data, err = helper.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -61,12 +61,12 @@ var botCmd = &cobra.Command{
 
 func init() {
 	botCmd.Flags().StringVarP(&variable.AccessToken, flags.AccessToken, "t", "", "dingtalk bot access token (required)")
-	botCmd.MarkFlagRequired(flags.AccessToken)
+	_ = botCmd.MarkFlagRequired(flags.AccessToken)
 
 	botCmd.Flags().StringVarP(&variable.Secret, flags.Secret, "s", "", "sign Secret")
 
 	botCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
-	botCmd.MarkFlagRequired(flags.MsgType)
+	_ = botCmd.MarkFlagRequired(flags.MsgType)
 
 	botCmd.Flags().StringVarP(&variable.AtUser, flags.AtUser, "o", "", "dingtalk user id list")
 	botCmd.Flags().StringVarP(&variable.AtMobile, flags.AtMobile, "b", "", "mobile list")

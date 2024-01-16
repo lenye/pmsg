@@ -16,14 +16,16 @@ package client
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 
+	"github.com/lenye/pmsg/pkg/helper"
 	"github.com/lenye/pmsg/pkg/httpclient"
 )
 
 // PostJSON http post json
 func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
-	body, err := httpclient.JsonEncode(reqBody)
+	body, err := helper.JsonEncode(reqBody)
 	if err != nil {
 		return nil, err
 	}
@@ -32,10 +34,12 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 	if err != nil {
 		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodPost, url, err)
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(resp.Body)
 
 	if resp.StatusCode/100 != 2 {
-		return resp.Header, httpclient.JsonDecode(resp.Body, respBody)
+		return resp.Header, helper.JsonDecode(resp.Body, respBody)
 	}
 
 	return resp.Header, nil

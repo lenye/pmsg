@@ -44,8 +44,8 @@ var accessTokenCmd = &cobra.Command{
 
 func init() {
 	accessTokenCmd.Flags().StringVarP(&variable.CorpID, flags.CorpID, "i", "", "work weixin corp id (required)")
-	accessTokenCmd.MarkFlagRequired(flags.CorpID)
+	_ = accessTokenCmd.MarkFlagRequired(flags.CorpID)
 
 	accessTokenCmd.Flags().StringVarP(&variable.CorpSecret, flags.CorpSecret, "s", "", "work weixin corp Secret (required)")
-	accessTokenCmd.MarkFlagRequired(flags.CorpSecret)
+	_ = accessTokenCmd.MarkFlagRequired(flags.CorpSecret)
 }

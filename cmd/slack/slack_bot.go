@@ -22,7 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/slack/bot"
-	"github.com/lenye/pmsg/pkg/conv"
+	"github.com/lenye/pmsg/pkg/helper"
 )
 
 // botCmd slack bot
@@ -40,7 +40,7 @@ var botCmd = &cobra.Command{
 			arg.Data = args[0]
 		} else {
 			var err error
-			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			arg.Data, err = helper.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -56,7 +56,7 @@ var botCmd = &cobra.Command{
 
 func init() {
 	botCmd.Flags().StringVar(&variable.Url, flags.Url, "", "slack webhook Url")
-	botCmd.MarkFlagRequired(flags.Url)
+	_ = botCmd.MarkFlagRequired(flags.Url)
 
 	botCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 }

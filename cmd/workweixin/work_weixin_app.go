@@ -22,7 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/work/message"
-	"github.com/lenye/pmsg/pkg/conv"
+	"github.com/lenye/pmsg/pkg/helper"
 )
 
 // appCmd 企业微信应用消息
@@ -51,7 +51,7 @@ var appCmd = &cobra.Command{
 			arg.Data = args[0]
 		} else {
 			var err error
-			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			arg.Data, err = helper.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -75,10 +75,10 @@ func init() {
 	appCmd.Flags().StringVarP(&variable.ToTag, flags.ToTag, "g", "", "work weixin tag id list")
 
 	appCmd.Flags().Int64VarP(&variable.AgentID, flags.AgentID, "e", 0, "work weixin agent id (required)")
-	appCmd.MarkFlagRequired(flags.AgentID)
+	_ = appCmd.MarkFlagRequired(flags.AgentID)
 
 	appCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
-	appCmd.MarkFlagRequired(flags.MsgType)
+	_ = appCmd.MarkFlagRequired(flags.MsgType)
 
 	appCmd.Flags().IntVar(&variable.Safe, flags.Safe, 0, "Safe")
 	appCmd.Flags().IntVarP(&variable.EnableIDTrans, flags.EnableIDTrans, "r", 0, "enable id translated")

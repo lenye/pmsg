@@ -22,7 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/customer/message"
-	"github.com/lenye/pmsg/pkg/conv"
+	"github.com/lenye/pmsg/pkg/helper"
 )
 
 // officialAccountCustomerCmd 微信公众号客服
@@ -46,7 +46,7 @@ var officialAccountCustomerCmd = &cobra.Command{
 			arg.Data = args[0]
 		} else {
 			var err error
-			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			arg.Data, err = helper.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -64,10 +64,10 @@ func init() {
 	weiXinSetAccessTokenFlags(officialAccountCustomerCmd)
 
 	officialAccountCustomerCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "weixin user open id (required)")
-	officialAccountCustomerCmd.MarkFlagRequired(flags.ToUser)
+	_ = officialAccountCustomerCmd.MarkFlagRequired(flags.ToUser)
 
 	officialAccountCustomerCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
-	officialAccountCustomerCmd.MarkFlagRequired(flags.MsgType)
+	_ = officialAccountCustomerCmd.MarkFlagRequired(flags.MsgType)
 
 	officialAccountCustomerCmd.Flags().StringVarP(&variable.KfAccount, flags.KfAccount, "k", "", "customer account")
 

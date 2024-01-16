@@ -22,7 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/miniprogram/message"
-	"github.com/lenye/pmsg/pkg/conv"
+	"github.com/lenye/pmsg/pkg/helper"
 )
 
 // miniProgramSubCmd 微信小程序订阅消息
@@ -48,7 +48,7 @@ var miniProgramSubCmd = &cobra.Command{
 			arg.Data = args[0]
 		} else {
 			var err error
-			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			arg.Data, err = helper.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -66,10 +66,10 @@ func init() {
 	weiXinSetAccessTokenFlags(miniProgramSubCmd)
 
 	miniProgramSubCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "weixin user open id (required)")
-	miniProgramSubCmd.MarkFlagRequired(flags.ToUser)
+	_ = miniProgramSubCmd.MarkFlagRequired(flags.ToUser)
 
 	miniProgramSubCmd.Flags().StringVarP(&variable.TemplateID, flags.TemplateID, "p", "", "weixin template id (required)")
-	miniProgramSubCmd.MarkFlagRequired(flags.TemplateID)
+	_ = miniProgramSubCmd.MarkFlagRequired(flags.TemplateID)
 
 	miniProgramSubCmd.Flags().StringVarP(&variable.MiniProgramState, flags.MiniProgramState, "g", "", "miniprogram_state")
 	miniProgramSubCmd.Flags().StringVar(&variable.Page, flags.Page, "", "Page")

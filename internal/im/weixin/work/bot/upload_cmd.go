@@ -18,7 +18,7 @@ import (
 	"fmt"
 
 	"github.com/lenye/pmsg/internal/im/weixin"
-	"github.com/lenye/pmsg/pkg/file"
+	"github.com/lenye/pmsg/pkg/helper"
 	"github.com/lenye/pmsg/pkg/httpclient"
 )
 
@@ -29,7 +29,7 @@ type CmdUploadParams struct {
 }
 
 func (t *CmdUploadParams) Validate() error {
-	if !file.Exists(t.File) {
+	if !helper.FileExists(t.File) {
 		return fmt.Errorf("file is not exist, %v", t.File)
 	}
 

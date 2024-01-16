@@ -23,7 +23,7 @@ import (
 
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin"
-	"github.com/lenye/pmsg/pkg/file"
+	"github.com/lenye/pmsg/pkg/helper"
 	"github.com/lenye/pmsg/pkg/httpclient"
 )
 
@@ -42,7 +42,7 @@ func (t *CmdSendParams) Validate() error {
 	}
 
 	if t.MsgType == MsgTypeImage {
-		if !file.Exists(t.Data) {
+		if !helper.FileExists(t.Data) {
 			return fmt.Errorf("file is not exist, %v", t.Data)
 		}
 	}

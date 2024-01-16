@@ -22,7 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/work/bot"
-	"github.com/lenye/pmsg/pkg/conv"
+	"github.com/lenye/pmsg/pkg/helper"
 )
 
 // botCmd 企业微信群机器人
@@ -43,7 +43,7 @@ var botCmd = &cobra.Command{
 			arg.Data = args[0]
 		} else {
 			var err error
-			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			arg.Data, err = helper.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -63,7 +63,7 @@ func init() {
 	workWeiXinBotSetKeyFlags(botCmd)
 
 	botCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
-	botCmd.MarkFlagRequired(flags.MsgType)
+	_ = botCmd.MarkFlagRequired(flags.MsgType)
 
 	botCmd.Flags().StringVarP(&variable.AtUser, flags.AtUser, "o", "", "work weixin user id list")
 	botCmd.Flags().StringVarP(&variable.AtMobile, flags.AtMobile, "b", "", "mobile list")
@@ -74,5 +74,5 @@ func init() {
 // workWeiXinBotSetKeyFlags 设置企业微信群机器人key命令行参数
 func workWeiXinBotSetKeyFlags(cmd *cobra.Command) {
 	cmd.Flags().StringVarP(&variable.Secret, flags.Key, "k", "", "work weixin bot key (required)")
-	cmd.MarkFlagRequired(flags.Key)
+	_ = cmd.MarkFlagRequired(flags.Key)
 }

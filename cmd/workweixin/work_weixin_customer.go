@@ -22,7 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/work/message"
-	"github.com/lenye/pmsg/pkg/conv"
+	"github.com/lenye/pmsg/pkg/helper"
 )
 
 // customerCmd 微信客服消息
@@ -47,7 +47,7 @@ var customerCmd = &cobra.Command{
 			arg.Data = args[0]
 		} else {
 			var err error
-			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			arg.Data, err = helper.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -65,13 +65,13 @@ func init() {
 	workWeiXinSetAccessTokenFlags(customerCmd)
 
 	customerCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "work weixin user id (required)")
-	customerCmd.MarkFlagRequired(flags.ToUser)
+	_ = customerCmd.MarkFlagRequired(flags.ToUser)
 
 	customerCmd.Flags().StringVarP(&variable.OpenKfID, flags.OpenKfID, "k", "", "work weixin customer account id (required)")
-	customerCmd.MarkFlagRequired(flags.OpenKfID)
+	_ = customerCmd.MarkFlagRequired(flags.OpenKfID)
 
 	customerCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
-	customerCmd.MarkFlagRequired(flags.MsgType)
+	_ = customerCmd.MarkFlagRequired(flags.MsgType)
 
 	customerCmd.Flags().StringVarP(&variable.MsgID, flags.MsgID, "c", "", "message id")
 

@@ -16,8 +16,10 @@ package client
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 
+	"github.com/lenye/pmsg/pkg/helper"
 	"github.com/lenye/pmsg/pkg/httpclient"
 )
 
@@ -34,18 +36,20 @@ func GetJSON(url string, respBody any) (http.Header, error) {
 	if err != nil {
 		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodGet, url, err)
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(resp.Body)
 
 	if err := CheckHttpResponseStatusCode(http.MethodGet, url, resp.StatusCode); err != nil {
 		return nil, err
 	}
 
-	return resp.Header, httpclient.JsonDecode(resp.Body, respBody)
+	return resp.Header, helper.JsonDecode(resp.Body, respBody)
 }
 
 // PostJSON http post json
 func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
-	body, err := httpclient.JsonEncode(reqBody)
+	body, err := helper.JsonEncode(reqBody)
 	if err != nil {
 		return nil, err
 	}
@@ -54,13 +58,15 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 	if err != nil {
 		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodPost, url, err)
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(resp.Body)
 
 	if err := CheckHttpResponseStatusCode(http.MethodPost, url, resp.StatusCode); err != nil {
 		return nil, err
 	}
 
-	return resp.Header, httpclient.JsonDecode(resp.Body, respBody)
+	return resp.Header, helper.JsonDecode(resp.Body, respBody)
 }
 
 func PostFileJSON(url, fieldName, fileName string, respBody any) (http.Header, error) {
@@ -68,11 +74,13 @@ func PostFileJSON(url, fieldName, fileName string, respBody any) (http.Header, e
 	if err != nil {
 		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodPost, url, err)
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(resp.Body)
 
 	if err := CheckHttpResponseStatusCode(http.MethodPost, url, resp.StatusCode); err != nil {
 		return nil, err
 	}
 
-	return resp.Header, httpclient.JsonDecode(resp.Body, respBody)
+	return resp.Header, helper.JsonDecode(resp.Body, respBody)
 }

@@ -22,7 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/customer/message"
-	"github.com/lenye/pmsg/pkg/conv"
+	"github.com/lenye/pmsg/pkg/helper"
 )
 
 // miniProgramCustomerCmd 发送微信小程序客服消息
@@ -45,7 +45,7 @@ var miniProgramCustomerCmd = &cobra.Command{
 			arg.Data = args[0]
 		} else {
 			var err error
-			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			arg.Data, err = helper.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -63,10 +63,10 @@ func init() {
 	weiXinSetAccessTokenFlags(miniProgramCustomerCmd)
 
 	miniProgramCustomerCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "weixin user open id (required)")
-	miniProgramCustomerCmd.MarkFlagRequired(flags.ToUser)
+	_ = miniProgramCustomerCmd.MarkFlagRequired(flags.ToUser)
 
 	miniProgramCustomerCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
-	miniProgramCustomerCmd.MarkFlagRequired(flags.MsgType)
+	_ = miniProgramCustomerCmd.MarkFlagRequired(flags.MsgType)
 
 	miniProgramCustomerCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
 }

@@ -22,7 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/work/message"
-	"github.com/lenye/pmsg/pkg/conv"
+	"github.com/lenye/pmsg/pkg/helper"
 )
 
 // appChatCmd 企业微信群聊推送消息
@@ -46,7 +46,7 @@ var appChatCmd = &cobra.Command{
 			arg.Data = args[0]
 		} else {
 			var err error
-			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			arg.Data, err = helper.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -64,10 +64,10 @@ func init() {
 	workWeiXinSetAccessTokenFlags(appChatCmd)
 
 	appChatCmd.Flags().StringVarP(&variable.ChatID, flags.ChatID, "c", "", "work weixin chat id (required)")
-	appChatCmd.MarkFlagRequired(flags.ChatID)
+	_ = appChatCmd.MarkFlagRequired(flags.ChatID)
 
 	appChatCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
-	appChatCmd.MarkFlagRequired(flags.MsgType)
+	_ = appChatCmd.MarkFlagRequired(flags.MsgType)
 
 	appChatCmd.Flags().IntVar(&variable.Safe, flags.Safe, 0, "Safe")
 

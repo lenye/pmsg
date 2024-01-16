@@ -22,7 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/offiaccount/message"
-	"github.com/lenye/pmsg/pkg/conv"
+	"github.com/lenye/pmsg/pkg/helper"
 )
 
 // officialAccountTplCmd 微信公众号模板消息
@@ -49,7 +49,7 @@ var officialAccountTplCmd = &cobra.Command{
 			arg.Data = args[0]
 		} else {
 			var err error
-			arg.Data, err = conv.StrRaw2Interpreted(args[0])
+			arg.Data, err = helper.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -69,10 +69,10 @@ func init() {
 	weiXinSetAccessTokenFlags(officialAccountTplCmd)
 
 	officialAccountTplCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "weixin user open id (required)")
-	officialAccountTplCmd.MarkFlagRequired(flags.ToUser)
+	_ = officialAccountTplCmd.MarkFlagRequired(flags.ToUser)
 
 	officialAccountTplCmd.Flags().StringVarP(&variable.TemplateID, flags.TemplateID, "p", "", "weixin template id (required)")
-	officialAccountTplCmd.MarkFlagRequired(flags.TemplateID)
+	_ = officialAccountTplCmd.MarkFlagRequired(flags.TemplateID)
 
 	officialAccountTplCmd.Flags().StringVar(&variable.Url, flags.Url, "", "Url")
 	officialAccountTplCmd.Flags().StringToStringVar(&variable.Mini, flags.Mini, nil, "weixin Mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")

@@ -22,7 +22,7 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin/work/bot"
-	"github.com/lenye/pmsg/pkg/conv"
+	"github.com/lenye/pmsg/pkg/helper"
 )
 
 // botUploadCmd 企业微信群机器人上传文件
@@ -40,7 +40,7 @@ var botUploadCmd = &cobra.Command{
 			arg.File = args[0]
 		} else {
 			var err error
-			arg.File, err = conv.StrRaw2Interpreted(args[0])
+			arg.File, err = helper.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return

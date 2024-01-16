@@ -20,7 +20,7 @@ import (
 	"github.com/lenye/pmsg/internal/flags"
 	"github.com/lenye/pmsg/internal/im/weixin"
 	"github.com/lenye/pmsg/internal/im/weixin/work/token"
-	"github.com/lenye/pmsg/pkg/file"
+	"github.com/lenye/pmsg/pkg/helper"
 	"github.com/lenye/pmsg/pkg/httpclient"
 )
 
@@ -42,7 +42,7 @@ func (t *CmdWorkMediaUploadParams) Validate() error {
 		return fmt.Errorf("invalid flags %s: %v", flags.MediaType, err)
 	}
 
-	if !file.Exists(t.File) {
+	if !helper.FileExists(t.File) {
 		return fmt.Errorf("file is not exist, %v", t.File)
 	}
 
