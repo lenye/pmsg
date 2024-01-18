@@ -55,7 +55,8 @@ archives:
 
 
 checksum:
-  name_template: "{{ .ProjectName }}_v{{ .Version }}_checksums.txt"
+  name_template: "{{ .ProjectName }}_v{{ .Version }}_sha256_checksums.txt"
+  algorithm: sha256
 
 
 changelog:
