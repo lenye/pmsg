@@ -47,7 +47,14 @@ builds:
 
 archives:
   - id: pmsg
-    name_template: '{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    name_template: >-
+      {{ .ProjectName }}_v{{ .Version }}_
+      {{- if eq .Os "darwin" }}macOS
+      {{- else }}{{ .Os }}{{ end }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end -}}
     format: tar.gz
     format_overrides:
       - goos: windows
@@ -77,71 +84,69 @@ release:
 
 dockers:
   - image_templates:
-      - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-amd64"
-      - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-amd64"
-      - "ghcr.io/lenye/{{ .ProjectName }}:latest-amd64"
+      - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-x86_64"
+      - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-x86_64"
     dockerfile: Dockerfile
     use: buildx
     goos: linux
     goarch: amd64
     build_flag_templates:
+      - "--pull"
       - "--platform=linux/amd64"
       - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
       - "--label=org.opencontainers.image.description={{.ProjectName}}"
-      - "--label=org.opencontainers.image.url=https://github.com/lenye/{{.ProjectName}}"
-      - "--label=org.opencontainers.image.source=https://github.com/lenye/{{.ProjectName}}"
+      - "--label=org.opencontainers.image.source=={{.GitURL}"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
   - image_templates:
       - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-arm64"
       - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-arm64"
-      - "ghcr.io/lenye/{{ .ProjectName }}:latest-arm64"
     use: buildx
     goos: linux
     goarch: arm64
     dockerfile: Dockerfile
     build_flag_templates:
+      - "--pull"
       - "--platform=linux/arm64"
       - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
       - "--label=org.opencontainers.image.description={{.ProjectName}}"
-      - "--label=org.opencontainers.image.url=https://github.com/lenye/{{.ProjectName}}"
-      - "--label=org.opencontainers.image.source=https://github.com/lenye/{{.ProjectName}}"
+      - "--label=org.opencontainers.image.source=={{.GitURL}"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
   - image_templates:
       - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-armv7"
       - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-armv7"
-      - "ghcr.io/lenye/{{ .ProjectName }}:latest-armv7"
     use: buildx
     goos: linux
     goarch: arm
     goarm: 7
     dockerfile: Dockerfile
     build_flag_templates:
+      - "--pull"
       - "--platform=linux/arm/v7"
       - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
       - "--label=org.opencontainers.image.description={{.ProjectName}}"
-      - "--label=org.opencontainers.image.url=https://github.com/lenye/{{.ProjectName}}"
-      - "--label=org.opencontainers.image.source=https://github.com/lenye/{{.ProjectName}}"
+      - "--label=org.opencontainers.image.source=={{.GitURL}"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
+
 
 docker_manifests:
   - name_template: ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}
     image_templates:
-      - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-amd64
+      - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-x86_64
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-arm64
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-armv7
   - name_template: ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}
     image_templates:
-      - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-amd64
+      - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-x86_64
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-arm64
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-armv7
   - name_template: ghcr.io/lenye/{{ .ProjectName }}:latest
     image_templates:
-      - ghcr.io/lenye/{{ .ProjectName }}:latest-amd64
-      - ghcr.io/lenye/{{ .ProjectName }}:latest-arm64
-      - ghcr.io/lenye/{{ .ProjectName }}:latest-armv7
+      - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-x86_64
+      - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-arm64
+      - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-armv7
