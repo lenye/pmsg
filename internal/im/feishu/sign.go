@@ -19,7 +19,6 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"fmt"
-	"io"
 	"math"
 	"strconv"
 	"time"
@@ -39,19 +38,13 @@ func Validate(signStr, timestamp, secret string) (bool, error) {
 		return false, fmt.Errorf("specified timestamp is expired")
 	}
 
-	ourSign, err := Sign(timestamp, secret)
-	if err != nil {
-		return false, err
-	}
+	ourSign := Sign(timestamp, secret)
 	return ourSign == signStr, nil
 }
 
 // Sign 签名
-func Sign(timestamp string, secret string) (string, error) {
-	stringToSign := fmt.Sprintf("%s\n%s", timestamp, secret)
-	h := hmac.New(sha256.New, []byte(secret))
-	if _, err := io.WriteString(h, stringToSign); err != nil {
-		return "", err
-	}
-	return base64.StdEncoding.EncodeToString(h.Sum(nil)), nil
+func Sign(timestamp string, secret string) string {
+	stringToSign := timestamp + "\n" + secret
+	h := hmac.New(sha256.New, []byte(stringToSign))
+	return base64.StdEncoding.EncodeToString(h.Sum(nil))
 }

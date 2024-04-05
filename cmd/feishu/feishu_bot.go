@@ -57,7 +57,7 @@ var botCmd = &cobra.Command{
 }
 
 func init() {
-	botCmd.Flags().StringVarP(&variable.AccessToken, flags.AccessToken, "t", "", "feishu bot access token (required)")
+	botCmd.Flags().StringVarP(&variable.AccessToken, flags.AccessToken, "t", "", "feishu bot token (required) , token 为 webhook 地址中 xxx 部分 https://open.feishu.cn/open-apis/bot/v2/hook/xxx")
 	_ = botCmd.MarkFlagRequired(flags.AccessToken)
 
 	botCmd.Flags().StringVarP(&variable.Secret, flags.Secret, "s", "", "sign Secret")

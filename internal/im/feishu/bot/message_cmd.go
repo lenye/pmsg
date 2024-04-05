@@ -54,12 +54,8 @@ func CmdSend(arg *CmdSendParams) error {
 	}
 
 	if arg.Secret != "" {
-		timestamp := strconv.FormatInt(time.Now().Unix(), 10)
-		sign, err := feishu.Sign(timestamp, arg.Secret)
-		if err != nil {
-			return fmt.Errorf("sign failed: %w", err)
-		}
-		msg.TimeStamp = timestamp
+		msg.TimeStamp = strconv.FormatInt(time.Now().Unix(), 10)
+		sign := feishu.Sign(msg.TimeStamp, arg.Secret)
 		msg.Sign = sign
 	}
 
