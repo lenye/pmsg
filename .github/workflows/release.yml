@@ -16,11 +16,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
       - name: Set up Go ${{ env.GO_VERSION }}
         uses: actions/setup-go@v5
         with:
@@ -37,10 +32,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GO_RELEASER_GITHUB_TOKEN }}
 
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v5
+      - name: Check out code
+        uses: actions/checkout@v4
         with:
-          version: latest
+          fetch-depth: 0
+
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          version: '~> v2'
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GO_RELEASER_GITHUB_TOKEN }}
