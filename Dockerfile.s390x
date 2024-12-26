@@ -1,0 +1,3 @@
+FROM gcr.io/distroless/static-debian12:latest-s390x
+COPY pmsg /
+ENTRYPOINT ["/pmsg"]

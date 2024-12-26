@@ -1,0 +1,3 @@
+FROM gcr.io/distroless/static-debian12:latest-ppc64le
+COPY pmsg /
+ENTRYPOINT ["/pmsg"]
