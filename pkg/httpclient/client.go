@@ -23,10 +23,9 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	"runtime"
 	"time"
 
-	"github.com/lenye/pmsg/pkg/version"
+	"github.com/lenye/pmsg/version"
 )
 
 var ErrRequest = errors.New("http request error")
@@ -47,10 +46,6 @@ var Default = &http.Client{
 
 var userAgent string
 
-func DefaultUserAgent() string {
-	return fmt.Sprintf("%s/%s (%s; %s) %s/%s", version.AppName, version.Version, runtime.GOOS, runtime.GOARCH, version.BuildCommit, version.BuildTime)
-}
-
 func SetUserAgent(v string) {
 	userAgent = v
 }
@@ -59,7 +54,7 @@ func UserAgent() string {
 	if userAgent != "" {
 		return userAgent
 	}
-	return DefaultUserAgent()
+	return version.UserAgent()
 }
 
 func SetTransport(v *http.Transport) {

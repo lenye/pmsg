@@ -25,7 +25,7 @@ import (
 	"github.com/lenye/pmsg/cmd/slack"
 	"github.com/lenye/pmsg/cmd/weixin"
 	"github.com/lenye/pmsg/cmd/workweixin"
-	"github.com/lenye/pmsg/pkg/version"
+	"github.com/lenye/pmsg/version"
 )
 
 // rootCmd represents the base command when called without any subcommands

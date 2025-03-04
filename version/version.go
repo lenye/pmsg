@@ -43,3 +43,7 @@ func Print() string {
 		runtime.Version(), runtime.GOOS, runtime.GOARCH,
 		OpenSource)
 }
+
+func UserAgent() string {
+	return fmt.Sprintf("%s/%s (%s; %s; %s)", AppName, Version, runtime.GOOS, runtime.GOARCH, runtime.Version())
+}
