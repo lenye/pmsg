@@ -20,9 +20,9 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/internal/flags"
-	"github.com/lenye/pmsg/internal/im/weixin/asset"
-	"github.com/lenye/pmsg/pkg/helper"
+	"github.com/lenye/pmsg/flags"
+	"github.com/lenye/pmsg/im"
+	"github.com/lenye/pmsg/im/weixin/asset"
 )
 
 // mediaUploadCmd 微信公众号新增临时素材
@@ -43,7 +43,7 @@ var mediaUploadCmd = &cobra.Command{
 			arg.File = args[0]
 		} else {
 			var err error
-			arg.File, err = helper.StrRaw2Interpreted(args[0])
+			arg.File, err = im.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return

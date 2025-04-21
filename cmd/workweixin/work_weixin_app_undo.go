@@ -20,7 +20,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/internal/im/weixin/work/message"
+	"github.com/lenye/pmsg/im/weixin/work/message"
 )
 
 // undoAppCmd 撤回企业微信应用消息

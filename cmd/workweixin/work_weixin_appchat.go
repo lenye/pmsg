@@ -20,9 +20,9 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/internal/flags"
-	"github.com/lenye/pmsg/internal/im/weixin/work/message"
-	"github.com/lenye/pmsg/pkg/helper"
+	"github.com/lenye/pmsg/flags"
+	"github.com/lenye/pmsg/im"
+	"github.com/lenye/pmsg/im/weixin/work/message"
 )
 
 // appChatCmd 企业微信群聊推送消息
@@ -46,7 +46,7 @@ var appChatCmd = &cobra.Command{
 			arg.Data = args[0]
 		} else {
 			var err error
-			arg.Data, err = helper.StrRaw2Interpreted(args[0])
+			arg.Data, err = im.StrRaw2Interpreted(args[0])
 			if err != nil {
 				fmt.Println(err)
 				return

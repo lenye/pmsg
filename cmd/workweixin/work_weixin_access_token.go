@@ -20,8 +20,8 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/variable"
-	"github.com/lenye/pmsg/internal/flags"
-	"github.com/lenye/pmsg/internal/im/weixin/work/token"
+	"github.com/lenye/pmsg/flags"
+	"github.com/lenye/pmsg/im/weixin/work/token"
 )
 
 // accessTokenCmd 获取企业微信接口调用凭证
