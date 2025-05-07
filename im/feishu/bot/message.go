@@ -52,6 +52,11 @@ type Message struct {
 const sendURL = "https://open.feishu.cn/open-apis/bot/v2/hook/"
 
 // Send 发送飞书自定义机器人消息
+//
+// 消息发送频率限制
+// 自定义机器人的频率控制和普通应用不同，为单租户单机器人 100 次/分钟，5 次/秒。
+// 建议发送消息尽量避开诸如 10:00、17:30 等整点及半点时间，否则可能出现因系统压力导致的 11232 限流错误，导致消息发送失败。
+// 发送消息时，请求体的数据大小不能超过 20 KB。
 func Send(accessToken string, msg *Message) error {
 	u := sendURL + accessToken
 	var resp feishu.ResponseMeta

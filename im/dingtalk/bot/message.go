@@ -61,6 +61,7 @@ const sendURL = "https://oapi.dingtalk.com/robot/send?access_token="
 //
 // 消息发送频率限制
 // 每个机器人每分钟最多发送20条消息到群里，如果超过20条，会限流10分钟
+// 如果你有大量发消息的场景（譬如系统监控报警）可以将这些信息进行整合，通过markdown消息以摘要的形式发送到群里。
 func Send(accessToken, secret string, msg *Message) error {
 	u := sendURL + url.QueryEscape(accessToken)
 	if secret != "" {
