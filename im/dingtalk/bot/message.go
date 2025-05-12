@@ -78,7 +78,7 @@ func Send(accessToken, secret string, msg *Message) error {
 		return err
 	}
 	if !resp.Succeed() {
-		return fmt.Errorf("%w; %v", dingtalk.ErrRequest, resp)
+		return fmt.Errorf("%w, %s", dingtalk.ErrRequest, resp)
 	}
 	return nil
 }
