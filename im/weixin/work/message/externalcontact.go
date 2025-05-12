@@ -84,13 +84,13 @@ func (t ExternalContactMessageResponse) String() string {
 	var sb []string
 
 	if t.InvalidParentUserID != nil && len(t.InvalidParentUserID) != 0 {
-		sb = append(sb, fmt.Sprintf("invalid_parent_userid: %q", strings.Join(t.InvalidParentUserID, ",")))
+		sb = append(sb, fmt.Sprintf("invalid_parent_userid: %s", strings.Join(t.InvalidParentUserID, ",")))
 	}
 	if t.InvalidStudentUserID != nil && len(t.InvalidStudentUserID) != 0 {
-		sb = append(sb, fmt.Sprintf("invalid_student_userid: %q", strings.Join(t.InvalidStudentUserID, ",")))
+		sb = append(sb, fmt.Sprintf("invalid_student_userid: %s", strings.Join(t.InvalidStudentUserID, ",")))
 	}
 	if t.InvalidParty != nil && len(t.InvalidParty) != 0 {
-		sb = append(sb, fmt.Sprintf("invalid_party: %q", strings.Join(t.InvalidParty, ",")))
+		sb = append(sb, fmt.Sprintf("invalid_party: %s", strings.Join(t.InvalidParty, ",")))
 	}
 
 	if !t.ResponseMeta.Succeed() {
@@ -110,7 +110,7 @@ func SendExternalContact(accessToken string, msg *ExternalContactMessage) (*Exte
 		return nil, err
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w; %v", weixin.ErrRequest, resp)
+		return nil, fmt.Errorf("%w, %s", weixin.ErrRequest, resp)
 	}
 	return &resp, nil
 }

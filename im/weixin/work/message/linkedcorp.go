@@ -85,13 +85,13 @@ func (t LinkedCorpMessageResponse) String() string {
 	var sb []string
 
 	if t.InvalidUser != nil && len(t.InvalidUser) != 0 {
-		sb = append(sb, fmt.Sprintf("invaliduser: %q", strings.Join(t.InvalidUser, ",")))
+		sb = append(sb, fmt.Sprintf("invaliduser: %s", strings.Join(t.InvalidUser, ",")))
 	}
 	if t.InvalidParty != nil && len(t.InvalidParty) != 0 {
-		sb = append(sb, fmt.Sprintf("invalidparty: %q", strings.Join(t.InvalidParty, ",")))
+		sb = append(sb, fmt.Sprintf("invalidparty: %s", strings.Join(t.InvalidParty, ",")))
 	}
 	if t.InvalidTag != nil && len(t.InvalidTag) != 0 {
-		sb = append(sb, fmt.Sprintf("invalidtag: %q", strings.Join(t.InvalidTag, ",")))
+		sb = append(sb, fmt.Sprintf("invalidtag: %s", strings.Join(t.InvalidTag, ",")))
 	}
 
 	if !t.ResponseMeta.Succeed() {
@@ -111,7 +111,7 @@ func SendLinkedCorp(accessToken string, msg *LinkedCorpMessage) (*LinkedCorpMess
 		return nil, err
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w; %v", weixin.ErrRequest, resp)
+		return nil, fmt.Errorf("%w, %s", weixin.ErrRequest, resp)
 	}
 	return &resp, nil
 }

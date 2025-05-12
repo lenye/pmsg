@@ -31,9 +31,9 @@ type AccessTokenMeta struct {
 
 func (t AccessTokenMeta) String() string {
 	if t.ExpireAt.IsZero() {
-		return fmt.Sprintf("access_token: %q, expires_in: %v", t.AccessToken, t.ExpireIn)
+		return fmt.Sprintf("access_token: %s, expires_in: %v", t.AccessToken, t.ExpireIn)
 	}
-	return fmt.Sprintf("access_token: %q, expires_in: %v, expire_at: %q", t.AccessToken, t.ExpireIn, t.ExpireAt.Format(time.RFC3339))
+	return fmt.Sprintf("access_token: %s, expires_in: %v, expire_at: %s", t.AccessToken, t.ExpireIn, t.ExpireAt.Format(time.RFC3339))
 }
 
 // AccessTokenResponse 响应
@@ -57,7 +57,7 @@ func FetchAccessToken(appID, appSecret string) (*AccessTokenMeta, error) {
 		return nil, err
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w; %v", weixin.ErrRequest, resp.ResponseMeta)
+		return nil, fmt.Errorf("%w, %s", weixin.ErrRequest, resp.ResponseMeta)
 	}
 
 	resp.AccessTokenMeta.ExpireAt = time.Now().Add(time.Second * time.Duration(resp.AccessTokenMeta.ExpireIn))

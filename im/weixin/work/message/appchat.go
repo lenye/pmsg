@@ -78,7 +78,7 @@ func SendAppChat(accessToken string, msg *AppChatMessage) error {
 		return err
 	}
 	if !resp.Succeed() {
-		return fmt.Errorf("%w; %v", weixin.ErrRequest, resp)
+		return fmt.Errorf("%w, %s", weixin.ErrRequest, resp)
 	}
 	return nil
 }

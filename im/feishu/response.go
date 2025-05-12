@@ -24,7 +24,7 @@ const (
 	MessageOK = "ok"
 )
 
-var ErrRequest = errors.New("feishu request error")
+var ErrRequest = errors.New("feishu request failed")
 
 // ResponseMeta 响应操作信息
 type ResponseMeta struct {
@@ -33,7 +33,7 @@ type ResponseMeta struct {
 }
 
 func (t ResponseMeta) String() string {
-	return fmt.Sprintf("code: %v, msg: %q", t.Code, t.Message)
+	return fmt.Sprintf("code: %v, msg: %s", t.Code, t.Message)
 }
 
 // Succeed 操作是否成功

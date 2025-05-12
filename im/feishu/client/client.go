@@ -18,12 +18,14 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 
 	"github.com/lenye/pmsg/httpclient"
 	"github.com/lenye/pmsg/im"
 )
 
-// PostJSON http post json
+const contentTypeJson = "application/json"
+
 func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 	body, err := im.JsonEncode(reqBody)
 	if err != nil {
@@ -32,15 +34,23 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 
 	resp, err := httpclient.Post(url, httpclient.HdrValApplicationJson, body)
 	if err != nil {
-		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodPost, url, err)
+		return nil, fmt.Errorf("%w, %w", httpclient.ErrRequest, err)
 	}
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
 	}(resp.Body)
 
-	if resp.StatusCode/100 != 2 {
-		return resp.Header, im.JsonDecode(resp.Body, respBody)
+	isRespContentTypeJson := false
+	if strings.EqualFold(resp.Header.Get("content-type"), contentTypeJson) {
+		isRespContentTypeJson = true
+		if err := im.JsonDecode(resp.Body, respBody); err != nil {
+			return nil, fmt.Errorf("json decode failed, %w", err)
+		}
 	}
-
+	if resp.StatusCode/100 != 2 {
+		if !isRespContentTypeJson {
+			return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
+		}
+	}
 	return resp.Header, nil
 }

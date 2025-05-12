@@ -65,7 +65,7 @@ func Send(accessToken string, msg *Message) error {
 		return err
 	}
 	if !resp.Succeed() {
-		return fmt.Errorf("%w; %v", feishu.ErrRequest, resp)
+		return fmt.Errorf("%w, %s", feishu.ErrRequest, resp)
 	}
 	return nil
 }

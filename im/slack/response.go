@@ -22,4 +22,4 @@ const (
 	MessageOK = "ok"
 )
 
-var ErrRequest = errors.New("slack request error")
+var ErrRequest = errors.New("slack request failed")

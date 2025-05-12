@@ -24,7 +24,7 @@ const (
 	MessageOK = "ok"
 )
 
-var ErrRequest = errors.New("weixin request error")
+var ErrRequest = errors.New("weixin request failed")
 
 // ResponseMeta 响应操作信息
 type ResponseMeta struct {
@@ -33,7 +33,7 @@ type ResponseMeta struct {
 }
 
 func (t ResponseMeta) String() string {
-	return fmt.Sprintf("errcode: %v, errmsg: %q", t.ErrorCode, t.ErrorMessage)
+	return fmt.Sprintf("errcode: %v, errmsg: %s", t.ErrorCode, t.ErrorMessage)
 }
 
 // Succeed 操作是否成功

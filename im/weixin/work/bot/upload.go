@@ -42,13 +42,13 @@ func (t MediaMeta) String() string {
 	var sb []string
 
 	if t.Type != "" {
-		sb = append(sb, fmt.Sprintf("type: %q", t.Type))
+		sb = append(sb, fmt.Sprintf("type: %s", t.Type))
 	}
 	if t.MediaID != "" {
-		sb = append(sb, fmt.Sprintf("media_id: %q", t.MediaID))
+		sb = append(sb, fmt.Sprintf("media_id: %s", t.MediaID))
 	}
 	locCreatedAt := time.Unix(t.CreatedAt, 0).Local()
-	sb = append(sb, fmt.Sprintf("created_at: %v (%v)", t.CreatedAt, locCreatedAt.Format(time.RFC3339)))
+	sb = append(sb, fmt.Sprintf("created_at: %v (%s)", t.CreatedAt, locCreatedAt.Format(time.RFC3339)))
 	return strings.Join(sb, ", ")
 }
 
@@ -63,7 +63,7 @@ func Upload(key, filename string) (*MediaMeta, error) {
 		return nil, err
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w; %v", weixin.ErrRequest, resp)
+		return nil, fmt.Errorf("%w, %s", weixin.ErrRequest, resp)
 	}
 	return &resp.MediaMeta, nil
 }

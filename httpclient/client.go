@@ -28,7 +28,7 @@ import (
 	"github.com/lenye/pmsg/version"
 )
 
-var ErrRequest = errors.New("http request error")
+var ErrRequest = errors.New("http request failed")
 
 const (
 	HdrKeyUserAgent       = "User-Agent"

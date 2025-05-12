@@ -23,21 +23,20 @@ import (
 	"github.com/lenye/pmsg/im/slack"
 )
 
-// PostJSON http post json
 func PostJSON(url, reqBody string) (http.Header, error) {
 	resp, err := httpclient.Post(url, httpclient.HdrValApplicationJson, strings.NewReader(reqBody))
 	if err != nil {
-		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodPost, url, err)
+		return nil, fmt.Errorf("%w, %w", httpclient.ErrRequest, err)
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode == http.StatusTooManyRequests {
-		return resp.Header, fmt.Errorf("%w; rate limit exceeded, retry after %s second", slack.ErrRequest, resp.Header.Get("Retry-After"))
+		return resp.Header, fmt.Errorf("%w, rate limit exceeded, retry after %s second", slack.ErrRequest, resp.Header.Get("Retry-After"))
 	}
 
 	// Slack seems to send an HTML body along with 5xx error codes. Don't parse it.
 	if resp.StatusCode != http.StatusOK {
-		return resp.Header, fmt.Errorf("%w; server error: %s", slack.ErrRequest, resp.Status)
+		return resp.Header, fmt.Errorf("%w, http response status: %s", slack.ErrRequest, resp.Status)
 	}
 
 	return resp.Header, nil

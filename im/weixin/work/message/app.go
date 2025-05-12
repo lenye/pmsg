@@ -112,22 +112,22 @@ func (t AppMessageResponse) String() string {
 	var sb []string
 
 	if t.MsgID != "" {
-		sb = append(sb, fmt.Sprintf("msgid: %q", t.MsgID))
+		sb = append(sb, fmt.Sprintf("msgid: %s", t.MsgID))
 	}
 	if t.ResponseCode != "" {
-		sb = append(sb, fmt.Sprintf("response_code: %q", t.ResponseCode))
+		sb = append(sb, fmt.Sprintf("response_code: %s", t.ResponseCode))
 	}
 	if t.InvalidUser != "" {
-		sb = append(sb, fmt.Sprintf("invaliduser: %q", t.InvalidUser))
+		sb = append(sb, fmt.Sprintf("invaliduser: %s", t.InvalidUser))
 	}
 	if t.InvalidParty != "" {
-		sb = append(sb, fmt.Sprintf("invalidparty: %q", t.InvalidParty))
+		sb = append(sb, fmt.Sprintf("invalidparty: %s", t.InvalidParty))
 	}
 	if t.InvalidTag != "" {
-		sb = append(sb, fmt.Sprintf("invalidtag: %q", t.InvalidTag))
+		sb = append(sb, fmt.Sprintf("invalidtag: %s", t.InvalidTag))
 	}
 	if t.UnLicensedUser != "" {
-		sb = append(sb, fmt.Sprintf("unlicenseduser: %q", t.UnLicensedUser))
+		sb = append(sb, fmt.Sprintf("unlicenseduser: %s", t.UnLicensedUser))
 	}
 
 	if !t.ResponseMeta.Succeed() {
@@ -147,7 +147,7 @@ func SendApp(accessToken string, msg *AppMessage) (*AppMessageResponse, error) {
 		return nil, err
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w; %v", weixin.ErrRequest, resp)
+		return nil, fmt.Errorf("%w, %s", weixin.ErrRequest, resp)
 	}
 	return &resp, nil
 }

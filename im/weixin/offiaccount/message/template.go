@@ -102,7 +102,7 @@ type TemplateMessageResponse struct {
 }
 
 func (t TemplateMessageResponse) String() string {
-	return fmt.Sprintf("errcode: %v, errmsg: %q, msgid: %v", t.ErrorCode, t.ErrorMessage, t.MsgID)
+	return fmt.Sprintf("errcode: %v, errmsg: %s, msgid: %v", t.ErrorCode, t.ErrorMessage, t.MsgID)
 }
 
 const templateURL = weixin.Host + "/cgi-bin/message/template/send?access_token="
@@ -116,7 +116,7 @@ func SendTemplate(accessToken string, msg *TemplateMessage) (int64, error) {
 		return 0, err
 	}
 	if !resp.Succeed() {
-		return 0, fmt.Errorf("%w; %v", weixin.ErrRequest, resp.ResponseMeta)
+		return 0, fmt.Errorf("%w, %s", weixin.ErrRequest, resp.ResponseMeta)
 	}
 	return resp.MsgID, nil
 }

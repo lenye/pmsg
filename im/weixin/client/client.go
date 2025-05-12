@@ -18,36 +18,41 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 
 	"github.com/lenye/pmsg/httpclient"
 	"github.com/lenye/pmsg/im"
 )
 
-// CheckHttpResponseStatusCode 检查HTTP响应状态码
-func CheckHttpResponseStatusCode(method, url string, statusCode int) error {
-	if statusCode/100 != 2 {
-		return fmt.Errorf("%w; http response status code: %v, %s %s", httpclient.ErrRequest, statusCode, method, url)
-	}
-	return nil
-}
+const (
+	contentTypeJsonCharset  = "application/json; charset=utf-8"
+	contentTypeJsonEncoding = "application/json; encoding=utf-8"
+)
 
 func GetJSON(url string, respBody any) (http.Header, error) {
 	resp, err := httpclient.Get(url)
 	if err != nil {
-		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodGet, url, err)
+		return nil, fmt.Errorf("%w, %w", httpclient.ErrRequest, err)
 	}
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
 	}(resp.Body)
 
-	if err := CheckHttpResponseStatusCode(http.MethodGet, url, resp.StatusCode); err != nil {
-		return nil, err
+	isRespContentTypeJson := false
+	if strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonCharset) || strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonEncoding) {
+		isRespContentTypeJson = true
+		if err := im.JsonDecode(resp.Body, respBody); err != nil {
+			return nil, fmt.Errorf("json decode failed, %w", err)
+		}
 	}
-
-	return resp.Header, im.JsonDecode(resp.Body, respBody)
+	if resp.StatusCode/100 != 2 {
+		if !isRespContentTypeJson {
+			return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
+		}
+	}
+	return resp.Header, nil
 }
 
-// PostJSON http post json
 func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 	body, err := im.JsonEncode(reqBody)
 	if err != nil {
@@ -56,31 +61,47 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 
 	resp, err := httpclient.Post(url, httpclient.HdrValApplicationJson, body)
 	if err != nil {
-		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodPost, url, err)
+		return nil, fmt.Errorf("%w, %w", httpclient.ErrRequest, err)
 	}
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
 	}(resp.Body)
 
-	if err := CheckHttpResponseStatusCode(http.MethodPost, url, resp.StatusCode); err != nil {
-		return nil, err
+	isRespContentTypeJson := false
+	if strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonCharset) || strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonEncoding) {
+		isRespContentTypeJson = true
+		if err := im.JsonDecode(resp.Body, respBody); err != nil {
+			return nil, fmt.Errorf("json decode failed, %w", err)
+		}
 	}
-
-	return resp.Header, im.JsonDecode(resp.Body, respBody)
+	if resp.StatusCode/100 != 2 {
+		if !isRespContentTypeJson {
+			return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
+		}
+	}
+	return resp.Header, nil
 }
 
 func PostFileJSON(url, fieldName, fileName string, respBody any) (http.Header, error) {
 	resp, err := httpclient.PostFile(url, fieldName, fileName)
 	if err != nil {
-		return nil, fmt.Errorf("%w; %s %s, %v", httpclient.ErrRequest, http.MethodPost, url, err)
+		return nil, fmt.Errorf("%w, %w", httpclient.ErrRequest, err)
 	}
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
 	}(resp.Body)
 
-	if err := CheckHttpResponseStatusCode(http.MethodPost, url, resp.StatusCode); err != nil {
-		return nil, err
+	isRespContentTypeJson := false
+	if strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonCharset) || strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonEncoding) {
+		isRespContentTypeJson = true
+		if err := im.JsonDecode(resp.Body, respBody); err != nil {
+			return nil, fmt.Errorf("json decode failed, %w", err)
+		}
 	}
-
-	return resp.Header, im.JsonDecode(resp.Body, respBody)
+	if resp.StatusCode/100 != 2 {
+		if !isRespContentTypeJson {
+			return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
+		}
+	}
+	return resp.Header, nil
 }

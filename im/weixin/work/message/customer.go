@@ -79,9 +79,9 @@ type CustomerMessageResponse struct {
 
 func (t CustomerMessageResponse) String() string {
 	if t.Succeed() {
-		return fmt.Sprintf("msgid: %q", t.MsgID)
+		return fmt.Sprintf("msgid: %s", t.MsgID)
 	}
-	return fmt.Sprintf("errcode: %v, errmsg: %q, msgid: %q", t.ErrorCode, t.ErrorMessage, t.MsgID)
+	return fmt.Sprintf("errcode: %v, errmsg: %s, msgid: %s", t.ErrorCode, t.ErrorMessage, t.MsgID)
 }
 
 const customerSendURL = work.Host + "/cgi-bin/kf/send_msg?access_token="
@@ -95,7 +95,7 @@ func SendCustomer(accessToken string, msg *CustomerMessage) (*CustomerMessageRes
 		return nil, err
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w; %v", weixin.ErrRequest, resp)
+		return nil, fmt.Errorf("%w, %s", weixin.ErrRequest, resp)
 	}
 	return &resp, nil
 }
