@@ -53,7 +53,7 @@ func (t *CmdWorkSendAppParams) Validate() error {
 		return fmt.Errorf("%v、%v、%v cannot be empty at the same time", flags.ToUser, flags.ToParty, flags.ToTag)
 	}
 
-	if t.ToUser == flags.AllUser {
+	if t.ToUser == flags.AtAllUser {
 		t.ToParty = ""
 		t.ToTag = ""
 	} else {

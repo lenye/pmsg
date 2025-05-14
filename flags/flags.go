@@ -63,11 +63,10 @@ const (
 	OpenKfID               = "open_kf_id"
 	MsgID                  = "msg_id"
 
-	AllUser = "@all"
-
-	AtUser   = "at_user"
-	AtMobile = "at_mobile"
-	IsAtAll  = "is_at_all"
+	AtAllUser = "@all"
+	AtUser    = "at_user"
+	AtMobile  = "at_mobile"
+	IsAtAll   = "is_at_all"
 
 	IsRaw = "raw"
 )
