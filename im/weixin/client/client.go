@@ -38,17 +38,14 @@ func GetJSON(url string, respBody any) (http.Header, error) {
 		_ = Body.Close()
 	}(resp.Body)
 
-	isRespContentTypeJson := false
-	if strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonCharset) || strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonEncoding) {
-		isRespContentTypeJson = true
+	isRespJson := strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonCharset) || strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonEncoding)
+	if isRespJson {
 		if err := im.JsonDecode(resp.Body, respBody); err != nil {
 			return nil, fmt.Errorf("json decode failed, %w", err)
 		}
 	}
-	if resp.StatusCode/100 != 2 {
-		if !isRespContentTypeJson {
-			return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
-		}
+	if resp.StatusCode/100 != 2 && !isRespJson {
+		return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
 	}
 	return resp.Header, nil
 }
@@ -67,17 +64,14 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 		_ = Body.Close()
 	}(resp.Body)
 
-	isRespContentTypeJson := false
-	if strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonCharset) || strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonEncoding) {
-		isRespContentTypeJson = true
+	isRespJson := strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonCharset) || strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonEncoding)
+	if isRespJson {
 		if err := im.JsonDecode(resp.Body, respBody); err != nil {
 			return nil, fmt.Errorf("json decode failed, %w", err)
 		}
 	}
-	if resp.StatusCode/100 != 2 {
-		if !isRespContentTypeJson {
-			return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
-		}
+	if resp.StatusCode/100 != 2 && !isRespJson {
+		return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
 	}
 	return resp.Header, nil
 }
@@ -91,17 +85,14 @@ func PostFileJSON(url, fieldName, fileName string, respBody any) (http.Header, e
 		_ = Body.Close()
 	}(resp.Body)
 
-	isRespContentTypeJson := false
-	if strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonCharset) || strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonEncoding) {
-		isRespContentTypeJson = true
+	isRespJson := strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonCharset) || strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonEncoding)
+	if isRespJson {
 		if err := im.JsonDecode(resp.Body, respBody); err != nil {
 			return nil, fmt.Errorf("json decode failed, %w", err)
 		}
 	}
-	if resp.StatusCode/100 != 2 {
-		if !isRespContentTypeJson {
-			return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
-		}
+	if resp.StatusCode/100 != 2 && !isRespJson {
+		return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
 	}
 	return resp.Header, nil
 }
