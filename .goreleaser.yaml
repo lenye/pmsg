@@ -31,19 +31,9 @@ builds:
     goarch:
       - "amd64"
       - "arm64"
-      - "386"
-      - "arm"
       - "riscv64"
       - "s390x"
       - "ppc64le"
-    goarm:
-      - 7
-      - 6
-    ignore:
-      - goos: windows
-        goarch: "arm"
-      - goos: windows
-        goarch: "386"
     mod_timestamp: '{{ .CommitTimestamp }}'
 
 
