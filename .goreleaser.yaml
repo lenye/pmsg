@@ -110,24 +110,6 @@ dockers:
       - "--label=org.opencontainers.image.version={{.Version}}"
 
   - image_templates:
-      - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-armv7"
-      - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-armv7"
-    use: buildx
-    goos: linux
-    goarch: arm
-    goarm: 7
-    dockerfile: Dockerfile.arm
-    build_flag_templates:
-      - "--pull"
-      - "--platform=linux/arm/v7"
-      - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.title={{.ProjectName}}"
-      - "--label=org.opencontainers.image.description={{.ProjectName}}"
-      - "--label=org.opencontainers.image.source={{.GitURL}}"
-      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
-      - "--label=org.opencontainers.image.version={{.Version}}"
-
-  - image_templates:
       - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-ppc64le"
       - "ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-ppc64le"
     use: buildx
@@ -167,20 +149,17 @@ docker_manifests:
     image_templates:
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-x86_64
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-arm64
-      - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-armv7
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-ppc64le
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-s390x
   - name_template: ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}
     image_templates:
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-x86_64
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-arm64
-      - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-armv7
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-ppc64le
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Version }}-s390x
   - name_template: ghcr.io/lenye/{{ .ProjectName }}:latest
     image_templates:
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-x86_64
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-arm64
-      - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-armv7
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-ppc64le
       - ghcr.io/lenye/{{ .ProjectName }}:{{ .Tag }}-s390x
