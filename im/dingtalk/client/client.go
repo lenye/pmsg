@@ -46,7 +46,7 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 			return nil, fmt.Errorf("json decode failed, %w", err)
 		}
 	}
-	if resp.StatusCode/100 != 2 && !isRespJson {
+	if resp.StatusCode/100 != 2 {
 		return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
 	}
 	return resp.Header, nil
