@@ -82,7 +82,7 @@ func (t *CmdWorkSendExternalContactParams) Validate() error {
 	return nil
 }
 
-// CmdWorkSendExternalContact 发送企业微信互联企业消息
+// CmdWorkSendExternalContact 发送企业微信家校消息
 func CmdWorkSendExternalContact(arg *CmdWorkSendExternalContactParams) error {
 
 	if err := arg.Validate(); err != nil {

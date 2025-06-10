@@ -25,7 +25,7 @@ import (
 var Cmd = &cobra.Command{
 	Use:     "dingtalk",
 	Aliases: []string{"dt"},
-	Short:   "ding talk",
+	Short:   "钉钉",
 }
 
 func init() {

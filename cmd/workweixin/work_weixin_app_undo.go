@@ -26,7 +26,7 @@ import (
 // undoAppCmd 撤回企业微信应用消息
 var undoAppCmd = &cobra.Command{
 	Use:   "undo",
-	Short: "undo work weixin app message",
+	Short: "撤回企业微信应用消息",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdWorkUndoAppParams{
@@ -44,5 +44,6 @@ var undoAppCmd = &cobra.Command{
 }
 
 func init() {
+	undoAppCmd.Flags().SortFlags = false
 	workWeiXinSetAccessTokenFlags(undoAppCmd)
 }

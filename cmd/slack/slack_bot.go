@@ -55,8 +55,9 @@ var botCmd = &cobra.Command{
 }
 
 func init() {
+	botCmd.Flags().SortFlags = false
 	botCmd.Flags().StringVar(&variable.Url, flags.Url, "", "slack webhook Url")
 	_ = botCmd.MarkFlagRequired(flags.Url)
 
-	botCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
+	botCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "消息内容是原始字符串字面值（不转义处理）")
 }

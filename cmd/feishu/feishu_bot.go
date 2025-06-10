@@ -28,7 +28,7 @@ import (
 // botCmd 飞书自定义机器人
 var botCmd = &cobra.Command{
 	Use:   "bot",
-	Short: "publish fei shu bot message",
+	Short: "发送飞书自定义机器人消息",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := bot.CmdSendParams{
@@ -57,14 +57,15 @@ var botCmd = &cobra.Command{
 }
 
 func init() {
-	botCmd.Flags().StringVarP(&variable.AccessToken, flags.AccessToken, "t", "", "feishu bot token (required) , token 为 webhook 地址中 xxx 部分 https://open.feishu.cn/open-apis/bot/v2/hook/xxx")
+	botCmd.Flags().SortFlags = false
+	botCmd.Flags().StringVarP(&variable.AccessToken, flags.AccessToken, "t", "", "飞书自定义机器人 token (必填), token 为 webhook 地址中 xxx 部分 https://open.feishu.cn/open-apis/bot/v2/hook/xxx")
 	_ = botCmd.MarkFlagRequired(flags.AccessToken)
 
-	botCmd.Flags().StringVarP(&variable.Secret, flags.Secret, "s", "", "sign Secret")
+	botCmd.Flags().StringVarP(&variable.Secret, flags.Secret, "s", "", "签名密钥")
 
-	botCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
+	botCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "消息类型 (必填)，text(文本消息)、post(富文本)、image(图片)、share_chat(分享群名片)、interactive(消息卡片)")
 	_ = botCmd.MarkFlagRequired(flags.MsgType)
 
-	botCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
+	botCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "消息内容是原始字符串字面值（不转义处理）")
 
 }

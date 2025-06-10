@@ -27,7 +27,7 @@ import (
 // accessTokenCmd 获取微信接口调用凭证
 var accessTokenCmd = &cobra.Command{
 	Use:   "token",
-	Short: "get weixin access token",
+	Short: "获取微信（公众号、小程序）接口调用凭证 access token",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := token.CmdTokenParams{
@@ -43,9 +43,11 @@ var accessTokenCmd = &cobra.Command{
 }
 
 func init() {
-	accessTokenCmd.Flags().StringVarP(&variable.AppID, flags.AppID, "i", "", "weixin app id (required)")
+	accessTokenCmd.Flags().SortFlags = false
+
+	accessTokenCmd.Flags().StringVarP(&variable.AppID, flags.AppID, "i", "", "微信 app id (必填)")
 	_ = accessTokenCmd.MarkFlagRequired(flags.AppID)
 
-	accessTokenCmd.Flags().StringVarP(&variable.AppSecret, flags.AppSecret, "s", "", "weixin app Secret (required)")
+	accessTokenCmd.Flags().StringVarP(&variable.AppSecret, flags.AppSecret, "s", "", "微信 app secret (必填)")
 	_ = accessTokenCmd.MarkFlagRequired(flags.AppSecret)
 }

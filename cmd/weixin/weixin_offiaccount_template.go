@@ -29,7 +29,7 @@ import (
 var officialAccountTplCmd = &cobra.Command{
 	Use:     "template",
 	Aliases: []string{"tpl"},
-	Short:   "publish weixin official account template message",
+	Short:   "发送微信公众号模板消息",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdMpSendTemplateParams{
@@ -64,21 +64,22 @@ var officialAccountTplCmd = &cobra.Command{
 }
 
 func init() {
+	officialAccountTplCmd.Flags().SortFlags = false
 	officialAccountTplCmd.AddCommand(officialAccountTplSubCmd)
 
 	weiXinSetAccessTokenFlags(officialAccountTplCmd)
 
-	officialAccountTplCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "weixin user open id (required)")
+	officialAccountTplCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "微信接收用户 openid (必填)")
 	_ = officialAccountTplCmd.MarkFlagRequired(flags.ToUser)
 
-	officialAccountTplCmd.Flags().StringVarP(&variable.TemplateID, flags.TemplateID, "p", "", "weixin template id (required)")
+	officialAccountTplCmd.Flags().StringVarP(&variable.TemplateID, flags.TemplateID, "p", "", "模板 id (必填)")
 	_ = officialAccountTplCmd.MarkFlagRequired(flags.TemplateID)
 
-	officialAccountTplCmd.Flags().StringVar(&variable.Url, flags.Url, "", "Url")
-	officialAccountTplCmd.Flags().StringToStringVar(&variable.Mini, flags.Mini, nil, "weixin Mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
+	officialAccountTplCmd.Flags().StringVar(&variable.Url, flags.Url, "", "用户点击后跳转的url")
+	officialAccountTplCmd.Flags().StringToStringVar(&variable.Mini, flags.Mini, nil, "跳小程序所需数据, 样例: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
 
-	officialAccountTplCmd.Flags().StringVar(&variable.Color, flags.Color, "", "template Color")
-	officialAccountTplCmd.Flags().StringVarP(&variable.ClientMsgID, flags.ClientMsgID, "c", "", "client message id")
+	officialAccountTplCmd.Flags().StringVar(&variable.Color, flags.Color, "", "模板内容字体颜色，不填默认为黑色")
+	officialAccountTplCmd.Flags().StringVarP(&variable.ClientMsgID, flags.ClientMsgID, "c", "", "防重入 id")
 
-	officialAccountTplCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
+	officialAccountTplCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "模板数据是原始字符串字面值（不转义处理）")
 }

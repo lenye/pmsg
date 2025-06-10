@@ -22,10 +22,11 @@ import (
 var officialAccountCmd = &cobra.Command{
 	Use:     "offiaccount",
 	Aliases: []string{"oa"},
-	Short:   "weixin official account",
+	Short:   "微信公众号",
 }
 
 func init() {
+	officialAccountCmd.Flags().SortFlags = false
 	officialAccountCmd.AddCommand(officialAccountCustomerCmd)
 	officialAccountCmd.AddCommand(officialAccountSubCmd)
 	officialAccountCmd.AddCommand(officialAccountTplCmd)

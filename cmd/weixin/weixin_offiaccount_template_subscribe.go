@@ -29,7 +29,7 @@ import (
 var officialAccountTplSubCmd = &cobra.Command{
 	Use:     "subscribe",
 	Aliases: []string{"sub"},
-	Short:   "publish weixin official account template subscribe message (onetime)",
+	Short:   "发送微信公众号一次性订阅消息",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdMpSendTemplateSubscribeParams{
@@ -64,22 +64,23 @@ var officialAccountTplSubCmd = &cobra.Command{
 }
 
 func init() {
+	officialAccountTplSubCmd.Flags().SortFlags = false
 	weiXinSetAccessTokenFlags(officialAccountTplSubCmd)
 
-	officialAccountTplSubCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "weixin user open id (required)")
+	officialAccountTplSubCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "微信接收用户 openid (必填)")
 	_ = officialAccountTplSubCmd.MarkFlagRequired(flags.ToUser)
 
-	officialAccountTplSubCmd.Flags().StringVarP(&variable.TemplateID, flags.TemplateID, "p", "", "weixin template id (required)")
+	officialAccountTplSubCmd.Flags().StringVarP(&variable.TemplateID, flags.TemplateID, "p", "", "模板 id (必填)")
 	_ = officialAccountTplSubCmd.MarkFlagRequired(flags.TemplateID)
 
-	officialAccountTplSubCmd.Flags().StringVar(&variable.Scene, flags.Scene, "", "weixin subscribe Scene (required)")
+	officialAccountTplSubCmd.Flags().StringVar(&variable.Scene, flags.Scene, "", "重定向后会带上scene参数，开发者可以填0-10000的整型值，用来标识订阅场景值 (必填)")
 	_ = officialAccountTplSubCmd.MarkFlagRequired(flags.Scene)
 
-	officialAccountTplSubCmd.Flags().StringVar(&variable.Title, flags.Title, "", "message Title (required)")
+	officialAccountTplSubCmd.Flags().StringVar(&variable.Title, flags.Title, "", "消息标题 (必填)")
 	_ = officialAccountTplSubCmd.MarkFlagRequired(flags.Title)
 
-	officialAccountTplSubCmd.Flags().StringVar(&variable.Url, flags.Url, "", "Url")
-	officialAccountTplSubCmd.Flags().StringToStringVar(&variable.Mini, flags.Mini, nil, "weixin Mini program, example: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
+	officialAccountTplSubCmd.Flags().StringVar(&variable.Url, flags.Url, "", "用户点击后跳转的URL, 该URL必须处于开发者在公众平台网站中设置的域中")
+	officialAccountTplSubCmd.Flags().StringToStringVar(&variable.Mini, flags.Mini, nil, "跳小程序所需数据, 样例: app_id=XiaoChengXuAppId,page_path=index?foo=bar")
 
-	officialAccountTplSubCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
+	officialAccountTplSubCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "模板数据是原始字符串字面值（不转义处理）")
 }

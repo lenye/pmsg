@@ -29,7 +29,7 @@ import (
 var appChatCmd = &cobra.Command{
 	Use:     "appchat",
 	Aliases: []string{"chat"},
-	Short:   "publish work weixin appchat message",
+	Short:   "发送企业微信群聊推送消息",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdWorkSendAppChatParams{
@@ -61,15 +61,16 @@ var appChatCmd = &cobra.Command{
 }
 
 func init() {
+	appChatCmd.Flags().SortFlags = false
 	workWeiXinSetAccessTokenFlags(appChatCmd)
 
-	appChatCmd.Flags().StringVarP(&variable.ChatID, flags.ChatID, "c", "", "work weixin chat id (required)")
+	appChatCmd.Flags().StringVarP(&variable.ChatID, flags.ChatID, "c", "", "群聊id (必填) ")
 	_ = appChatCmd.MarkFlagRequired(flags.ChatID)
 
-	appChatCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
+	appChatCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "消息类型 (必填)，text(文本消息)、image(图片消息)、voice(语音消息)、video(视频消息)、file(文件消息)、textcard(文本卡片消息)、news(图文消息)、mpnews(图文消息)、markdown(markdown消息)")
 	_ = appChatCmd.MarkFlagRequired(flags.MsgType)
 
-	appChatCmd.Flags().IntVar(&variable.Safe, flags.Safe, 0, "Safe")
+	appChatCmd.Flags().IntVar(&variable.Safe, flags.Safe, 0, "表示是否是保密消息，0表示可对外分享，1表示不能分享且内容显示水印，默认为0")
 
-	appChatCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
+	appChatCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "消息内容是原始字符串字面值（不转义处理）")
 }

@@ -28,7 +28,7 @@ import (
 // mediaUploadCmd 微信公众号新增临时素材
 var mediaUploadCmd = &cobra.Command{
 	Use:   "upload",
-	Short: "weixin media upload",
+	Short: "微信（公众号、小程序）上传临时素材",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := asset.CmdMediaUploadParams{
@@ -58,10 +58,12 @@ var mediaUploadCmd = &cobra.Command{
 }
 
 func init() {
+	mediaUploadCmd.Flags().SortFlags = false
+
 	weiXinSetAccessTokenFlags(mediaUploadCmd)
 
-	mediaUploadCmd.Flags().StringVarP(&variable.MediaType, flags.MediaType, "m", "", "media type (required)")
+	mediaUploadCmd.Flags().StringVarP(&variable.MediaType, flags.MediaType, "m", "", "临时素材的格式类型 (必填)，image(图片)、voice(语音)、video(视频)、thumb(缩略图)")
 	_ = mediaUploadCmd.MarkFlagRequired(flags.MediaType)
 
-	mediaUploadCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
+	mediaUploadCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "文件名称含路径是原始字符串字面值（不转义处理）")
 }

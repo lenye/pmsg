@@ -30,7 +30,7 @@ import (
 var linkedCorpCmd = &cobra.Command{
 	Use:     "linkedcorp",
 	Aliases: []string{"lc"},
-	Short:   "publish work weixin linked corp message",
+	Short:   "发送企业微信互联企业消息",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdWorkSendLinkedCorpParams{
@@ -73,21 +73,22 @@ var linkedCorpCmd = &cobra.Command{
 }
 
 func init() {
+	linkedCorpCmd.Flags().SortFlags = false
 	workWeiXinSetAccessTokenFlags(linkedCorpCmd)
 
-	linkedCorpCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "work weixin user id list")
-	linkedCorpCmd.Flags().StringVarP(&variable.ToParty, flags.ToParty, "p", "", "work weixin party id list")
-	linkedCorpCmd.Flags().StringVarP(&variable.ToTag, flags.ToTag, "g", "", "work weixin tag id list")
-	linkedCorpCmd.Flags().IntVarP(&variable.ToAll, flags.ToAll, "l", 0, "send to all user")
+	linkedCorpCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "指定接收消息的成员，成员ID列表，最多支持1000个，多个接收者用‘|’分隔")
+	linkedCorpCmd.Flags().StringVarP(&variable.ToParty, flags.ToParty, "p", "", "指定接收消息的部门，部门ID列表，最多支持100个，多个接收者用‘|’分隔")
+	linkedCorpCmd.Flags().StringVarP(&variable.ToTag, flags.ToTag, "g", "", "指定接收消息的标签，标签ID列表，最多支持100个，多个接收者用‘|’分隔")
+	linkedCorpCmd.Flags().IntVarP(&variable.ToAll, flags.ToAll, "l", 0, "1表示发送给应用可见范围内的所有人（包括互联企业的成员），默认为0")
 
-	linkedCorpCmd.Flags().Int64VarP(&variable.AgentID, flags.AgentID, "e", 0, "work weixin agent id (required)")
+	linkedCorpCmd.Flags().Int64VarP(&variable.AgentID, flags.AgentID, "e", 0, "企业应用的id (必填)")
 	_ = linkedCorpCmd.MarkFlagRequired(flags.AgentID)
 
-	linkedCorpCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
+	linkedCorpCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "消息类型 (必填)，text(文本消息)、image(图片消息)、voice(语音消息)、video(视频消息)、file(文件消息)、textcard(文本卡片消息)、news(图文消息)、mpnews(图文消息)、markdown(markdown消息)、miniprogram_notice(小程序通知消息)")
 	_ = linkedCorpCmd.MarkFlagRequired(flags.MsgType)
 
-	linkedCorpCmd.Flags().IntVar(&variable.Safe, flags.Safe, 0, "Safe")
+	linkedCorpCmd.Flags().IntVar(&variable.Safe, flags.Safe, 0, "表示是否是保密消息，0表示否，1表示是，默认0")
 
-	linkedCorpCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
+	linkedCorpCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "消息内容是原始字符串字面值（不转义处理）")
 
 }

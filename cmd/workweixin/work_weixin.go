@@ -25,7 +25,7 @@ import (
 var Cmd = &cobra.Command{
 	Use:     "workweixin",
 	Aliases: []string{"wwx"},
-	Short:   "work weixin",
+	Short:   "企业微信",
 }
 
 func init() {
@@ -44,10 +44,10 @@ func init() {
 
 // workWeiXinSetAccessTokenFlags 设置企业微信access_token或者corp_id/corp_secret命令行参数
 func workWeiXinSetAccessTokenFlags(cmd *cobra.Command) {
-	cmd.Flags().StringVarP(&variable.AccessToken, flags.AccessToken, "t", "", "work weixin access token")
+	cmd.Flags().StringVarP(&variable.AccessToken, flags.AccessToken, "t", "", "企业微信接口调用凭证 access token")
 
-	cmd.Flags().StringVarP(&variable.CorpID, flags.CorpID, "i", "", "work weixin corp id (required if corp Secret is set)")
-	cmd.Flags().StringVarP(&variable.CorpSecret, flags.CorpSecret, "s", "", "work weixin corp Secret (required if corp id is set)")
+	cmd.Flags().StringVarP(&variable.CorpID, flags.CorpID, "i", "", "企业微信 corp id")
+	cmd.Flags().StringVarP(&variable.CorpSecret, flags.CorpSecret, "s", "", "企业微信 corp secret")
 
 	cmd.MarkFlagsMutuallyExclusive(flags.AccessToken, flags.CorpID)
 	cmd.MarkFlagsRequiredTogether(flags.CorpID, flags.CorpSecret)

@@ -25,7 +25,7 @@ import (
 var Cmd = &cobra.Command{
 	Use:     "feishu",
 	Aliases: []string{"fs"},
-	Short:   "fei shu",
+	Short:   "飞书",
 }
 
 func init() {

@@ -49,7 +49,7 @@ func (t *CmdWorkSendCustomerParams) Validate() error {
 	return nil
 }
 
-// CmdWorkSendCustomer 发送微信客服消息
+// CmdWorkSendCustomer 发送企业微信客服消息
 func CmdWorkSendCustomer(arg *CmdWorkSendCustomerParams) error {
 
 	if err := arg.Validate(); err != nil {

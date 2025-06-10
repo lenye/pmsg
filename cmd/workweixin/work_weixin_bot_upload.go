@@ -28,7 +28,7 @@ import (
 // botUploadCmd 企业微信群机器人上传文件
 var botUploadCmd = &cobra.Command{
 	Use:   "upload",
-	Short: "work weixin group bot file upload",
+	Short: "企业微信群机器人上传文件",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := bot.CmdUploadParams{
@@ -55,7 +55,8 @@ var botUploadCmd = &cobra.Command{
 }
 
 func init() {
+	botUploadCmd.Flags().SortFlags = false
 	workWeiXinBotSetKeyFlags(botUploadCmd)
 
-	botUploadCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
+	botUploadCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "文件名称含路径是原始字符串字面值（不转义处理）")
 }

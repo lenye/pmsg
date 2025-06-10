@@ -25,11 +25,11 @@ import (
 	"github.com/lenye/pmsg/im/weixin/work/message"
 )
 
-// customerCmd 微信客服消息
+// customerCmd 企业微信客服消息
 var customerCmd = &cobra.Command{
 	Use:     "customer",
 	Aliases: []string{"kf"},
-	Short:   "publish work weixin customer message",
+	Short:   "发送企业微信客服消息",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdWorkSendCustomerParams{
@@ -62,18 +62,19 @@ var customerCmd = &cobra.Command{
 }
 
 func init() {
+	customerCmd.Flags().SortFlags = false
 	workWeiXinSetAccessTokenFlags(customerCmd)
 
-	customerCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "work weixin user id (required)")
-	_ = customerCmd.MarkFlagRequired(flags.ToUser)
-
-	customerCmd.Flags().StringVarP(&variable.OpenKfID, flags.OpenKfID, "k", "", "work weixin customer account id (required)")
+	customerCmd.Flags().StringVarP(&variable.OpenKfID, flags.OpenKfID, "k", "", "指定发送消息的客服帐号 id (必填)")
 	_ = customerCmd.MarkFlagRequired(flags.OpenKfID)
 
-	customerCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
+	customerCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "指定接收消息的客户 userid (必填)")
+	_ = customerCmd.MarkFlagRequired(flags.ToUser)
+
+	customerCmd.Flags().StringVarP(&variable.MsgID, flags.MsgID, "c", "", "指定消息 id")
+
+	customerCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "消息类型 (必填) text(文本消息)、image(图片消息)、voice(语音消息)、video(视频消息)、file(文件消息)、link(图文链接消息)、miniprogram(小程序消息)、msgmenu(菜单消息)、location(地理位置消息)")
 	_ = customerCmd.MarkFlagRequired(flags.MsgType)
 
-	customerCmd.Flags().StringVarP(&variable.MsgID, flags.MsgID, "c", "", "message id")
-
-	customerCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
+	customerCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "消息内容是原始字符串字面值（不转义处理）")
 }

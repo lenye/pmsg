@@ -22,10 +22,11 @@ import (
 var miniProgramCmd = &cobra.Command{
 	Use:     "miniprogram",
 	Aliases: []string{"mini"},
-	Short:   "weixin miniprogram",
+	Short:   "微信小程序",
 }
 
 func init() {
+	miniProgramCmd.Flags().SortFlags = false
 	miniProgramCmd.AddCommand(miniProgramCustomerCmd)
 	miniProgramCmd.AddCommand(miniProgramSubCmd)
 }

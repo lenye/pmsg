@@ -29,7 +29,7 @@ import (
 var miniProgramCustomerCmd = &cobra.Command{
 	Use:     "customer",
 	Aliases: []string{"kf"},
-	Short:   "publish weixin miniprogram customer message",
+	Short:   "发送微信小程序客服消息",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdMiniSendCustomerParams{
@@ -60,13 +60,14 @@ var miniProgramCustomerCmd = &cobra.Command{
 }
 
 func init() {
+	miniProgramCustomerCmd.Flags().SortFlags = false
 	weiXinSetAccessTokenFlags(miniProgramCustomerCmd)
 
-	miniProgramCustomerCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "weixin user open id (required)")
+	miniProgramCustomerCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "微信接收用户 openid (必填)")
 	_ = miniProgramCustomerCmd.MarkFlagRequired(flags.ToUser)
 
-	miniProgramCustomerCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "message type (required)")
+	miniProgramCustomerCmd.Flags().StringVarP(&variable.MsgType, flags.MsgType, "m", "", "消息类型 (必填)，text(文本消息)、image(图片消息)、link(图文链接)、miniprogrampage(小程序卡片)")
 	_ = miniProgramCustomerCmd.MarkFlagRequired(flags.MsgType)
 
-	miniProgramCustomerCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
+	miniProgramCustomerCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "消息内容是原始字符串字面值（不转义处理）")
 }

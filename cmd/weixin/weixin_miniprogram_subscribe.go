@@ -29,7 +29,7 @@ import (
 var miniProgramSubCmd = &cobra.Command{
 	Use:     "subscribe",
 	Aliases: []string{"sub"},
-	Short:   "publish weixin miniprogram subscribe message",
+	Short:   "发送微信小程序订阅消息",
 	Args:    cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := message.CmdMiniSendSubscribeParams{
@@ -63,17 +63,18 @@ var miniProgramSubCmd = &cobra.Command{
 }
 
 func init() {
+	miniProgramSubCmd.Flags().SortFlags = false
 	weiXinSetAccessTokenFlags(miniProgramSubCmd)
 
-	miniProgramSubCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "weixin user open id (required)")
+	miniProgramSubCmd.Flags().StringVarP(&variable.ToUser, flags.ToUser, "o", "", "微信接收用户 openid (必填)")
 	_ = miniProgramSubCmd.MarkFlagRequired(flags.ToUser)
 
-	miniProgramSubCmd.Flags().StringVarP(&variable.TemplateID, flags.TemplateID, "p", "", "weixin template id (required)")
+	miniProgramSubCmd.Flags().StringVarP(&variable.TemplateID, flags.TemplateID, "p", "", "模板 id (必填)")
 	_ = miniProgramSubCmd.MarkFlagRequired(flags.TemplateID)
 
-	miniProgramSubCmd.Flags().StringVarP(&variable.MiniProgramState, flags.MiniProgramState, "g", "", "miniprogram_state")
-	miniProgramSubCmd.Flags().StringVar(&variable.Page, flags.Page, "", "Page")
-	miniProgramSubCmd.Flags().StringVar(&variable.Language, flags.Language, "", "Language")
+	miniProgramSubCmd.Flags().StringVarP(&variable.MiniProgramState, flags.MiniProgramState, "g", "", "跳转小程序类型：developer为开发版；trial为体验版；formal为正式版；默认为正式版")
+	miniProgramSubCmd.Flags().StringVar(&variable.Page, flags.Page, "", "点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转")
+	miniProgramSubCmd.Flags().StringVar(&variable.Language, flags.Language, "", "进入小程序查看的语言类型，支持zh_CN(简体中文)、en_US(英文)、zh_HK(繁体中文)、zh_TW(繁体中文)，默认为zh_CN")
 
-	miniProgramSubCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "strings without any escape processing")
+	miniProgramSubCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "消息内容是原始字符串字面值（不转义处理）")
 }

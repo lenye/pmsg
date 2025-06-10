@@ -27,7 +27,7 @@ import (
 // accessTokenCmd 获取企业微信接口调用凭证
 var accessTokenCmd = &cobra.Command{
 	Use:   "token",
-	Short: "get work weixin access token",
+	Short: "获取企业微信接口调用凭证 access token",
 	Args:  cobra.NoArgs,
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := token.CmdWorkTokenParams{
@@ -43,9 +43,10 @@ var accessTokenCmd = &cobra.Command{
 }
 
 func init() {
-	accessTokenCmd.Flags().StringVarP(&variable.CorpID, flags.CorpID, "i", "", "work weixin corp id (required)")
+	accessTokenCmd.Flags().SortFlags = false
+	accessTokenCmd.Flags().StringVarP(&variable.CorpID, flags.CorpID, "i", "", "企业微信 corp id (必填)")
 	_ = accessTokenCmd.MarkFlagRequired(flags.CorpID)
 
-	accessTokenCmd.Flags().StringVarP(&variable.CorpSecret, flags.CorpSecret, "s", "", "work weixin corp Secret (required)")
+	accessTokenCmd.Flags().StringVarP(&variable.CorpSecret, flags.CorpSecret, "s", "", "企业微信 corp secret (必填)")
 	_ = accessTokenCmd.MarkFlagRequired(flags.CorpSecret)
 }
