@@ -27,19 +27,19 @@ import (
 // timestamp 当前时间戳，单位是秒
 
 // Validate 验证
-func Validate(signStr, timestamp, secret string) (bool, error) {
+func Validate(signature, timestamp, secret string) (bool, error) {
 	t, err := strconv.ParseInt(timestamp, 10, 64)
 	if err != nil {
 		return false, err
 	}
 
-	timeGap := time.Since(time.Unix(t, 0))
-	if math.Abs(timeGap.Hours()) > 1 {
-		return false, fmt.Errorf("specified timestamp is expired")
+	dur := time.Since(time.Unix(t, 0))
+	if math.Abs(dur.Hours()) > 1 {
+		return false, fmt.Errorf("timestamp is expired")
 	}
 
-	ourSign := Sign(timestamp, secret)
-	return ourSign == signStr, nil
+	signature2 := Sign(timestamp, secret)
+	return signature2 == signature, nil
 }
 
 // Sign 签名
