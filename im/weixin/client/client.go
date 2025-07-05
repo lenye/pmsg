@@ -44,7 +44,7 @@ func GetJSON(url string, respBody any) (http.Header, error) {
 			return nil, fmt.Errorf("json decode failed, %w", err)
 		}
 	}
-	if resp.StatusCode/100 != 2 && !isRespJson {
+	if resp.StatusCode/100 != 2 {
 		return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
 	}
 	return resp.Header, nil
@@ -91,7 +91,7 @@ func PostFileJSON(url, fieldName, fileName string, respBody any) (http.Header, e
 			return nil, fmt.Errorf("json decode failed, %w", err)
 		}
 	}
-	if resp.StatusCode/100 != 2 && !isRespJson {
+	if resp.StatusCode/100 != 2 {
 		return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
 	}
 	return resp.Header, nil
