@@ -6,7 +6,6 @@
 * Linux
 * macOS
 * FreeBSD
-* OpenBSD
 
 #### 使用二进制发行版
 
@@ -17,24 +16,23 @@
    linux
 
    ```shell
-   $ ./pmsg --help
-   
-   Usage:
-     pmsg [command]
-   
-   Available Commands:
-     dingtalk    ding talk
-     feishu      fei shu
-     help        Help about any command
-     slack       slack   
-     weixin      weixin        
-     workweixin  work weixin
-   
-   Flags:
-     -h, --help      help for pmsg
-     -v, --version   version for pmsg
-   
-   Use "pmsg [command] --help" for more information about a command.
+    $ ./pmsg --help
+    Usage:
+      pmsg [command]
+    
+    Available Commands:
+      dingtalk    钉钉
+      feishu      飞书
+      help        Help about any command
+      slack       slack
+      weixin      微信：公众号、小程序
+      workweixin  企业微信
+    
+    Flags:
+      -h, --help      help for pmsg
+      -v, --version   version for pmsg
+    
+    Use "pmsg [command] --help" for more information about a command.   
    ```
 
 #### linux容器映像
