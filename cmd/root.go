@@ -32,13 +32,13 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "pmsg",
 	Short: "publish message",
-	Long: `发送消息的小工具：
+	Long: `多平台消息推送：
     企业微信群机器人消息
     钉钉自定义机器人消息
     飞书自定义机器人消息
     Slack 机器人消息
-    微信消息
-    微信客服消息
+    微信消息：公众号、小程序
+    微信客服消息：公众号、小程序
     企业微信消息
     企业微信客服消息
 

@@ -25,7 +25,7 @@ import (
 var Cmd = &cobra.Command{
 	Use:     "weixin",
 	Aliases: []string{"wx"},
-	Short:   "微信",
+	Short:   "微信：公众号、小程序",
 }
 
 func init() {

@@ -34,6 +34,7 @@
 * Windows
 * Linux
 * macOS
+* FreeBSD
 
 ## 文档
 
@@ -50,26 +51,25 @@ https://github.com/lenye/pmsg/tree/main/docs
    linux
 
    ```shell
-   $ ./pmsg --help
-   
-   Usage:
-     pmsg [command]
-   
-   Available Commands:
-     dingtalk    ding talk
-     feishu      fei shu
-     help        Help about any command
-     slack       slack   
-     weixin      weixin
-     workweixin  work weixin
-   
-   Flags:
-     -h, --help      help for pmsg
-     -v, --version   version for pmsg
-   
-   Use "pmsg [command] --help" for more information about a command.
+    $ ./pmsg --help
+    Usage:
+      pmsg [command]
+    
+    Available Commands:
+      dingtalk    钉钉
+      feishu      飞书
+      help        Help about any command
+      slack       slack
+      weixin      微信：公众号、小程序
+      workweixin  企业微信
+    
+    Flags:
+      -h, --help      help for pmsg
+      -v, --version   version for pmsg
+    
+    Use "pmsg [command] --help" for more information about a command.   
    ```
-
+  
 ### linux容器映像
 
 1. `Packages` https://github.com/lenye/pmsg/pkgs/container/pmsg
@@ -90,14 +90,10 @@ https://github.com/lenye/pmsg/tree/main/docs
 $ git clone https://github.com/lenye/pmsg.git
 ```
 
+## 贡献
+
+欢迎创建 [Issue](https://github.com/lenye/pmsg/issues) 来帮助改进项目。
+
 ## License
 
 `pmsg` is released under the [Apache 2.0 license](https://github.com/lenye/pmsg/blob/main/LICENSE).
-
-## Links
-
-### Webhook 异步网关
-
-轻松管理、监控和测试你的 Web 事件，助力你掌控事件全流程
-
-https://dashboard.nanhook.com
