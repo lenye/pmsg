@@ -1,4 +1,4 @@
-`pmsg`是一个发送消息的小工具。
+`pmsg`是一个多平台消息推送SDK/API：轻松实现微信公众号、微信小程序、企业微信、钉钉、飞书、Slack消息自动化。
 
 ## 支持的消息
 
@@ -69,7 +69,7 @@ https://github.com/lenye/pmsg/tree/main/docs
     
     Use "pmsg [command] --help" for more information about a command.   
    ```
-  
+
 ### linux容器映像
 
 1. `Packages` https://github.com/lenye/pmsg/pkgs/container/pmsg
