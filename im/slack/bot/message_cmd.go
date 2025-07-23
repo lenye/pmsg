@@ -32,7 +32,11 @@ func CmdSend(arg *CmdSendParams) error {
 
 	httpclient.SetUserAgent(arg.UserAgent)
 
-	if err := Send(arg.URL, arg.Data); err != nil {
+	msg := Message{
+		Text: arg.Data,
+	}
+
+	if err := Send(arg.URL, &msg); err != nil {
 		return err
 	}
 	fmt.Println(slack.MessageOK)

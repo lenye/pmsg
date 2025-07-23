@@ -18,7 +18,7 @@ args                        参数：消息内容，默认是解释字符串，�
 linux
 
 ```shell
-$ pmsg slack bot --url webhook_url '{"text": "Hello, World!"}'
+$ pmsg slack bot --url webhook_url 'Hello, World!'
 
 ok
 ```

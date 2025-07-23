@@ -18,12 +18,17 @@ import (
 	"github.com/lenye/pmsg/im/slack/client"
 )
 
+// Message Slack机器人消息
+type Message struct {
+	Text string `json:"text"` // 文本消息
+}
+
 // Send 发送消息
 //
 // 消息发送频率限制
 // 1 per second，Short bursts >1 allowed. 每秒1次
-func Send(webhookUrl, body string) error {
-	_, err := client.PostJSON(webhookUrl, body)
+func Send(webhookUrl string, msg *Message) error {
+	_, err := client.PostJSON(webhookUrl, msg)
 	if err != nil {
 		return err
 	}

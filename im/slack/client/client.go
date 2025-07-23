@@ -16,19 +16,26 @@ package client
 
 import (
 	"fmt"
+	"io"
 	"net/http"
-	"strings"
 
 	"github.com/lenye/pmsg/httpclient"
+	"github.com/lenye/pmsg/im"
 	"github.com/lenye/pmsg/im/slack"
 )
 
-func PostJSON(url, reqBody string) (http.Header, error) {
-	resp, err := httpclient.Post(url, httpclient.HdrValApplicationJson, strings.NewReader(reqBody))
+func PostJSON(url string, reqBody any) (http.Header, error) {
+	body, err := im.JsonEncode(reqBody)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := httpclient.Post(url, httpclient.HdrValApplicationJson, body)
 	if err != nil {
 		return nil, fmt.Errorf("%w, %w", httpclient.ErrRequest, err)
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		_ = Body.Close()
+	}(resp.Body)
 
 	if resp.StatusCode == http.StatusTooManyRequests {
 		return resp.Header, fmt.Errorf("%w, rate limit exceeded, retry after %s second", slack.ErrRequest, resp.Header.Get("Retry-After"))
