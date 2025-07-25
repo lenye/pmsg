@@ -1,4 +1,4 @@
-// Copyright 2022-2024 The pmsg Authors. All rights reserved.
+// Copyright 2022-2025 The pmsg Authors. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package slack
+package discord
 
 import (
 	"fmt"
@@ -22,13 +22,13 @@ import (
 	"github.com/lenye/pmsg/cmd/variable"
 	"github.com/lenye/pmsg/flags"
 	"github.com/lenye/pmsg/im"
-	"github.com/lenye/pmsg/im/slack/bot"
+	"github.com/lenye/pmsg/im/discord/bot"
 )
 
-// botCmd slack bot
+// botCmd discord bot
 var botCmd = &cobra.Command{
 	Use:   "bot",
-	Short: "publish slack bot message",
+	Short: "publish discord bot message",
 	Args:  cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		arg := bot.CmdSendParams{
@@ -51,12 +51,12 @@ var botCmd = &cobra.Command{
 			fmt.Println(err)
 		}
 	},
-	Example: "pmsg slack bot --Url webhook_url 'Hello, World!'",
+	Example: "pmsg discord bot --Url webhook_url 'Hello, World!'",
 }
 
 func init() {
 	botCmd.Flags().SortFlags = false
-	botCmd.Flags().StringVar(&variable.Url, flags.Url, "", "slack webhook Url")
+	botCmd.Flags().StringVar(&variable.Url, flags.Url, "", "discord webhook Url")
 	_ = botCmd.MarkFlagRequired(flags.Url)
 
 	botCmd.Flags().BoolVar(&variable.IsRaw, flags.IsRaw, false, "消息内容是原始字符串字面值（不转义处理）")

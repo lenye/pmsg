@@ -21,6 +21,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/lenye/pmsg/cmd/dingtalk"
+	"github.com/lenye/pmsg/cmd/discord"
 	"github.com/lenye/pmsg/cmd/feishu"
 	"github.com/lenye/pmsg/cmd/slack"
 	"github.com/lenye/pmsg/cmd/weixin"
@@ -37,6 +38,7 @@ var rootCmd = &cobra.Command{
     钉钉自定义机器人消息
     飞书自定义机器人消息
     Slack 机器人消息
+    Discord 机器人消息
     微信消息：公众号、小程序
     微信客服消息：公众号、小程序
     企业微信消息
@@ -66,4 +68,5 @@ func init() {
 	rootCmd.AddCommand(dingtalk.Cmd)
 	rootCmd.AddCommand(feishu.Cmd)
 	rootCmd.AddCommand(slack.Cmd)
+	rootCmd.AddCommand(discord.Cmd)
 }
