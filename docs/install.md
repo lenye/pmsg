@@ -22,6 +22,7 @@
     
     Available Commands:
       dingtalk    钉钉
+      discord     discord   
       feishu      飞书
       help        Help about any command
       slack       slack

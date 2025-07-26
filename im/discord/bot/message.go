@@ -16,9 +16,7 @@ package bot
 
 import (
 	"fmt"
-	"strings"
 
-	"github.com/lenye/pmsg/httpclient"
 	"github.com/lenye/pmsg/im/discord"
 	"github.com/lenye/pmsg/im/discord/client"
 )
@@ -38,12 +36,13 @@ func Send(webhookUrl string, msg *Message) error {
 	var resp discord.ResponseMeta
 	headers, err := client.PostJSON(webhookUrl, msg, &resp)
 	if err != nil {
-		return err
-	}
-	if strings.EqualFold(headers.Get("content-type"), httpclient.HdrValApplicationJson) {
-		if !resp.Succeed() {
-			return fmt.Errorf("%w, %s", discord.ErrRequest, resp.String())
+		if headers == nil {
+			return err
 		}
+		return fmt.Errorf("%w, %s", err, resp.String())
+	}
+	if headers != nil && !resp.Succeed() {
+		return fmt.Errorf("%s", resp.String())
 	}
 	return nil
 }

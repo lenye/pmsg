@@ -22,7 +22,6 @@ import (
 
 	"github.com/lenye/pmsg/httpclient"
 	"github.com/lenye/pmsg/im"
-	"github.com/lenye/pmsg/im/discord"
 )
 
 func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
@@ -32,29 +31,31 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 	}
 	resp, err := httpclient.Post(url, httpclient.HdrValApplicationJson, body)
 	if err != nil {
-		return nil, fmt.Errorf("%w, %w", httpclient.ErrRequest, err)
+		return nil, err
 	}
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
 	}(resp.Body)
 
+	// 成功
 	if resp.StatusCode == http.StatusNoContent {
-		return resp.Header, nil
+		return nil, nil
+	}
+	// 响应内容
+	if !strings.EqualFold(resp.Header.Get("content-type"), httpclient.HdrValApplicationJson) {
+		return nil, fmt.Errorf("http.response.header.content-type != %s", httpclient.HdrValApplicationJson)
+	}
+	if err := im.JsonDecode(resp.Body, respBody); err != nil {
+		return nil, fmt.Errorf("http.response.body json decode failed, %w", err)
 	}
 
-	if strings.EqualFold(resp.Header.Get("content-type"), httpclient.HdrValApplicationJson) {
-		if err := im.JsonDecode(resp.Body, respBody); err != nil {
-			return nil, fmt.Errorf("json decode failed, %w", err)
-		}
-	}
-
+	// 速率限制
 	if resp.StatusCode == http.StatusTooManyRequests {
-		return resp.Header, fmt.Errorf("%w, rate limit exceeded, retry after %s second", discord.ErrRequest, resp.Header.Get("Retry-After"))
+		return resp.Header, fmt.Errorf("rate limit exceeded, retry after %s second", resp.Header.Get("Retry-After"))
 	}
-
-	// Slack seems to send an HTML body along with 5xx error codes. Don't parse it.
+	// 其他错误
 	if resp.StatusCode != http.StatusOK {
-		return resp.Header, fmt.Errorf("%w, http response status: %s", discord.ErrRequest, resp.Status)
+		return resp.Header, fmt.Errorf("invalid http.response.status: %s", resp.Status)
 	}
 
 	return resp.Header, nil

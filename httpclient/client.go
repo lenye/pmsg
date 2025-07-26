@@ -31,9 +31,14 @@ import (
 var ErrRequest = errors.New("http request failed")
 
 const (
-	HdrKeyUserAgent       = "User-Agent"
-	HdrKeyContentType     = "Content-Type"
-	HdrValApplicationJson = "application/json"
+	HdrKeyUserAgent   = "User-Agent"
+	HdrKeyContentType = "Content-Type"
+)
+
+const (
+	HdrValApplicationJson         = "application/json"
+	HdrValApplicationJsonCharset  = "application/json; charset=utf-8"
+	HdrValApplicationJsonEncoding = "application/json; encoding=utf-8"
 )
 
 const (

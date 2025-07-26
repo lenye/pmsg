@@ -37,7 +37,7 @@ func CmdSend(arg *CmdSendParams) error {
 	}
 
 	if err := Send(arg.URL, &msg); err != nil {
-		return err
+		return fmt.Errorf("%w, %w", discord.ErrRequest, err)
 	}
 
 	fmt.Println(discord.MessageOK)

@@ -8,6 +8,7 @@
 * 钉钉自定义机器人消息
 * 飞书自定义机器人消息
 * Slack机器人消息
+* Discord机器人消息
 
 ### 微信
 
@@ -57,6 +58,7 @@ https://github.com/lenye/pmsg/tree/main/docs
     
     Available Commands:
       dingtalk    钉钉
+      discord     discord
       feishu      飞书
       help        Help about any command
       slack       slack
