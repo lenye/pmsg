@@ -33,7 +33,7 @@ func CmdGetAccessToken(arg *CmdTokenParams) error {
 
 	accessTokenResp, err := FetchAccessToken(arg.AppID, arg.AppSecret)
 	if err != nil {
-		return err
+		return fmt.Errorf("%w, %w", weixin.ErrRequest, err)
 	}
 	fmt.Println(fmt.Sprintf("%v; %v", weixin.MessageOK, accessTokenResp))
 
