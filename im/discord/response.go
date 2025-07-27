@@ -15,8 +15,9 @@
 package discord
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
+	"strings"
 )
 
 const (
@@ -34,8 +35,22 @@ type ResponseMeta struct {
 }
 
 func (t *ResponseMeta) String() string {
-	buf, _ := json.Marshal(t)
-	return string(buf)
+	var sb []string
+
+	if t.Code != nil {
+		sb = append(sb, fmt.Sprintf("code: %d", *t.Code))
+	}
+	if t.Message != "" {
+		sb = append(sb, fmt.Sprintf("message: %s", t.Message))
+	}
+	if t.RetryAfter != nil {
+		sb = append(sb, fmt.Sprintf("retry_after: %f", *t.RetryAfter))
+	}
+	if t.Global != nil {
+		sb = append(sb, fmt.Sprintf("global: %t", *t.Global))
+	}
+
+	return strings.Join(sb, ", ")
 }
 
 // Succeed 操作是否成功
