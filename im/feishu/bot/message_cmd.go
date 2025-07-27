@@ -94,7 +94,7 @@ func CmdSend(arg *CmdSendParams) error {
 	httpclient.SetUserAgent(arg.UserAgent)
 
 	if err := Send(arg.AccessToken, &msg); err != nil {
-		return err
+		return fmt.Errorf("%w, %w", feishu.ErrRequest, err)
 	}
 	fmt.Println(feishu.MessageOK)
 
