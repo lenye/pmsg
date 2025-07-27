@@ -25,6 +25,7 @@ import (
 	"github.com/lenye/pmsg/httpclient"
 	"github.com/lenye/pmsg/im"
 	"github.com/lenye/pmsg/im/weixin"
+	"github.com/lenye/pmsg/im/weixin/work"
 )
 
 type CmdSendParams struct {
@@ -123,7 +124,7 @@ func CmdSend(arg *CmdSendParams) error {
 	httpclient.SetUserAgent(arg.UserAgent)
 
 	if err := Send(arg.Key, &msg); err != nil {
-		return err
+		return fmt.Errorf("%w, %w", work.ErrRequest, err)
 	}
 	fmt.Println(weixin.MessageOK)
 

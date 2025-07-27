@@ -106,12 +106,15 @@ const linkedCorpSendURL = work.Host + "/cgi-bin/linkedcorp/message/send?access_t
 func SendLinkedCorp(accessToken string, msg *LinkedCorpMessage) (*LinkedCorpMessageResponse, error) {
 	u := linkedCorpSendURL + url.QueryEscape(accessToken)
 	var resp LinkedCorpMessageResponse
-	_, err := client.PostJSON(u, msg, &resp)
+	headers, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
-		return nil, err
+		if headers == nil {
+			return nil, err
+		}
+		return nil, fmt.Errorf("%w, %s", err, resp.String())
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w, %s", weixin.ErrRequest, resp)
+		return nil, fmt.Errorf("%s", resp.String())
 	}
 	return &resp, nil
 }

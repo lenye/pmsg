@@ -19,6 +19,7 @@ import (
 
 	"github.com/lenye/pmsg/httpclient"
 	"github.com/lenye/pmsg/im/weixin"
+	"github.com/lenye/pmsg/im/weixin/work"
 	"github.com/lenye/pmsg/im/weixin/work/token"
 )
 
@@ -42,13 +43,13 @@ func CmdWorkUndoApp(arg *CmdWorkUndoAppParams) error {
 	if arg.AccessToken == "" {
 		accessTokenResp, err := token.FetchAccessToken(arg.CorpID, arg.CorpSecret)
 		if err != nil {
-			return err
+			return fmt.Errorf("%w, %w", work.ErrRequest, err)
 		}
 		arg.AccessToken = accessTokenResp.AccessToken
 	}
 
 	if err := UndoApp(arg.AccessToken, &msg); err != nil {
-		return err
+		return fmt.Errorf("%w, %w", work.ErrRequest, err)
 	}
 	fmt.Println(weixin.MessageOK)
 

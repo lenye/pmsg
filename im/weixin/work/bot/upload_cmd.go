@@ -20,6 +20,7 @@ import (
 	"github.com/lenye/pmsg/httpclient"
 	"github.com/lenye/pmsg/im"
 	"github.com/lenye/pmsg/im/weixin"
+	"github.com/lenye/pmsg/im/weixin/work"
 )
 
 type CmdUploadParams struct {
@@ -46,7 +47,7 @@ func CmdUpload(arg *CmdUploadParams) error {
 	httpclient.SetUserAgent(arg.UserAgent)
 
 	if meta, err := Upload(arg.Key, arg.File); err != nil {
-		return err
+		return fmt.Errorf("%w, %w", work.ErrRequest, err)
 	} else {
 		fmt.Println(fmt.Sprintf("%v; %v", weixin.MessageOK, meta))
 	}

@@ -56,12 +56,15 @@ const reqURL = work.Host + "/cgi-bin/gettoken?corpid="
 func FetchAccessToken(corpID, corpSecret string) (*AccessTokenMeta, error) {
 	u := reqURL + url.QueryEscape(corpID) + "&corpsecret=" + url.QueryEscape(corpSecret)
 	var resp AccessTokenResponse
-	_, err := client.GetJSON(u, &resp)
+	headers, err := client.GetJSON(u, &resp)
 	if err != nil {
-		return nil, err
+		if headers == nil {
+			return nil, err
+		}
+		return nil, fmt.Errorf("%w, %s", err, resp.ResponseMeta.String())
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w, %s", weixin.ErrRequest, resp.ResponseMeta)
+		return nil, fmt.Errorf("%s", resp.ResponseMeta.String())
 	}
 
 	resp.AccessTokenMeta.ExpireAt = time.Now().Add(time.Second * time.Duration(resp.AccessTokenMeta.ExpireIn))

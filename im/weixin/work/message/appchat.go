@@ -73,12 +73,15 @@ const appChatSendURL = work.Host + "/cgi-bin/appchat/send?access_token="
 func SendAppChat(accessToken string, msg *AppChatMessage) error {
 	u := appChatSendURL + url.QueryEscape(accessToken)
 	var resp weixin.ResponseMeta
-	_, err := client.PostJSON(u, msg, &resp)
+	headers, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
-		return err
+		if headers == nil {
+			return err
+		}
+		return fmt.Errorf("%w, %s", err, resp.String())
 	}
 	if !resp.Succeed() {
-		return fmt.Errorf("%w, %s", weixin.ErrRequest, resp)
+		return fmt.Errorf("%s", resp.String())
 	}
 	return nil
 }

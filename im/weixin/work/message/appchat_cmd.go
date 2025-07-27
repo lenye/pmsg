@@ -23,6 +23,7 @@ import (
 	"github.com/lenye/pmsg/flags"
 	"github.com/lenye/pmsg/httpclient"
 	"github.com/lenye/pmsg/im/weixin"
+	"github.com/lenye/pmsg/im/weixin/work"
 	"github.com/lenye/pmsg/im/weixin/work/token"
 )
 
@@ -131,13 +132,13 @@ func CmdWorkSendAppChat(arg *CmdWorkSendAppChatParams) error {
 	if arg.AccessToken == "" {
 		accessTokenResp, err := token.FetchAccessToken(arg.CorpID, arg.CorpSecret)
 		if err != nil {
-			return err
+			return fmt.Errorf("%w, %w", work.ErrRequest, err)
 		}
 		arg.AccessToken = accessTokenResp.AccessToken
 	}
 
 	if err := SendAppChat(arg.AccessToken, &msg); err != nil {
-		return err
+		return fmt.Errorf("%w, %w", work.ErrRequest, err)
 	}
 	fmt.Println(weixin.MessageOK)
 

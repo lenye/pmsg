@@ -40,12 +40,15 @@ const undoAppSendURL = work.Host + "/cgi-bin/message/recall?access_token="
 func UndoApp(accessToken string, msg *UndoAppMessage) error {
 	u := appSendURL + url.QueryEscape(accessToken)
 	var resp UndoAppMessageResponse
-	_, err := client.PostJSON(u, msg, &resp)
+	headers, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
-		return err
+		if headers == nil {
+			return err
+		}
+		return fmt.Errorf("%w, %s", err, resp.String())
 	}
 	if !resp.Succeed() {
-		return fmt.Errorf("%w, %s", weixin.ErrRequest, resp)
+		return fmt.Errorf("%s", resp.String())
 	}
 	return nil
 }

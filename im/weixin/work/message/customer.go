@@ -90,12 +90,15 @@ const customerSendURL = work.Host + "/cgi-bin/kf/send_msg?access_token="
 func SendCustomer(accessToken string, msg *CustomerMessage) (*CustomerMessageResponse, error) {
 	u := customerSendURL + url.QueryEscape(accessToken)
 	var resp CustomerMessageResponse
-	_, err := client.PostJSON(u, msg, &resp)
+	headers, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
-		return nil, err
+		if headers == nil {
+			return nil, err
+		}
+		return nil, fmt.Errorf("%w, %s", err, resp.String())
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w, %s", weixin.ErrRequest, resp)
+		return nil, fmt.Errorf("%s", resp.String())
 	}
 	return &resp, nil
 }

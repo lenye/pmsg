@@ -105,12 +105,15 @@ const externalContactSendURL = work.Host + "/cgi-bin/externalcontact/message/sen
 func SendExternalContact(accessToken string, msg *ExternalContactMessage) (*ExternalContactMessageResponse, error) {
 	u := externalContactSendURL + url.QueryEscape(accessToken)
 	var resp ExternalContactMessageResponse
-	_, err := client.PostJSON(u, msg, &resp)
+	headers, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
-		return nil, err
+		if headers == nil {
+			return nil, err
+		}
+		return nil, fmt.Errorf("%w, %s", err, resp.String())
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w, %s", weixin.ErrRequest, resp)
+		return nil, fmt.Errorf("%s", resp.String())
 	}
 	return &resp, nil
 }

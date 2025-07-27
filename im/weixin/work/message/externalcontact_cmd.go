@@ -23,6 +23,7 @@ import (
 	"github.com/lenye/pmsg/flags"
 	"github.com/lenye/pmsg/httpclient"
 	"github.com/lenye/pmsg/im/weixin"
+	"github.com/lenye/pmsg/im/weixin/work"
 	"github.com/lenye/pmsg/im/weixin/work/token"
 )
 
@@ -167,13 +168,13 @@ func CmdWorkSendExternalContact(arg *CmdWorkSendExternalContactParams) error {
 	if arg.AccessToken == "" {
 		accessTokenResp, err := token.FetchAccessToken(arg.CorpID, arg.CorpSecret)
 		if err != nil {
-			return err
+			return fmt.Errorf("%w, %w", work.ErrRequest, err)
 		}
 		arg.AccessToken = accessTokenResp.AccessToken
 	}
 
 	if resp, err := SendExternalContact(arg.AccessToken, &msg); err != nil {
-		return err
+		return fmt.Errorf("%w, %w", work.ErrRequest, err)
 	} else {
 		fmt.Println(fmt.Sprintf("%v; %v", weixin.MessageOK, resp))
 	}

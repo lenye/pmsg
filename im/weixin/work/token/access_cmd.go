@@ -19,6 +19,7 @@ import (
 
 	"github.com/lenye/pmsg/httpclient"
 	"github.com/lenye/pmsg/im/weixin"
+	"github.com/lenye/pmsg/im/weixin/work"
 )
 
 type CmdWorkTokenParams struct {
@@ -34,7 +35,7 @@ func CmdWorkGetAccessToken(arg *CmdWorkTokenParams) error {
 
 	accessTokenResp, err := FetchAccessToken(arg.CorpID, arg.CorpSecret)
 	if err != nil {
-		return err
+		return fmt.Errorf("%w, %w", work.ErrRequest, err)
 	}
 	fmt.Println(fmt.Sprintf("%v; %v", weixin.MessageOK, accessTokenResp))
 

@@ -21,6 +21,7 @@ import (
 	"github.com/lenye/pmsg/httpclient"
 	"github.com/lenye/pmsg/im"
 	"github.com/lenye/pmsg/im/weixin"
+	"github.com/lenye/pmsg/im/weixin/work"
 	"github.com/lenye/pmsg/im/weixin/work/token"
 )
 
@@ -61,13 +62,13 @@ func CmdWorkMediaUpload(arg *CmdWorkMediaUploadParams) error {
 	if arg.AccessToken == "" {
 		accessTokenResp, err := token.FetchAccessToken(arg.CorpID, arg.CorpSecret)
 		if err != nil {
-			return err
+			return fmt.Errorf("%w, %w", work.ErrRequest, err)
 		}
 		arg.AccessToken = accessTokenResp.AccessToken
 	}
 
 	if meta, err := MediaUpload(arg.AccessToken, arg.MediaType, arg.File); err != nil {
-		return err
+		return fmt.Errorf("%w, %w", work.ErrRequest, err)
 	} else {
 		fmt.Println(fmt.Sprintf("%v; %v", weixin.MessageOK, meta))
 	}
