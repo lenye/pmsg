@@ -122,7 +122,7 @@ func CmdSend(arg *CmdSendParams) error {
 	httpclient.SetUserAgent(arg.UserAgent)
 
 	if err := Send(arg.AccessToken, arg.Secret, &msg); err != nil {
-		return err
+		return fmt.Errorf("%w, %w", dingtalk.ErrRequest, err)
 	}
 	fmt.Println(dingtalk.MessageOK)
 

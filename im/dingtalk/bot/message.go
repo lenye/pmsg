@@ -73,12 +73,15 @@ func Send(accessToken, secret string, msg *Message) error {
 		u = u + "&timestamp=" + timestamp + "&sign=" + url.QueryEscape(sign)
 	}
 	var resp dingtalk.ResponseMeta
-	_, err := client.PostJSON(u, msg, &resp)
+	headers, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
-		return err
+		if headers == nil {
+			return err
+		}
+		return fmt.Errorf("%w, %s", err, resp.String())
 	}
 	if !resp.Succeed() {
-		return fmt.Errorf("%w, %s", dingtalk.ErrRequest, resp)
+		return fmt.Errorf("%s", resp.String())
 	}
 	return nil
 }
