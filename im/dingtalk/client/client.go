@@ -32,7 +32,7 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 
 	resp, err := httpclient.Post(url, httpclient.HdrValApplicationJson, body)
 	if err != nil {
-		return nil, fmt.Errorf("%w", err)
+		return nil, err
 	}
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
