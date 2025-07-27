@@ -52,12 +52,15 @@ const reqURL = weixin.Host + "/cgi-bin/token?grant_type=client_credential&appid=
 func FetchAccessToken(appID, appSecret string) (*AccessTokenMeta, error) {
 	u := reqURL + url.QueryEscape(appID) + "&secret=" + url.QueryEscape(appSecret)
 	var resp AccessTokenResponse
-	_, err := client.GetJSON(u, &resp)
+	headers, err := client.GetJSON(u, &resp)
 	if err != nil {
-		return nil, err
+		if headers == nil {
+			return nil, err
+		}
+		return nil, fmt.Errorf("%w, %s", err, resp.ResponseMeta.String())
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w, %s", weixin.ErrRequest, resp.ResponseMeta)
+		return nil, fmt.Errorf("%s", resp.ResponseMeta.String())
 	}
 
 	resp.AccessTokenMeta.ExpireAt = time.Now().Add(time.Second * time.Duration(resp.AccessTokenMeta.ExpireIn))

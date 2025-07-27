@@ -201,13 +201,13 @@ func CmdMpSendCustomer(arg *CmdMpSendCustomerParams) error {
 	if arg.AccessToken == "" {
 		accessTokenResp, err := token.FetchAccessToken(arg.AppID, arg.AppSecret)
 		if err != nil {
-			return err
+			return fmt.Errorf("%w, %w", weixin.ErrRequest, err)
 		}
 		arg.AccessToken = accessTokenResp.AccessToken
 	}
 
 	if err := SendCustomer(arg.AccessToken, &msg); err != nil {
-		return err
+		return fmt.Errorf("%w, %w", weixin.ErrRequest, err)
 	}
 	fmt.Println(weixin.MessageOK)
 

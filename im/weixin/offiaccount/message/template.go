@@ -111,12 +111,15 @@ const templateURL = weixin.Host + "/cgi-bin/message/template/send?access_token="
 func SendTemplate(accessToken string, msg *TemplateMessage) (int64, error) {
 	u := templateURL + url.QueryEscape(accessToken)
 	var resp TemplateMessageResponse
-	_, err := client.PostJSON(u, msg, &resp)
+	headers, err := client.PostJSON(u, msg, &resp)
 	if err != nil {
-		return 0, err
+		if headers == nil {
+			return 0, err
+		}
+		return 0, fmt.Errorf("%w, %s", err, resp.ResponseMeta.String())
 	}
 	if !resp.Succeed() {
-		return 0, fmt.Errorf("%w, %s", weixin.ErrRequest, resp.ResponseMeta)
+		return 0, fmt.Errorf("%s", resp.ResponseMeta.String())
 	}
 	return resp.MsgID, nil
 }

@@ -64,8 +64,10 @@ func (t MediaMeta) String() string {
 	if t.MediaID != "" {
 		sb = append(sb, fmt.Sprintf("media_id: %s", t.MediaID))
 	}
-	locCreatedAt := time.Unix(t.CreatedAt, 0).Local()
-	sb = append(sb, fmt.Sprintf("created_at: %v (%s)", t.CreatedAt, locCreatedAt.Format(time.RFC3339)))
+	if t.CreatedAt != 0 {
+		locCreatedAt := time.Unix(t.CreatedAt, 0).Local()
+		sb = append(sb, fmt.Sprintf("created_at: %v (%s)", t.CreatedAt, locCreatedAt.Format(time.RFC3339)))
+	}
 	return strings.Join(sb, ", ")
 }
 
@@ -75,12 +77,15 @@ const reqURL = weixin.Host + "/cgi-bin/media/upload?access_token="
 func MediaUpload(accessToken, mediaType, filename string) (*MediaMeta, error) {
 	u := reqURL + url.QueryEscape(accessToken) + "&type=" + url.QueryEscape(mediaType)
 	var resp MediaResponse
-	_, err := client.PostFileJSON(u, FieldName, filename, &resp)
+	headers, err := client.PostFileJSON(u, FieldName, filename, &resp)
 	if err != nil {
-		return nil, err
+		if headers == nil {
+			return nil, err
+		}
+		return nil, fmt.Errorf("%w, %s", err, resp.ResponseMeta.String())
 	}
 	if !resp.Succeed() {
-		return nil, fmt.Errorf("%w, %s", weixin.ErrRequest, resp)
+		return nil, fmt.Errorf("%s", resp.ResponseMeta.String())
 	}
 	return &resp.MediaMeta, nil
 }

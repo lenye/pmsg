@@ -60,13 +60,13 @@ func CmdMediaUpload(arg *CmdMediaUploadParams) error {
 	if arg.AccessToken == "" {
 		accessTokenResp, err := token.FetchAccessToken(arg.AppID, arg.AppSecret)
 		if err != nil {
-			return err
+			return fmt.Errorf("%w, %w", weixin.ErrRequest, err)
 		}
 		arg.AccessToken = accessTokenResp.AccessToken
 	}
 
 	if meta, err := MediaUpload(arg.AccessToken, arg.MediaType, arg.File); err != nil {
-		return err
+		return fmt.Errorf("%w, %w", weixin.ErrRequest, err)
 	} else {
 		fmt.Println(fmt.Sprintf("%v; %v", weixin.MessageOK, meta))
 	}

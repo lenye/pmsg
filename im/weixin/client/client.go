@@ -32,20 +32,21 @@ const (
 func GetJSON(url string, respBody any) (http.Header, error) {
 	resp, err := httpclient.Get(url)
 	if err != nil {
-		return nil, fmt.Errorf("%w, %w", httpclient.ErrRequest, err)
+		return nil, err
 	}
 	defer func(Body io.ReadCloser) {
 		_ = Body.Close()
 	}(resp.Body)
 
-	isRespJson := strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonCharset) || strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonEncoding)
-	if isRespJson {
-		if err := im.JsonDecode(resp.Body, respBody); err != nil {
-			return nil, fmt.Errorf("json decode failed, %w", err)
-		}
+	contentType := resp.Header.Get("content-type")
+	if !strings.EqualFold(contentType, httpclient.HdrValApplicationJsonCharset) && !strings.EqualFold(contentType, httpclient.HdrValApplicationJsonEncoding) {
+		return nil, fmt.Errorf("http.response.header.content-type != %s", httpclient.HdrValApplicationJson)
 	}
-	if resp.StatusCode/100 != 2 {
-		return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
+	if err := im.JsonDecode(resp.Body, respBody); err != nil {
+		return nil, fmt.Errorf("http.response.body json decode failed, %w", err)
+	}
+	if resp.StatusCode != http.StatusOK {
+		return resp.Header, fmt.Errorf("invalid http.response.status: %s", resp.Status)
 	}
 	return resp.Header, nil
 }
@@ -64,14 +65,15 @@ func PostJSON(url string, reqBody, respBody any) (http.Header, error) {
 		_ = Body.Close()
 	}(resp.Body)
 
-	isRespJson := strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonCharset) || strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonEncoding)
-	if isRespJson {
-		if err := im.JsonDecode(resp.Body, respBody); err != nil {
-			return nil, fmt.Errorf("json decode failed, %w", err)
-		}
+	contentType := resp.Header.Get("content-type")
+	if !strings.EqualFold(contentType, httpclient.HdrValApplicationJsonCharset) && !strings.EqualFold(contentType, httpclient.HdrValApplicationJsonEncoding) {
+		return nil, fmt.Errorf("http.response.header.content-type != %s", httpclient.HdrValApplicationJson)
 	}
-	if resp.StatusCode/100 != 2 {
-		return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
+	if err := im.JsonDecode(resp.Body, respBody); err != nil {
+		return nil, fmt.Errorf("http.response.body json decode failed, %w", err)
+	}
+	if resp.StatusCode != http.StatusOK {
+		return resp.Header, fmt.Errorf("invalid http.response.status: %s", resp.Status)
 	}
 	return resp.Header, nil
 }
@@ -85,14 +87,15 @@ func PostFileJSON(url, fieldName, fileName string, respBody any) (http.Header, e
 		_ = Body.Close()
 	}(resp.Body)
 
-	isRespJson := strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonCharset) || strings.EqualFold(resp.Header.Get("content-type"), contentTypeJsonEncoding)
-	if isRespJson {
-		if err := im.JsonDecode(resp.Body, respBody); err != nil {
-			return nil, fmt.Errorf("json decode failed, %w", err)
-		}
+	contentType := resp.Header.Get("content-type")
+	if !strings.EqualFold(contentType, httpclient.HdrValApplicationJsonCharset) && !strings.EqualFold(contentType, httpclient.HdrValApplicationJsonEncoding) {
+		return nil, fmt.Errorf("http.response.header.content-type != %s", httpclient.HdrValApplicationJson)
 	}
-	if resp.StatusCode/100 != 2 {
-		return nil, fmt.Errorf("%w, http response status: %s", httpclient.ErrRequest, resp.Status)
+	if err := im.JsonDecode(resp.Body, respBody); err != nil {
+		return nil, fmt.Errorf("http.response.body json decode failed, %w", err)
+	}
+	if resp.StatusCode != http.StatusOK {
+		return resp.Header, fmt.Errorf("invalid http.response.status: %s", resp.Status)
 	}
 	return resp.Header, nil
 }
