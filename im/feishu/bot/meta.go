@@ -59,7 +59,7 @@ type CardHeaderTitle struct {
 
 type CardElement struct {
 	Tag     string              `json:"tag"`
-	Text    CardElementText     `json:"text,omitempty"`
+	Text    CardElementText     `json:"text"`
 	Actions []CardElementAction `json:"actions,omitempty"`
 }
 

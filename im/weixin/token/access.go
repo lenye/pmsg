@@ -24,9 +24,9 @@ import (
 )
 
 type AccessTokenMeta struct {
-	AccessToken string    `json:"access_token"`        // 微信接口调用凭证
-	ExpireIn    int64     `json:"expires_in"`          // 微信接口调用凭证有效时间，单位：秒
-	ExpireAt    time.Time `json:"expire_at,omitempty"` // 微信接口调用凭证到期时间
+	AccessToken string    `json:"access_token"`       // 微信接口调用凭证
+	ExpireIn    int64     `json:"expires_in"`         // 微信接口调用凭证有效时间，单位：秒
+	ExpireAt    time.Time `json:"expire_at,omitzero"` // 微信接口调用凭证到期时间
 }
 
 func (t AccessTokenMeta) String() string {

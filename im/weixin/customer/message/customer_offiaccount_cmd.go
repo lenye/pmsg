@@ -163,7 +163,7 @@ func CmdMpSendCustomer(arg *CmdMpSendCustomerParams) error {
 		if lenList == 0 {
 			return errors.New("list is empty")
 		}
-		for i := 0; i < lenList; i++ {
+		for i := range lenList {
 			if msgMeta.List[i].ID == "" {
 				return fmt.Errorf("list[%v].id is empty", i)
 			}
