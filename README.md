@@ -9,6 +9,7 @@
 * 飞书自定义机器人消息
 * Slack机器人消息
 * Discord机器人消息
+* Mattermost机器人消息
 
 ### 微信
 
@@ -61,6 +62,7 @@ https://github.com/lenye/pmsg/tree/main/docs
       discord     discord
       feishu      飞书
       help        Help about any command
+      mattermost  mattermost   
       slack       slack
       weixin      微信：公众号、小程序
       workweixin  企业微信

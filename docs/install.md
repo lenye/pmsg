@@ -25,6 +25,7 @@
       discord     discord   
       feishu      飞书
       help        Help about any command
+      mattermost  mattermost
       slack       slack
       weixin      微信：公众号、小程序
       workweixin  企业微信

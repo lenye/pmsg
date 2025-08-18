@@ -23,6 +23,7 @@ import (
 	"github.com/lenye/pmsg/cmd/dingtalk"
 	"github.com/lenye/pmsg/cmd/discord"
 	"github.com/lenye/pmsg/cmd/feishu"
+	"github.com/lenye/pmsg/cmd/mattermost"
 	"github.com/lenye/pmsg/cmd/slack"
 	"github.com/lenye/pmsg/cmd/weixin"
 	"github.com/lenye/pmsg/cmd/workweixin"
@@ -69,4 +70,5 @@ func init() {
 	rootCmd.AddCommand(feishu.Cmd)
 	rootCmd.AddCommand(slack.Cmd)
 	rootCmd.AddCommand(discord.Cmd)
+	rootCmd.AddCommand(mattermost.Cmd)
 }

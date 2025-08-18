@@ -31,6 +31,10 @@
 
 * [机器人消息](discord/bot_message.md)
 
+### Mattermost
+
+* [机器人消息](mattermost/bot_message.md)
+
 ## 微信
 
 * [获取接口调用凭证（公众号、小程序）](weixin/access_token.md)access_token
