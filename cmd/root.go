@@ -40,6 +40,7 @@ var rootCmd = &cobra.Command{
     飞书自定义机器人消息
     Slack 机器人消息
     Discord 机器人消息
+	Mattermost 机器人消息
     微信消息：公众号、小程序
     微信客服消息：公众号、小程序
     企业微信消息
