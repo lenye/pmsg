@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"io"
 	"mime/multipart"
+	"net"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -42,10 +43,25 @@ const (
 )
 
 const (
-	Timeout = 5 * time.Second
+	Timeout = 30 * time.Second
 )
 
 var Default = &http.Client{
+	Transport: &http.Transport{
+		Proxy: http.ProxyFromEnvironment,
+		DialContext: (&net.Dialer{
+			Timeout:   5 * time.Second,
+			KeepAlive: 30 * time.Second,
+		}).DialContext,
+		IdleConnTimeout:        Timeout,
+		TLSHandshakeTimeout:    5 * time.Second,
+		ResponseHeaderTimeout:  10 * time.Second,
+		ExpectContinueTimeout:  1 * time.Second,
+		WriteBufferSize:        32 * 1024,
+		ReadBufferSize:         32 * 1024,
+		MaxResponseHeaderBytes: 32 * 1024,
+		ForceAttemptHTTP2:      true,
+	},
 	Timeout: Timeout,
 }
 
