@@ -94,7 +94,6 @@ dockers:
     build_flag_templates:
       - "--pull"
       - "--platform=linux/amd64"
-      - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
       - "--label=org.opencontainers.image.description={{.ProjectName}}"
       - "--label=org.opencontainers.image.source={{.GitURL}}"
@@ -111,7 +110,6 @@ dockers:
     build_flag_templates:
       - "--pull"
       - "--platform=linux/arm64"
-      - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
       - "--label=org.opencontainers.image.description={{.ProjectName}}"
       - "--label=org.opencontainers.image.source={{.GitURL}}"
@@ -128,7 +126,6 @@ dockers:
     build_flag_templates:
       - "--pull"
       - "--platform=linux/ppc64le"
-      - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
       - "--label=org.opencontainers.image.description={{.ProjectName}}"
       - "--label=org.opencontainers.image.source={{.GitURL}}"
@@ -145,7 +142,6 @@ dockers:
     build_flag_templates:
       - "--pull"
       - "--platform=linux/s390x"
-      - "--label=org.opencontainers.image.created={{.Date}}"
       - "--label=org.opencontainers.image.title={{.ProjectName}}"
       - "--label=org.opencontainers.image.description={{.ProjectName}}"
       - "--label=org.opencontainers.image.source={{.GitURL}}"
