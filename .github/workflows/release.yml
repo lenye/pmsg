@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Set up Go ${{ env.GO_VERSION }}
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v6
         with:
           go-version: ${{ env.GO_VERSION }}
           check-latest: true
@@ -39,7 +39,7 @@ jobs:
           password: ${{ secrets.GO_RELEASER_GITHUB_TOKEN }}
 
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
