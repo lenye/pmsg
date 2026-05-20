@@ -19,7 +19,6 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"fmt"
-	"io"
 	"math"
 	"strconv"
 	"time"
@@ -50,7 +49,7 @@ func Validate(signature, timestamp, secret string) (bool, error) {
 func Sign(timestamp string, secret string) (string, error) {
 	stringToSign := timestamp + "\n" + secret
 	h := hmac.New(sha256.New, []byte(secret))
-	if _, err := io.WriteString(h, stringToSign); err != nil {
+	if _, err := h.Write([]byte(stringToSign)); err != nil {
 		return "", err
 	}
 	return base64.StdEncoding.EncodeToString(h.Sum(nil)), nil
